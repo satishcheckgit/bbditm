@@ -340,7 +340,6 @@ export function HomeHero({
     }
   };
 
-  const currentSlide = slides[currentIndex];
 
   const getBadgeClass = (variant?: string) => {
     switch (variant) {
@@ -779,19 +778,11 @@ export function HomeHero({
         </div>
       </div>
 
-      {/* Apple-grade Master Bottom Navigation Bar (Centered) */}
-      <Container>
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-slate-200/80">
-          {/* Left info badge */}
-          <div className="text-xs font-medium text-[#86868b]">
-            <span className="text-[#1d1d1f] font-semibold">
-              Slide {currentIndex + 1} of {totalSlides}:
-            </span>{" "}
-            {currentSlide.media?.title || currentSlide.badge || currentSlide.id}
-          </div>
-
-          {/* Center Apple-style Indicator Progress Pills */}
-          {showIndicators && totalSlides > 1 && (
+      {/* Apple-grade Master Bottom Navigation Bar (Centered Dots with Play/Pause) */}
+      {showIndicators && totalSlides > 1 && (
+        <Container>
+          <div className="flex items-center justify-center gap-3.5 mt-8 pt-6 border-t border-slate-200/80">
+            {/* Center Apple-style Indicator Progress Pills */}
             <div
               className="flex items-center gap-2.5"
               role="tablist"
@@ -829,51 +820,26 @@ export function HomeHero({
                 );
               })}
             </div>
-          )}
 
-          {/* Right Action Controls: Play/Pause, Prev, Next */}
-          <div className="flex items-center gap-2">
+            {/* Play/Pause Control right beside the dots */}
             {showPlayPause && (
               <button
                 type="button"
                 onClick={() => setIsPlaying(!isPlaying)}
-                className="w-8 h-8 rounded-full border border-slate-200 bg-white/90 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-xs flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
+                className="w-7 h-7 rounded-full border border-slate-200 bg-white/90 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-xs flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
                 aria-label={isPlaying ? "Pause hero slider" : "Play hero slider"}
                 title={isPlaying ? "Pause autoplay" : "Start autoplay"}
               >
                 {isPlaying ? (
-                  <Pause className="w-3.5 h-3.5" />
+                  <Pause className="w-3 h-3 text-slate-700" />
                 ) : (
-                  <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
+                  <Play className="w-3 h-3 text-slate-700 fill-slate-700 ml-0.5" />
                 )}
               </button>
             )}
-
-            {showControls && (
-              <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={goToPrev}
-                  className="w-8 h-8 rounded-full border border-slate-200 bg-white/90 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-xs flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
-                  aria-label="Previous slide"
-                  title="Previous slide"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={goToNext}
-                  className="w-8 h-8 rounded-full border border-slate-200 bg-white/90 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-xs flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
-                  aria-label="Next slide"
-                  title="Next slide"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            )}
           </div>
-        </div>
-      </Container>
+        </Container>
+      )}
 
       {/* Video Modal Overlay (Triggered by Watch Campus Tour) */}
       {activeVideoModal && (
