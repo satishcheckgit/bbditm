@@ -254,6 +254,27 @@ export function HomeHero({
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
+  const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined);
+  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Dynamically adapt carousel height to active slide (eliminates mobile blank void below banner)
+  useEffect(() => {
+    const activeEl = slideRefs.current[currentIndex];
+    if (!activeEl) return;
+
+    setContainerHeight(activeEl.offsetHeight);
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === activeEl) {
+          setContainerHeight(activeEl.offsetHeight);
+        }
+      }
+    });
+
+    resizeObserver.observe(activeEl);
+    return () => resizeObserver.disconnect();
+  }, [currentIndex]);
 
   const totalSlides = slides.length;
   const touchStartXRef = useRef<number | null>(null);
@@ -353,7 +374,7 @@ export function HomeHero({
       onMouseEnter={() => setIsPlaying(false)}
       onMouseLeave={() => setIsPlaying(true)}
       className={cn(
-        "relative overflow-hidden bg-white pt-10 pb-8 md:pt-14 md:pb-10 lg:pt-16 lg:pb-16 select-none outline-none focus-visible:ring-1 focus-visible:ring-[#e41d43]",
+        "relative overflow-hidden bg-white pt-2 pb-5 sm:pt-6 sm:pb-8 md:pt-12 md:pb-10 lg:pt-16 lg:pb-16 select-none outline-none focus-visible:ring-1 focus-visible:ring-[#e41d43]",
         className
       )}
     >
@@ -391,10 +412,13 @@ export function HomeHero({
         </>
       )}
 
-      {/* Carousel Sliding Track */}
-      <div className="w-full overflow-hidden">
+      {/* Carousel Sliding Track with Dynamic Height */}
+      <div
+        className="w-full overflow-hidden transition-[height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        style={{ height: containerHeight ? `${containerHeight}px` : "auto" }}
+      >
         <div
-          className="flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className="flex items-start transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {slides.map((slide, slideIdx) => {
@@ -405,6 +429,9 @@ export function HomeHero({
             return (
               <div
                 key={slide.id}
+                ref={(el) => {
+                  slideRefs.current[slideIdx] = el;
+                }}
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`${slideIdx + 1} of ${totalSlides}: ${slide.id}`}
@@ -430,8 +457,7 @@ export function HomeHero({
                         slide.fullBleed
                           ? "rounded-none"
                           : "rounded-2xl md:rounded-3xl border border-slate-200/80",
-                        "aspect-[2.2/1] sm:aspect-[2.5/1] md:aspect-[2.7/1] lg:aspect-[2.74/1]",
-                        "min-h-[220px] sm:min-h-[300px] md:min-h-[400px] lg:min-h-[480px] xl:min-h-[520px]"
+                        "aspect-[2.74/1] w-full"
                       )}
                     >
                       {/* Custom Banner Image */}
@@ -781,7 +807,7 @@ export function HomeHero({
       {/* Apple-grade Master Bottom Navigation Bar (Centered Dots with Play/Pause) */}
       {showIndicators && totalSlides > 1 && (
         <Container>
-          <div className="flex items-center justify-center gap-3.5 mt-6 pt-2">
+          <div className="flex items-center justify-center gap-3.5 mt-2.5 sm:mt-6 pt-1 sm:pt-2">
             {/* Center Apple-style Indicator Progress Pills */}
             <div
               className="flex items-center gap-2.5"
