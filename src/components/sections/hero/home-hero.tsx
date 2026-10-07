@@ -1,16 +1,340 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { HeroSlider, HeroSlideItem } from "@/components/ui/hero-slider";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  Pause,
+  GraduationCap,
+  Trophy,
+  Video,
+  X,
+  Sparkles,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export interface HomeHeroProps {
-  slides?: HeroSlideItem[];
+export interface HeroSlideMedia {
+  type?: "card" | "video" | "image" | "custom";
+  badge?: string;
+  badgeVariant?: "red" | "blue" | "white" | "emerald";
+  title: string;
+  subtitle?: string;
+  description?: string;
+  videoUrl?: string; // Optional direct MP4/WebM or embed URL
+  videoPoster?: string;
+  videoDuration?: string;
+  highlights?: Array<{
+    tag?: string;
+    title: string;
+    desc: string;
+  }>;
+  ctaText?: string;
+  ctaLink?: string;
+  imageUrl?: string;
+  customContent?: React.ReactNode;
 }
 
-export function HomeHero({ slides }: HomeHeroProps = {}) {
+export interface FullHeroSlide {
+  id: string;
+  badge?: string;
+  badgeVariant?: "red" | "blue" | "emerald" | "outline";
+  headline: React.ReactNode;
+  subtitle: string;
+  primaryCta: {
+    label: string;
+    href: string;
+  };
+  secondaryCta?: {
+    label: string;
+    href: string;
+  };
+  stats: Array<{
+    value: string;
+    label: string;
+  }>;
+  media: HeroSlideMedia;
+}
+
+export interface HomeHeroProps {
+  slides?: FullHeroSlide[];
+  autoPlayInterval?: number;
+  showControls?: boolean;
+  showIndicators?: boolean;
+  showPlayPause?: boolean;
+  className?: string;
+}
+
+// Production-grade curated default slides
+export const defaultFullHeroSlides: FullHeroSlide[] = [
+  {
+    id: "academic-depth",
+    badge: "ADMISSIONS 2026-27",
+    badgeVariant: "red",
+    headline: (
+      <>
+        Where technical depth meets{" "}
+        <span className="text-[#e41d43]">real-world leadership.</span>
+      </>
+    ),
+    subtitle:
+      "Study at Babu Banarasi Das Institute of Technology & Management. Empowering engineers and managers with industry-aligned curricula, specialized research labs, and an active campus community.",
+    primaryCta: {
+      label: "Explore Programmes",
+      href: "/programmes",
+    },
+    secondaryCta: {
+      label: "Admissions 2026-27",
+      href: "/admissions",
+    },
+    stats: [
+      { value: "25+", label: "Years of Academic Legacy" },
+      { value: "₹ 44.15L", label: "Highest Salary Package" },
+      { value: "100+", label: "Acres Campus City" },
+    ],
+    media: {
+      type: "card",
+      badge: "AICTE APPROVED",
+      badgeVariant: "red",
+      title: "Academic Excellence",
+      subtitle: "BBDITM Lucknow",
+      description: "AKTU College Code: 054 · NBA Accredited Standards",
+      highlights: [
+        {
+          tag: "FLAGSHIP SCHOOL",
+          title: "Computer Science & Engineering",
+          desc: "With specialized tracks in AI, Machine Learning, and Data Science.",
+        },
+        {
+          tag: "INDUSTRY PARTNERSHIPS",
+          title: "Top Corporate Recruiters",
+          desc: "TCS, Infosys, Wipro, Capgemini, Cognizant, and Samsung R&D.",
+        },
+      ],
+      ctaText: "Talk to Admission Team",
+      ctaLink: "/contact",
+    },
+  },
+  {
+    id: "campus-infrastructure",
+    badge: "100+ ACRE SMART CAMPUS",
+    badgeVariant: "blue",
+    headline: (
+      <>
+        A 100+ acre smart campus{" "}
+        <span className="text-[#e41d43]">engineered for discovery.</span>
+      </>
+    ),
+    subtitle:
+      "Immerse yourself in world-class infrastructure — NVIDIA supercomputing clusters, drone robotics labs, AC digital central library, and Olympic-standard sports arenas on Faizabad Road.",
+    primaryCta: {
+      label: "Explore Campus Facilities",
+      href: "/campus-life",
+    },
+    secondaryCta: {
+      label: "Virtual Campus Tour",
+      href: "/contact",
+    },
+    stats: [
+      { value: "100+", label: "Acres Lush Green Campus" },
+      { value: "60+", label: "Advanced Labs & Hubs" },
+      { value: "24/7", label: "Hostel & Smart Amenities" },
+    ],
+    media: {
+      type: "video",
+      badge: "CAMPUS TOUR",
+      badgeVariant: "white",
+      title: "100+ Acre Smart Campus",
+      subtitle: "Faizabad Road, Lucknow",
+      videoDuration: "4K Campus Walkthrough",
+      description:
+        "State-of-the-art supercomputing labs, AC digital library, Olympic-standard sports arena, and modern residential student hostels.",
+      highlights: [
+        {
+          tag: "RESEARCH & LABS",
+          title: "Advanced Computing & IoT Hub",
+          desc: "NVIDIA-powered GPU clusters for deep learning research and drone robotics.",
+        },
+        {
+          tag: "STUDENT LIFE",
+          title: "Integrated Campus City",
+          desc: "24/7 banking, medical center, cafeteria, and national stadium facilities.",
+        },
+      ],
+      ctaText: "Explore Campus Facilities",
+      ctaLink: "/campus-life",
+    },
+  },
+  {
+    id: "career-placements",
+    badge: "RECORD-BREAKING PLACEMENTS",
+    badgeVariant: "emerald",
+    headline: (
+      <>
+        Launching global careers with{" "}
+        <span className="text-[#e41d43]">record-breaking placements.</span>
+      </>
+    ),
+    subtitle:
+      "Our proactive Career Development Cell bridges student ambition with Fortune 500 industry leaders through rigorous tech interview prep, hackathons, and corporate mentorship.",
+    primaryCta: {
+      label: "View Placement Records",
+      href: "/placements",
+    },
+    secondaryCta: {
+      label: "Top Recruiters",
+      href: "/placements#recruiters",
+    },
+    stats: [
+      { value: "₹ 44.15L", label: "Highest Salary Package" },
+      { value: "850+", label: "Offers in 2024-25" },
+      { value: "180+", label: "Corporate Recruiters" },
+    ],
+    media: {
+      type: "card",
+      badge: "SESSION 2026-27",
+      badgeVariant: "emerald",
+      title: "Career Development Cell",
+      subtitle: "Transforming Potential into Leadership",
+      description: "₹44.15 LPA Highest Package · 850+ Offers Across 180+ Recruiters",
+      highlights: [
+        {
+          tag: "TOP HIGHEST PACKAGE",
+          title: "₹ 44.15 Lakhs / Annum",
+          desc: "Record-breaking software engineering offer secured at global tech leader.",
+        },
+        {
+          tag: "PRE-PLACEMENT GROOMING",
+          title: "Technical Mock Interviews",
+          desc: "Corporate mentorship by alumni working at Amazon, Google, and Microsoft.",
+        },
+      ],
+      ctaText: "View Placements Report",
+      ctaLink: "/placements",
+    },
+  },
+];
+
+export function HomeHero({
+  slides = defaultFullHeroSlides,
+  autoPlayInterval = 6500,
+  showControls = true,
+  showIndicators = true,
+  showPlayPause = true,
+  className,
+}: HomeHeroProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
+
+  const totalSlides = slides.length;
+  const touchStartXRef = useRef<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % totalSlides);
+    setProgress(0);
+  }, [totalSlides]);
+
+  const goToPrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+    setProgress(0);
+  }, [totalSlides]);
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+    setProgress(0);
+  };
+
+  // High-smoothness autoplay timer with fine-grained progress bar (Apple TV+ / Store style)
+  useEffect(() => {
+    if (!isPlaying || totalSlides <= 1) return;
+
+    const stepMs = 50;
+    const stepPercent = (stepMs / autoPlayInterval) * 100;
+
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev + stepPercent >= 100) {
+          goToNext();
+          return 0;
+        }
+        return prev + stepPercent;
+      });
+    }, stepMs);
+
+    return () => clearInterval(timer);
+  }, [isPlaying, autoPlayInterval, goToNext, totalSlides]);
+
+  // Touch gesture support (swipe on mobile/tablet)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartXRef.current - touchEndX;
+
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        goToNext();
+      } else {
+        goToPrev();
+      }
+    }
+    touchStartXRef.current = null;
+  };
+
+  // Keyboard navigation
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") {
+      goToPrev();
+    } else if (e.key === "ArrowRight") {
+      goToNext();
+    } else if (e.key === " ") {
+      e.preventDefault();
+      setIsPlaying((prev) => !prev);
+    }
+  };
+
+  const currentSlide = slides[currentIndex];
+
+  const getBadgeClass = (variant?: string) => {
+    switch (variant) {
+      case "red":
+        return "bg-[#e41d43] text-white";
+      case "emerald":
+        return "bg-emerald-600 text-white";
+      case "blue":
+        return "bg-[#243d77] text-white";
+      case "white":
+      default:
+        return "bg-white/20 backdrop-blur-md text-white border border-white/30";
+    }
+  };
+
   return (
-    <section className="relative overflow-hidden bg-white pt-10 pb-16 md:pt-16 md:pb-24 lg:pt-20 lg:pb-32">
+    <section
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Campus Hero Showcase"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onMouseEnter={() => setIsPlaying(false)}
+      onMouseLeave={() => setIsPlaying(true)}
+      className={cn(
+        "relative overflow-hidden bg-white pt-10 pb-8 md:pt-14 md:pb-10 lg:pt-16 lg:pb-16 select-none outline-none focus-visible:ring-1 focus-visible:ring-[#e41d43]",
+        className
+      )}
+    >
       {/* Subtle background ambient mesh */}
       <div
         className="pointer-events-none absolute -top-40 right-0 -z-10 h-[500px] w-[500px] rounded-full bg-[var(--color-brand-50)] blur-3xl opacity-70"
@@ -21,84 +345,430 @@ export function HomeHero({ slides }: HomeHeroProps = {}) {
         aria-hidden="true"
       />
 
+      {/* Floating Side Arrow Controls (Desktop hover ergonomics) */}
+      {showControls && totalSlides > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={goToPrev}
+            className="hidden xl:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full items-center justify-center bg-white/80 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-md border border-slate-200/80 backdrop-blur-md transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
+            aria-label="Previous slide"
+            title="Previous slide"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={goToNext}
+            className="hidden xl:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full items-center justify-center bg-white/80 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-md border border-slate-200/80 backdrop-blur-md transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
+            aria-label="Next slide"
+            title="Next slide"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </>
+      )}
+
+      {/* Carousel Sliding Track */}
+      <div className="w-full overflow-hidden">
+        <div
+          className="flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {slides.map((slide, slideIdx) => {
+            const isSlideActive = slideIdx === currentIndex;
+            const { media } = slide;
+
+            return (
+              <div
+                key={slide.id}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${slideIdx + 1} of ${totalSlides}: ${slide.id}`}
+                aria-hidden={!isSlideActive}
+                className={cn(
+                  "min-w-full w-full shrink-0 transition-opacity duration-500",
+                  isSlideActive ? "opacity-100" : "opacity-30 pointer-events-none"
+                )}
+              >
+                <Container>
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center min-h-[460px] lg:min-h-[500px]">
+                    {/* Left Column: Headline, Subtitle, CTAs, Proof Points */}
+                    <div className="lg:col-span-7 space-y-6 md:space-y-7">
+                      {/* Optional Slide Category Pill */}
+                      {slide.badge && (
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-slate-100 text-[#243d77] border border-slate-200/70">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#e41d43]" />
+                          <span>{slide.badge}</span>
+                        </div>
+                      )}
+
+                      {/* Editorial Headline */}
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-semibold text-black tracking-tight leading-[1.12] font-heading">
+                        {slide.headline}
+                      </h1>
+
+                      {/* Subtitle */}
+                      <p className="text-base sm:text-lg text-[#6e6e73] leading-relaxed max-w-2xl font-normal">
+                        {slide.subtitle}
+                      </p>
+
+                      {/* Action Buttons */}
+                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+                        <Button
+                          href={slide.primaryCta.href}
+                          variant="primary"
+                          size="lg"
+                          className="group"
+                        >
+                          <span>{slide.primaryCta.label}</span>
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-1" />
+                        </Button>
+
+                        {slide.secondaryCta && (
+                          <Button
+                            href={slide.secondaryCta.href}
+                            variant="secondary"
+                            size="lg"
+                          >
+                            <span>{slide.secondaryCta.label}</span>
+                          </Button>
+                        )}
+                      </div>
+
+                      {/* Editorial Proof Points */}
+                      {slide.stats && slide.stats.length > 0 && (
+                        <div className="pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-6 max-w-xl">
+                          {slide.stats.map((stat, sIdx) => (
+                            <div key={sIdx}>
+                              <p className="text-2xl sm:text-3xl font-bold text-[#243d77] tracking-tight font-heading">
+                                {stat.value}
+                              </p>
+                              <p className="text-xs text-[#86868b] font-medium mt-0.5">
+                                {stat.label}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Right Column: Slide Media Canvas (Card / Video Player) */}
+                    <div className="lg:col-span-5 relative">
+                      <div className="relative mx-auto max-w-md lg:max-w-none">
+                        <div className="relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-300">
+                          {/* Background Frame with layered gradients */}
+                          <div className="relative min-h-[440px] sm:min-h-[460px] flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#1c2e59] via-[#152345] to-[#0c162e] border border-white/10 p-6 sm:p-7 text-white">
+                            {/* Ambient background glow */}
+                            <div
+                              className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#e41d43]/15 blur-3xl"
+                              aria-hidden="true"
+                            />
+                            <div
+                              className="pointer-events-none absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-[#243d77]/40 blur-3xl"
+                              aria-hidden="true"
+                            />
+
+                            {/* Direct Video Background (if slide provides media.videoUrl) */}
+                            {media.videoUrl && (
+                              <div className="absolute inset-0 z-0 overflow-hidden">
+                                <video
+                                  ref={isSlideActive ? videoRef : undefined}
+                                  src={media.videoUrl}
+                                  poster={media.videoPoster}
+                                  autoPlay
+                                  muted
+                                  loop
+                                  playsInline
+                                  className="w-full h-full object-cover opacity-35"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0c162e] via-[#152345]/80 to-transparent" />
+                              </div>
+                            )}
+
+                            {/* Video decorative ambient grid (for video-type slide) */}
+                            {media.type === "video" && !media.videoUrl && (
+                              <div className="absolute inset-0 z-0 overflow-hidden opacity-20 pointer-events-none">
+                                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-400 via-transparent to-transparent animate-pulse" />
+                                <div className="w-full h-full bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:2rem_2rem]" />
+                              </div>
+                            )}
+
+                            {/* Card Top Header: Icon + Title + Badge */}
+                            <div className="relative z-10 flex items-center justify-between pb-4 border-b border-white/10">
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0 shadow-sm">
+                                  {media.type === "video" ? (
+                                    <Video className="w-5 h-5 text-[#f87171]" />
+                                  ) : slide.id === "career-placements" ? (
+                                    <Trophy className="w-5 h-5 text-amber-400" />
+                                  ) : (
+                                    <GraduationCap className="w-5 h-5 text-[#f87171]" />
+                                  )}
+                                </div>
+                                <div className="min-w-0">
+                                  <p className="text-sm font-semibold text-white truncate font-heading tracking-tight">
+                                    {media.title}
+                                  </p>
+                                  {media.subtitle && (
+                                    <p className="text-xs text-slate-300 truncate">
+                                      {media.subtitle}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+
+                              {media.badge && (
+                                <span
+                                  className={cn(
+                                    "text-xs font-semibold tracking-tight px-3 py-1 rounded-full uppercase shadow-xs shrink-0",
+                                    getBadgeClass(media.badgeVariant)
+                                  )}
+                                >
+                                  {media.badge}
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Card Main Body: Highlights or Custom Node */}
+                            <div className="relative z-10 py-5 space-y-3 flex-1 flex flex-col justify-center">
+                              {media.description && (
+                                <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                                  {media.description}
+                                </p>
+                              )}
+
+                              {/* Interactive Video Play Banner if video slide */}
+                              {media.type === "video" && (
+                                <div
+                                  onClick={() =>
+                                    setActiveVideoModal(
+                                      media.videoUrl ||
+                                      "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                                    )
+                                  }
+                                  className="group/video relative cursor-pointer rounded-xl overflow-hidden border border-white/20 bg-black/30 p-3 sm:p-4 hover:border-[#f87171]/60 transition-all"
+                                >
+                                  <div className="flex items-center gap-3">
+                                    <div className="w-9 h-9 rounded-full bg-[#e41d43] group-hover/video:scale-110 flex items-center justify-center text-white shadow-md transition-transform shrink-0">
+                                      <Play className="w-4 h-4 fill-white ml-0.5" />
+                                    </div>
+                                    <div className="min-w-0 flex-1">
+                                      <div className="flex items-center gap-1.5">
+                                        <p className="text-xs font-semibold text-white">
+                                          Watch Campus Video Tour
+                                        </p>
+                                        <Sparkles className="w-3 h-3 text-amber-400" />
+                                      </div>
+                                      <p className="text-[11px] text-slate-300">
+                                        {media.videoDuration ||
+                                          "360° Aerial View & State-of-the-Art Labs"}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+
+                              {media.customContent ? (
+                                media.customContent
+                              ) : media.highlights && media.highlights.length > 0 ? (
+                                <div className="space-y-2.5">
+                                  {media.highlights.map((h, i) => (
+                                    <div
+                                      key={i}
+                                      className="p-3.5 sm:p-4 rounded-xl bg-white/5 hover:bg-white/[0.08] border border-white/10 space-y-1 transition-colors"
+                                    >
+                                      {h.tag && (
+                                        <span className="text-xs font-semibold text-[#f87171] uppercase tracking-wider block">
+                                          {h.tag}
+                                        </span>
+                                      )}
+                                      <h4 className="text-sm font-semibold text-white tracking-tight font-heading">
+                                        {h.title}
+                                      </h4>
+                                      <p className="text-xs text-slate-300 leading-relaxed">
+                                        {h.desc}
+                                      </p>
+                                    </div>
+                                  ))}
+                                </div>
+                              ) : null}
+                            </div>
+
+                            {/* Card Bottom: Link */}
+                            <div className="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between gap-3">
+                              {media.ctaLink && media.ctaText ? (
+                                <Link
+                                  href={media.ctaLink}
+                                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#f87171] hover:text-white transition-colors group"
+                                >
+                                  <span>{media.ctaText}</span>
+                                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                              ) : (
+                                <span className="text-xs text-slate-400">
+                                  BBDITM Academic Showcase
+                                </span>
+                              )}
+
+                              <span className="text-xs text-slate-400 font-mono">
+                                0{slideIdx + 1} / 0{totalSlides}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Container>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Apple-grade Master Bottom Navigation Bar (Centered) */}
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Confident Editorial Typography */}
-          <div className="lg:col-span-7 space-y-6 md:space-y-8">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-2 pt-2">
 
-            {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-semibold text-black tracking-tight leading-[1.12] font-heading">
-              Where technical depth meets{" "}
-              <span className="text-[#e41d43]">
-                real-world leadership.
-              </span>
-            </h1>
 
-            {/* Subtitle */}
-            <p className="text-base sm:text-lg text-[#6e6e73] leading-relaxed max-w-2xl font-normal">
-              Study at Babu Banarasi Das Institute of Technology & Management.
-              Empowering engineers and managers with industry-aligned curricula,
-              specialized research labs, and an active campus community.
-            </p>
+          {showIndicators && totalSlides > 1 && (
+            <div
+              className="flex items-center gap-2.5"
+              role="tablist"
+              aria-label="Hero slide selection"
+            >
+              {slides.map((s, idx) => {
+                const isActive = idx === currentIndex;
+                return (
+                  <button
+                    key={s.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-label={`Go to slide ${idx + 1}: ${s.media.title}`}
+                    onClick={() => goToSlide(idx)}
+                    className="group relative h-2.5 rounded-full overflow-hidden transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
+                    style={{
+                      width: isActive ? "52px" : "14px",
+                      backgroundColor: isActive
+                        ? "rgba(36, 61, 119, 0.15)"
+                        : "rgba(0, 0, 0, 0.1)",
+                    }}
+                  >
+                    {isActive && (
+                      <span
+                        className="absolute inset-y-0 left-0 bg-[#e41d43] rounded-full transition-all"
+                        style={{
+                          width: `${progress}%`,
+                          transition: isPlaying ? "width 50ms linear" : "none",
+                        }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          )}
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
-              <Button
-                href="/programmes"
-                variant="primary"
-                size="lg"
-                className="group"
+
+          {/* <div className="flex items-center gap-2">
+            {showPlayPause && (
+              <button
+                type="button"
+                onClick={() => setIsPlaying(!isPlaying)}
+                className="w-8 h-8 rounded-full border border-slate-200 bg-white/90 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-xs flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
+                aria-label={isPlaying ? "Pause hero slider" : "Play hero slider"}
+                title={isPlaying ? "Pause autoplay" : "Start autoplay"}
               >
-                <span>Explore Programmes</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-1" />
-              </Button>
+                {isPlaying ? (
+                  <Pause className="w-3.5 h-3.5" />
+                ) : (
+                  <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
+                )}
+              </button>
+            )}
 
-              <Button
-                href="/admissions"
-                variant="secondary"
-                size="lg"
+            {showControls && (
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={goToPrev}
+                  className="w-8 h-8 rounded-full border border-slate-200 bg-white/90 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-xs flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
+                  aria-label="Previous slide"
+                  title="Previous slide"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={goToNext}
+                  className="w-8 h-8 rounded-full border border-slate-200 bg-white/90 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-xs flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
+                  aria-label="Next slide"
+                  title="Next slide"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            )}
+          </div> */}
+        </div>
+      </Container>
+
+      {/* Video Modal Overlay (Triggered by Watch Campus Tour) */}
+      {activeVideoModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Campus Video Player"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in duration-200"
+          onClick={() => setActiveVideoModal(null)}
+        >
+          <div
+            className="relative w-full max-w-4xl rounded-2xl overflow-hidden bg-black shadow-2xl border border-white/20"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-5 py-3.5 bg-neutral-900 border-b border-white/10 text-white">
+              <div className="flex items-center gap-2">
+                <Video className="w-4 h-4 text-[#e41d43]" />
+                <span className="text-sm font-semibold tracking-tight">
+                  BBDITM 100+ Acre Campus Experience
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setActiveVideoModal(null)}
+                className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus:outline-none"
+                aria-label="Close video player"
               >
-                <span>Admissions 2026-27</span>
-              </Button>
+                <X className="w-4 h-4" />
+              </button>
             </div>
 
-            {/* Editorial Proof Points */}
-            <div className="pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-6 max-w-xl">
-              <div>
-                <p className="text-2xl sm:text-3xl font-bold text-[#243d77] tracking-tight font-heading">
-                  25+
-                </p>
-                <p className="text-xs text-[#86868b] font-medium mt-0.5">
-                  Years of Academic Legacy
-                </p>
-              </div>
-              <div>
-                <p className="text-2xl sm:text-3xl font-bold text-[#243d77] tracking-tight font-heading">
-                  ₹ 44.15L
-                </p>
-                <p className="text-xs text-[#86868b] font-medium mt-0.5">
-                  Highest Salary Package
-                </p>
-              </div>
-              <div>
-                <p className="text-2xl sm:text-3xl font-bold text-[#243d77] tracking-tight font-heading">
-                  100+
-                </p>
-                <p className="text-xs text-[#86868b] font-medium mt-0.5">
-                  Acres Campus City
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Framed Editorial Media Canvas with Reusable Hero Slider */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative mx-auto max-w-md lg:max-w-none">
-              <HeroSlider slides={slides} />
+            {/* Video Player Content */}
+            <div className="relative aspect-video w-full bg-black flex items-center justify-center">
+              {activeVideoModal.includes("youtube.com") ||
+                activeVideoModal.includes("youtu.be") ? (
+                <iframe
+                  src={activeVideoModal}
+                  title="Campus Tour"
+                  className="w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <video
+                  src={activeVideoModal}
+                  controls
+                  autoPlay
+                  className="w-full h-full object-cover"
+                />
+              )}
             </div>
           </div>
         </div>
-      </Container>
+      )}
     </section>
   );
 }
