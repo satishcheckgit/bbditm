@@ -39,7 +39,7 @@ export function UniversityProof() {
             <p className="text-xs font-semibold uppercase tracking-wider text-[#e41d43]">
               Institutional Foundation
             </p>
-            <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-semibold text-[#243d77] tracking-tight leading-[1.2] font-heading">
+            <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-semibold text-black tracking-tight leading-[1.2] font-heading">
               Education built around what comes next.
             </h2>
             <p className="text-sm sm:text-base text-[#6e6e73] leading-relaxed">
