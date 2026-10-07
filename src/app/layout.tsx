@@ -8,6 +8,8 @@ import { siteConfig } from "@/config/site";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  // Optical-size axis: headlines auto-switch to the tighter "Display" cut (SF Pro Display feel)
+  axes: ["opsz"],
   display: "swap",
 });
 

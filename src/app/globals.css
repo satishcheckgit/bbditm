@@ -47,6 +47,23 @@
   --font-sans: -apple-system, BlinkMacSystemFont, var(--font-inter), "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-heading: -apple-system, BlinkMacSystemFont, var(--font-inter), "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* Apple-style dynamic tracking: small text breathes, large text tightens.
+     (Matches SF Pro / Inter dynamic metrics; prevents mushy small text on Windows.)
+     Explicit tracking-* utilities still override these. */
+  --text-xs--letter-spacing: 0em;
+  --text-sm--letter-spacing: -0.006em;
+  --text-base--letter-spacing: -0.011em;
+  --text-lg--letter-spacing: -0.014em;
+  --text-xl--letter-spacing: -0.017em;
+  --text-2xl--letter-spacing: -0.019em;
+  --text-3xl--letter-spacing: -0.021em;
+  --text-4xl--letter-spacing: -0.022em;
+  --text-5xl--letter-spacing: -0.022em;
+  --text-6xl--letter-spacing: -0.022em;
+
+  /* Apple headline tracking token (was Tailwind default -0.025em) */
+  --tracking-tight: -0.022em;
 }
 
 :root {
@@ -58,6 +75,8 @@ html {
   scroll-behavior: smooth;
   color-scheme: light;
   font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -68,8 +87,12 @@ body {
   font-weight: 400;
   letter-spacing: -0.011em;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+  /* Default glyphs only (double-storey 'a', closed digits) = closest to SF Pro */
+  font-feature-settings: "kern", "liga", "calt";
+  font-kerning: normal;
   font-optical-sizing: auto;
+  /* Never let the browser fake bold/italic (faux bold = smeared, blurry glyphs) */
+  font-synthesis: none;
 }
 
 /* Sharp ClearType subpixel rendering for standard DPI displays; smooth antialiased for Retina/4K */
@@ -80,11 +103,15 @@ body {
   }
 }
 
-/* Apple-style typography hierarchy */
-.font-heading {
-  font-family: var(--font-heading);
-  letter-spacing: -0.022em;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+/* Apple-style typography hierarchy.
+   In the components layer so size tokens (text-sm etc.) and tracking-* utilities
+   can refine spacing — small headings no longer get over-tightened. */
+@layer components {
+  .font-heading {
+    font-family: var(--font-heading);
+    letter-spacing: -0.022em;
+    font-feature-settings: "kern", "liga", "calt";
+  }
 }
 
 /* Accessible focus ring style */
