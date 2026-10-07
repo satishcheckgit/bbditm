@@ -9,6 +9,7 @@ import { MobileNav } from "./mobile-nav";
 import { mainNavItems } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { ChevronDown, ArrowRight, Sparkles } from "lucide-react";
+import Image from "next/image";
 
 export function Header() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -29,29 +30,25 @@ export function Header() {
 
       {/* Main Navbar */}
       <div
-        className={`w-full border-b transition-all duration-300 ${
-          isScrolled
-            ? "bg-white/85 backdrop-blur-xl border-black/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
-            : "bg-white/90 backdrop-blur-md border-black/[0.05]"
-        }`}
+        className={`w-full border-b transition-all duration-300 ${isScrolled
+          ? "bg-white/85 backdrop-blur-xl border-black/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
+          : "bg-white/90 backdrop-blur-md border-black/[0.05]"
+          }`}
       >
         <Container className="flex items-center justify-between h-20">
           {/* Institutional Brand Identity */}
           <Link
             href="/"
-            className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e41d43] rounded-full p-1"
+            className="flex items-center gap- group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e41d43] rounded-full p-1"
             aria-label={`${siteConfig.shortName} Home`}
           >
             {/* Elegant Emblem Badge */}
-            <div className="w-10 h-10 rounded-xl bg-[#243d77] border-b-2 border-[#e41d43] flex items-center justify-center text-white font-black text-lg shadow-sm group-hover:bg-[#1a2c56] transition-colors">
-              <span>B</span>
+            <div className=" flex items-center justify-center">
+              <Image src="/logo/bbditm_logo.png" alt="logo" width={100} height={100} className="rounded-none" />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-xl sm:text-2xl tracking-tight text-[#243d77] leading-none font-heading">
-                BBD<span className="text-[#e41d43]">ITM</span>
-              </span>
               <span className="text-xs font-semibold text-[#86868b] tracking-wider uppercase mt-1">
-                BABU BANARASI DAS GROUP
+                BBD ITM
               </span>
             </div>
           </Link>
@@ -74,18 +71,16 @@ export function Header() {
                 >
                   <Link
                     href={item.href}
-                    className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-200 inline-flex items-center gap-1 ${
-                      isActive
-                        ? "text-[#e41d43] bg-[#fff1f3]"
-                        : "text-[#1d1d1f] hover:text-[#243d77] hover:bg-[#f5f5f7]"
-                    }`}
+                    className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-200 inline-flex items-center gap-1 ${isActive
+                      ? "text-[#e41d43] bg-[#fff1f3]"
+                      : "text-[#1d1d1f] hover:text-[#243d77] hover:bg-[#f5f5f7]"
+                      }`}
                   >
                     <span>{item.title}</span>
                     {hasFlyout && (
                       <ChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                          isActive ? "rotate-180 text-[#e41d43]" : "text-[#86868b]"
-                        }`}
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${isActive ? "rotate-180 text-[#e41d43]" : "text-[#86868b]"
+                          }`}
                       />
                     )}
                   </Link>

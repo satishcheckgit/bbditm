@@ -21,14 +21,9 @@ export function HomeHero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Confident Editorial Typography */}
           <div className="lg:col-span-7 space-y-6 md:space-y-8">
-            {/* Trust Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#fff1f3] border border-[#e41d43]/20 text-xs font-semibold text-[#e41d43] tracking-tight">
-              <span className="flex h-2 w-2 rounded-full bg-[#e41d43]" />
-              <span>AKTU Affiliated Code: 054 · Admissions Open 2026-27</span>
-            </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-semibold text-[#243d77] tracking-tight leading-[1.12] font-heading">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-semibold text-black tracking-tight leading-[1.12] font-heading">
               Where technical depth meets{" "}
               <span className="text-[#e41d43]">
                 real-world leadership.

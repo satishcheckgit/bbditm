@@ -34,7 +34,7 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
   });
 
   return (
-    <section className="py-20 sm:py-24 lg:py-28 bg-[var(--color-surface-soft)]/50 border-t border-b border-gray-100">
+    <section className="py-12 sm:py-16 lg:py-16 bg-[var(--color-surface-soft)]/50 border-t border-b border-gray-100">
       <Container>
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -61,11 +61,10 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
               <button
                 key={tab.id}
                 onClick={() => setSelectedFilter(tab.id)}
-                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
-                  isSelected
-                    ? "bg-[#243d77] text-white shadow-sm"
-                    : "text-[#1d1d1f] hover:text-[#243d77] hover:bg-white/60"
-                }`}
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${isSelected
+                  ? "bg-[#243d77] text-white shadow-sm"
+                  : "text-[#1d1d1f] hover:text-[#243d77] hover:bg-white/60"
+                  }`}
               >
                 {tab.label}
               </button>
