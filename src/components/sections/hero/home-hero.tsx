@@ -781,7 +781,7 @@ export function HomeHero({
       {/* Apple-grade Master Bottom Navigation Bar (Centered Dots with Play/Pause) */}
       {showIndicators && totalSlides > 1 && (
         <Container>
-          <div className="flex items-center justify-center gap-3.5 mt-8 pt-6 border-t border-slate-200/80">
+          <div className="flex items-center justify-center gap-3.5 mt-6 pt-2">
             {/* Center Apple-style Indicator Progress Pills */}
             <div
               className="flex items-center gap-2.5"
