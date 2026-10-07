@@ -43,14 +43,14 @@ export function Header() {
             aria-label={`${siteConfig.shortName} Home`}
           >
             {/* Elegant Emblem Badge */}
-            <div className=" flex items-center justify-center">
-              <Image src="/logo/bbditm_logo.png" alt="logo" width={100} height={100} className="rounded-none" />
+            <div className="w-56 h-56 flex items-center justify-center">
+              <Image src="/logo/logo.png" alt="logo" width={280} height={280} className="rounded-none" />
             </div>
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <span className="text-xs font-semibold text-[#86868b] tracking-wider uppercase mt-1">
                 BBD ITM
               </span>
-            </div>
+            </div> */}
           </Link>
 
           {/* Desktop Navigation Links */}
