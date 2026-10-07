@@ -1,10 +1,14 @@
 import React from "react";
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronRight, GraduationCap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { HeroSlider, HeroSlideItem } from "@/components/ui/hero-slider";
 
-export function HomeHero() {
+export interface HomeHeroProps {
+  slides?: HeroSlideItem[];
+}
+
+export function HomeHero({ slides }: HomeHeroProps = {}) {
   return (
     <section className="relative overflow-hidden bg-white pt-10 pb-16 md:pt-16 md:pb-24 lg:pt-20 lg:pb-32">
       {/* Subtle background ambient mesh */}
@@ -87,66 +91,10 @@ export function HomeHero() {
             </div>
           </div>
 
-          {/* Right Column: Framed Editorial Media Canvas */}
+          {/* Right Column: Framed Editorial Media Canvas with Reusable Hero Slider */}
           <div className="lg:col-span-5 relative">
             <div className="relative mx-auto max-w-md lg:max-w-none">
-              {/* Institutional Canvas Card */}
-              <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#1c2e59] via-[#152345] to-[#0c162e] border border-white/10 p-7 text-white shadow-xl">
-                {/* Visual badge */}
-                <div className="flex items-center justify-between pb-5 border-b border-white/10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white">
-                      <GraduationCap className="w-5 h-5 text-[#f87171]" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white">Academic Excellence</p>
-                      <p className="text-xs text-slate-300">BBDITM Lucknow</p>
-                    </div>
-                  </div>
-                  <span className="text-xs font-semibold tracking-tight px-3 py-1 rounded-full bg-[#e41d43] text-white">
-                    AICTE APPROVED
-                  </span>
-                </div>
-
-                {/* Campus & Innovation Highlights */}
-                <div className="py-5 space-y-3">
-                  <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                    <span className="text-xs font-semibold text-[#f87171] uppercase tracking-wider">
-                      Flagship School
-                    </span>
-                    <h3 className="text-sm font-semibold text-white">
-                      Computer Science & Engineering
-                    </h3>
-                    <p className="text-xs text-slate-300">
-                      With specialized tracks in AI, Machine Learning, and Data Science.
-                    </p>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                    <span className="text-xs font-semibold text-[#f87171] uppercase tracking-wider">
-                      Industry Partnerships
-                    </span>
-                    <h3 className="text-sm font-semibold text-white">
-                      Top Corporate Recruiters
-                    </h3>
-                    <p className="text-xs text-slate-300">
-                      TCS, Infosys, Wipro, Capgemini, Cognizant, and Samsung R&D.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Bottom interactive card action */}
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                  <span className="text-xs text-slate-300">Need counseling?</span>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#f87171] hover:text-white transition-colors"
-                  >
-                    <span>Talk to Admission Team</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
+              <HeroSlider slides={slides} />
             </div>
           </div>
         </div>
