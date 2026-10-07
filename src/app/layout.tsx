@@ -8,7 +8,6 @@ import { siteConfig } from "@/config/site";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -63,7 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${openSans.variable} h-full antialiased`}
+      className={`${inter.variable} ${openSans.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-white text-[#1d1d1f] selection:bg-[#243d77]/10 selection:text-[#243d77]">
         {/* Accessible skip link */}
