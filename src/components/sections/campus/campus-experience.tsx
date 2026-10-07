@@ -64,7 +64,7 @@ export function CampusExperience() {
                     <div className="w-11 h-11 rounded-xl bg-white text-[#243d77] border border-black/[0.06] shadow-sm flex items-center justify-center">
                       <Icon className="w-5 h-5 text-[#243d77]" />
                     </div>
-                    <span className="text-[11px] font-semibold text-[#e41d43] uppercase tracking-tight">
+                    <span className="text-xs font-semibold text-[#e41d43] uppercase tracking-tight">
                       {f.tag}
                     </span>
                   </div>
@@ -72,7 +72,7 @@ export function CampusExperience() {
                   <h3 className="text-base font-bold text-[#1d1d1f] mb-2 font-heading">
                     {f.title}
                   </h3>
-                  <p className="text-xs sm:text-[13px] text-[#6e6e73] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
                     {f.description}
                   </p>
                 </div>

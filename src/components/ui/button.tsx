@@ -45,9 +45,9 @@ export const Button = React.forwardRef<
     };
 
     const sizeStyles = {
-      sm: "text-[12px] px-3.5 py-1.5 rounded-full gap-1.5 font-medium",
-      md: "text-[13px] px-5 py-2 rounded-full gap-2 font-medium",
-      lg: "text-[14px] px-6 py-2.5 rounded-full gap-2 font-medium",
+      sm: "text-xs px-3.5 py-1.5 rounded-full gap-1.5 font-medium",
+      md: "text-sm px-5 py-2 rounded-full gap-2 font-medium",
+      lg: "text-sm sm:text-base px-6 py-2.5 rounded-full gap-2 font-medium",
     };
 
     const combinedClassName = cn(

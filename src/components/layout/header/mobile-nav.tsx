@@ -64,7 +64,7 @@ export function MobileNav() {
             <div className="font-extrabold text-lg text-[#243d77] tracking-tight">
               BBD<span className="text-[#e41d43]">ITM</span>
             </div>
-            <p className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">BBD Educational Group</p>
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">BBD Educational Group</p>
           </div>
           <button
             onClick={() => setIsOpen(false)}
@@ -102,7 +102,7 @@ export function MobileNav() {
                         <div className="pl-3 pb-3 pt-2 space-y-3 bg-[#f5f5f7] rounded-xl my-1.5 p-3.5 border border-black/[0.04]">
                           {item.groups?.map((group) => (
                             <div key={group.heading} className="space-y-1">
-                              <span className="text-[11px] font-bold uppercase tracking-wider text-[#e41d43]">
+                              <span className="text-xs font-bold uppercase tracking-wider text-[#e41d43]">
                                 {group.heading}
                               </span>
                               <div className="space-y-1 mt-1">

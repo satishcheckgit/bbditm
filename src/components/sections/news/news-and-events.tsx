@@ -40,7 +40,7 @@ export function NewsAndEvents({ news, events }: NewsAndEventsProps) {
             {/* Featured Article */}
             {featuredNews && (
               <div className="bg-white rounded-2xl p-6 border border-black/[0.06] shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] transition-all duration-300">
-                <span className="inline-block text-[11px] font-semibold text-[#e41d43] bg-[#fff1f3] border border-[#e41d43]/20 px-3 py-0.5 rounded-full uppercase tracking-tight mb-3">
+                <span className="inline-block text-xs font-semibold text-[#e41d43] bg-[#fff1f3] border border-[#e41d43]/20 px-3 py-0.5 rounded-full uppercase tracking-tight mb-3">
                   {featuredNews.category} · {featuredNews.publishedAt}
                 </span>
                 <h3 className="text-lg sm:text-xl font-bold text-[#1d1d1f] hover:text-[#243d77] transition-colors leading-snug font-heading">
@@ -48,7 +48,7 @@ export function NewsAndEvents({ news, events }: NewsAndEventsProps) {
                     {featuredNews.title}
                   </Link>
                 </h3>
-                <p className="text-xs sm:text-[13px] text-[#6e6e73] mt-2.5 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#6e6e73] mt-2.5 leading-relaxed">
                   {featuredNews.excerpt}
                 </p>
               </div>
@@ -62,7 +62,7 @@ export function NewsAndEvents({ news, events }: NewsAndEventsProps) {
                   className="bg-white rounded-xl p-4 border border-black/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-[#243d77]/25 transition-all shadow-sm"
                 >
                   <div>
-                    <span className="text-[10px] font-semibold text-[#86868b] uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-[#86868b] uppercase tracking-wider">
                       {item.category} · {item.publishedAt}
                     </span>
                     <h4 className="text-sm font-semibold text-[#1d1d1f] hover:text-[#243d77] transition-colors mt-0.5 font-heading">
@@ -109,7 +109,7 @@ export function NewsAndEvents({ news, events }: NewsAndEventsProps) {
                 >
                   {/* Date Badge */}
                   <div className="w-14 rounded-xl bg-[#f5f5f7] text-[#243d77] border border-[#d2d2d7]/60 p-2 text-center shrink-0">
-                    <span className="block text-[11px] font-bold text-[#e41d43] uppercase">
+                    <span className="block text-xs font-bold text-[#e41d43] uppercase">
                       {ev.date.split(" ")[0]}
                     </span>
                     <span className="block text-lg font-bold leading-none mt-0.5 text-[#243d77] font-heading">
@@ -119,7 +119,7 @@ export function NewsAndEvents({ news, events }: NewsAndEventsProps) {
 
                   {/* Event Details */}
                   <div className="flex-1 min-w-0">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#86868b]">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-[#86868b]">
                       {ev.category}
                     </span>
                     <h4 className="text-xs sm:text-sm font-semibold text-[#1d1d1f] mt-0.5 leading-snug font-heading">

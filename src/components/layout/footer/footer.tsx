@@ -22,13 +22,13 @@ export function Footer() {
                 <span className="font-bold text-xl text-white tracking-tight font-heading">
                   BBD<span className="text-[#e41d43]">ITM</span>
                 </span>
-                <p className="text-[11px] text-[#86868b] font-medium">
+                <p className="text-xs text-[#86868b] font-medium">
                   Babu Banarasi Das Group of Educational Institutions
                 </p>
               </div>
             </div>
 
-            <p className="text-xs sm:text-[13px] text-[#86868b] leading-relaxed pr-4">
+            <p className="text-xs sm:text-sm text-[#86868b] leading-relaxed pr-4">
               Babu Banarasi Das Institute of Technology & Management (AKTU College Code: 054) provides accredited professional education in Engineering and Business Administration.
             </p>
 

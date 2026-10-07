@@ -50,7 +50,7 @@ export function Header() {
               <span className="font-bold text-xl sm:text-2xl tracking-tight text-[#243d77] leading-none font-heading">
                 BBD<span className="text-[#e41d43]">ITM</span>
               </span>
-              <span className="text-[10px] font-semibold text-[#86868b] tracking-wider uppercase mt-1">
+              <span className="text-xs font-semibold text-[#86868b] tracking-wider uppercase mt-1">
                 BABU BANARASI DAS GROUP
               </span>
             </div>
@@ -74,7 +74,7 @@ export function Header() {
                 >
                   <Link
                     href={item.href}
-                    className={`px-3.5 py-1.5 rounded-full text-[13px] font-medium transition-all duration-200 inline-flex items-center gap-1 ${
+                    className={`px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-200 inline-flex items-center gap-1 ${
                       isActive
                         ? "text-[#e41d43] bg-[#fff1f3]"
                         : "text-[#1d1d1f] hover:text-[#243d77] hover:bg-[#f5f5f7]"
@@ -125,7 +125,7 @@ export function Header() {
                                           <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all text-[#e41d43]" />
                                         </div>
                                         {sub.description && (
-                                          <p className="text-[11px] text-[#86868b] mt-0.5 line-clamp-1">
+                                          <p className="text-xs text-[#86868b] mt-0.5 line-clamp-1">
                                             {sub.description}
                                           </p>
                                         )}
@@ -142,7 +142,7 @@ export function Header() {
                             <div className="col-span-4 bg-[#f5f5f7] rounded-xl p-5 border border-[#d2d2d7]/60 flex flex-col justify-between">
                               <div>
                                 {item.featured.badge && (
-                                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#e41d43] bg-white px-2.5 py-0.5 rounded-full border border-[#e41d43]/20 mb-3">
+                                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#e41d43] bg-white px-2.5 py-0.5 rounded-full border border-[#e41d43]/20 mb-3">
                                     <Sparkles className="w-3 h-3 text-[#e41d43]" />
                                     {item.featured.badge}
                                   </span>

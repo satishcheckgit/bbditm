@@ -8,7 +8,7 @@ export function UtilityBar() {
     <div className="hidden lg:block bg-[#1a2c56] border-b border-[#243d77] text-xs text-slate-200 py-1.5 transition-colors">
       <Container className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 font-semibold text-white bg-[#e41d43] px-2.5 py-0.5 rounded-full text-[11px] tracking-tight">
+          <span className="inline-flex items-center gap-1.5 font-semibold text-white bg-[#e41d43] px-2.5 py-0.5 rounded-full text-xs tracking-tight">
             AKTU Code: 054
           </span>
           <span className="text-slate-400">|</span>

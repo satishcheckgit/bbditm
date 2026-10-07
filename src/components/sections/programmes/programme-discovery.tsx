@@ -83,7 +83,7 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
               <div>
                 {/* Degree & Level Badges */}
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#e41d43] bg-[#fff1f3] border border-[#e41d43]/20 px-2.5 py-0.5 rounded-full uppercase tracking-tight">
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#e41d43] bg-[#fff1f3] border border-[#e41d43]/20 px-2.5 py-0.5 rounded-full uppercase tracking-tight">
                     {prog.degree}
                   </span>
                   <span className="text-xs text-[#86868b] font-medium">
@@ -98,7 +98,7 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
 
                 {/* Description / Tagline */}
                 {prog.tagline && (
-                  <p className="text-xs sm:text-[13px] text-[#6e6e73] mt-2.5 line-clamp-2 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#6e6e73] mt-2.5 line-clamp-2 leading-relaxed">
                     {prog.tagline}
                   </p>
                 )}

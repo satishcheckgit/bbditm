@@ -51,7 +51,7 @@ export default async function ProgrammesPage() {
                     <span className="text-xs font-bold text-[#e41d43] uppercase tracking-wider">
                       {prog.discipline}
                     </span>
-                    <span className="text-[11px] text-[#86868b] font-medium px-2.5 py-0.5 rounded-full bg-[#f5f5f7]">
+                    <span className="text-xs text-[#86868b] font-medium px-2.5 py-0.5 rounded-full bg-[#f5f5f7]">
                       AKTU: 054
                     </span>
                   </div>
@@ -121,7 +121,7 @@ export default async function ProgrammesPage() {
                     <span className="text-xs font-bold text-[#e41d43] uppercase tracking-wider">
                       Management
                     </span>
-                    <span className="text-[11px] text-[#86868b] font-medium px-2.5 py-0.5 rounded-full bg-[#f5f5f7]">
+                    <span className="text-xs text-[#86868b] font-medium px-2.5 py-0.5 rounded-full bg-[#f5f5f7]">
                       AKTU: 054
                     </span>
                   </div>

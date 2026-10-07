@@ -40,7 +40,7 @@ export function SchoolShowcase({ schools }: SchoolShowcaseProps) {
                     <Icon className="w-5 h-5" />
                   </div>
 
-                  <span className="text-[11px] font-semibold text-[#e41d43] uppercase tracking-tight">
+                  <span className="text-xs font-semibold text-[#e41d43] uppercase tracking-tight">
                     {school.programmeCount > 0
                       ? `${school.programmeCount} Programmes Offered`
                       : "Foundational Sciences"}
@@ -50,7 +50,7 @@ export function SchoolShowcase({ schools }: SchoolShowcaseProps) {
                     {school.name}
                   </h3>
 
-                  <p className="text-xs sm:text-[13px] text-[#6e6e73] mt-3 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#6e6e73] mt-3 leading-relaxed">
                     {school.description}
                   </p>
                 </div>

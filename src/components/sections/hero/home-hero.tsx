@@ -28,7 +28,7 @@ export function HomeHero() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-bold text-[#243d77] tracking-tight leading-[1.12] font-heading">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-semibold text-[#243d77] tracking-tight leading-[1.12] font-heading">
               Where technical depth meets{" "}
               <span className="text-[#e41d43]">
                 real-world leadership.
@@ -108,7 +108,7 @@ export function HomeHero() {
                       <p className="text-xs text-slate-300">BBDITM Lucknow</p>
                     </div>
                   </div>
-                  <span className="text-[11px] font-semibold tracking-tight px-3 py-1 rounded-full bg-[#e41d43] text-white">
+                  <span className="text-xs font-semibold tracking-tight px-3 py-1 rounded-full bg-[#e41d43] text-white">
                     AICTE APPROVED
                   </span>
                 </div>
@@ -116,7 +116,7 @@ export function HomeHero() {
                 {/* Campus & Innovation Highlights */}
                 <div className="py-5 space-y-3">
                   <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                    <span className="text-[11px] font-semibold text-[#f87171] uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-[#f87171] uppercase tracking-wider">
                       Flagship School
                     </span>
                     <h3 className="text-sm font-semibold text-white">
@@ -128,7 +128,7 @@ export function HomeHero() {
                   </div>
 
                   <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                    <span className="text-[11px] font-semibold text-[#f87171] uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-[#f87171] uppercase tracking-wider">
                       Industry Partnerships
                     </span>
                     <h3 className="text-sm font-semibold text-white">

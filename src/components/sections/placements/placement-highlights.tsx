@@ -77,7 +77,7 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
             >
               <div>
                 <Quote className="w-6 h-6 text-[#f87171] mb-3" />
-                <p className="text-xs sm:text-[13px] text-slate-200 leading-relaxed italic">
+                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed italic">
                   &ldquo;{story.quote}&rdquo;
                 </p>
               </div>
@@ -87,7 +87,7 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
                   <h4 className="text-xs sm:text-sm font-semibold text-white font-heading">
                     {story.studentName}
                   </h4>
-                  <p className="text-[11px] text-[#86868b]">
+                  <p className="text-xs text-[#86868b]">
                     {story.programme} · {story.batch}
                   </p>
                 </div>
