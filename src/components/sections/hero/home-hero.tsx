@@ -67,6 +67,8 @@ export interface FullHeroSlide {
   bannerImage?: string; // Image path or URL for full banner
   bannerAlt?: string;
   bannerLink?: string; // Clickable link for the entire banner
+  fullBleed?: boolean; // If true, banner stretches edge-to-edge full width
+  showOverlay?: boolean; // If true, renders text overlay & gradient. Default: false for clean graphical banners
 }
 
 export interface HomeHeroProps {
@@ -232,26 +234,10 @@ export const defaultFullHeroSlides: FullHeroSlide[] = [
   {
     id: "admissions-wide-banner",
     layout: "banner", // Option 2: Full-Width Image Banner Slide
-    badge: "ADMISSIONS 2026-27 NOW OPEN",
-    badgeVariant: "red",
-    headline: (
-      <>
-        Shape your future at BBDITM.{" "}
-        <span className="text-[#e41d43]">Admissions Open 2026-27.</span>
-      </>
-    ),
-    subtitle:
-      "Direct admissions open for B.Tech, M.Tech, MBA, MCA, and Pharmacy programs. Scholarships available for meritorious candidates.",
-    primaryCta: {
-      label: "Apply Online Now",
-      href: "/admissions",
-    },
-    secondaryCta: {
-      label: "Download Brochure",
-      href: "/contact",
-    },
-    bannerImage: "", // Ready for custom banner image URL (e.g. /images/hero-admissions-banner.jpg)
-    bannerAlt: "BBDITM Admissions 2026-27 Open",
+    fullBleed: true, // Expands full-fledge across the hero section
+    showOverlay: false, // Clean graphical banner without text/black gradient clutter
+    bannerImage: "/banner/banner.jpg",
+    bannerAlt: "BBDITM AKTU Merit List Academic Session 2024-25, 2025-26",
     bannerLink: "/admissions",
   },
 ];
@@ -428,95 +414,109 @@ export function HomeHero({
                   isSlideActive ? "opacity-100" : "opacity-30 pointer-events-none"
                 )}
               >
-                <Container>
-                  {/* OPTION 2: FULL-WIDTH IMAGE BANNER LAYOUT */}
-                  {isBannerMode ? (
-                    <div className="relative min-h-[460px] lg:min-h-[500px] flex items-center">
-                      <div className="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 group/banner min-h-[420px] md:min-h-[460px] flex flex-col justify-end p-6 sm:p-10 md:p-12 text-white bg-gradient-to-r from-[#1c2e59] via-[#243d77] to-[#122247]">
-                        {/* Custom Banner Image */}
-                        {slide.bannerImage ? (
-                          <Image
-                            src={slide.bannerImage}
-                            alt={slide.bannerAlt || "Banner"}
-                            fill
-                            unoptimized
-                            sizes="100vw"
-                            className="object-cover transition-transform duration-700 ease-out group-hover/banner:scale-[1.02]"
-                          />
-                        ) : (
-                          /* Artistic Mesh Backdrop fallback when image is pending */
-                          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                            <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#e41d43]/20 blur-3xl" />
-                            <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-blue-500/20 blur-3xl" />
-                            <div className="w-full h-full bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:3rem_3rem]" />
+                {/* OPTION 2: FULL-WIDTH IMAGE BANNER LAYOUT */}
+                {isBannerMode ? (
+                  <div
+                    className={cn(
+                      "w-full mx-auto transition-all",
+                      slide.fullBleed
+                        ? "max-w-none px-0"
+                        : "max-w-[1680px] px-2 sm:px-4 md:px-6"
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        "relative w-full overflow-hidden group/banner shadow-xl transition-all",
+                        slide.fullBleed
+                          ? "rounded-none"
+                          : "rounded-2xl md:rounded-3xl border border-slate-200/80",
+                        "aspect-[2.2/1] sm:aspect-[2.5/1] md:aspect-[2.7/1] lg:aspect-[2.74/1]",
+                        "min-h-[220px] sm:min-h-[300px] md:min-h-[400px] lg:min-h-[480px] xl:min-h-[520px]"
+                      )}
+                    >
+                      {/* Custom Banner Image */}
+                      {slide.bannerImage ? (
+                        <Image
+                          src={slide.bannerImage}
+                          alt={slide.bannerAlt || "Banner"}
+                          fill
+                          priority
+                          unoptimized
+                          sizes="100vw"
+                          className="object-cover transition-transform duration-700 ease-out group-hover/banner:scale-[1.01]"
+                        />
+                      ) : (
+                        /* Artistic Mesh Backdrop fallback when image is pending */
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#1c2e59] via-[#243d77] to-[#122247]" />
+                      )}
+
+                      {/* Full-banner clickable link when no overlay */}
+                      {slide.bannerLink && !slide.showOverlay && (
+                        <Link
+                          href={slide.bannerLink}
+                          className="absolute inset-0 z-10 cursor-pointer"
+                          aria-label={slide.bannerAlt || "Banner link"}
+                        />
+                      )}
+
+                      {/* Optional Overlay Content (ONLY when showOverlay === true) */}
+                      {slide.showOverlay && (
+                        <>
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none" />
+                          <div className="relative z-20 max-w-2xl space-y-4 md:space-y-5 p-6 sm:p-10 md:p-12 text-white flex flex-col justify-end h-full">
+                            {slide.badge && (
+                              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide bg-white/20 backdrop-blur-md text-white border border-white/30">
+                                <span className="w-2 h-2 rounded-full bg-[#e41d43]" />
+                                <span>{slide.badge}</span>
+                              </div>
+                            )}
+
+                            {slide.headline && (
+                              <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight leading-[1.14] font-heading drop-shadow-md">
+                                {slide.headline}
+                              </h2>
+                            )}
+
+                            {slide.subtitle && (
+                              <p className="text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed font-normal max-w-xl drop-shadow-sm">
+                                {slide.subtitle}
+                              </p>
+                            )}
+
+                            {(slide.primaryCta || slide.secondaryCta) && (
+                              <div className="flex flex-wrap items-center gap-3 pt-2">
+                                {slide.primaryCta && (
+                                  <Button
+                                    href={slide.primaryCta.href}
+                                    variant="primary"
+                                    size="lg"
+                                    className="group shadow-lg"
+                                  >
+                                    <span>{slide.primaryCta.label}</span>
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-1" />
+                                  </Button>
+                                )}
+
+                                {slide.secondaryCta && (
+                                  <Button
+                                    href={slide.secondaryCta.href}
+                                    variant="secondary"
+                                    size="lg"
+                                    className="bg-white/90 backdrop-blur-md text-[#243d77] hover:bg-white border-0 shadow-lg"
+                                  >
+                                    <span>{slide.secondaryCta.label}</span>
+                                  </Button>
+                                )}
+                              </div>
+                            )}
                           </div>
-                        )}
-
-                        {/* Ambient gradient overlay for text readability */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none" />
-
-                        {/* Optional full-banner clickable link if no action buttons */}
-                        {slide.bannerLink && !slide.primaryCta && (
-                          <Link
-                            href={slide.bannerLink}
-                            className="absolute inset-0 z-10"
-                            aria-label={slide.bannerAlt || "Banner link"}
-                          />
-                        )}
-
-                        {/* Overlay Content (Badge, Headline, Subtitle, CTAs) */}
-                        <div className="relative z-20 max-w-2xl space-y-4 md:space-y-5">
-                          {slide.badge && (
-                            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide bg-white/20 backdrop-blur-md text-white border border-white/30">
-                              <span className="w-2 h-2 rounded-full bg-[#e41d43]" />
-                              <span>{slide.badge}</span>
-                            </div>
-                          )}
-
-                          {slide.headline && (
-                            <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight leading-[1.14] font-heading drop-shadow-md">
-                              {slide.headline}
-                            </h2>
-                          )}
-
-                          {slide.subtitle && (
-                            <p className="text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed font-normal max-w-xl drop-shadow-sm">
-                              {slide.subtitle}
-                            </p>
-                          )}
-
-                          {/* Action Buttons */}
-                          {(slide.primaryCta || slide.secondaryCta) && (
-                            <div className="flex flex-wrap items-center gap-3 pt-2">
-                              {slide.primaryCta && (
-                                <Button
-                                  href={slide.primaryCta.href}
-                                  variant="primary"
-                                  size="lg"
-                                  className="group shadow-lg"
-                                >
-                                  <span>{slide.primaryCta.label}</span>
-                                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-1" />
-                                </Button>
-                              )}
-
-                              {slide.secondaryCta && (
-                                <Button
-                                  href={slide.secondaryCta.href}
-                                  variant="secondary"
-                                  size="lg"
-                                  className="bg-white/90 backdrop-blur-md text-[#243d77] hover:bg-white border-0 shadow-lg"
-                                >
-                                  <span>{slide.secondaryCta.label}</span>
-                                </Button>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      </div>
+                        </>
+                      )}
                     </div>
-                  ) : (
-                    /* OPTION 1: SPLIT 2-COLUMN LAYOUT (Supporting Text + Card / Video / Image Card) */
+                  </div>
+                ) : (
+                  <Container>
+                    {/* OPTION 1: SPLIT 2-COLUMN LAYOUT (Supporting Text + Card / Video / Image Card) */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center min-h-[460px] lg:min-h-[500px]">
                       {/* Left Column: Headline, Subtitle, CTAs, Proof Points */}
                       <div className="lg:col-span-7 space-y-6 md:space-y-7">
@@ -586,7 +586,7 @@ export function HomeHero({
                             <div className="relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-300">
                               {/* Background Frame with layered gradients or Image Banner */}
                               <div className="relative min-h-[440px] sm:min-h-[460px] flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#1c2e59] via-[#152345] to-[#0c162e] border border-white/10 p-6 sm:p-7 text-white group/rightcard">
-                                
+
                                 {/* Option 1: Right-Column Image Banner (media.type === "image" && media.imageUrl) */}
                                 {media.type === "image" && media.imageUrl && (
                                   <>
@@ -693,7 +693,7 @@ export function HomeHero({
                                       onClick={() =>
                                         setActiveVideoModal(
                                           media.videoUrl ||
-                                            "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                                          "https://www.youtube.com/embed/dQw4w9WgXcQ"
                                         )
                                       }
                                       className="group/video relative cursor-pointer rounded-xl overflow-hidden border border-white/20 bg-black/30 p-3 sm:p-4 hover:border-[#f87171]/60 transition-all"
@@ -770,8 +770,8 @@ export function HomeHero({
                         </div>
                       )}
                     </div>
-                  )}
-                </Container>
+                  </Container>
+                )}
               </div>
             );
           })}
@@ -875,7 +875,7 @@ export function HomeHero({
             {/* Video Player Content */}
             <div className="relative aspect-video w-full bg-black flex items-center justify-center">
               {activeVideoModal.includes("youtube.com") ||
-              activeVideoModal.includes("youtu.be") ? (
+                activeVideoModal.includes("youtu.be") ? (
                 <iframe
                   src={activeVideoModal}
                   title="Campus Tour"
