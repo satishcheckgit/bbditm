@@ -27,41 +27,41 @@ export function SchoolShowcase({ schools }: SchoolShowcaseProps) {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {schools.map((school) => {
             const Icon = iconMap[school.id] || GraduationCap;
             return (
               <div
                 key={school.id}
-                className="group relative bg-white rounded-[4px] p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-[#243d77] transition-all duration-150 flex flex-col justify-between"
+                className="group relative bg-white rounded-2xl p-7 border border-black/[0.06] shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] hover:border-[#243d77]/30 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-[3px] bg-[#f0f4fa] text-[#243d77] flex items-center justify-center mb-5 group-hover:bg-[#243d77] group-hover:text-white transition-colors duration-150">
+                  <div className="w-11 h-11 rounded-xl bg-[#f5f5f7] text-[#243d77] flex items-center justify-center mb-5 group-hover:bg-[#243d77] group-hover:text-white transition-all duration-300">
                     <Icon className="w-5 h-5" />
                   </div>
 
-                  <span className="text-[11px] font-bold text-[#e41d43] uppercase tracking-wider">
+                  <span className="text-[11px] font-semibold text-[#e41d43] uppercase tracking-tight">
                     {school.programmeCount > 0
                       ? `${school.programmeCount} Programmes Offered`
                       : "Foundational Sciences"}
                   </span>
 
-                  <h3 className="text-lg font-bold text-[#243d77] mt-1.5 group-hover:text-[#e41d43] transition-colors">
+                  <h3 className="text-lg font-bold text-[#1d1d1f] mt-1.5 group-hover:text-[#243d77] transition-colors font-heading">
                     {school.name}
                   </h3>
 
-                  <p className="text-xs sm:text-[13px] text-[#64748b] mt-3 leading-[22px]">
+                  <p className="text-xs sm:text-[13px] text-[#6e6e73] mt-3 leading-relaxed">
                     {school.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-100">
+                <div className="mt-6 pt-4 border-t border-black/[0.04]">
                   <Link
                     href={`/schools/${school.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#e41d43] hover:text-[#c21334]"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#e41d43] hover:text-[#c21334] group-hover:translate-x-0.5 transition-transform"
                   >
                     <span>Explore Department</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>

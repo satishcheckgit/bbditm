@@ -63,30 +63,32 @@ export default async function SchoolDetailPage({ params }: SchoolPageProps) {
 
         {/* Hero Section */}
         <div className="max-w-3xl mb-16 space-y-4">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#e41d43]">
+          <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#e41d43]/10 text-[#e41d43] border border-[#e41d43]/20 mb-1">
             Academic Department
           </span>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#243d77] tracking-tight font-heading">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#243d77] tracking-tight font-heading">
             {school.name}
           </h1>
-          <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#6e6e73] leading-relaxed">
             {school.description}
           </p>
 
-          <div className="pt-2 flex items-center gap-4 text-xs text-gray-500">
-            <span className="flex items-center gap-1.5 font-medium text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-[3px] border border-emerald-200">
+          <div className="pt-2 flex flex-wrap items-center gap-3 text-xs text-[#86868b]">
+            <span className="flex items-center gap-1.5 font-medium text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
               AICTE Approved & AKTU Affiliated
             </span>
             {school.establishedYear && (
-              <span className="font-medium">Established {school.establishedYear}</span>
+              <span className="font-medium px-3 py-1 rounded-full bg-[#f5f5f7] border border-black/[0.04] text-[#1d1d1f]">
+                Established {school.establishedYear}
+              </span>
             )}
           </div>
         </div>
 
         {/* Programmes Offered Under This School */}
         <div className="space-y-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] font-heading">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] tracking-tight font-heading">
             Degree Programmes Offered
           </h2>
 
@@ -95,27 +97,27 @@ export default async function SchoolDetailPage({ params }: SchoolPageProps) {
               {departmentProgrammes.map((prog) => (
                 <div
                   key={prog.id}
-                  className="p-6 rounded-[3px] bg-white border border-gray-200 shadow-sm hover:border-[#243d77]/40 hover:shadow-md transition-all flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-white border border-black/[0.06] shadow-sm hover:border-[#243d77]/30 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
                     <span className="text-xs font-bold uppercase tracking-wider text-[#e41d43] block mb-2">
                       {prog.degree}
                     </span>
-                    <h3 className="text-base sm:text-lg font-bold text-[#243d77] leading-snug">
+                    <h3 className="text-base sm:text-lg font-bold text-[#243d77] leading-snug tracking-tight font-heading">
                       {prog.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 mt-2 line-clamp-2">
+                    <p className="text-xs sm:text-sm text-[#6e6e73] mt-2 line-clamp-2 leading-relaxed">
                       {prog.tagline}
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-xs">
-                    <span className="text-gray-500 font-medium">{prog.duration}</span>
+                  <div className="mt-6 pt-4 border-t border-black/[0.06] flex items-center justify-between text-xs">
+                    <span className="text-[#86868b] font-medium">{prog.duration}</span>
                     <Link
                       href={`/programmes/${prog.slug}`}
-                      className="font-bold text-[#243d77] hover:text-[#e41d43] inline-flex items-center gap-1 transition-colors"
+                      className="font-semibold text-[#243d77] hover:text-[#e41d43] inline-flex items-center gap-1 transition-colors"
                     >
-                      <span>View Curriculum</span>
+                      <span>View Details</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
@@ -123,7 +125,7 @@ export default async function SchoolDetailPage({ params }: SchoolPageProps) {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-[#6e6e73]">
               Foundational courses and multidisciplinary subjects offered across all engineering branches.
             </p>
           )}

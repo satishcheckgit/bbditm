@@ -54,17 +54,17 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
         </div>
 
         {/* Filter Pills Bar */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-8 no-scrollbar">
+        <div className="flex items-center gap-1 overflow-x-auto p-1 rounded-full bg-[#e5e5ea]/70 border border-black/[0.04] max-w-fit mb-8 no-scrollbar">
           {filterTabs.map((tab) => {
             const isSelected = selectedFilter === tab.id;
             return (
               <button
                 key={tab.id}
                 onClick={() => setSelectedFilter(tab.id)}
-                className={`px-3.5 py-1.5 rounded-[3px] text-xs font-bold transition-all whitespace-nowrap cursor-pointer select-none ${
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
                   isSelected
                     ? "bg-[#243d77] text-white shadow-sm"
-                    : "bg-white text-[#243d77] hover:bg-[#f0f4fa] border border-[#cbd5e1]"
+                    : "text-[#1d1d1f] hover:text-[#243d77] hover:bg-white/60"
                 }`}
               >
                 {tab.label}
@@ -78,42 +78,42 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
           {filtered.map((prog) => (
             <div
               key={prog.id}
-              className="group bg-white rounded-[4px] p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-[#243d77] transition-all duration-150 flex flex-col justify-between"
+              className="group bg-white rounded-2xl p-6 border border-black/[0.06] shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] hover:border-[#243d77]/25 transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 {/* Degree & Level Badges */}
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#e41d43] bg-[#fff1f3] border border-[#fecdd3] px-2 py-0.5 rounded-[3px] uppercase tracking-wider">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#e41d43] bg-[#fff1f3] border border-[#e41d43]/20 px-2.5 py-0.5 rounded-full uppercase tracking-tight">
                     {prog.degree}
                   </span>
-                  <span className="text-xs text-[#64748b] font-medium">
+                  <span className="text-xs text-[#86868b] font-medium">
                     {prog.schoolName}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base sm:text-lg font-bold text-[#243d77] group-hover:text-[#e41d43] transition-colors leading-snug">
+                <h3 className="text-base sm:text-lg font-bold text-[#1d1d1f] group-hover:text-[#243d77] transition-colors leading-snug font-heading">
                   {prog.title}
                 </h3>
 
                 {/* Description / Tagline */}
                 {prog.tagline && (
-                  <p className="text-xs sm:text-[13px] text-[#64748b] mt-2.5 line-clamp-2 leading-[22px]">
+                  <p className="text-xs sm:text-[13px] text-[#6e6e73] mt-2.5 line-clamp-2 leading-relaxed">
                     {prog.tagline}
                   </p>
                 )}
               </div>
 
               {/* Metadata & Footer Action */}
-              <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-[#64748b]">
+              <div className="mt-5 pt-4 border-t border-black/[0.04] flex items-center justify-between text-xs text-[#86868b]">
                 <div className="flex items-center gap-3">
                   <span className="inline-flex items-center gap-1 font-medium">
-                    <Clock className="w-3.5 h-3.5 text-slate-400" />
+                    <Clock className="w-3.5 h-3.5 text-[#86868b]" />
                     {prog.duration}
                   </span>
                   {prog.intake && (
                     <span className="inline-flex items-center gap-1 font-medium">
-                      <Users className="w-3.5 h-3.5 text-slate-400" />
+                      <Users className="w-3.5 h-3.5 text-[#86868b]" />
                       {prog.intake}
                     </span>
                   )}
@@ -121,7 +121,7 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
 
                 <Link
                   href={`/programmes/${prog.slug}`}
-                  className="font-bold text-[#e41d43] hover:text-[#c21334] group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1"
+                  className="font-semibold text-[#e41d43] hover:text-[#c21334] group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1"
                 >
                   <span>Curriculum</span>
                   <ArrowRight className="w-3.5 h-3.5" />

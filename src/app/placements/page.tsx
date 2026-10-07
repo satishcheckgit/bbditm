@@ -38,16 +38,16 @@ export default async function PlacementsPage() {
       <PlacementHighlights data={data} />
 
       {/* Training & Placement Cell Details */}
-      <section className="py-20 sm:py-28 bg-slate-50 border-t border-slate-200/80">
+      <section className="py-20 sm:py-28 bg-[#f5f5f7] border-t border-black/[0.06]">
         <Container>
           <div className="max-w-3xl mb-14">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#e41d43]">
+            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#e41d43]/10 text-[#e41d43] border border-[#e41d43]/20 mb-3">
               Training & Development
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#243d77] mt-2 font-heading tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#243d77] font-heading tracking-tight">
               Career Development Cell (CDC)
             </h2>
-            <p className="text-sm sm:text-base text-gray-600 mt-3 leading-relaxed">
+            <p className="text-sm sm:text-base text-[#6e6e73] mt-3 leading-relaxed">
               Our placement framework operates year-round to ensure graduates bridge the gap between academic theory and high-productivity corporate demands.
             </p>
           </div>
@@ -56,13 +56,13 @@ export default async function PlacementsPage() {
             {trainingInitiatives.map((t) => (
               <div
                 key={t.title}
-                className="p-7 rounded-[3px] bg-white border border-gray-200 shadow-sm space-y-2.5"
+                className="p-7 rounded-2xl bg-white border border-black/[0.06] shadow-sm hover:shadow-md transition-all duration-300 space-y-2.5"
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-5 h-5 text-[#e41d43] shrink-0" />
-                  <h3 className="text-base font-bold text-[#243d77]">{t.title}</h3>
+                  <h3 className="text-base font-bold text-[#243d77] tracking-tight font-heading">{t.title}</h3>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed pl-7">
+                <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed pl-7.5">
                   {t.desc}
                 </p>
               </div>

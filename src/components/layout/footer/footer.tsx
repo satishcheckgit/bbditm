@@ -8,31 +8,31 @@ export function Footer() {
   const currentYear = 2026;
 
   return (
-    <footer className="bg-[#0b1120] text-[#bcbcbc] pt-14 pb-10 border-t border-[#1e293b]">
+    <footer className="bg-[#161617] text-[#86868b] pt-14 pb-10 border-t border-white/10">
       <Container>
         {/* Main Columns Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-12 border-b border-[#1e293b]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-12 border-b border-white/10">
           {/* Institutional Bio & Affiliation */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-[3px] bg-[#243d77] border-b-2 border-[#e41d43] flex items-center justify-center text-white font-bold text-lg shadow-md">
+              <div className="w-10 h-10 rounded-xl bg-[#243d77] border-b-2 border-[#e41d43] flex items-center justify-center text-white font-bold text-lg shadow-md">
                 B
               </div>
               <div>
-                <span className="font-extrabold text-xl text-white tracking-tight">
+                <span className="font-bold text-xl text-white tracking-tight font-heading">
                   BBD<span className="text-[#e41d43]">ITM</span>
                 </span>
-                <p className="text-[11px] text-[#999999] font-medium">
+                <p className="text-[11px] text-[#86868b] font-medium">
                   Babu Banarasi Das Group of Educational Institutions
                 </p>
               </div>
             </div>
 
-            <p className="text-xs sm:text-[13px] text-[#999999] leading-[22px] pr-4">
+            <p className="text-xs sm:text-[13px] text-[#86868b] leading-relaxed pr-4">
               Babu Banarasi Das Institute of Technology & Management (AKTU College Code: 054) provides accredited professional education in Engineering and Business Administration.
             </p>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-[3px] bg-[#111c38] border border-[#243d77] text-xs text-slate-200">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-slate-300">
               <ShieldCheck className="w-4 h-4 text-[#e41d43] shrink-0" />
               <span>Approved by AICTE | Affiliated to AKTU, Lucknow</span>
             </div>

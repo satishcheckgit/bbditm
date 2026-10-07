@@ -79,15 +79,15 @@ export default function AdmissionsPage() {
             {steps.map((st) => (
               <div
                 key={st.step}
-                className="p-6 rounded-[3px] bg-slate-50 border border-slate-200/80 relative space-y-3"
+                className="p-6 rounded-2xl bg-[#f5f5f7] border border-black/[0.06] hover:bg-white hover:border-[#243d77]/25 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 relative space-y-3"
               >
-                <span className="text-2xl font-extrabold text-[#e41d43] block">
+                <span className="text-2xl font-bold text-[#e41d43] font-heading block">
                   {st.step}
                 </span>
-                <h3 className="text-base font-bold text-[#243d77]">
+                <h3 className="text-base font-bold text-[#1d1d1f] font-heading">
                   {st.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
                   {st.description}
                 </p>
               </div>
@@ -102,15 +102,15 @@ export default function AdmissionsPage() {
               <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] font-heading">
                 Annual Institutional Fee Structure
               </h2>
-              <p className="text-xs sm:text-sm text-gray-500 mt-1">
+              <p className="text-xs sm:text-sm text-[#86868b] mt-1">
                 Fee regulated and approved by the Fee Regulatory Committee / AKTU Lucknow.
               </p>
             </div>
           </div>
 
-          <div className="overflow-x-auto rounded-[3px] border border-gray-200">
+          <div className="overflow-x-auto rounded-2xl border border-black/[0.06] shadow-sm">
             <table className="w-full text-left text-sm text-gray-700">
-              <thead className="bg-gray-50 text-xs uppercase font-bold text-gray-600 border-b border-gray-200">
+              <thead className="bg-[#f5f5f7] text-xs uppercase font-semibold text-[#6e6e73] border-b border-black/[0.06]">
                 <tr>
                   <th className="py-4 px-6">Programme</th>
                   <th className="py-4 px-6">Duration</th>
@@ -118,52 +118,52 @@ export default function AdmissionsPage() {
                   <th className="py-4 px-6">Eligibility Requirement</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 bg-white">
+              <tbody className="divide-y divide-black/[0.04] bg-white">
                 <tr>
-                  <td className="py-4 px-6 font-bold text-gray-900">
+                  <td className="py-4 px-6 font-semibold text-[#1d1d1f]">
                     B.Tech (CSE, AI & ML, IT)
                   </td>
-                  <td className="py-4 px-6">4 Years</td>
+                  <td className="py-4 px-6 text-[#6e6e73]">4 Years</td>
                   <td className="py-4 px-6 font-semibold text-[#243d77]">
                     ₹ 89,200 / Year
                   </td>
-                  <td className="py-4 px-6 text-xs text-gray-600">
+                  <td className="py-4 px-6 text-xs text-[#6e6e73]">
                     10+2 with PCM (Min 45% aggregate, 40% SC/ST)
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-4 px-6 font-bold text-gray-900">
+                  <td className="py-4 px-6 font-semibold text-[#1d1d1f]">
                     B.Tech (ECE, ME, Civil)
                   </td>
-                  <td className="py-4 px-6">4 Years</td>
+                  <td className="py-4 px-6 text-[#6e6e73]">4 Years</td>
                   <td className="py-4 px-6 font-semibold text-[#243d77]">
                     ₹ 89,200 / Year
                   </td>
-                  <td className="py-4 px-6 text-xs text-gray-600">
+                  <td className="py-4 px-6 text-xs text-[#6e6e73]">
                     10+2 with PCM (Min 45% aggregate, 40% SC/ST)
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-4 px-6 font-bold text-gray-900">
+                  <td className="py-4 px-6 font-semibold text-[#1d1d1f]">
                     B.Tech Lateral Entry
                   </td>
-                  <td className="py-4 px-6">3 Years</td>
+                  <td className="py-4 px-6 text-[#6e6e73]">3 Years</td>
                   <td className="py-4 px-6 font-semibold text-[#243d77]">
                     ₹ 89,200 / Year
                   </td>
-                  <td className="py-4 px-6 text-xs text-gray-600">
+                  <td className="py-4 px-6 text-xs text-[#6e6e73]">
                     Diploma in Engg. / B.Sc with Mathematics (Min 45%)
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-4 px-6 font-bold text-gray-900">
+                  <td className="py-4 px-6 font-semibold text-[#1d1d1f]">
                     Master of Business Administration (MBA)
                   </td>
-                  <td className="py-4 px-6">2 Years</td>
+                  <td className="py-4 px-6 text-[#6e6e73]">2 Years</td>
                   <td className="py-4 px-6 font-semibold text-[#243d77]">
                     ₹ 75,000 / Year
                   </td>
-                  <td className="py-4 px-6 text-xs text-gray-600">
+                  <td className="py-4 px-6 text-xs text-[#6e6e73]">
                     Recognized Bachelor&apos;s Degree (Min 50%, 45% SC/ST)
                   </td>
                 </tr>
@@ -173,20 +173,20 @@ export default function AdmissionsPage() {
         </div>
 
         {/* Scholarships Information */}
-        <div className="p-8 rounded-[4px] bg-slate-50 border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="p-8 rounded-2xl bg-[#f5f5f7] border border-black/[0.06] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#e41d43]">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#e41d43]">
               Financial Assistance & Scholarships
             </span>
-            <h3 className="text-lg sm:text-xl font-bold text-[#243d77]">
+            <h3 className="text-lg sm:text-xl font-bold text-[#243d77] font-heading">
               UP Government & Social Welfare Scholarships Applicable
             </h3>
-            <p className="text-xs sm:text-sm text-gray-600 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#6e6e73] max-w-2xl leading-relaxed">
               Eligible domicile students under SC/ST/OBC and General EWS categories can avail full or partial tuition reimbursement under the Uttar Pradesh Post-Matric Scholarship Scheme.
             </p>
           </div>
 
-          <Button href="/contact" variant="default" className="shrink-0">
+          <Button href="/contact" variant="primary" className="shrink-0">
             <span>Enquire for Scholarships</span>
             <ArrowRight className="w-4 h-4 ml-1" />
           </Button>

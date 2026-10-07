@@ -57,22 +57,22 @@ export function CampusExperience() {
             return (
               <div
                 key={f.title}
-                className="p-6 rounded-[4px] bg-[#f8fafc] border border-slate-200 hover:border-[#243d77] hover:bg-white hover:shadow-md transition-all duration-150 flex flex-col justify-between"
+                className="p-6 rounded-2xl bg-[#f5f5f7] border border-black/[0.06] hover:bg-white hover:border-[#243d77]/25 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-10 h-10 rounded-[3px] bg-white text-[#243d77] border border-slate-200 shadow-sm flex items-center justify-center">
-                      <Icon className="w-5 h-5" />
+                    <div className="w-11 h-11 rounded-xl bg-white text-[#243d77] border border-black/[0.06] shadow-sm flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-[#243d77]" />
                     </div>
-                    <span className="text-[11px] font-bold text-[#e41d43] uppercase tracking-wider">
+                    <span className="text-[11px] font-semibold text-[#e41d43] uppercase tracking-tight">
                       {f.tag}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-bold text-[#243d77] mb-2">
+                  <h3 className="text-base font-bold text-[#1d1d1f] mb-2 font-heading">
                     {f.title}
                   </h3>
-                  <p className="text-xs sm:text-[13px] text-[#64748b] leading-[22px]">
+                  <p className="text-xs sm:text-[13px] text-[#6e6e73] leading-relaxed">
                     {f.description}
                   </p>
                 </div>

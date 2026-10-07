@@ -68,7 +68,7 @@ export function MobileNav() {
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 text-gray-500 hover:text-gray-900 rounded-[3px]"
+            className="p-2 text-[#6e6e73] hover:text-[#1d1d1f] rounded-full hover:bg-black/5 transition-colors"
             aria-label="Close menu"
           >
             <X className="w-5 h-5" />
@@ -83,7 +83,7 @@ export function MobileNav() {
               const isExpanded = expandedIndex === idx;
 
               return (
-                <div key={item.title} className="border-b border-gray-100 last:border-b-0 pb-1">
+                <div key={item.title} className="border-b border-black/[0.06] last:border-b-0 pb-1">
                   {hasSub ? (
                     <div>
                       <button
@@ -99,7 +99,7 @@ export function MobileNav() {
                       </button>
 
                       {isExpanded && (
-                        <div className="pl-3 pb-3 pt-1 space-y-3 bg-[#f0f4fa] rounded-[3px] my-1 p-3">
+                        <div className="pl-3 pb-3 pt-2 space-y-3 bg-[#f5f5f7] rounded-xl my-1.5 p-3.5 border border-black/[0.04]">
                           {item.groups?.map((group) => (
                             <div key={group.heading} className="space-y-1">
                               <span className="text-[11px] font-bold uppercase tracking-wider text-[#e41d43]">
@@ -137,8 +137,8 @@ export function MobileNav() {
           </nav>
 
           {/* Quick Utility Portals */}
-          <div className="pt-4 border-t border-gray-100">
-            <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
+          <div className="pt-4 border-t border-black/[0.06]">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#86868b] mb-2">
               Quick Portals
             </p>
             <div className="grid grid-cols-2 gap-2 text-xs">
@@ -148,7 +148,7 @@ export function MobileNav() {
                   href={u.href}
                   target={u.isExternal ? "_blank" : undefined}
                   rel={u.isExternal ? "noopener noreferrer" : undefined}
-                  className="p-2 rounded-lg bg-[var(--color-surface-soft)] text-gray-700 hover:text-[var(--color-brand-600)] font-medium flex items-center justify-between"
+                  className="p-2.5 rounded-xl bg-[#f5f5f7] text-[#1d1d1f] hover:text-[#243d77] font-medium flex items-center justify-between border border-black/[0.04]"
                 >
                   <span>{u.title}</span>
                   {u.isExternal && <ExternalLink className="w-3 h-3 text-gray-400" />}

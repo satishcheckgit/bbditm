@@ -14,7 +14,7 @@ export function Container({
   ...props
 }: ContainerProps) {
   const sizeClasses = {
-    default: "max-w-7xl", // 1280px standard readable width
+    default: "max-w-[1550px]", // 1280px standard readable width
     wide: "max-w-[1440px]", // 1440px wide media / expansive sections
     reading: "max-w-3xl", // 768px editorial reading width
     full: "max-w-full",

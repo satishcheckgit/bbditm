@@ -21,60 +21,66 @@ export default function AboutPage() {
       <Container>
         {/* Editorial Heading */}
         <div className="max-w-3xl mb-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#e41d43]">
+          <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#e41d43]/10 text-[#e41d43] border border-[#e41d43]/20 mb-3">
             Our Heritage & Vision
           </span>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#243d77] mt-2 tracking-tight font-heading">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#243d77] tracking-tight font-heading">
             Academic distinction built on visionary leadership.
           </h1>
-          <p className="text-sm sm:text-base text-gray-600 mt-4 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#6e6e73] mt-4 leading-relaxed">
             Babu Banarasi Das Institute of Technology & Management (BBDITM), Lucknow, is one of the flagship institutions of the renowned Babu Banarasi Das Educational Group. Guided by the vision of Late Dr. Akhilesh Das Gupta, the institution is dedicated to developing world-class engineers, computer scientists, and business managers.
           </p>
         </div>
 
         {/* Core Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          <div className="p-8 rounded-[3px] bg-slate-50 border border-slate-200/80 space-y-3">
-            <ShieldCheck className="w-8 h-8 text-[#243d77]" />
-            <h3 className="text-lg font-bold text-[#243d77]">Statutory Approvals</h3>
-            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-20">
+          <div className="p-8 rounded-2xl bg-[#f5f5f7] border border-black/[0.06] space-y-4 hover:shadow-md transition-all duration-300">
+            <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-xs border border-black/[0.04]">
+              <ShieldCheck className="w-6 h-6 text-[#243d77]" />
+            </div>
+            <h3 className="text-lg font-bold text-[#243d77] tracking-tight font-heading">Statutory Approvals</h3>
+            <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
               Approved by the All India Council for Technical Education (AICTE), New Delhi, and affiliated to Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow (College Code: 054).
             </p>
           </div>
 
-          <div className="p-8 rounded-[3px] bg-slate-50 border border-slate-200/80 space-y-3">
-            <Building2 className="w-8 h-8 text-[#243d77]" />
-            <h3 className="text-lg font-bold text-[#243d77]">100+ Acre BBD City</h3>
-            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+          <div className="p-8 rounded-2xl bg-[#f5f5f7] border border-black/[0.06] space-y-4 hover:shadow-md transition-all duration-300">
+            <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-xs border border-black/[0.04]">
+              <Building2 className="w-6 h-6 text-[#243d77]" />
+            </div>
+            <h3 className="text-lg font-bold text-[#243d77] tracking-tight font-heading">100+ Acre BBD City</h3>
+            <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
               Located on Lucknow-Faizabad National Highway, offering an integrated campus experience with high-tech classrooms, residential hostels, stadium, and digital library.
             </p>
           </div>
 
-          <div className="p-8 rounded-[3px] bg-slate-50 border border-slate-200/80 space-y-3">
-            <Award className="w-8 h-8 text-[#243d77]" />
-            <h3 className="text-lg font-bold text-[#243d77]">Outcome-Centric Learning</h3>
-            <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+          <div className="p-8 rounded-2xl bg-[#f5f5f7] border border-black/[0.06] space-y-4 hover:shadow-md transition-all duration-300">
+            <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-xs border border-black/[0.04]">
+              <Award className="w-6 h-6 text-[#243d77]" />
+            </div>
+            <h3 className="text-lg font-bold text-[#243d77] tracking-tight font-heading">Outcome-Centric Learning</h3>
+            <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
               Curricula aligned with National Board of Accreditation (NBA) outcome parameters to ensure competitive technical abilities and lifelong learning.
             </p>
           </div>
         </div>
 
         {/* Milestone Timeline */}
-        <div className="border-t border-gray-100 pt-16">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] mb-8 font-heading">
+        <div className="border-t border-black/[0.06] pt-16">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] mb-8 font-heading tracking-tight">
             Chronology of Growth
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {milestones.map((m) => (
               <div
                 key={m.year}
-                className="p-6 rounded-[3px] bg-white border border-gray-200 shadow-sm space-y-2"
+                className="p-6 rounded-2xl bg-white border border-black/[0.06] shadow-sm hover:shadow-md transition-all duration-300 space-y-2.5"
               >
-                <span className="text-2xl font-black text-[#e41d43]">
+                <span className="text-2xl font-extrabold text-[#e41d43] tracking-tight font-heading">
                   {m.year}
                 </span>
-                <h4 className="text-sm font-bold text-[#243d77]">{m.title}</h4>
-                <p className="text-xs text-gray-600 leading-relaxed">{m.desc}</p>
+                <h4 className="text-sm font-bold text-[#243d77] tracking-tight font-heading">{m.title}</h4>
+                <p className="text-xs text-[#6e6e73] leading-relaxed">{m.desc}</p>
               </div>
             ))}
           </div>

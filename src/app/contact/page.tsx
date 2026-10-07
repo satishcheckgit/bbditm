@@ -29,22 +29,22 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left: Contact Details Cards (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="p-6 rounded-[3px] bg-slate-50 border border-slate-200 space-y-4">
+            <div className="p-6 rounded-2xl bg-[#f5f5f7] border border-black/[0.06] space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#243d77] shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-sm text-[#243d77]">Campus Address</h4>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-1 leading-relaxed">
+                  <h4 className="font-semibold text-sm text-[#1d1d1f] font-heading">Campus Address</h4>
+                  <p className="text-xs sm:text-sm text-[#6e6e73] mt-1 leading-relaxed">
                     {siteConfig.contact.address}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 pt-3 border-t border-gray-200/60">
+              <div className="flex items-start gap-3 pt-3 border-t border-black/[0.06]">
                 <Phone className="w-5 h-5 text-[#243d77] shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-sm text-[#243d77]">Admissions Helplines</h4>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-1">
+                  <h4 className="font-semibold text-sm text-[#1d1d1f] font-heading">Admissions Helplines</h4>
+                  <p className="text-xs sm:text-sm text-[#6e6e73] mt-1">
                     <a href={`tel:${siteConfig.contact.admissionsPhone}`} className="hover:text-[#e41d43] font-semibold block transition-colors">
                       {siteConfig.contact.admissionsPhone}
                     </a>
@@ -55,11 +55,11 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 pt-3 border-t border-gray-200/60">
+              <div className="flex items-start gap-3 pt-3 border-t border-black/[0.06]">
                 <Mail className="w-5 h-5 text-[#243d77] shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-sm text-[#243d77]">Email Desks</h4>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-1">
+                  <h4 className="font-semibold text-sm text-[#1d1d1f] font-heading">Email Desks</h4>
+                  <p className="text-xs sm:text-sm text-[#6e6e73] mt-1">
                     <a href={`mailto:${siteConfig.contact.admissionsEmail}`} className="hover:text-[#e41d43] font-semibold block transition-colors">
                       {siteConfig.contact.admissionsEmail}
                     </a>
@@ -70,19 +70,19 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 pt-3 border-t border-gray-200/60">
+              <div className="flex items-start gap-3 pt-3 border-t border-black/[0.06]">
                 <Clock className="w-5 h-5 text-[#243d77] shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-sm text-[#243d77]">Counseling Office Hours</h4>
-                  <p className="text-xs text-gray-600 mt-0.5">
+                  <h4 className="font-semibold text-sm text-[#1d1d1f] font-heading">Counseling Office Hours</h4>
+                  <p className="text-xs text-[#6e6e73] mt-0.5">
                     Monday to Saturday: 9:00 AM – 5:30 PM IST
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="p-5 rounded-[3px] bg-slate-50 border border-slate-200 text-xs text-gray-700 space-y-1">
-              <span className="font-bold text-[#243d77] block">AKTU UP-TAC Counseling Reference</span>
+            <div className="p-5 rounded-2xl bg-[#f5f5f7] border border-black/[0.06] text-xs text-[#6e6e73] space-y-1">
+              <span className="font-semibold text-[#1d1d1f] block font-heading">AKTU UP-TAC Counseling Reference</span>
               <p className="leading-relaxed">
                 Fill College Code <strong className="text-[#e41d43]">054</strong> (Babu Banarasi Das Institute of Technology & Management) as your preferred institutional choice during state counseling rounds.
               </p>
@@ -90,11 +90,11 @@ export default function ContactPage() {
           </div>
 
           {/* Right: Enquiry Form (7 cols) */}
-          <div className="lg:col-span-7 bg-white rounded-[3px] p-8 border border-gray-200 shadow-sm">
+          <div className="lg:col-span-7 bg-white rounded-2xl p-8 border border-black/[0.06] shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
             <h3 className="text-xl font-bold text-[#243d77] mb-2 font-heading">
               Send an Admission Enquiry
             </h3>
-            <p className="text-xs text-gray-500 mb-6">
+            <p className="text-xs text-[#86868b] mb-6">
               Our academic counselors will evaluate your eligibility and assist with curriculum questions.
             </p>
             <EnquiryForm />

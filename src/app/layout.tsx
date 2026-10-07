@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import { Inter, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header/navbar";
 import { Footer } from "@/components/layout/footer/footer";
 import { siteConfig } from "@/config/site";
 
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
 const openSans = Open_Sans({
   variable: "--font-open-sans",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -55,13 +63,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${openSans.variable} h-full antialiased`}
+      className={`${inter.variable} ${openSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-[#1c2438] selection:bg-[var(--color-primary-navy-surface)] selection:text-[var(--color-primary-navy)]">
+      <body className="min-h-full flex flex-col bg-white text-[#1d1d1f] selection:bg-[#243d77]/10 selection:text-[#243d77]">
         {/* Accessible skip link */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-3 focus:py-1.5 focus:bg-[var(--color-accent-crimson)] focus:text-white focus:rounded-[3px] focus:shadow-md text-xs font-semibold"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#e41d43] focus:text-white focus:rounded-full focus:shadow-md text-xs font-semibold"
         >
           Skip to main content
         </a>
