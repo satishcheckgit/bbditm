@@ -54,17 +54,17 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
         </div>
 
         {/* Filter Pills Bar */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-3 mb-8 no-scrollbar">
           {filterTabs.map((tab) => {
             const isSelected = selectedFilter === tab.id;
             return (
               <button
                 key={tab.id}
                 onClick={() => setSelectedFilter(tab.id)}
-                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap cursor-pointer select-none ${
+                className={`px-3.5 py-1.5 rounded-[3px] text-xs font-bold transition-all whitespace-nowrap cursor-pointer select-none ${
                   isSelected
-                    ? "bg-[var(--color-brand-600)] text-white shadow-sm"
-                    : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
+                    ? "bg-[#243d77] text-white shadow-sm"
+                    : "bg-white text-[#243d77] hover:bg-[#f0f4fa] border border-[#cbd5e1]"
                 }`}
               >
                 {tab.label}
@@ -78,42 +78,42 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
           {filtered.map((prog) => (
             <div
               key={prog.id}
-              className="group bg-white rounded-2xl p-6 border border-[var(--color-border-card)] shadow-[0_2px_8px_rgb(0_0_0/0.03)] hover:shadow-[0_12px_30px_rgb(20_20_40/0.06)] hover:border-purple-200 transition-all duration-300 flex flex-col justify-between"
+              className="group bg-white rounded-[4px] p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-[#243d77] transition-all duration-150 flex flex-col justify-between"
             >
               <div>
                 {/* Degree & Level Badges */}
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[var(--color-brand-700)] bg-[var(--color-brand-50)] border border-[var(--color-brand-100)] px-2.5 py-1 rounded-full uppercase tracking-wider">
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#e41d43] bg-[#fff1f3] border border-[#fecdd3] px-2 py-0.5 rounded-[3px] uppercase tracking-wider">
                     {prog.degree}
                   </span>
-                  <span className="text-xs text-gray-500 font-medium">
+                  <span className="text-xs text-[#64748b] font-medium">
                     {prog.schoolName}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-[var(--color-ink)] group-hover:text-[var(--color-brand-600)] transition-colors leading-snug">
+                <h3 className="text-base sm:text-lg font-bold text-[#243d77] group-hover:text-[#e41d43] transition-colors leading-snug">
                   {prog.title}
                 </h3>
 
                 {/* Description / Tagline */}
                 {prog.tagline && (
-                  <p className="text-sm text-gray-600 mt-3 line-clamp-2 leading-relaxed">
+                  <p className="text-xs sm:text-[13px] text-[#64748b] mt-2.5 line-clamp-2 leading-[22px]">
                     {prog.tagline}
                   </p>
                 )}
               </div>
 
               {/* Metadata & Footer Action */}
-              <div className="mt-6 pt-5 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
-                <div className="flex items-center gap-4">
-                  <span className="inline-flex items-center gap-1.5 font-medium">
-                    <Clock className="w-3.5 h-3.5 text-gray-400" />
+              <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-[#64748b]">
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex items-center gap-1 font-medium">
+                    <Clock className="w-3.5 h-3.5 text-slate-400" />
                     {prog.duration}
                   </span>
                   {prog.intake && (
-                    <span className="inline-flex items-center gap-1.5 font-medium">
-                      <Users className="w-3.5 h-3.5 text-gray-400" />
+                    <span className="inline-flex items-center gap-1 font-medium">
+                      <Users className="w-3.5 h-3.5 text-slate-400" />
                       {prog.intake}
                     </span>
                   )}
@@ -121,9 +121,9 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
 
                 <Link
                   href={`/programmes/${prog.slug}`}
-                  className="font-semibold text-[var(--color-brand-600)] group-hover:translate-x-1 transition-transform inline-flex items-center gap-1"
+                  className="font-bold text-[#e41d43] hover:text-[#c21334] group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1"
                 >
-                  <span>Details</span>
+                  <span>Curriculum</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

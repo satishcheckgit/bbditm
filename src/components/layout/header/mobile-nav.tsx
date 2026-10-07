@@ -61,14 +61,14 @@ export function MobileNav() {
         {/* Header */}
         <div className="flex items-center justify-between p-5 border-b border-gray-100">
           <div>
-            <div className="font-bold text-lg text-[var(--color-ink)] tracking-tight">
-              BBD<span className="text-[var(--color-brand-600)]">ITM</span>
+            <div className="font-extrabold text-lg text-[#243d77] tracking-tight">
+              BBD<span className="text-[#e41d43]">ITM</span>
             </div>
-            <p className="text-[11px] text-gray-500">BBD Educational Group</p>
+            <p className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">BBD Educational Group</p>
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 text-gray-500 hover:text-gray-900 rounded-lg"
+            className="p-2 text-gray-500 hover:text-gray-900 rounded-[3px]"
             aria-label="Close menu"
           >
             <X className="w-5 h-5" />
@@ -88,21 +88,21 @@ export function MobileNav() {
                     <div>
                       <button
                         onClick={() => toggleGroup(idx)}
-                        className="w-full flex items-center justify-between py-3 text-base font-semibold text-gray-900 hover:text-[var(--color-brand-600)] transition-colors text-left"
+                        className="w-full flex items-center justify-between py-3 text-sm font-bold text-[#243d77] hover:text-[#e41d43] transition-colors text-left"
                       >
                         <span>{item.title}</span>
                         <ChevronDown
                           className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
-                            isExpanded ? "rotate-180 text-[var(--color-brand-600)]" : ""
+                            isExpanded ? "rotate-180 text-[#e41d43]" : ""
                           }`}
                         />
                       </button>
 
                       {isExpanded && (
-                        <div className="pl-3 pb-3 pt-1 space-y-4 bg-[var(--color-surface-soft)] rounded-xl my-1 p-3">
+                        <div className="pl-3 pb-3 pt-1 space-y-3 bg-[#f0f4fa] rounded-[3px] my-1 p-3">
                           {item.groups?.map((group) => (
-                            <div key={group.heading} className="space-y-1.5">
-                              <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                            <div key={group.heading} className="space-y-1">
+                              <span className="text-[11px] font-bold uppercase tracking-wider text-[#e41d43]">
                                 {group.heading}
                               </span>
                               <div className="space-y-1 mt-1">
@@ -111,7 +111,7 @@ export function MobileNav() {
                                     key={subItem.title}
                                     href={subItem.href}
                                     onClick={closeMenu}
-                                    className="block py-1.5 text-sm text-gray-700 hover:text-[var(--color-brand-600)] font-medium"
+                                    className="block py-1 text-xs text-gray-700 hover:text-[#243d77] font-semibold"
                                   >
                                     {subItem.title}
                                   </Link>
@@ -126,7 +126,7 @@ export function MobileNav() {
                     <Link
                       href={item.href}
                       onClick={closeMenu}
-                      className="block py-3 text-base font-semibold text-gray-900 hover:text-[var(--color-brand-600)] transition-colors"
+                      className="block py-3 text-sm font-bold text-[#243d77] hover:text-[#e41d43] transition-colors"
                     >
                       {item.title}
                     </Link>

@@ -33,35 +33,35 @@ export function SchoolShowcase({ schools }: SchoolShowcaseProps) {
             return (
               <div
                 key={school.id}
-                className="group relative bg-white rounded-2xl p-8 border border-gray-200/80 shadow-[0_2px_8px_rgb(0_0_0/0.03)] hover:shadow-[0_16px_36px_rgb(20_20_40/0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                className="group relative bg-white rounded-[4px] p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-[#243d77] transition-all duration-150 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-[var(--color-brand-50)] text-[var(--color-brand-700)] flex items-center justify-center mb-6 group-hover:bg-[var(--color-brand-600)] group-hover:text-white transition-colors duration-200">
-                    <Icon className="w-6 h-6" />
+                  <div className="w-10 h-10 rounded-[3px] bg-[#f0f4fa] text-[#243d77] flex items-center justify-center mb-5 group-hover:bg-[#243d77] group-hover:text-white transition-colors duration-150">
+                    <Icon className="w-5 h-5" />
                   </div>
 
-                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <span className="text-[11px] font-bold text-[#e41d43] uppercase tracking-wider">
                     {school.programmeCount > 0
                       ? `${school.programmeCount} Programmes Offered`
                       : "Foundational Sciences"}
                   </span>
 
-                  <h3 className="text-2xl font-bold text-[var(--color-ink)] mt-2 group-hover:text-[var(--color-brand-600)] transition-colors">
+                  <h3 className="text-lg font-bold text-[#243d77] mt-1.5 group-hover:text-[#e41d43] transition-colors">
                     {school.name}
                   </h3>
 
-                  <p className="text-sm text-gray-600 mt-4 leading-relaxed">
+                  <p className="text-xs sm:text-[13px] text-[#64748b] mt-3 leading-[22px]">
                     {school.description}
                   </p>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-gray-100">
+                <div className="mt-6 pt-4 border-t border-slate-100">
                   <Link
                     href={`/schools/${school.slug}`}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-brand-600)] group-hover:text-[var(--color-brand-800)]"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#e41d43] hover:text-[#c21334]"
                   >
                     <span>Explore Department</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>

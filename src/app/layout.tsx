@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header/navbar";
 import { Footer } from "@/components/layout/footer/footer";
 import { siteConfig } from "@/config/site";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -59,13 +55,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${openSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-[var(--color-ink)] selection:bg-[var(--color-brand-100)] selection:text-[var(--color-brand-900)]">
+      <body className="min-h-full flex flex-col bg-white text-[#1c2438] selection:bg-[var(--color-primary-navy-surface)] selection:text-[var(--color-primary-navy)]">
         {/* Accessible skip link */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--color-brand-600)] focus:text-white focus:rounded-md focus:shadow-lg"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-3 focus:py-1.5 focus:bg-[var(--color-accent-crimson)] focus:text-white focus:rounded-[3px] focus:shadow-md text-xs font-semibold"
         >
           Skip to main content
         </a>

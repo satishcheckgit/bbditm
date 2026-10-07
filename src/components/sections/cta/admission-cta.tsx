@@ -6,41 +6,37 @@ import { ArrowRight, PhoneCall, Sparkles } from "lucide-react";
 
 export function AdmissionCTA() {
   return (
-    <section className="py-20 sm:py-28 bg-white">
+    <section className="py-16 sm:py-24 bg-white border-t border-gray-100">
       <Container>
-        <div className="relative rounded-[32px] overflow-hidden bg-gradient-to-br from-[var(--color-brand-800)] via-[var(--color-brand-700)] to-[#1b2559] p-8 sm:p-12 lg:p-16 text-white text-center shadow-xl">
-          {/* Subtle background ambient light */}
+        <div className="relative rounded-[4px] overflow-hidden bg-gradient-to-br from-[#243d77] via-[#1a2c56] to-[#0f1b36] p-8 sm:p-12 lg:p-16 text-white text-center shadow-md border border-[#243d77]/40">
+          {/* Subtle architectural grid pattern */}
           <div
-            className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-purple-400/20 blur-3xl"
-            aria-hidden="true"
-          />
-          <div
-            className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-blue-400/20 blur-3xl"
+            className="pointer-events-none absolute inset-0 opacity-5 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"
             aria-hidden="true"
           />
 
-          <div className="relative max-w-3xl mx-auto space-y-6">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-xs font-semibold tracking-wider uppercase text-purple-200 border border-white/20">
-              <Sparkles className="w-3.5 h-3.5" />
+          <div className="relative max-w-3xl mx-auto space-y-5">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[3px] bg-[#e41d43]/20 text-xs font-semibold tracking-wider uppercase text-rose-200 border border-[#e41d43]/40">
+              <Sparkles className="w-3.5 h-3.5 text-[#e41d43]" />
               <span>Admissions Open for Academic Session 2026-27</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15]">
-              Your next chapter starts here.
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-heading">
+              Your next chapter starts at BBDITM.
             </h2>
 
-            <p className="text-base sm:text-lg text-purple-100 max-w-2xl mx-auto leading-relaxed">
-              Join thousands of aspiring engineers, managers, and innovators shaping the future at Babu Banarasi Das Institute of Technology & Management.
+            <p className="text-sm sm:text-base text-gray-200 max-w-2xl mx-auto leading-relaxed">
+              Join thousands of aspiring engineers, managers, and innovators shaping the future at Babu Banarasi Das Institute of Technology & Management (AKTU Code 054).
             </p>
 
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Button
                 href={siteConfig.links.applyNow}
-                variant="secondary"
+                variant="default"
                 size="lg"
-                className="w-full sm:w-auto shadow-lg"
+                className="w-full sm:w-auto shadow-sm"
               >
-                <span>Apply for Admission</span>
+                <span>Apply for Admission 2026</span>
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
 
@@ -48,9 +44,9 @@ export function AdmissionCTA() {
                 href={`tel:${siteConfig.contact.admissionsPhone}`}
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto text-white border-white/30 hover:bg-white/10"
+                className="w-full sm:w-auto text-white border-white/40 hover:bg-white/10"
               >
-                <PhoneCall className="w-4 h-4 mr-1 text-purple-200" />
+                <PhoneCall className="w-4 h-4 mr-1 text-white" />
                 <span>Call Helpline: {siteConfig.contact.admissionsPhone}</span>
               </Button>
             </div>

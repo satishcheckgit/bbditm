@@ -43,10 +43,10 @@ export function CampusExperience() {
           />
           <Link
             href="/campus-life"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-brand-600)] hover:text-[var(--color-brand-800)] shrink-0 self-start md:self-end"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#e41d43] hover:text-[#c21334] shrink-0 self-start md:self-end"
           >
             <span>Explore Life at BBD</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
@@ -57,22 +57,22 @@ export function CampusExperience() {
             return (
               <div
                 key={f.title}
-                className="p-7 rounded-2xl bg-[var(--color-surface-soft)] border border-gray-100 hover:border-purple-200 hover:bg-white hover:shadow-[0_12px_30px_rgb(20_20_40/0.06)] transition-all duration-300 flex flex-col justify-between"
+                className="p-6 rounded-[4px] bg-[#f8fafc] border border-slate-200 hover:border-[#243d77] hover:bg-white hover:shadow-md transition-all duration-150 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="w-11 h-11 rounded-xl bg-white text-[var(--color-brand-700)] shadow-sm flex items-center justify-center">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-[3px] bg-white text-[#243d77] border border-slate-200 shadow-sm flex items-center justify-center">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
+                    <span className="text-[11px] font-bold text-[#e41d43] uppercase tracking-wider">
                       {f.tag}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-[var(--color-ink)] mb-2">
+                  <h3 className="text-base font-bold text-[#243d77] mb-2">
                     {f.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-xs sm:text-[13px] text-[#64748b] leading-[22px]">
                     {f.description}
                   </p>
                 </div>

@@ -8,32 +8,32 @@ export function Footer() {
   const currentYear = 2026;
 
   return (
-    <footer className="bg-[#0e1118] text-gray-300 pt-16 pb-12 border-t border-gray-800">
+    <footer className="bg-[#0b1120] text-[#bcbcbc] pt-14 pb-10 border-t border-[#1e293b]">
       <Container>
         {/* Main Columns Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-gray-800/80">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-12 border-b border-[#1e293b]">
           {/* Institutional Bio & Affiliation */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--color-brand-600)] to-[var(--color-brand-800)] flex items-center justify-center text-white font-bold text-lg shadow-md">
+              <div className="w-10 h-10 rounded-[3px] bg-[#243d77] border-b-2 border-[#e41d43] flex items-center justify-center text-white font-bold text-lg shadow-md">
                 B
               </div>
               <div>
                 <span className="font-extrabold text-xl text-white tracking-tight">
-                  BBD<span className="text-[var(--color-brand-400)]">ITM</span>
+                  BBD<span className="text-[#e41d43]">ITM</span>
                 </span>
-                <p className="text-[11px] text-gray-400">
+                <p className="text-[11px] text-[#999999] font-medium">
                   Babu Banarasi Das Group of Educational Institutions
                 </p>
               </div>
             </div>
 
-            <p className="text-sm text-gray-400 leading-relaxed pr-4">
+            <p className="text-xs sm:text-[13px] text-[#999999] leading-[22px] pr-4">
               Babu Banarasi Das Institute of Technology & Management (AKTU College Code: 054) provides accredited professional education in Engineering and Business Administration.
             </p>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-900/90 border border-gray-800 text-xs text-gray-300">
-              <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-[3px] bg-[#111c38] border border-[#243d77] text-xs text-slate-200">
+              <ShieldCheck className="w-4 h-4 text-[#e41d43] shrink-0" />
               <span>Approved by AICTE | Affiliated to AKTU, Lucknow</span>
             </div>
           </div>
@@ -70,7 +70,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/academics" className="hover:text-white transition-colors text-xs text-[var(--color-brand-400)] font-medium">
+                <Link href="/academics" className="hover:text-white transition-colors text-xs text-[#f87171] font-bold">
                   View all programmes →
                 </Link>
               </li>

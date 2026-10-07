@@ -5,15 +5,15 @@ import { utilityNavItems } from "@/config/navigation";
 
 export function UtilityBar() {
   return (
-    <div className="hidden lg:block border-b border-gray-100 bg-[var(--color-surface-soft)]/80 text-xs text-[var(--color-ink-muted)] py-1.5 transition-colors">
+    <div className="hidden lg:block bg-[#1a2c56] border-b border-[#243d77] text-xs text-slate-200 py-1.5 transition-colors">
       <Container className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 font-medium text-[var(--color-brand-800)] bg-[var(--color-brand-100)] px-2 py-0.5 rounded-full text-[11px]">
-            AKTU College Code: 054
+          <span className="inline-flex items-center gap-1.5 font-bold text-white bg-[#e41d43] px-2 py-0.5 rounded-[3px] text-[11px] tracking-wide">
+            AKTU Code: 054
           </span>
-          <span className="text-gray-300">|</span>
-          <span className="text-gray-600">
-            Approved by AICTE, New Delhi & Affiliated to AKTU Lucknow
+          <span className="text-slate-400">|</span>
+          <span className="text-slate-300 font-normal">
+            Approved by AICTE, New Delhi & Affiliated to AKTU, Lucknow
           </span>
         </div>
 
@@ -25,7 +25,7 @@ export function UtilityBar() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[var(--color-brand-600)] transition-colors font-medium flex items-center gap-1"
+                className="hover:text-white transition-colors font-medium flex items-center gap-1 text-slate-300"
               >
                 {item.title}
                 <svg
@@ -46,7 +46,7 @@ export function UtilityBar() {
               <Link
                 key={item.title}
                 href={item.href}
-                className="hover:text-[var(--color-brand-600)] transition-colors font-medium"
+                className="hover:text-white transition-colors font-medium text-slate-300"
               >
                 {item.title}
               </Link>

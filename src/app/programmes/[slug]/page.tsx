@@ -74,56 +74,56 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             <div className="lg:col-span-8 space-y-4">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[var(--color-brand-50)] text-[var(--color-brand-700)] border border-[var(--color-brand-100)]">
+                <span className="px-3 py-1 rounded-[3px] text-xs font-bold uppercase tracking-wider bg-[#e41d43]/10 text-[#e41d43] border border-[#e41d43]/20">
                   {programme.degree}
                 </span>
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
+                <span className="px-3 py-1 rounded-[3px] text-xs font-medium bg-gray-100 text-gray-700">
                   {programme.schoolName}
                 </span>
                 {programme.accreditation && (
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span className="px-3 py-1 rounded-[3px] text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
                     {programme.accreditation}
                   </span>
                 )}
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--color-ink)] tracking-tight">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#243d77] tracking-tight font-heading">
                 {programme.title}
               </h1>
 
-              <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-3xl">
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-3xl">
                 {programme.overview}
               </p>
 
               {/* Fast Metadata Facts */}
               <div className="pt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-gray-100">
-                <div className="p-3.5 rounded-xl bg-[var(--color-surface-soft)]">
+                <div className="p-3.5 rounded-[3px] bg-slate-50 border border-slate-200/80">
                   <span className="text-xs text-gray-500 font-medium block">
                     Duration
                   </span>
-                  <span className="text-sm font-bold text-gray-900 mt-0.5 flex items-center gap-1.5">
-                    <Clock className="w-4 h-4 text-[var(--color-brand-600)]" />
+                  <span className="text-sm font-bold text-[#243d77] mt-0.5 flex items-center gap-1.5">
+                    <Clock className="w-4 h-4 text-[#243d77]" />
                     {programme.duration}
                   </span>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[var(--color-surface-soft)]">
+                <div className="p-3.5 rounded-[3px] bg-slate-50 border border-slate-200/80">
                   <span className="text-xs text-gray-500 font-medium block">
                     Affiliation & Code
                   </span>
-                  <span className="text-sm font-bold text-gray-900 mt-0.5 flex items-center gap-1.5">
+                  <span className="text-sm font-bold text-[#243d77] mt-0.5 flex items-center gap-1.5">
                     <ShieldCheck className="w-4 h-4 text-emerald-600" />
                     AKTU Code: 054
                   </span>
                 </div>
 
                 {programme.intake && (
-                  <div className="p-3.5 rounded-xl bg-[var(--color-surface-soft)] col-span-2 sm:col-span-1">
+                  <div className="p-3.5 rounded-[3px] bg-slate-50 border border-slate-200/80 col-span-2 sm:col-span-1">
                     <span className="text-xs text-gray-500 font-medium block">
                       Approved Intake
                     </span>
-                    <span className="text-sm font-bold text-gray-900 mt-0.5 flex items-center gap-1.5">
-                      <Users className="w-4 h-4 text-blue-600" />
+                    <span className="text-sm font-bold text-[#243d77] mt-0.5 flex items-center gap-1.5">
+                      <Users className="w-4 h-4 text-[#243d77]" />
                       {programme.intake}
                     </span>
                   </div>
@@ -132,8 +132,8 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
             </div>
 
             {/* Right Action Card */}
-            <div className="lg:col-span-4 bg-[var(--color-surface-soft)] rounded-2xl p-6 border border-gray-200/80 shadow-sm space-y-4">
-              <h3 className="font-bold text-gray-900 text-lg">
+            <div className="lg:col-span-4 bg-slate-50 rounded-[3px] p-6 border border-slate-200 shadow-sm space-y-4">
+              <h3 className="font-bold text-[#243d77] text-base font-heading">
                 Admissions Session 2026-27
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed">
@@ -142,8 +142,8 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
 
               <Button
                 href={siteConfig.links.applyNow}
-                variant="primary"
-                className="w-full justify-center"
+                variant="default"
+                className="w-full justify-center shadow-sm"
               >
                 <span>Apply for this Degree</span>
                 <ArrowRight className="w-4 h-4 ml-1" />
@@ -151,7 +151,7 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
 
               <Button
                 href={`tel:${siteConfig.contact.admissionsPhone}`}
-                variant="secondary"
+                variant="outline"
                 className="w-full justify-center text-xs"
               >
                 <span>Call Admissions: {siteConfig.contact.admissionsPhone}</span>
@@ -169,16 +169,16 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
             {/* Programme Highlights */}
             {programme.highlights && programme.highlights.length > 0 && (
               <section className="space-y-4">
-                <h2 className="text-2xl font-bold text-[var(--color-ink)]">
+                <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] font-heading">
                   Key Programme Highlights
                 </h2>
                 <div className="grid grid-cols-1 gap-3">
                   {programme.highlights.map((h, i) => (
                     <div
                       key={i}
-                      className="flex items-start gap-3 p-4 rounded-xl bg-[var(--color-surface-soft)] border border-gray-100"
+                      className="flex items-start gap-3 p-4 rounded-[3px] bg-slate-50 border border-slate-200/80"
                     >
-                      <CheckCircle2 className="w-5 h-5 text-[var(--color-brand-600)] shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-5 h-5 text-[#e41d43] shrink-0 mt-0.5" />
                       <span className="text-sm text-gray-700 leading-relaxed">
                         {h}
                       </span>
@@ -190,10 +190,10 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
 
             {/* Eligibility Criteria */}
             <section className="space-y-4">
-              <h2 className="text-2xl font-bold text-[var(--color-ink)]">
+              <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] font-heading">
                 Eligibility & Admission Process
               </h2>
-              <div className="p-6 rounded-2xl bg-white border border-gray-200 space-y-4">
+              <div className="p-6 rounded-[3px] bg-white border border-gray-200 space-y-4">
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400">
                     Academic Requirement
@@ -221,15 +221,15 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
             {/* Fee Structure */}
             {programme.annualFee && (
               <section className="space-y-4">
-                <h2 className="text-2xl font-bold text-[var(--color-ink)]">
+                <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] font-heading">
                   Tuition & Fee Structure
                 </h2>
-                <div className="p-5 rounded-2xl bg-purple-50/60 border border-purple-100 text-sm text-[var(--color-brand-950)] flex items-center justify-between">
+                <div className="p-5 rounded-[3px] bg-slate-50 border border-slate-200 text-sm flex items-center justify-between">
                   <div>
-                    <span className="text-xs text-purple-700 font-semibold block uppercase">
+                    <span className="text-xs text-[#243d77] font-semibold block uppercase">
                       Prescribed Institutional Fee
                     </span>
-                    <span className="text-base font-bold text-gray-900 mt-0.5 block">
+                    <span className="text-base font-bold text-[#e41d43] mt-0.5 block">
                       {programme.annualFee}
                     </span>
                   </div>
@@ -243,16 +243,16 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
             {/* Career Opportunities */}
             {programme.careerOpportunities && (
               <section className="space-y-4">
-                <h2 className="text-2xl font-bold text-[var(--color-ink)]">
+                <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] font-heading">
                   Career Pathways & Opportunities
                 </h2>
                 <div className="flex flex-wrap gap-2.5">
                   {programme.careerOpportunities.map((c, i) => (
                     <span
                       key={i}
-                      className="px-3.5 py-1.5 rounded-xl bg-white border border-gray-200 text-xs sm:text-sm font-medium text-gray-800 flex items-center gap-2"
+                      className="px-3.5 py-1.5 rounded-[3px] bg-white border border-gray-200 text-xs sm:text-sm font-medium text-gray-800 flex items-center gap-2"
                     >
-                      <Briefcase className="w-3.5 h-3.5 text-[var(--color-brand-600)]" />
+                      <Briefcase className="w-3.5 h-3.5 text-[#243d77]" />
                       {c}
                     </span>
                   ))}
@@ -263,8 +263,8 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
 
           {/* Sidebar (4 cols) */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="p-6 rounded-2xl bg-white border border-gray-200 space-y-4">
-              <h3 className="font-bold text-gray-900 text-base">
+            <div className="p-6 rounded-[3px] bg-white border border-gray-200 space-y-4">
+              <h3 className="font-bold text-[#243d77] text-base font-heading">
                 Department Laboratories
               </h3>
               <p className="text-xs text-gray-500">
@@ -274,22 +274,22 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
                 {programme.laboratories ? (
                   programme.laboratories.map((lab, i) => (
                     <li key={i} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-600)]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#e41d43]" />
                       <span>{lab}</span>
                     </li>
                   ))
                 ) : (
                   <>
                     <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-600)]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#e41d43]" />
                       <span>Advanced Simulation Lab</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-600)]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#e41d43]" />
                       <span>Systems & Computing Center</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-600)]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#e41d43]" />
                       <span>Departmental Project Lab</span>
                     </li>
                   </>
@@ -297,8 +297,8 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
               </ul>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[var(--color-surface-soft)] border border-gray-200 space-y-3">
-              <h4 className="font-bold text-sm text-gray-900">
+            <div className="p-6 rounded-[3px] bg-slate-50 border border-slate-200 space-y-3">
+              <h4 className="font-bold text-sm text-[#243d77] font-heading">
                 Need Help with AKTU Code 054 Choice Filling?
               </h4>
               <p className="text-xs text-gray-600 leading-relaxed">
@@ -306,7 +306,7 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--color-brand-600)] hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#243d77] hover:text-[#e41d43] transition-colors"
               >
                 <span>Contact Guidance Desk</span>
                 <ArrowRight className="w-3.5 h-3.5" />

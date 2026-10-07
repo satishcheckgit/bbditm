@@ -35,25 +35,25 @@ export function UniversityProof() {
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Editorial Statement */}
-          <div className="lg:col-span-5 space-y-6">
-            <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-600)]">
+          <div className="lg:col-span-5 space-y-5">
+            <p className="text-xs font-bold uppercase tracking-wider text-[#e41d43]">
               Institutional Foundation
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--color-ink)] tracking-tight leading-[1.12]">
+            <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-extrabold text-[#243d77] tracking-tight leading-[1.2]">
               Education built around what comes next.
             </h2>
-            <p className="text-base sm:text-lg text-[var(--color-ink-muted)] leading-relaxed">
+            <p className="text-sm sm:text-base text-[#64748b] leading-[25px]">
               At BBDITM, we balance theoretical rigor with practical problem-solving.
               Our faculty members guide undergraduates and postgraduates through real-world projects,
               technical competitions, and interdisciplinary learning.
             </p>
 
-            <div className="pt-4">
-              <div className="p-5 rounded-2xl bg-[var(--color-surface-purple)] border border-[var(--color-brand-100)]">
-                <p className="text-sm font-semibold text-[var(--color-brand-900)]">
+            <div className="pt-2">
+              <div className="p-4 rounded-[3px] bg-[#f0f4fa] border border-[#d2def5]">
+                <p className="text-xs font-bold text-[#243d77] uppercase tracking-wider">
                   Commitment to Quality Learning
                 </p>
-                <p className="text-xs text-gray-600 mt-1 leading-relaxed">
+                <p className="text-xs text-[#64748b] mt-1 leading-[20px]">
                   Regular curriculum updates aligned with industry certifications in Cloud Computing, AI, Full-Stack Development, and Business Intelligence.
                 </p>
               </div>
@@ -61,18 +61,18 @@ export function UniversityProof() {
           </div>
 
           {/* Right Proof Points Grid */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
             {points.map((pt) => {
               const Icon = pt.icon;
               return (
-                <div key={pt.title} className="space-y-3">
-                  <div className="w-12 h-12 rounded-xl bg-[var(--color-brand-50)] text-[var(--color-brand-700)] border border-[var(--color-brand-100)] flex items-center justify-center">
-                    <Icon className="w-6 h-6" />
+                <div key={pt.title} className="p-5 rounded-[4px] border border-slate-200 bg-white hover:border-[#243d77] transition-colors space-y-2.5">
+                  <div className="w-10 h-10 rounded-[3px] bg-[#f0f4fa] text-[#243d77] border border-[#d2def5] flex items-center justify-center">
+                    <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="text-lg font-bold text-[var(--color-ink)]">
+                  <h3 className="text-sm sm:text-base font-bold text-[#243d77]">
                     {pt.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-xs text-[#64748b] leading-[22px]">
                     {pt.description}
                   </p>
                 </div>

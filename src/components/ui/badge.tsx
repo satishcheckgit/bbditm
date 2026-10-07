@@ -13,19 +13,19 @@ export function Badge({
 }: BadgeProps) {
   const variantStyles = {
     brand:
-      "bg-[var(--color-brand-100)] text-[var(--color-brand-800)] border border-[var(--color-brand-200)]",
+      "bg-[#fff1f3] text-[#e41d43] border border-[#fecdd3]",
     neutral:
-      "bg-[var(--color-surface-soft)] text-[var(--color-ink-muted)] border border-[var(--color-border-subtle)]",
+      "bg-[#f8fafc] text-[#64748b] border border-[#e2e8f0]",
     blue:
-      "bg-blue-50 text-[var(--color-institutional-blue)] border border-blue-200",
+      "bg-[#f0f4fa] text-[#243d77] border border-[#d2def5]",
     outline:
-      "bg-transparent text-[var(--color-ink-muted)] border border-[var(--color-border-subtle)]",
+      "bg-transparent text-[#64748b] border border-[#cbd5e1]",
   };
 
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider",
+        "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[3px] text-[11px] font-bold uppercase tracking-wider",
         variantStyles[variant],
         className
       )}

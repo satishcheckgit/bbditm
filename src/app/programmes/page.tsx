@@ -32,10 +32,10 @@ export default async function ProgrammesPage() {
         {/* Undergraduate Stream */}
         <div className="space-y-6 mb-16">
           <div className="flex items-center gap-3">
-            <h2 className="text-2xl font-bold text-[var(--color-ink)]">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] font-heading">
               Undergraduate Engineering (B.Tech)
             </h2>
-            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[var(--color-brand-100)] text-[var(--color-brand-800)]">
+            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-[3px] bg-[#e41d43]/10 text-[#e41d43]">
               4 Years Full-Time
             </span>
           </div>
@@ -44,19 +44,19 @@ export default async function ProgrammesPage() {
             {ugProgrammes.map((prog) => (
               <div
                 key={prog.id}
-                className="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-[0_2px_8px_rgb(0_0_0/0.03)] hover:shadow-lg hover:border-purple-200 transition-all flex flex-col justify-between"
+                className="bg-white rounded-[3px] p-6 border border-gray-200 shadow-sm hover:shadow-md hover:border-[#243d77]/40 transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-bold text-[var(--color-brand-600)] uppercase tracking-wider">
+                    <span className="text-xs font-bold text-[#e41d43] uppercase tracking-wider">
                       {prog.discipline}
                     </span>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-gray-500 font-mono">
                       Code: 054
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-[var(--color-ink)] leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-[#243d77] leading-snug">
                     {prog.title}
                   </h3>
 
@@ -65,8 +65,8 @@ export default async function ProgrammesPage() {
                   </p>
 
                   {prog.eligibilitySummary && (
-                    <div className="mt-4 p-3 rounded-xl bg-gray-50 border border-gray-100 text-xs text-gray-600">
-                      <span className="font-semibold block text-gray-700 mb-0.5">Eligibility:</span>
+                    <div className="mt-4 p-3 rounded-[3px] bg-slate-50 border border-slate-200 text-xs text-gray-600">
+                      <span className="font-semibold block text-[#243d77] mb-0.5">Eligibility:</span>
                       {prog.eligibilitySummary}
                     </div>
                   )}
@@ -75,12 +75,12 @@ export default async function ProgrammesPage() {
                 <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-xs">
                   <div className="flex items-center gap-3 text-gray-500 font-medium">
                     <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
+                      <Clock className="w-3.5 h-3.5 text-[#243d77]" />
                       {prog.duration}
                     </span>
                     {prog.intake && (
                       <span className="flex items-center gap-1">
-                        <Users className="w-3.5 h-3.5" />
+                        <Users className="w-3.5 h-3.5 text-[#243d77]" />
                         {prog.intake}
                       </span>
                     )}
@@ -88,7 +88,7 @@ export default async function ProgrammesPage() {
 
                   <Link
                     href={`/programmes/${prog.slug}`}
-                    className="font-bold text-[var(--color-brand-600)] hover:text-[var(--color-brand-800)] inline-flex items-center gap-1"
+                    className="font-bold text-[#243d77] hover:text-[#e41d43] inline-flex items-center gap-1 transition-colors"
                   >
                     <span>View Curriculum</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -102,10 +102,10 @@ export default async function ProgrammesPage() {
         {/* Postgraduate Stream */}
         <div className="space-y-6">
           <div className="flex items-center gap-3">
-            <h2 className="text-2xl font-bold text-[var(--color-ink)]">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] font-heading">
               Postgraduate Management (MBA)
             </h2>
-            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-100 text-[var(--color-institutional-blue)]">
+            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-[3px] bg-[#243d77]/10 text-[#243d77]">
               2 Years Full-Time
             </span>
           </div>
@@ -114,19 +114,19 @@ export default async function ProgrammesPage() {
             {pgProgrammes.map((prog) => (
               <div
                 key={prog.id}
-                className="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-[0_2px_8px_rgb(0_0_0/0.03)] hover:shadow-lg hover:border-purple-200 transition-all flex flex-col justify-between"
+                className="bg-white rounded-[3px] p-6 border border-gray-200 shadow-sm hover:shadow-md hover:border-[#243d77]/40 transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-bold text-[var(--color-brand-600)] uppercase tracking-wider">
+                    <span className="text-xs font-bold text-[#e41d43] uppercase tracking-wider">
                       Management
                     </span>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-gray-500 font-mono">
                       Code: 054
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-[var(--color-ink)] leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-[#243d77] leading-snug">
                     {prog.title}
                   </h3>
 
@@ -135,8 +135,8 @@ export default async function ProgrammesPage() {
                   </p>
 
                   {prog.eligibilitySummary && (
-                    <div className="mt-4 p-3 rounded-xl bg-gray-50 border border-gray-100 text-xs text-gray-600">
-                      <span className="font-semibold block text-gray-700 mb-0.5">Eligibility:</span>
+                    <div className="mt-4 p-3 rounded-[3px] bg-slate-50 border border-slate-200 text-xs text-gray-600">
+                      <span className="font-semibold block text-[#243d77] mb-0.5">Eligibility:</span>
                       {prog.eligibilitySummary}
                     </div>
                   )}
@@ -145,12 +145,12 @@ export default async function ProgrammesPage() {
                 <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-xs">
                   <div className="flex items-center gap-3 text-gray-500 font-medium">
                     <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
+                      <Clock className="w-3.5 h-3.5 text-[#243d77]" />
                       {prog.duration}
                     </span>
                     {prog.intake && (
                       <span className="flex items-center gap-1">
-                        <Users className="w-3.5 h-3.5" />
+                        <Users className="w-3.5 h-3.5 text-[#243d77]" />
                         {prog.intake}
                       </span>
                     )}
@@ -158,7 +158,7 @@ export default async function ProgrammesPage() {
 
                   <Link
                     href={`/programmes/${prog.slug}`}
-                    className="font-bold text-[var(--color-brand-600)] hover:text-[var(--color-brand-800)] inline-flex items-center gap-1"
+                    className="font-bold text-[#243d77] hover:text-[#e41d43] inline-flex items-center gap-1 transition-colors"
                   >
                     <span>View Curriculum</span>
                     <ArrowRight className="w-3.5 h-3.5" />
