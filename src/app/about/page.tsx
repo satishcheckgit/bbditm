@@ -24,7 +24,7 @@ export default function AboutPage() {
           <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#e41d43]/10 text-[#e41d43] border border-[#e41d43]/20 mb-3">
             Our Heritage & Vision
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#243d77] tracking-tight font-heading">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#243d77] tracking-tight font-heading">
             Academic distinction built on visionary leadership.
           </h1>
           <p className="text-sm sm:text-base text-[#6e6e73] mt-4 leading-relaxed">
@@ -38,7 +38,7 @@ export default function AboutPage() {
             <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-xs border border-black/[0.04]">
               <ShieldCheck className="w-6 h-6 text-[#243d77]" />
             </div>
-            <h3 className="text-lg font-bold text-[#243d77] tracking-tight font-heading">Statutory Approvals</h3>
+            <h3 className="text-lg font-semibold text-[#243d77] tracking-tight font-heading">Statutory Approvals</h3>
             <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
               Approved by the All India Council for Technical Education (AICTE), New Delhi, and affiliated to Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow (College Code: 054).
             </p>
@@ -48,7 +48,7 @@ export default function AboutPage() {
             <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-xs border border-black/[0.04]">
               <Building2 className="w-6 h-6 text-[#243d77]" />
             </div>
-            <h3 className="text-lg font-bold text-[#243d77] tracking-tight font-heading">100+ Acre BBD City</h3>
+            <h3 className="text-lg font-semibold text-[#243d77] tracking-tight font-heading">100+ Acre BBD City</h3>
             <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
               Located on Lucknow-Faizabad National Highway, offering an integrated campus experience with high-tech classrooms, residential hostels, stadium, and digital library.
             </p>
@@ -58,7 +58,7 @@ export default function AboutPage() {
             <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-xs border border-black/[0.04]">
               <Award className="w-6 h-6 text-[#243d77]" />
             </div>
-            <h3 className="text-lg font-bold text-[#243d77] tracking-tight font-heading">Outcome-Centric Learning</h3>
+            <h3 className="text-lg font-semibold text-[#243d77] tracking-tight font-heading">Outcome-Centric Learning</h3>
             <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
               Curricula aligned with National Board of Accreditation (NBA) outcome parameters to ensure competitive technical abilities and lifelong learning.
             </p>
@@ -67,7 +67,7 @@ export default function AboutPage() {
 
         {/* Milestone Timeline */}
         <div className="border-t border-black/[0.06] pt-16">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] mb-8 font-heading tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-semibold text-[#243d77] mb-8 font-heading tracking-tight">
             Chronology of Growth
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

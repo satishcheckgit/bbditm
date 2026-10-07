@@ -21,7 +21,7 @@ export function AdmissionCTA() {
               <span>Admissions Open for Academic Session 2026-27</span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-bold tracking-tight text-white font-heading leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-semibold tracking-tight text-white font-heading leading-tight">
               Your next chapter starts at BBDITM.
             </h2>
 

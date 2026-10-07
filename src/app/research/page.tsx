@@ -33,7 +33,7 @@ export default function ResearchPage() {
           <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#e41d43]/10 text-[#e41d43] border border-[#e41d43]/20 mb-3">
             Innovation Ecosystem
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#243d77] tracking-tight font-heading">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#243d77] tracking-tight font-heading">
             Research & Technological Inquiry
           </h1>
           <p className="text-sm sm:text-base text-[#6e6e73] mt-4 leading-relaxed">
@@ -52,7 +52,7 @@ export default function ResearchPage() {
                 <div className="w-12 h-12 rounded-xl bg-white text-[#243d77] border border-black/[0.04] shadow-xs flex items-center justify-center">
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-[#243d77] tracking-tight font-heading">{a.title}</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-[#243d77] tracking-tight font-heading">{a.title}</h3>
                 <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
                   {a.desc}
                 </p>

@@ -87,7 +87,7 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
                 )}
               </div>
 
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#243d77] tracking-tight font-heading">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#243d77] tracking-tight font-heading">
                 {programme.title}
               </h1>
 
@@ -133,7 +133,7 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
 
             {/* Right Action Card */}
             <div className="lg:col-span-4 bg-[#f5f5f7] rounded-2xl p-6 border border-black/[0.06] shadow-sm space-y-4">
-              <h3 className="font-bold text-[#243d77] text-base font-heading">
+              <h3 className="font-semibold text-[#243d77] text-base font-heading">
                 Admissions Session 2026-27
               </h3>
               <p className="text-xs text-[#6e6e73] leading-relaxed">
@@ -169,7 +169,7 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
             {/* Programme Highlights */}
             {programme.highlights && programme.highlights.length > 0 && (
               <section className="space-y-4">
-                <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] tracking-tight font-heading">
+                <h2 className="text-xl sm:text-2xl font-semibold text-[#243d77] tracking-tight font-heading">
                   Key Programme Highlights
                 </h2>
                 <div className="grid grid-cols-1 gap-3">
@@ -190,7 +190,7 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
 
             {/* Eligibility Criteria */}
             <section className="space-y-4">
-              <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] tracking-tight font-heading">
+              <h2 className="text-xl sm:text-2xl font-semibold text-[#243d77] tracking-tight font-heading">
                 Eligibility & Admission Process
               </h2>
               <div className="p-6 sm:p-8 rounded-2xl bg-white border border-black/[0.06] shadow-sm space-y-6">
@@ -221,7 +221,7 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
             {/* Fee Structure */}
             {programme.annualFee && (
               <section className="space-y-4">
-                <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] tracking-tight font-heading">
+                <h2 className="text-xl sm:text-2xl font-semibold text-[#243d77] tracking-tight font-heading">
                   Tuition & Fee Structure
                 </h2>
                 <div className="p-6 rounded-2xl bg-[#f5f5f7] border border-black/[0.06] shadow-sm text-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -243,7 +243,7 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
             {/* Career Opportunities */}
             {programme.careerOpportunities && (
               <section className="space-y-4">
-                <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] tracking-tight font-heading">
+                <h2 className="text-xl sm:text-2xl font-semibold text-[#243d77] tracking-tight font-heading">
                   Career Pathways & Opportunities
                 </h2>
                 <div className="flex flex-wrap gap-2.5">
@@ -264,7 +264,7 @@ export default async function ProgrammeDetailPage({ params }: ProgrammePageProps
           {/* Sidebar (4 cols) */}
           <div className="lg:col-span-4 space-y-6">
             <div className="p-6 rounded-2xl bg-white border border-black/[0.06] shadow-sm space-y-4">
-              <h3 className="font-bold text-[#243d77] text-base tracking-tight font-heading">
+              <h3 className="font-semibold text-[#243d77] text-base tracking-tight font-heading">
                 Department Laboratories
               </h3>
               <p className="text-xs text-[#86868b]">

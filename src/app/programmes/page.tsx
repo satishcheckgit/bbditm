@@ -32,7 +32,7 @@ export default async function ProgrammesPage() {
         {/* Undergraduate Stream */}
         <div className="space-y-6 mb-16">
           <div className="flex items-center gap-3">
-            <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] tracking-tight font-heading">
+            <h2 className="text-xl sm:text-2xl font-semibold text-[#243d77] tracking-tight font-heading">
               Undergraduate Engineering (B.Tech)
             </h2>
             <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#e41d43]/10 text-[#e41d43] border border-[#e41d43]/20">
@@ -56,7 +56,7 @@ export default async function ProgrammesPage() {
                     </span>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold text-[#243d77] leading-snug tracking-tight font-heading">
+                  <h3 className="text-base sm:text-lg font-semibold text-[#243d77] leading-snug tracking-tight font-heading">
                     {prog.title}
                   </h3>
 
@@ -102,7 +102,7 @@ export default async function ProgrammesPage() {
         {/* Postgraduate Stream */}
         <div className="space-y-6">
           <div className="flex items-center gap-3">
-            <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] tracking-tight font-heading">
+            <h2 className="text-xl sm:text-2xl font-semibold text-[#243d77] tracking-tight font-heading">
               Postgraduate Management (MBA)
             </h2>
             <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#243d77]/10 text-[#243d77] border border-[#243d77]/20">
@@ -126,7 +126,7 @@ export default async function ProgrammesPage() {
                     </span>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold text-[#243d77] leading-snug tracking-tight font-heading">
+                  <h3 className="text-base sm:text-lg font-semibold text-[#243d77] leading-snug tracking-tight font-heading">
                     {prog.title}
                   </h3>
 

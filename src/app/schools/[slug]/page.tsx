@@ -66,7 +66,7 @@ export default async function SchoolDetailPage({ params }: SchoolPageProps) {
           <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#e41d43]/10 text-[#e41d43] border border-[#e41d43]/20 mb-1">
             Academic Department
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#243d77] tracking-tight font-heading">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#243d77] tracking-tight font-heading">
             {school.name}
           </h1>
           <p className="text-sm sm:text-base text-[#6e6e73] leading-relaxed">
@@ -88,7 +88,7 @@ export default async function SchoolDetailPage({ params }: SchoolPageProps) {
 
         {/* Programmes Offered Under This School */}
         <div className="space-y-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] tracking-tight font-heading">
+          <h2 className="text-xl sm:text-2xl font-semibold text-[#243d77] tracking-tight font-heading">
             Degree Programmes Offered
           </h2>
 
@@ -103,7 +103,7 @@ export default async function SchoolDetailPage({ params }: SchoolPageProps) {
                     <span className="text-xs font-bold uppercase tracking-wider text-[#e41d43] block mb-2">
                       {prog.degree}
                     </span>
-                    <h3 className="text-base sm:text-lg font-bold text-[#243d77] leading-snug tracking-tight font-heading">
+                    <h3 className="text-base sm:text-lg font-semibold text-[#243d77] leading-snug tracking-tight font-heading">
                       {prog.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-[#6e6e73] mt-2 line-clamp-2 leading-relaxed">

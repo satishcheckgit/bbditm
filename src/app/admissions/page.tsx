@@ -46,7 +46,7 @@ export default function AdmissionsPage() {
           <span className="text-xs font-bold uppercase tracking-wider text-[#e41d43]">
             Enrollment 2026-27
           </span>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#243d77] mt-2 tracking-tight font-heading">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#243d77] mt-2 tracking-tight font-heading">
             Admissions at BBDITM Lucknow
           </h1>
           <p className="text-sm sm:text-base text-gray-600 mt-4 leading-relaxed">
@@ -72,7 +72,7 @@ export default function AdmissionsPage() {
 
         {/* 4 Step Process Grid */}
         <div id="steps" className="mb-20 scroll-mt-24">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] mb-8 font-heading">
+          <h2 className="text-xl sm:text-2xl font-semibold text-[#243d77] mb-8 font-heading tracking-tight">
             How to Apply — Step-by-Step
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -84,7 +84,7 @@ export default function AdmissionsPage() {
                 <span className="text-2xl font-bold text-[#e41d43] font-heading block">
                   {st.step}
                 </span>
-                <h3 className="text-base font-bold text-[#1d1d1f] font-heading">
+                <h3 className="text-base font-semibold text-[#1d1d1f] font-heading">
                   {st.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
@@ -99,7 +99,7 @@ export default function AdmissionsPage() {
         <div id="fees" className="mb-20 scroll-mt-24">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#243d77] font-heading">
+              <h2 className="text-xl sm:text-2xl font-semibold text-[#243d77] font-heading tracking-tight">
                 Annual Institutional Fee Structure
               </h2>
               <p className="text-xs sm:text-sm text-[#86868b] mt-1">
