@@ -266,27 +266,60 @@ export function HomeHero({
   const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Dynamically adapt carousel height to active slide (eliminates mobile blank void below banner)
+  // Measure and synchronize slider and banner heights so there is ZERO vertical jumping
   useEffect(() => {
-    const activeEl = slideRefs.current[currentIndex];
-    if (!activeEl) return;
+    const updateHeight = () => {
+      if (typeof window === "undefined") return;
+      const isMobile = window.innerWidth < 768;
 
-    setContainerHeight(activeEl.offsetHeight);
-
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        if (entry.target === activeEl) {
+      if (isMobile) {
+        // Mobile viewport: adapt to current slide so banner doesn't have an empty void below it
+        const activeEl = slideRefs.current[currentIndex];
+        if (activeEl) {
           setContainerHeight(activeEl.offsetHeight);
         }
+      } else {
+        // Desktop / Laptop / Tablet: equalized height across slider & banner
+        // Collect heights of standard split slides to lock a single consistent height
+        const standardHeights = slides
+          .map((s, idx) => (s.layout !== "banner" ? slideRefs.current[idx]?.offsetHeight || 0 : 0))
+          .filter((h) => h > 0);
+
+        const allHeights = slideRefs.current
+          .map((el) => el?.offsetHeight || 0)
+          .filter((h) => h > 0);
+
+        const targetHeight =
+          standardHeights.length > 0
+            ? Math.max(...standardHeights)
+            : allHeights.length > 0
+              ? Math.max(...allHeights)
+              : undefined;
+
+        if (targetHeight && targetHeight > 0) {
+          setContainerHeight(targetHeight);
+        }
       }
+    };
+
+    updateHeight();
+
+    const ro = new ResizeObserver(() => {
+      updateHeight();
     });
 
-    resizeObserver.observe(activeEl);
-    return () => resizeObserver.disconnect();
-  }, [currentIndex]);
+    slideRefs.current.forEach((el) => {
+      if (el) ro.observe(el);
+    });
+
+    window.addEventListener("resize", updateHeight);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, [currentIndex, slides]);
 
   const totalSlides = slides.length;
-  const isCurrentSlideBanner = slides[currentIndex]?.layout === "banner";
   const touchStartXRef = useRef<number | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -384,10 +417,8 @@ export function HomeHero({
       onMouseEnter={() => setIsPlaying(false)}
       onMouseLeave={() => setIsPlaying(true)}
       className={cn(
-        "relative overflow-hidden bg-white select-none outline-none focus-visible:ring-1 focus-visible:ring-[#e41d43] transition-[padding] duration-300",
-        isCurrentSlideBanner
-          ? "pt-1.5 sm:pt-2.5 md:pt-3 lg:pt-3.5 pb-2.5 sm:pb-3 md:pb-3.5 lg:pb-4"
-          : "pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-5 sm:pb-6 md:pb-8 lg:pb-10",
+        "relative overflow-hidden bg-white select-none outline-none focus-visible:ring-1 focus-visible:ring-[#e41d43]",
+        "pt-4 sm:pt-6 md:pt-7 lg:pt-8 pb-4 sm:pb-5 md:pb-6 lg:pb-6",
         className
       )}
     >
@@ -425,13 +456,13 @@ export function HomeHero({
         </>
       )}
 
-      {/* Carousel Sliding Track with Dynamic Height */}
+      {/* Carousel Sliding Track with Synchronized Equalized Height */}
       <div
         className="w-full overflow-hidden transition-[height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
         style={{ height: containerHeight ? `${containerHeight}px` : "auto" }}
       >
         <div
-          className="flex items-start transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className="flex items-stretch transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] h-full"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {slides.map((slide, slideIdx) => {
@@ -450,7 +481,7 @@ export function HomeHero({
                 aria-label={`${slideIdx + 1} of ${totalSlides}: ${slide.id}`}
                 aria-hidden={!isSlideActive}
                 className={cn(
-                  "min-w-full w-full shrink-0 transition-opacity duration-500",
+                  "min-w-full w-full shrink-0 transition-opacity duration-500 h-full flex flex-col justify-center",
                   isSlideActive ? "opacity-100" : "opacity-30 pointer-events-none"
                 )}
               >
@@ -458,7 +489,7 @@ export function HomeHero({
                 {isBannerMode ? (
                   <div
                     className={cn(
-                      "w-full mx-auto transition-all",
+                      "w-full h-full mx-auto flex items-center justify-center transition-all",
                       slide.fullBleed
                         ? "max-w-none px-0"
                         : "max-w-[1680px] px-2 sm:px-4 md:px-6"
@@ -470,7 +501,8 @@ export function HomeHero({
                         slide.fullBleed
                           ? "rounded-none"
                           : "rounded-2xl md:rounded-3xl border border-slate-200/80",
-                        "aspect-[2.74/1] w-full"
+                        // Mobile uses natural ratio; Tablet/Desktop fills equalized hero height
+                        "aspect-[2.74/1] md:aspect-auto md:h-full md:min-h-[460px] lg:min-h-[500px] w-full"
                       )}
                     >
                       {/* Custom Banner Image */}
@@ -482,7 +514,7 @@ export function HomeHero({
                           priority
                           unoptimized
                           sizes="100vw"
-                          className="object-cover transition-transform duration-700 ease-out group-hover/banner:scale-[1.01]"
+                          className="object-cover object-[center_40%] transition-transform duration-700 ease-out group-hover/banner:scale-[1.01]"
                         />
                       ) : (
                         /* Artistic Mesh Backdrop fallback when image is pending */
@@ -821,12 +853,7 @@ export function HomeHero({
       {showIndicators && totalSlides > 1 && (
         <Container>
           <div
-            className={cn(
-              "flex items-center justify-center gap-3.5 transition-all duration-300",
-              isCurrentSlideBanner
-                ? "mt-2 sm:mt-2.5 md:mt-3 pt-0.5"
-                : "mt-3 sm:mt-5 md:mt-6 pt-1"
-            )}
+            className="flex items-center justify-center gap-3.5 mt-3 sm:mt-4 md:mt-5 pt-0.5"
           >
             {/* Center Apple-style Indicator Progress Pills */}
             <div
