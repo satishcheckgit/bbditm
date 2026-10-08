@@ -67,6 +67,7 @@ export interface FullHeroSlide {
   bannerImage?: string; // Image path or URL for full banner
   bannerAlt?: string;
   bannerLink?: string; // Clickable link for the entire banner
+  bannerAspect?: string; // Exact aspect ratio to prevent cropping on mobile & tablet, e.g. "aspect-[1920/700]"
   fullBleed?: boolean; // If true, banner stretches edge-to-edge full width
   showOverlay?: boolean; // If true, renders text overlay & gradient. Default: false for clean graphical banners
 }
@@ -239,6 +240,7 @@ export const defaultFullHeroSlides: FullHeroSlide[] = [
     bannerImage: "/banner/banner.jpg",
     bannerAlt: "BBDITM AKTU Merit List Academic Session 2024-25, 2025-26",
     bannerLink: "/admissions",
+    bannerAspect: "aspect-[1920/700]",
   },
   {
     id: "student-wide-banner",
@@ -248,6 +250,7 @@ export const defaultFullHeroSlides: FullHeroSlide[] = [
     bannerImage: "/banner/students.webp",
     bannerAlt: "BBDITM AKTU Students",
     bannerLink: "/contact",
+    bannerAspect: "aspect-[1920/900]",
   },
 ];
 
@@ -263,23 +266,27 @@ export function HomeHero({
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
-  const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined);
+  const [containerHeight, setContainerHeight] = useState<number | undefined>(580);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Measure and synchronize slider and banner heights so there is ZERO vertical jumping
   useEffect(() => {
     const updateHeight = () => {
       if (typeof window === "undefined") return;
-      const isMobile = window.innerWidth < 768;
+      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
 
-      if (isMobile) {
-        // Mobile viewport: adapt to current slide so banner doesn't have an empty void below it
+      if (!isDesktop) {
+        // Mobile & Tablet viewport: adapt smoothly to active slide so there is ZERO empty void
         const activeEl = slideRefs.current[currentIndex];
         if (activeEl) {
-          setContainerHeight(activeEl.offsetHeight);
+          const bannerEl = activeEl.querySelector<HTMLElement>("[data-banner-container]");
+          const h = bannerEl ? bannerEl.offsetHeight : activeEl.offsetHeight;
+          if (h > 0) {
+            setContainerHeight(h);
+          }
         }
       } else {
-        // Desktop / Laptop / Tablet: equalized height across slider & banner
+        // Desktop / Laptop: equalized height across slider & banner
         // Collect heights of standard split slides to lock a single consistent height
         const standardHeights = slides
           .map((s, idx) => (s.layout !== "banner" ? slideRefs.current[idx]?.offsetHeight || 0 : 0))
@@ -309,7 +316,11 @@ export function HomeHero({
     });
 
     slideRefs.current.forEach((el) => {
-      if (el) ro.observe(el);
+      if (el) {
+        ro.observe(el);
+        const banner = el.querySelector("[data-banner-container]");
+        if (banner) ro.observe(banner);
+      }
     });
 
     window.addEventListener("resize", updateHeight);
@@ -418,7 +429,7 @@ export function HomeHero({
       onMouseLeave={() => setIsPlaying(true)}
       className={cn(
         "relative overflow-hidden bg-white select-none outline-none focus-visible:ring-1 focus-visible:ring-[#e41d43]",
-        "pt-4 sm:pt-6 md:pt-7 lg:pt-8 pb-4 sm:pb-5 md:pb-6 lg:pb-6",
+        "pt-0 sm:pt-0 md:pt-0 lg:pt-0 pb-1 sm:pb-1 md:pb-1 lg:pb-2",
         className
       )}
     >
@@ -462,7 +473,7 @@ export function HomeHero({
         style={{ height: containerHeight ? `${containerHeight}px` : "auto" }}
       >
         <div
-          className="flex items-stretch transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] h-full"
+          className="flex items-start lg:items-stretch transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] h-full"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {slides.map((slide, slideIdx) => {
@@ -481,7 +492,7 @@ export function HomeHero({
                 aria-label={`${slideIdx + 1} of ${totalSlides}: ${slide.id}`}
                 aria-hidden={!isSlideActive}
                 className={cn(
-                  "min-w-full w-full shrink-0 transition-opacity duration-500 h-full flex flex-col justify-center",
+                  "min-w-full w-full shrink-0 transition-opacity duration-500 lg:h-full flex flex-col justify-center",
                   isSlideActive ? "opacity-100" : "opacity-30 pointer-events-none"
                 )}
               >
@@ -489,20 +500,21 @@ export function HomeHero({
                 {isBannerMode ? (
                   <div
                     className={cn(
-                      "w-full h-full mx-auto flex items-center justify-center transition-all",
+                      "w-full lg:h-full mx-auto flex items-center justify-center transition-all",
                       slide.fullBleed
                         ? "max-w-none px-0"
                         : "max-w-[1680px] px-2 sm:px-4 md:px-6"
                     )}
                   >
                     <div
+                      data-banner-container
                       className={cn(
                         "relative w-full overflow-hidden group/banner shadow-xl transition-all",
                         slide.fullBleed
                           ? "rounded-none"
-                          : "rounded-2xl md:rounded-3xl border border-slate-200/80",
-                        // Mobile uses natural ratio; Tablet/Desktop fills equalized hero height
-                        "aspect-[2.74/1] md:aspect-auto md:h-full md:min-h-[460px] lg:min-h-[500px] w-full"
+                          : "rounded-xl sm:rounded-2xl md:rounded-3xl border border-slate-200/80",
+                        slide.bannerAspect || "aspect-[2.74/1]",
+                        "lg:aspect-auto lg:h-full lg:min-h-[500px]"
                       )}
                     >
                       {/* Custom Banner Image */}
@@ -588,9 +600,9 @@ export function HomeHero({
                 ) : (
                   <Container>
                     {/* OPTION 1: SPLIT 2-COLUMN LAYOUT (Supporting Text + Card / Video / Image Card) */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center min-h-[460px] lg:min-h-[500px]">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-8 items-center min-h-0 lg:min-h-[500px]">
                       {/* Left Column: Headline, Subtitle, CTAs, Proof Points */}
-                      <div className="lg:col-span-7 space-y-6 md:space-y-7">
+                      <div className="lg:col-span-7 space-y-4 sm:space-y-6 md:space-y-7">
                         {slide.badge && (
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-slate-100 text-[#243d77] border border-slate-200/70">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#e41d43]" />
@@ -635,7 +647,7 @@ export function HomeHero({
                         )}
 
                         {slide.stats && slide.stats.length > 0 && (
-                          <div className="pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-6 max-w-xl">
+                          <div className="pt-4 sm:pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-3 sm:gap-6 max-w-xl">
                             {slide.stats.map((stat, sIdx) => (
                               <div key={sIdx}>
                                 <p className="text-2xl sm:text-3xl font-bold text-[#243d77] tracking-tight font-heading">
@@ -653,10 +665,10 @@ export function HomeHero({
                       {/* Right Column: Slide Media Canvas (Card / Video Player / Image Banner Card) */}
                       {media && (
                         <div className="lg:col-span-5 relative">
-                          <div className="relative mx-auto max-w-md lg:max-w-none">
+                          <div className="relative mx-auto max-w-md md:max-w-lg lg:max-w-none">
                             <div className="relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-300">
                               {/* Background Frame with layered gradients or Image Banner */}
-                              <div className="relative min-h-[440px] sm:min-h-[460px] flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#1c2e59] via-[#152345] to-[#0c162e] border border-white/10 p-6 sm:p-7 text-white group/rightcard">
+                              <div className="relative min-h-[380px] sm:min-h-[420px] lg:min-h-[460px] flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#1c2e59] via-[#152345] to-[#0c162e] border border-white/10 p-5 sm:p-6 lg:p-7 text-white group/rightcard">
 
                                 {/* Option 1: Right-Column Image Banner (media.type === "image" && media.imageUrl) */}
                                 {media.type === "image" && media.imageUrl && (
@@ -872,7 +884,7 @@ export function HomeHero({
                     aria-selected={isActive}
                     aria-label={`Go to slide ${idx + 1}: ${slideLabel}`}
                     onClick={() => goToSlide(idx)}
-                    className="group relative h-2.5 rounded-full overflow-hidden transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
+                    className="group relative h-2.5 rounded-full overflow-hidden transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#e41d43] before:absolute before:-inset-2 before:content-['']"
                     style={{
                       width: isActive ? "52px" : "14px",
                       backgroundColor: isActive
