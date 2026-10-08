@@ -240,6 +240,15 @@ export const defaultFullHeroSlides: FullHeroSlide[] = [
     bannerAlt: "BBDITM AKTU Merit List Academic Session 2024-25, 2025-26",
     bannerLink: "/admissions",
   },
+  {
+    id: "student-wide-banner",
+    layout: "banner", // Option 2: Full-Width Image Banner Slide
+    fullBleed: true, // Expands full-fledge across the hero section
+    showOverlay: false, // Clean graphical banner without text/black gradient clutter
+    bannerImage: "/banner/students.webp",
+    bannerAlt: "BBDITM AKTU Students",
+    bannerLink: "/contact",
+  },
 ];
 
 export function HomeHero({
@@ -277,6 +286,7 @@ export function HomeHero({
   }, [currentIndex]);
 
   const totalSlides = slides.length;
+  const isCurrentSlideBanner = slides[currentIndex]?.layout === "banner";
   const touchStartXRef = useRef<number | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -374,7 +384,10 @@ export function HomeHero({
       onMouseEnter={() => setIsPlaying(false)}
       onMouseLeave={() => setIsPlaying(true)}
       className={cn(
-        "relative overflow-hidden bg-white pt-2 pb-5 sm:pt-6 sm:pb-8 md:pt-12 md:pb-10 lg:pt-16 lg:pb-16 select-none outline-none focus-visible:ring-1 focus-visible:ring-[#e41d43]",
+        "relative overflow-hidden bg-white select-none outline-none focus-visible:ring-1 focus-visible:ring-[#e41d43] transition-[padding] duration-300",
+        isCurrentSlideBanner
+          ? "pt-1.5 sm:pt-2.5 md:pt-3 lg:pt-3.5 pb-2.5 sm:pb-3 md:pb-3.5 lg:pb-4"
+          : "pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-5 sm:pb-6 md:pb-8 lg:pb-10",
         className
       )}
     >
@@ -807,7 +820,14 @@ export function HomeHero({
       {/* Apple-grade Master Bottom Navigation Bar (Centered Dots with Play/Pause) */}
       {showIndicators && totalSlides > 1 && (
         <Container>
-          <div className="flex items-center justify-center gap-3.5 mt-2.5 sm:mt-6 pt-1 sm:pt-2">
+          <div
+            className={cn(
+              "flex items-center justify-center gap-3.5 transition-all duration-300",
+              isCurrentSlideBanner
+                ? "mt-2 sm:mt-2.5 md:mt-3 pt-0.5"
+                : "mt-3 sm:mt-5 md:mt-6 pt-1"
+            )}
+          >
             {/* Center Apple-style Indicator Progress Pills */}
             <div
               className="flex items-center gap-2.5"
