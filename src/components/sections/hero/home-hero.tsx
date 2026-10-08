@@ -65,8 +65,9 @@ export interface FullHeroSlide {
   backgroundImage?: string; // Tareeqa B: Per-slide ambient background image
   backgroundOpacity?: number; // Optional opacity (default: 0.18 for crisp text readability)
 
-  // Option 2: Full-Width Image Banner props (used when layout === "banner")
-  bannerImage?: string; // Image path or URL for full banner
+  // Option 2: Full-Width Image or Video Banner props (used when layout === "banner")
+  bannerImage?: string; // Image path or URL for full banner (or poster fallback for video)
+  bannerVideo?: string; // Video URL (e.g. MP4, WebM) for full-width background banner video
   bannerAlt?: string;
   bannerLink?: string; // Clickable link for the entire banner
   bannerAspect?: string; // Exact aspect ratio to prevent cropping on mobile & tablet, e.g. "aspect-[1920/700]"
@@ -258,6 +259,15 @@ export const defaultFullHeroSlides: FullHeroSlide[] = [
     bannerLink: "/contact",
     bannerAspect: "aspect-[1920/900]",
   },
+  {
+    id: "campus-full-video-banner",
+    layout: "banner",
+    fullBleed: true,
+    showOverlay: false,
+    bannerVideo: "https://srgi.in/media/bgvideo.mp4",
+    bannerImage: "/banner/poster.jpg",
+    bannerAspect: "aspect-[1920/700]",
+  }
 ];
 
 export function HomeHero({
@@ -431,8 +441,6 @@ export function HomeHero({
       onKeyDown={handleKeyDown}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      onMouseEnter={() => setIsPlaying(false)}
-      onMouseLeave={() => setIsPlaying(true)}
       className={cn(
         "relative overflow-hidden bg-white select-none outline-none focus-visible:ring-1 focus-visible:ring-[#e41d43]",
         "pt-0 sm:pt-0 md:pt-0 lg:pt-0 pb-0",
@@ -541,8 +549,18 @@ export function HomeHero({
                         "lg:aspect-auto lg:h-full lg:min-h-[500px]"
                       )}
                     >
-                      {/* Custom Banner Image */}
-                      {slide.bannerImage ? (
+                      {/* Custom Banner Media: Video or Image */}
+                      {slide.bannerVideo ? (
+                        <video
+                          src={slide.bannerVideo}
+                          poster={slide.bannerImage}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          className="w-full h-full object-cover object-center"
+                        />
+                      ) : slide.bannerImage ? (
                         <Image
                           src={slide.bannerImage}
                           alt={slide.bannerAlt || "Banner"}

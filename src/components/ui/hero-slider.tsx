@@ -213,8 +213,6 @@ export function HeroSlider({
       onKeyDown={handleKeyDown}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      onMouseEnter={() => setIsPlaying(false)}
-      onMouseLeave={() => setIsPlaying(true)}
       className={cn(
         "relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 select-none outline-none focus-visible:ring-2 focus-visible:ring-[#e41d43]",
         className
