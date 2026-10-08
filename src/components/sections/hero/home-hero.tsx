@@ -266,7 +266,7 @@ export function HomeHero({
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
-  const [containerHeight, setContainerHeight] = useState<number | undefined>(580);
+  const [containerHeight, setContainerHeight] = useState<number | undefined>(700);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Measure and synchronize slider and banner heights so there is ZERO vertical jumping
@@ -429,7 +429,7 @@ export function HomeHero({
       onMouseLeave={() => setIsPlaying(true)}
       className={cn(
         "relative overflow-hidden bg-white select-none outline-none focus-visible:ring-1 focus-visible:ring-[#e41d43]",
-        "pt-0 sm:pt-0 md:pt-0 lg:pt-0 pb-1 sm:pb-1 md:pb-1 lg:pb-2",
+        "pt-0 sm:pt-0 md:pt-0 lg:pt-0 pb-0",
         className
       )}
     >
@@ -526,7 +526,7 @@ export function HomeHero({
                           priority
                           unoptimized
                           sizes="100vw"
-                          className="object-cover object-[center_40%] transition-transform duration-700 ease-out group-hover/banner:scale-[1.01]"
+                          className="object-cover object-top transition-transform duration-700 ease-out group-hover/banner:scale-[1.01]"
                         />
                       ) : (
                         /* Artistic Mesh Backdrop fallback when image is pending */
@@ -598,7 +598,7 @@ export function HomeHero({
                     </div>
                   </div>
                 ) : (
-                  <Container>
+                  <Container className="pb-10 sm:pb-12 md:pb-14">
                     {/* OPTION 1: SPLIT 2-COLUMN LAYOUT (Supporting Text + Card / Video / Image Card) */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-8 items-center min-h-0 lg:min-h-[500px]">
                       {/* Left Column: Headline, Subtitle, CTAs, Proof Points */}
@@ -863,67 +863,69 @@ export function HomeHero({
 
       {/* Apple-grade Master Bottom Navigation Bar (Centered Dots with Play/Pause) */}
       {showIndicators && totalSlides > 1 && (
-        <Container>
-          <div
-            className="flex items-center justify-center gap-3.5 mt-3 sm:mt-4 md:mt-5 pt-0.5"
-          >
-            {/* Center Apple-style Indicator Progress Pills */}
+        <div className="absolute bottom-3 sm:bottom-4 md:bottom-5 left-0 right-0 z-20 pointer-events-none">
+          <Container>
             <div
-              className="flex items-center gap-2.5"
-              role="tablist"
-              aria-label="Hero slide selection"
+              className="flex items-center justify-center gap-3.5 pointer-events-auto"
             >
-              {slides.map((s, idx) => {
-                const isActive = idx === currentIndex;
-                const slideLabel = s.media?.title || s.badge || s.id;
-                return (
-                  <button
-                    key={s.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={isActive}
-                    aria-label={`Go to slide ${idx + 1}: ${slideLabel}`}
-                    onClick={() => goToSlide(idx)}
-                    className="group relative h-2.5 rounded-full overflow-hidden transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#e41d43] before:absolute before:-inset-2 before:content-['']"
-                    style={{
-                      width: isActive ? "52px" : "14px",
-                      backgroundColor: isActive
-                        ? "rgba(36, 61, 119, 0.15)"
-                        : "rgba(0, 0, 0, 0.1)",
-                    }}
-                  >
-                    {isActive && (
-                      <span
-                        className="absolute inset-y-0 left-0 bg-[#e41d43] rounded-full transition-all"
-                        style={{
-                          width: `${progress}%`,
-                          transition: isPlaying ? "width 50ms linear" : "none",
-                        }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Play/Pause Control right beside the dots */}
-            {showPlayPause && (
-              <button
-                type="button"
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="w-7 h-7 rounded-full border border-slate-200 bg-white/90 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-xs flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
-                aria-label={isPlaying ? "Pause hero slider" : "Play hero slider"}
-                title={isPlaying ? "Pause autoplay" : "Start autoplay"}
+              {/* Center Apple-style Indicator Progress Pills */}
+              <div
+                className="flex items-center gap-2.5"
+                role="tablist"
+                aria-label="Hero slide selection"
               >
-                {isPlaying ? (
-                  <Pause className="w-3 h-3 text-slate-700" />
-                ) : (
-                  <Play className="w-3 h-3 text-slate-700 fill-slate-700 ml-0.5" />
-                )}
-              </button>
-            )}
-          </div>
-        </Container>
+                {slides.map((s, idx) => {
+                  const isActive = idx === currentIndex;
+                  const slideLabel = s.media?.title || s.badge || s.id;
+                  return (
+                    <button
+                      key={s.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      aria-label={`Go to slide ${idx + 1}: ${slideLabel}`}
+                      onClick={() => goToSlide(idx)}
+                      className="group relative h-2.5 rounded-full overflow-hidden transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#e41d43] before:absolute before:-inset-2 before:content-['']"
+                      style={{
+                        width: isActive ? "52px" : "14px",
+                        backgroundColor: isActive
+                          ? "rgba(36, 61, 119, 0.15)"
+                          : "rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                      {isActive && (
+                        <span
+                          className="absolute inset-y-0 left-0 bg-[#e41d43] rounded-full transition-all"
+                          style={{
+                            width: `${progress}%`,
+                            transition: isPlaying ? "width 50ms linear" : "none",
+                          }}
+                        />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Play/Pause Control right beside the dots */}
+              {showPlayPause && (
+                <button
+                  type="button"
+                  onClick={() => setIsPlaying(!isPlaying)}
+                  className="w-7 h-7 rounded-full border border-slate-200 bg-white/90 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-xs flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
+                  aria-label={isPlaying ? "Pause hero slider" : "Play hero slider"}
+                  title={isPlaying ? "Pause autoplay" : "Start autoplay"}
+                >
+                  {isPlaying ? (
+                    <Pause className="w-3 h-3 text-slate-700" />
+                  ) : (
+                    <Play className="w-3 h-3 text-slate-700 fill-slate-700 ml-0.5" />
+                  )}
+                </button>
+              )}
+            </div>
+          </Container>
+        </div>
       )}
 
       {/* Video Modal Overlay (Triggered by Watch Campus Tour) */}
