@@ -62,6 +62,8 @@ export interface FullHeroSlide {
     label: string;
   }>;
   media?: HeroSlideMedia;
+  backgroundImage?: string; // Tareeqa B: Per-slide ambient background image
+  backgroundOpacity?: number; // Optional opacity (default: 0.18 for crisp text readability)
 
   // Option 2: Full-Width Image Banner props (used when layout === "banner")
   bannerImage?: string; // Image path or URL for full banner
@@ -86,8 +88,10 @@ export const defaultFullHeroSlides: FullHeroSlide[] = [
   {
     id: "academic-depth",
     layout: "split",
-    badge: "ADMISSIONS 2026-27",
+    // badge: "ADMISSIONS 2026-27",
     badgeVariant: "red",
+    backgroundImage: "/banner/slideonec.webp",
+
     headline: (
       <>
         Where technical depth meets{" "}
@@ -109,28 +113,29 @@ export const defaultFullHeroSlides: FullHeroSlide[] = [
       { value: "₹ 44.15L", label: "Highest Salary Package" },
       { value: "100+", label: "Acres Campus City" },
     ],
-    media: {
-      type: "card",
-      badge: "AICTE APPROVED",
-      badgeVariant: "red",
-      title: "Academic Excellence",
-      subtitle: "BBDITM Lucknow",
-      description: "AKTU College Code: 054 · NBA Accredited Standards",
-      highlights: [
-        {
-          tag: "FLAGSHIP SCHOOL",
-          title: "Computer Science & Engineering",
-          desc: "With specialized tracks in AI, Machine Learning, and Data Science.",
-        },
-        {
-          tag: "INDUSTRY PARTNERSHIPS",
-          title: "Top Corporate Recruiters",
-          desc: "TCS, Infosys, Wipro, Capgemini, Cognizant, and Samsung R&D.",
-        },
-      ],
-      ctaText: "Talk to Admission Team",
-      ctaLink: "/contact",
-    },
+    // media: {
+    //   type: "image",
+    //   badge: "AICTE APPROVED",
+
+    //   badgeVariant: "red",
+    //   title: "Academic Excellence",
+    //   subtitle: "BBDITM Lucknow",
+    //   description: "AKTU College Code: 054 · NBA Accredited Standards",
+    //   highlights: [
+    //     {
+    //       tag: "FLAGSHIP SCHOOL",
+    //       title: "Computer Science & Engineering",
+    //       desc: "With specialized tracks in AI, Machine Learning, and Data Science.",
+    //     },
+    //     {
+    //       tag: "INDUSTRY PARTNERSHIPS",
+    //       title: "Top Corporate Recruiters",
+    //       desc: "TCS, Infosys, Wipro, Capgemini, Cognizant, and Samsung R&D.",
+    //     },
+    //   ],
+    //   ctaText: "Talk to Admission Team",
+    //   ctaLink: "/contact",
+    // },
   },
   {
     id: "campus-infrastructure",
@@ -234,20 +239,21 @@ export const defaultFullHeroSlides: FullHeroSlide[] = [
   },
   {
     id: "admissions-wide-banner",
-    layout: "banner", // Option 2: Full-Width Image Banner Slide
-    fullBleed: true, // Expands full-fledge across the hero section
-    showOverlay: false, // Clean graphical banner without text/black gradient clutter
+    layout: "banner",
+    fullBleed: true,
+    showOverlay: false,
     bannerImage: "/banner/banner.jpg",
     bannerAlt: "BBDITM AKTU Merit List Academic Session 2024-25, 2025-26",
     bannerLink: "/admissions",
     bannerAspect: "aspect-[1920/700]",
   },
+
   {
-    id: "student-wide-banner",
-    layout: "banner", // Option 2: Full-Width Image Banner Slide
-    fullBleed: true, // Expands full-fledge across the hero section
-    showOverlay: false, // Clean graphical banner without text/black gradient clutter
-    bannerImage: "/banner/students.webp",
+    id: "placed-banner",
+    layout: "banner",
+    fullBleed: true,
+    showOverlay: false,
+    bannerImage: "/banner/placed.webp",
     bannerAlt: "BBDITM AKTU Students",
     bannerLink: "/contact",
     bannerAspect: "aspect-[1920/900]",
@@ -492,10 +498,28 @@ export function HomeHero({
                 aria-label={`${slideIdx + 1} of ${totalSlides}: ${slide.id}`}
                 aria-hidden={!isSlideActive}
                 className={cn(
-                  "min-w-full w-full shrink-0 transition-opacity duration-500 lg:h-full flex flex-col justify-center",
+                  "relative min-w-full w-full shrink-0 transition-opacity duration-500 lg:h-full flex flex-col justify-center overflow-hidden",
                   isSlideActive ? "opacity-100" : "opacity-30 pointer-events-none"
                 )}
               >
+                {/* Tareeqa B: Per-Slide Ambient Background Image */}
+                {slide.backgroundImage && !isBannerMode && (
+                  <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+                    <Image
+                      src={slide.backgroundImage}
+                      alt=""
+                      fill
+                      unoptimized
+                      priority={slideIdx === 0}
+                      sizes="100vw"
+                      className="object-cover object-right lg:object-[right_center]"
+                      style={{ opacity: slide.backgroundOpacity ?? 1 }}
+                    />
+                    {/* Soft fade on left side so black text on left remains 100% crisp, while right image is 100% clear */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-white via-white/20 via-35% to-transparent" />
+                  </div>
+                )}
+
                 {/* OPTION 2: FULL-WIDTH IMAGE BANNER LAYOUT */}
                 {isBannerMode ? (
                   <div
@@ -598,11 +622,18 @@ export function HomeHero({
                     </div>
                   </div>
                 ) : (
-                  <Container className="pb-10 sm:pb-12 md:pb-14">
+                  <Container className="relative z-10 pb-10 sm:pb-12 md:pb-14">
                     {/* OPTION 1: SPLIT 2-COLUMN LAYOUT (Supporting Text + Card / Video / Image Card) */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-8 items-center min-h-0 lg:min-h-[500px]">
                       {/* Left Column: Headline, Subtitle, CTAs, Proof Points */}
-                      <div className="lg:col-span-7 space-y-4 sm:space-y-6 md:space-y-7">
+                      <div
+                        className={cn(
+                          "space-y-4 sm:space-y-6 md:space-y-7",
+                          media?.type === "image" && media?.imageUrl
+                            ? "lg:col-span-6"
+                            : "lg:col-span-7"
+                        )}
+                      >
                         {slide.badge && (
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-slate-100 text-[#243d77] border border-slate-200/70">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#e41d43]" />
@@ -662,194 +693,208 @@ export function HomeHero({
                         )}
                       </div>
 
-                      {/* Right Column: Slide Media Canvas (Card / Video Player / Image Banner Card) */}
+                      {/* Right Column: Slide Media Canvas (Card / Video Player / Standalone Natural Image) */}
                       {media && (
-                        <div className="lg:col-span-5 relative">
-                          <div className="relative mx-auto max-w-md md:max-w-lg lg:max-w-none">
-                            <div className="relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-300">
-                              {/* Background Frame with layered gradients or Image Banner */}
-                              <div className="relative min-h-[380px] sm:min-h-[420px] lg:min-h-[460px] flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#1c2e59] via-[#152345] to-[#0c162e] border border-white/10 p-5 sm:p-6 lg:p-7 text-white group/rightcard">
+                        <div
+                          className={cn(
+                            "relative",
+                            media.type === "image" && media.imageUrl
+                              ? "lg:col-span-6"
+                              : "lg:col-span-5"
+                          )}
+                        >
+                          {media.type === "image" && media.imageUrl ? (
+                            /* Standalone Natural Image Showcase (No card wrap, full image visible) */
+                            <div className="relative mx-auto w-full h-[320px] sm:h-[400px] lg:h-[460px] xl:h-[500px] flex items-center justify-center lg:justify-end group/rightcard">
+                              <Image
+                                src={media.imageUrl}
+                                alt={media.imageAlt || media.title || "Hero showcase"}
+                                fill
+                                priority={slideIdx === 0}
+                                unoptimized
+                                sizes="(max-width: 1024px) 100vw, 750px"
+                                className="object-contain object-center lg:object-right transition-transform duration-700 ease-out group-hover/rightcard:scale-[1.02]"
+                              />
+                              {media.ctaLink && (
+                                <Link
+                                  href={media.ctaLink}
+                                  className="absolute inset-0 z-10 cursor-pointer"
+                                  aria-label={media.imageAlt || media.title}
+                                />
+                              )}
+                            </div>
+                          ) : (
+                            <div className="relative mx-auto max-w-md md:max-w-lg lg:max-w-none">
+                              <div className="relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-300">
+                                {/* Background Frame with layered gradients or Video / Card */}
+                                <div className="relative min-h-[380px] sm:min-h-[420px] lg:min-h-[460px] flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#1c2e59] via-[#152345] to-[#0c162e] border border-white/10 p-5 sm:p-6 lg:p-7 text-white group/rightcard">
 
-                                {/* Option 1: Right-Column Image Banner (media.type === "image" && media.imageUrl) */}
-                                {media.type === "image" && media.imageUrl && (
-                                  <>
-                                    <Image
-                                      src={media.imageUrl}
-                                      alt={media.imageAlt || media.title}
-                                      fill
-                                      unoptimized
-                                      sizes="(max-width: 1024px) 100vw, 500px"
-                                      className="object-cover transition-transform duration-700 ease-out group-hover/rightcard:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c162e]/90 via-[#152345]/60 to-black/30" />
-                                  </>
-                                )}
+                                  {/* Ambient background glow (when no full image background) */}
+                                  {(!media.imageUrl || media.type !== "image") && (
+                                    <>
+                                      <div
+                                        className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#e41d43]/15 blur-3xl"
+                                        aria-hidden="true"
+                                      />
+                                      <div
+                                        className="pointer-events-none absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-[#243d77]/40 blur-3xl"
+                                        aria-hidden="true"
+                                      />
+                                    </>
+                                  )}
 
-                                {/* Ambient background glow (when no full image background) */}
-                                {(!media.imageUrl || media.type !== "image") && (
-                                  <>
-                                    <div
-                                      className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#e41d43]/15 blur-3xl"
-                                      aria-hidden="true"
-                                    />
-                                    <div
-                                      className="pointer-events-none absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-[#243d77]/40 blur-3xl"
-                                      aria-hidden="true"
-                                    />
-                                  </>
-                                )}
-
-                                {/* Direct Video Background (if slide provides media.videoUrl) */}
-                                {media.videoUrl && (
-                                  <div className="absolute inset-0 z-0 overflow-hidden">
-                                    <video
-                                      ref={isSlideActive ? videoRef : undefined}
-                                      src={media.videoUrl}
-                                      poster={media.videoPoster}
-                                      autoPlay
-                                      muted
-                                      loop
-                                      playsInline
-                                      className="w-full h-full object-cover opacity-35"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c162e] via-[#152345]/80 to-transparent" />
-                                  </div>
-                                )}
-
-                                {/* Video decorative ambient grid (for video-type slide) */}
-                                {media.type === "video" && !media.videoUrl && (
-                                  <div className="absolute inset-0 z-0 overflow-hidden opacity-20 pointer-events-none">
-                                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-400 via-transparent to-transparent animate-pulse" />
-                                    <div className="w-full h-full bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:2rem_2rem]" />
-                                  </div>
-                                )}
-
-                                {/* Card Top Header: Icon + Title + Badge */}
-                                <div className="relative z-10 flex items-center justify-between pb-4 border-b border-white/10">
-                                  <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shrink-0 shadow-sm">
-                                      {media.type === "video" ? (
-                                        <Video className="w-5 h-5 text-[#f87171]" />
-                                      ) : media.type === "image" ? (
-                                        <ImageIcon className="w-5 h-5 text-white" />
-                                      ) : slide.id === "career-placements" ? (
-                                        <Trophy className="w-5 h-5 text-amber-400" />
-                                      ) : (
-                                        <GraduationCap className="w-5 h-5 text-[#f87171]" />
-                                      )}
+                                  {/* Direct Video Background (if slide provides media.videoUrl) */}
+                                  {media.videoUrl && (
+                                    <div className="absolute inset-0 z-0 overflow-hidden">
+                                      <video
+                                        ref={isSlideActive ? videoRef : undefined}
+                                        src={media.videoUrl}
+                                        poster={media.videoPoster}
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        className="w-full h-full object-cover opacity-35"
+                                      />
+                                      <div className="absolute inset-0 bg-gradient-to-t from-[#0c162e] via-[#152345]/80 to-transparent" />
                                     </div>
-                                    <div className="min-w-0">
-                                      <p className="text-sm font-semibold text-white truncate font-heading tracking-tight drop-shadow-sm">
-                                        {media.title}
-                                      </p>
-                                      {media.subtitle && (
-                                        <p className="text-xs text-slate-300 truncate drop-shadow-sm">
-                                          {media.subtitle}
+                                  )}
+
+                                  {/* Video decorative ambient grid (for video-type slide) */}
+                                  {media.type === "video" && !media.videoUrl && (
+                                    <div className="absolute inset-0 z-0 overflow-hidden opacity-20 pointer-events-none">
+                                      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-400 via-transparent to-transparent animate-pulse" />
+                                      <div className="w-full h-full bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:2rem_2rem]" />
+                                    </div>
+                                  )}
+
+                                  {/* Card Top Header: Icon + Title + Badge */}
+                                  <div className="relative z-10 flex items-center justify-between pb-4 border-b border-white/10">
+                                    <div className="flex items-center gap-3">
+                                      <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shrink-0 shadow-sm">
+                                        {media.type === "video" ? (
+                                          <Video className="w-5 h-5 text-[#f87171]" />
+                                        ) : media.type === "image" ? (
+                                          <ImageIcon className="w-5 h-5 text-white" />
+                                        ) : slide.id === "career-placements" ? (
+                                          <Trophy className="w-5 h-5 text-amber-400" />
+                                        ) : (
+                                          <GraduationCap className="w-5 h-5 text-[#f87171]" />
+                                        )}
+                                      </div>
+                                      <div className="min-w-0">
+                                        <p className="text-sm font-semibold text-white truncate font-heading tracking-tight drop-shadow-sm">
+                                          {media.title}
                                         </p>
-                                      )}
-                                    </div>
-                                  </div>
-
-                                  {media.badge && (
-                                    <span
-                                      className={cn(
-                                        "text-xs font-semibold tracking-tight px-3 py-1 rounded-full uppercase shadow-xs shrink-0",
-                                        getBadgeClass(media.badgeVariant)
-                                      )}
-                                    >
-                                      {media.badge}
-                                    </span>
-                                  )}
-                                </div>
-
-                                {/* Card Main Body: Highlights or Custom Node */}
-                                <div className="relative z-10 py-5 space-y-3 flex-1 flex flex-col justify-center">
-                                  {media.description && (
-                                    <p className="text-xs text-slate-200 leading-relaxed font-normal drop-shadow-sm">
-                                      {media.description}
-                                    </p>
-                                  )}
-
-                                  {/* Interactive Video Play Banner if video slide */}
-                                  {media.type === "video" && (
-                                    <div
-                                      onClick={() =>
-                                        setActiveVideoModal(
-                                          media.videoUrl ||
-                                          "https://www.youtube.com/embed/dQw4w9WgXcQ"
-                                        )
-                                      }
-                                      className="group/video relative cursor-pointer rounded-xl overflow-hidden border border-white/20 bg-black/30 p-3 sm:p-4 hover:border-[#f87171]/60 transition-all"
-                                    >
-                                      <div className="flex items-center gap-3">
-                                        <div className="w-9 h-9 rounded-full bg-[#e41d43] group-hover/video:scale-110 flex items-center justify-center text-white shadow-md transition-transform shrink-0">
-                                          <Play className="w-4 h-4 fill-white ml-0.5" />
-                                        </div>
-                                        <div className="min-w-0 flex-1">
-                                          <div className="flex items-center gap-1.5">
-                                            <p className="text-xs font-semibold text-white">
-                                              Watch Campus Video Tour
-                                            </p>
-                                            <Sparkles className="w-3 h-3 text-amber-400" />
-                                          </div>
-                                          <p className="text-[11px] text-slate-300">
-                                            {media.videoDuration ||
-                                              "360° Aerial View & State-of-the-Art Labs"}
+                                        {media.subtitle && (
+                                          <p className="text-xs text-slate-300 truncate drop-shadow-sm">
+                                            {media.subtitle}
                                           </p>
-                                        </div>
+                                        )}
                                       </div>
                                     </div>
-                                  )}
 
-                                  {media.customContent ? (
-                                    media.customContent
-                                  ) : media.highlights && media.highlights.length > 0 ? (
-                                    <div className="space-y-2.5">
-                                      {media.highlights.map((h, i) => (
-                                        <div
-                                          key={i}
-                                          className="p-3.5 sm:p-4 rounded-xl bg-white/5 hover:bg-white/[0.08] backdrop-blur-xs border border-white/10 space-y-1 transition-colors"
-                                        >
-                                          {h.tag && (
-                                            <span className="text-xs font-semibold text-[#f87171] uppercase tracking-wider block">
-                                              {h.tag}
-                                            </span>
-                                          )}
-                                          <h4 className="text-sm font-semibold text-white tracking-tight font-heading">
-                                            {h.title}
-                                          </h4>
-                                          <p className="text-xs text-slate-300 leading-relaxed">
-                                            {h.desc}
-                                          </p>
+                                    {media.badge && (
+                                      <span
+                                        className={cn(
+                                          "text-xs font-semibold tracking-tight px-3 py-1 rounded-full uppercase shadow-xs shrink-0",
+                                          getBadgeClass(media.badgeVariant)
+                                        )}
+                                      >
+                                        {media.badge}
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  {/* Card Main Body: Highlights or Custom Node */}
+                                  <div className="relative z-10 py-5 space-y-3 flex-1 flex flex-col justify-center">
+                                    {media.description && (
+                                      <p className="text-xs text-slate-200 leading-relaxed font-normal drop-shadow-sm">
+                                        {media.description}
+                                      </p>
+                                    )}
+
+                                    {/* Interactive Video Play Banner if video slide */}
+                                    {media.type === "video" && (
+                                      <div
+                                        onClick={() =>
+                                          setActiveVideoModal(
+                                            media.videoUrl ||
+                                            "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                                          )
+                                        }
+                                        className="group/video relative cursor-pointer rounded-xl overflow-hidden border border-white/20 bg-black/30 p-3 sm:p-4 hover:border-[#f87171]/60 transition-all"
+                                      >
+                                        <div className="flex items-center gap-3">
+                                          <div className="w-9 h-9 rounded-full bg-[#e41d43] group-hover/video:scale-110 flex items-center justify-center text-white shadow-md transition-transform shrink-0">
+                                            <Play className="w-4 h-4 fill-white ml-0.5" />
+                                          </div>
+                                          <div className="min-w-0 flex-1">
+                                            <div className="flex items-center gap-1.5">
+                                              <p className="text-xs font-semibold text-white">
+                                                Watch Campus Video Tour
+                                              </p>
+                                              <Sparkles className="w-3 h-3 text-amber-400" />
+                                            </div>
+                                            <p className="text-[11px] text-slate-300">
+                                              {media.videoDuration ||
+                                                "360° Aerial View & State-of-the-Art Labs"}
+                                            </p>
+                                          </div>
                                         </div>
-                                      ))}
-                                    </div>
-                                  ) : null}
-                                </div>
+                                      </div>
+                                    )}
 
-                                {/* Card Bottom: Link */}
-                                <div className="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between gap-3">
-                                  {media.ctaLink && media.ctaText ? (
-                                    <Link
-                                      href={media.ctaLink}
-                                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#f87171] hover:text-white transition-colors group"
-                                    >
-                                      <span>{media.ctaText}</span>
-                                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                                    </Link>
-                                  ) : (
-                                    <span className="text-xs text-slate-400">
-                                      BBDITM Academic Showcase
+                                    {media.customContent ? (
+                                      media.customContent
+                                    ) : media.highlights && media.highlights.length > 0 ? (
+                                      <div className="space-y-2.5">
+                                        {media.highlights.map((h, i) => (
+                                          <div
+                                            key={i}
+                                            className="p-3.5 sm:p-4 rounded-xl bg-white/5 hover:bg-white/[0.08] backdrop-blur-xs border border-white/10 space-y-1 transition-colors"
+                                          >
+                                            {h.tag && (
+                                              <span className="text-xs font-semibold text-[#f87171] uppercase tracking-wider block">
+                                                {h.tag}
+                                              </span>
+                                            )}
+                                            <h4 className="text-sm font-semibold text-white tracking-tight font-heading">
+                                              {h.title}
+                                            </h4>
+                                            <p className="text-xs text-slate-300 leading-relaxed">
+                                              {h.desc}
+                                            </p>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    ) : null}
+                                  </div>
+
+                                  {/* Card Bottom: Link */}
+                                  <div className="relative z-10 pt-4 border-t border-white/10 flex items-center justify-between gap-3">
+                                    {media.ctaLink && media.ctaText ? (
+                                      <Link
+                                        href={media.ctaLink}
+                                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#f87171] hover:text-white transition-colors group"
+                                      >
+                                        <span>{media.ctaText}</span>
+                                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                      </Link>
+                                    ) : (
+                                      <span className="text-xs text-slate-400">
+                                        BBDITM Academic Showcase
+                                      </span>
+                                    )}
+
+                                    <span className="text-xs text-slate-400 font-mono">
+                                      0{slideIdx + 1} / 0{totalSlides}
                                     </span>
-                                  )}
-
-                                  <span className="text-xs text-slate-400 font-mono">
-                                    0{slideIdx + 1} / 0{totalSlides}
-                                  </span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          )}
                         </div>
                       )}
                     </div>

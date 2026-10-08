@@ -22,7 +22,7 @@ const openSans = Open_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.shortName} — Babu Banarasi Das Institute of Technology & Management, Lucknow`,
+    default: `${siteConfig.shortName} - Babu Banarasi Das Institute of Technology & Management, Lucknow`,
     template: `%s | ${siteConfig.shortName}`,
   },
   description: siteConfig.description,
