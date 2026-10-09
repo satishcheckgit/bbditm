@@ -4,9 +4,9 @@ name: Apple-design-analysis
 description: A photography-first interface that turns marketing into a museum gallery. Edge-to-edge product tiles alternate light and dark canvases, framed by SF Pro Display headlines with negative letter-spacing and a single Action Blue (#0066cc) interactive color. UI chrome recedes so the product can speak — no decorative gradients, no shadows on chrome, only the one signature drop-shadow under product imagery resting on a surface.
 
 colors:
-  primary: "#0066cc"
-  primary-focus: "#0071e3"
-  primary-on-dark: "#2997ff"
+  primary: "#e41d43"
+  primary-focus: "#c21132ff"
+  primary-on-dark: "#f5163fff"
   ink: "#1d1d1f"
   body: "#1d1d1f"
   body-on-dark: "#ffffff"

@@ -213,11 +213,11 @@ export function HeroSlideMediaCard({
             const isLeft = position === 2;
 
             if (isFront) {
-              // ACTIVE FRONT CARD (Apple clean museum tile with subtle frosted glass)
+              // ACTIVE FRONT CARD (Apple clean museum tile: Borderless with soft ambient elevation)
               return (
                 <div
                   key={card.id}
-                  className="relative z-20 w-full rounded-[26px] bg-white/95 backdrop-blur-2xl border border-black/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] ring-1 ring-black/[0.02] p-5 sm:p-5.5 flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] scale-100 rotate-0 translate-x-0 translate-y-0 opacity-100"
+                  className="relative z-20 w-full rounded-[26px] bg-white/95 backdrop-blur-2xl shadow-[0_24px_50px_rgba(0,0,0,0.08),0_4px_16px_rgba(0,0,0,0.02)] p-5 sm:p-5.5 flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] scale-100 rotate-0 translate-x-0 translate-y-0 opacity-100"
                 >
                   {/* Card Header: Eyebrow Capsule + Clean Headline + Shuffle Button */}
                   <div>
@@ -240,7 +240,7 @@ export function HeroSlideMediaCard({
                     </h3>
                   </div>
 
-                  {/* Center Media Showcase Window (Clean Apple Rounded Geometry) */}
+                  {/* Center Media Showcase Window (Clean Apple Rounded Geometry - Borderless) */}
                   <div className="relative my-3 w-full flex flex-col items-center">
                     <div
                       onClick={() =>
@@ -248,7 +248,7 @@ export function HeroSlideMediaCard({
                           ? onOpenVideoModal?.(card.videoUrl)
                           : rotateNext()
                       }
-                      className="group/media relative w-full h-[185px] sm:h-[195px] rounded-[18px] overflow-hidden border border-black/[0.08] bg-[#f5f5f7] cursor-pointer shadow-[0_4px_16px_rgba(0,0,0,0.04)]"
+                      className="group/media relative w-full h-[185px] sm:h-[195px] rounded-[18px] overflow-hidden bg-[#f5f5f7] cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
                     >
                       <Image
                         src={card.image}
@@ -265,7 +265,7 @@ export function HeroSlideMediaCard({
 
                       {/* Top-Right Frosted Glass Tag Pill */}
                       <div className="absolute top-2.5 right-2.5 z-10 pointer-events-none">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md border border-white/20 text-[10px] font-medium tracking-wide text-white shadow-xs">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md text-[10px] font-medium tracking-wide text-white shadow-xs">
                           {card.id === "placements" ? (
                             <Trophy className="w-3 h-3 text-amber-300" />
                           ) : card.isVideo ? (
@@ -282,7 +282,7 @@ export function HeroSlideMediaCard({
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div
                             className={cn(
-                              "w-12 h-12 rounded-full bg-white/95 hover:bg-white backdrop-blur-md group-hover/media:scale-110 active:scale-95 flex items-center justify-center shadow-lg border border-white/50 transition-all duration-300",
+                              "w-12 h-12 rounded-full bg-white/95 hover:bg-white backdrop-blur-md group-hover/media:scale-110 active:scale-95 flex items-center justify-center shadow-lg transition-all duration-300",
                               card.playIconClass || "text-[#e41d43]"
                             )}
                           >
@@ -330,7 +330,7 @@ export function HeroSlideMediaCard({
               );
             }
 
-            // PEEKING BACKGROUND CARDS (Click to bring to front smoothly)
+            // PEEKING BACKGROUND CARDS (Borderless with soft diffuse elevation)
             return (
               <div
                 key={card.id}
@@ -342,7 +342,7 @@ export function HeroSlideMediaCard({
                   if (e.key === "Enter" || e.key === " ") setActiveCardIndex(idx);
                 }}
                 className={cn(
-                  "absolute top-5 w-[280px] sm:w-[310px] h-[370px] sm:h-[390px] rounded-[26px] bg-[#fafafc]/95 backdrop-blur-xl border border-black/[0.07] shadow-md transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex flex-col justify-between p-4 cursor-pointer hover:shadow-xl",
+                  "absolute top-5 w-[280px] sm:w-[310px] h-[370px] sm:h-[390px] rounded-[26px] bg-[#fafafc]/95 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.06)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex flex-col justify-between p-4 cursor-pointer hover:shadow-xl",
                   isRight && "z-10 -right-5 sm:-right-8 rotate-6 scale-95 opacity-80 hover:opacity-100 hover:scale-[0.98] hover:rotate-3",
                   isLeft && "z-10 -left-5 sm:-left-8 -rotate-6 scale-95 opacity-80 hover:opacity-100 hover:scale-[0.98] hover:-rotate-3"
                 )}
@@ -361,8 +361,8 @@ export function HeroSlideMediaCard({
                   </h4>
                 </div>
 
-                {/* Clean preview window */}
-                <div className="relative w-full h-[160px] sm:h-[175px] rounded-[16px] overflow-hidden border border-black/[0.06] bg-[#f5f5f7] pointer-events-none">
+                {/* Clean preview window - Borderless */}
+                <div className="relative w-full h-[160px] sm:h-[175px] rounded-[16px] overflow-hidden bg-[#f5f5f7] pointer-events-none">
                   <Image
                     src={card.image}
                     alt=""
@@ -375,7 +375,7 @@ export function HeroSlideMediaCard({
                 </div>
 
                 <div className="text-center pt-0.5 pointer-events-none">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/90 border border-black/[0.06] text-[11px] font-medium text-slate-700 shadow-2xs">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/95 text-[11px] font-medium text-slate-700 shadow-2xs">
                     <span>{card.ctaText}</span>
                     <ChevronRight className="w-3 h-3 text-slate-400" />
                   </span>
@@ -403,9 +403,9 @@ export function HeroSlideMediaCard({
           ))}
         </div>
 
-        {/* Bottom Floating Action Pill (Apple frosted capsule bar) */}
+        {/* Bottom Floating Action Pill (Apple frosted capsule bar - Borderless) */}
         <div className="relative z-30 w-[94%] max-w-[370px]">
-          <div className="w-full rounded-full bg-white/85 backdrop-blur-xl border border-black/[0.08] shadow-[0_8px_30px_rgb(0,0,0,0.06)] px-4 py-2 sm:py-2.5 flex items-center justify-between gap-3 transition-all hover:shadow-md group/bottompill">
+          <div className="w-full rounded-full bg-white/90 backdrop-blur-xl shadow-[0_10px_35px_rgba(0,0,0,0.07)] px-4 py-2 sm:py-2.5 flex items-center justify-between gap-3 transition-all hover:shadow-lg group/bottompill">
             <Link
               href={activeCard.ctaLink}
               className="flex-1 text-xs text-slate-600 hover:text-[#e41d43] font-normal leading-snug line-clamp-1 pl-1 cursor-pointer transition-colors"
