@@ -49,7 +49,7 @@ export function HeroSlideContent({ slide, className }: HeroSlideContentProps) {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
           <Button
             href={slide.primaryCta.href}
-            variant="primary"
+            variant="slidecta"
             size="lg"
             className="group"
           >

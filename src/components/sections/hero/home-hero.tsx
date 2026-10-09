@@ -258,22 +258,61 @@ export function HomeHero({
                   isSlideActive ? "opacity-100" : "opacity-30 pointer-events-none"
                 )}
               >
-                {/* Tareeqa B: Per-Slide Ambient Background Image */}
-                {slide.backgroundImage && !isBannerMode && (
-                  <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-                    <Image
-                      src={slide.backgroundImage}
-                      alt=""
-                      fill
-                      unoptimized
-                      priority={slideIdx === 0}
-                      sizes="100vw"
-                      className="object-cover object-right lg:object-[right_center]"
-                      style={{ opacity: slide.backgroundOpacity ?? 1 }}
-                    />
-                    {/* Soft fade on left side so black text on left remains 100% crisp, while right image is 100% clear */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-white via-white/20 via-35% to-transparent" />
-                  </div>
+                {/* DYNAMIC AMBIENT SLIDE BACKGROUND (Gradient, Video, Image/GIF, Protective Fade) */}
+                {!isBannerMode && (
+                  <>
+                    {/* Layer 1: Custom CSS Class or Inline Gradient (e.g. .bbditm-hero) */}
+                    {(slide.backgroundClass || slide.backgroundGradient) && (
+                      <div
+                        className={cn(
+                          "absolute inset-0 pointer-events-none z-0",
+                          slide.backgroundClass
+                        )}
+                        style={
+                          slide.backgroundGradient
+                            ? { background: slide.backgroundGradient }
+                            : undefined
+                        }
+                      />
+                    )}
+
+                    {/* Layer 2: Ambient Looping Background Video (MP4 / WebM with Poster) */}
+                    {slide.backgroundVideo && (
+                      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+                        <video
+                          src={slide.backgroundVideo}
+                          poster={slide.backgroundVideoPoster || slide.backgroundImage}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="w-full h-full object-cover object-center"
+                          style={{ opacity: slide.backgroundOpacity ?? 0.85 }}
+                        />
+                      </div>
+                    )}
+
+                    {/* Layer 3: Ambient Background Image / Animated GIF */}
+                    {slide.backgroundImage && (
+                      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+                        <Image
+                          src={slide.backgroundImage}
+                          alt=""
+                          fill
+                          unoptimized
+                          priority={slideIdx === 0}
+                          sizes="100vw"
+                          className="object-cover object-right lg:object-[right_center]"
+                          style={{ opacity: slide.backgroundOpacity ?? 1 }}
+                        />
+                      </div>
+                    )}
+
+                    {/* Layer 4: Soft protective fade on left side for text readability */}
+                    {(slide.showBackgroundOverlay ?? Boolean(slide.backgroundImage && !slide.backgroundClass)) && (
+                      <div className="absolute inset-0 pointer-events-none z-0 bg-gradient-to-r from-white via-white/20 via-35% to-transparent" />
+                    )}
+                  </>
                 )}
 
                 {/* OPTION 2: FULL-WIDTH IMAGE BANNER LAYOUT */}

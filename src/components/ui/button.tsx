@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "primary" | "secondary" | "outline" | "ghost" | "link";
+  variant?: "default" | "primary" | "secondary" | "outline" | "ghost" | "link" | "slidecta";
   size?: "sm" | "md" | "lg";
   href?: string;
   isExternal?: boolean;
@@ -34,6 +34,8 @@ export const Button = React.forwardRef<
         "bg-[#e41d43] text-white hover:bg-[#e5244a] shadow-[0_1px_3px_rgba(228,29,67,0.3)] hover:shadow-[0_4px_12px_rgba(228,29,67,0.35)]",
       primary:
         "bg-[#e41d43] text-white hover:bg-[#e5244a] shadow-[0_1px_3px_rgba(228,29,67,0.3)] hover:shadow-[0_4px_12px_rgba(228,29,67,0.35)]",
+      slidecta:
+        "bg-[#ed3d15] text-white hover:bg-[#e5244a] shadow-[0_1px_3px_rgba(228,29,67,0.3)] hover:shadow-[0_4px_12px_rgba(228,29,67,0.35)]",
       secondary:
         "bg-[#f5f5f7] text-[#243d77] border border-[#d2d2d7] hover:bg-white hover:border-[#243d77] hover:shadow-sm",
       outline:

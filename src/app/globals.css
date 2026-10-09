@@ -160,6 +160,31 @@ body {
   transform: translateY(-2px);
 }
 
+/* Custom BBDITM Hero Ambient Multi-Layer Gradient */
+.bbditm-hero {
+  background:
+    radial-gradient(ellipse 43% 64% at 92% 24%, #FFB18A88 0%, transparent 78%),
+    linear-gradient(105deg,
+      #FFFFFF 0%,
+      #FFFFFF 35%,
+      #FFF2EF 54%,
+      #FFC1AF 76%,
+      #F25A43 100%
+    );
+}
+
+@media (max-width: 768px) {
+  .bbditm-hero {
+    background:
+      linear-gradient(180deg,
+        #FFFFFF 0%,
+        #FFFFFF 42%,
+        #FFF2EF 68%,
+        #FFC1AF 100%
+      );
+  }
+}
+
 /* Respect reduced motion user preference */
 @media (prefers-reduced-motion: reduce) {
 

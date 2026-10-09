@@ -42,8 +42,14 @@ export interface FullHeroSlide {
     label: string;
   }>;
   media?: HeroSlideMedia;
-  backgroundImage?: string; // Tareeqa B: Per-slide ambient background image
-  backgroundOpacity?: number; // Optional opacity (default: 0.18 for crisp text readability)
+  // Dynamic Ambient Background Controls (Production-grade, works with split and banner slides)
+  backgroundImage?: string; // Per-slide background image, graphic, or animated GIF (e.g. "/banner/bg_card.webp" or ".gif")
+  backgroundOpacity?: number; // Optional opacity (default: 1)
+  backgroundClass?: string; // Custom CSS class or Tailwind gradient (e.g. "bbditm-hero")
+  backgroundGradient?: string; // Direct inline CSS gradient string (e.g. "linear-gradient(...)")
+  backgroundVideo?: string; // Ambient looping MP4/WebM video background (e.g. "/banner/campus.mp4")
+  backgroundVideoPoster?: string; // Poster image fallback for video
+  showBackgroundOverlay?: boolean; // Control soft left-to-right white fade (default: true for images, false if gradient has its own white balance)
 
   // Option 2: Full-Width Image or Video Banner props (used when layout === "banner")
   bannerImage?: string; // Image path or URL for full banner (or poster fallback for video)
@@ -127,10 +133,10 @@ export const defaultFullHeroSlides: FullHeroSlide[] = [
       label: "Explore Campus Facilities",
       href: "/campus-life",
     },
-    secondaryCta: {
-      label: "Virtual Campus Tour",
-      href: "/contact",
-    },
+    // secondaryCta: {
+    //   label: "Virtual Campus Tour",
+    //   href: "/contact",
+    // },
     stats: [
       { value: "100+", label: "Acres Lush Green Campus" },
       { value: "60+", label: "Advanced Labs & Hubs" },
@@ -164,8 +170,10 @@ export const defaultFullHeroSlides: FullHeroSlide[] = [
   {
     id: "career-placements",
     layout: "split",
-    badge: "RECORD-BREAKING PLACEMENTS",
+    // badge: "RECORD-BREAKING PLACEMENTS",
     badgeVariant: "emerald",
+    backgroundClass: "bbditm-hero",
+    // backgroundOpacity: 0.25,
     headline: (
       <>
         Launching global careers with{" "}
@@ -178,10 +186,10 @@ export const defaultFullHeroSlides: FullHeroSlide[] = [
       label: "View Placement Records",
       href: "/placements",
     },
-    secondaryCta: {
-      label: "Top Recruiters",
-      href: "/placements#recruiters",
-    },
+    // secondaryCta: {
+    //   label: "Top Recruiters",
+    //   href: "/placements#recruiters",
+    // },
     stats: [
       { value: "₹ 44.15L", label: "Highest Salary Package" },
       { value: "850+", label: "Offers in 2024-25" },
