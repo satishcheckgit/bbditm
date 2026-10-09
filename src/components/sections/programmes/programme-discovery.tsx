@@ -77,7 +77,8 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
           {filtered.map((prog) => (
             <div
               key={prog.id}
-              className="group bg-white rounded-[22px] p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_18px_40px_rgba(0,0,0,0.07)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between"
+              style={{ boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.04)" }}
+              className="group bg-white rounded-[22px] p-6 sm:p-7 shadow-[0px_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0px_24px_50px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 {/* Degree & Level Badges */}
@@ -89,6 +90,18 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
                     {prog.schoolName}
                   </span>
                 </div>
+
+                {/* Product Image with Grounded Contact Shadow */}
+                {prog.image && (
+                  <div className="my-4 flex items-center justify-center overflow-visible">
+                    <img
+                      src={prog.image}
+                      alt={prog.title}
+                      className="max-h-40 w-auto object-contain rounded-xl transition-transform duration-300 group-hover:scale-[1.03]"
+                      style={{ filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15))" }}
+                    />
+                  </div>
+                )}
 
                 {/* Title */}
                 <h3 className="text-base sm:text-lg font-semibold text-[#1d1d1f] group-hover:text-[#243d77] transition-colors leading-snug font-heading tracking-tight">

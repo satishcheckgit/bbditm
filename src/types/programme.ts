@@ -15,6 +15,7 @@ export interface ProgrammeSummary {
   featured?: boolean;
   intake?: string;
   eligibilitySummary?: string;
+  image?: string;
 }
 
 export interface ProgrammeCurriculumYear {
