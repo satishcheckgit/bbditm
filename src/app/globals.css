@@ -183,6 +183,24 @@ body {
   }
 }
 
+/* Custom second section of home page with gradient */
+.bbditm-hero-second {
+  background:
+    radial-gradient(ellipse 65% 125% at 0% 22%, rgba(154, 185, 234, .53) 0%, transparent 79%),
+    radial-gradient(ellipse 60% 105% at 100% 35%, rgba(228, 55, 78, .38) 0%, transparent 83%),
+    radial-gradient(ellipse 55% 57% at 72% 100%, rgba(255, 160, 128, .27) 0%, transparent 80%),
+    linear-gradient(105deg, #EAF1FC 0%, #FFFAFC 45%, #FFF1ED 100%);
+}
+
+@media (max-width: 768px) {
+  .bbditm-hero-second {
+    background:
+      radial-gradient(ellipse 125% 60% at 0% 10%, rgba(154, 185, 234, .48), transparent 82%),
+      radial-gradient(ellipse 120% 70% at 100% 100%, rgba(228, 55, 78, .35), transparent 83%),
+      #FFF9FA;
+  }
+}
+
 /* Respect reduced motion user preference */
 @media (prefers-reduced-motion: reduce) {
 
