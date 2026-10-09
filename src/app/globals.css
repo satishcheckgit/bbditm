@@ -169,8 +169,7 @@ body {
       #FFFFFF 35%,
       #FFF2EF 54%,
       #FFC1AF 76%,
-      #F25A43 100%
-    );
+      #F25A43 100%);
 }
 
 @media (max-width: 768px) {
@@ -180,8 +179,7 @@ body {
         #FFFFFF 0%,
         #FFFFFF 42%,
         #FFF2EF 68%,
-        #FFC1AF 100%
-      );
+        #FFC1AF 100%);
   }
 }
 

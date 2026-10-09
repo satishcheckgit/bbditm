@@ -24,6 +24,8 @@ export interface HeroSlideMediaCardProps {
   className?: string;
   variant?: "stacked" | "dark";
   themeColor?: string;
+  autoplay?: boolean; // Enable/disable 3D cards auto-rotation (default: true)
+  autoplayInterval?: number; // Auto-rotation interval in ms (default: 4000ms)
 }
 
 const getBadgeClass = (variant?: string) => {
@@ -49,6 +51,8 @@ export function HeroSlideMediaCard({
   className,
   variant = "stacked",
   themeColor = "#e41d43",
+  autoplay = true,
+  autoplayInterval = 1500,
 }: HeroSlideMediaCardProps) {
   const media = slide.media;
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -57,9 +61,34 @@ export function HeroSlideMediaCard({
   const isPlacementSlide = slide.id === "career-placements";
   const [activeCardIndex, setActiveCardIndex] = useState(isPlacementSlide ? 1 : 0);
 
+  // Hover & Focus state for Smart Pause-on-Hover / Pause-on-Focus
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Dynamic Autoplay configuration (customizable per slide or via props)
+  const isAutoplayEnabled = slide.autoplayCards ?? autoplay;
+  const rotationInterval = slide.autoplayCardsInterval ?? autoplayInterval;
+
   useEffect(() => {
     setActiveCardIndex(slide.id === "career-placements" ? 1 : 0);
   }, [slide.id]);
+
+  // Production-grade Auto-Rotation Timer for 3D Stacked Cards
+  useEffect(() => {
+    // Only run autoplay if:
+    // 1. Stacked 3D variant
+    // 2. Autoplay is enabled
+    // 3. Current hero slide is actively visible
+    // 4. User is not currently hovering over / interacting with the card
+    if (variant !== "stacked" || !isAutoplayEnabled || !isActive || isHovered) {
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setActiveCardIndex((prev) => (prev + 1) % 3);
+    }, rotationInterval);
+
+    return () => clearInterval(timer);
+  }, [variant, isAutoplayEnabled, isActive, isHovered, rotationInterval]);
 
   if (!media) return null;
 
@@ -165,6 +194,10 @@ export function HeroSlideMediaCard({
 
     return (
       <div
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onFocus={() => setIsHovered(true)}
+        onBlur={() => setIsHovered(false)}
         className={cn(
           "relative lg:col-span-5 flex flex-col items-center justify-center py-4 select-none",
           className

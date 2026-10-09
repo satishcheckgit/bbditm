@@ -51,6 +51,10 @@ export interface FullHeroSlide {
   backgroundVideoPoster?: string; // Poster image fallback for video
   showBackgroundOverlay?: boolean; // Control soft left-to-right white fade (default: true for images, false if gradient has its own white balance)
 
+  // Dynamic 3D Stacked Cards Autoplay Controls (Customizable per slide)
+  autoplayCards?: boolean; // Enable/disable 3D cards auto-rotation on this slide (default: true)
+  autoplayCardsInterval?: number; // Auto-rotation interval in ms (default: 4000)
+
   // Option 2: Full-Width Image or Video Banner props (used when layout === "banner")
   bannerImage?: string; // Image path or URL for full banner (or poster fallback for video)
   bannerVideo?: string; // Video URL (e.g. MP4, WebM) for full-width background banner video
