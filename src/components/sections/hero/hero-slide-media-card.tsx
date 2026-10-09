@@ -23,6 +23,7 @@ export interface HeroSlideMediaCardProps {
   onOpenVideoModal?: (videoUrl: string) => void;
   className?: string;
   variant?: "stacked" | "dark";
+  themeColor?: string;
 }
 
 const getBadgeClass = (variant?: string) => {
@@ -47,6 +48,7 @@ export function HeroSlideMediaCard({
   onOpenVideoModal,
   className,
   variant = "stacked",
+  themeColor = "#e41d43",
 }: HeroSlideMediaCardProps) {
   const media = slide.media;
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -94,54 +96,64 @@ export function HeroSlideMediaCard({
 
   // Case B: 3D INTERACTIVE ROTATING STACKED CARDS VARIANT
   if (variant === "stacked") {
-    // 3 rich highlight cards in the deck
+    // Dynamic theme color defaults (easily changeable per-card in cardsData below)
+    const defaultThemeRed = themeColor || "#e41d43";
+    const defaultButtonClass = "bg-[#e41d43] hover:bg-[#c8102e] text-white";
+
+    // 3 rich highlight cards in the deck with dynamic theme customization
     const cardsData = [
       {
         id: "campus",
-        monogram: "b b d i t m • c a m p u s",
+        eyebrow: "Campus Experience",
         title: isPlacementSlide ? "Smart Campus Hub" : (media.title || "Smart Campus"),
         description: isPlacementSlide
           ? "100+ acre lush green campus with NVIDIA supercomputing clusters & drone robotics."
           : (media.description || "State-of-the-art supercomputing labs, AC digital central library & Olympic arena."),
         image: media.videoPoster || "/banner/bbditm.webp",
-        bgClass: "bg-[#f0effe] border-indigo-100",
-        tag: "RESEARCH & LABS",
-        tagBg: "bg-[#c7d2fe] text-indigo-900",
+        tag: "Virtual Tour",
         ctaText: media.type === "video" ? "Watch Tour" : "Explore Campus",
         ctaLink: "/campus-life",
         isVideo: media.type === "video",
         videoUrl: media.videoUrl || "https://www.youtube.com/embed/dQw4w9WgXcQ",
         capsuleText: "Explore our 100+ acre smart campus, NVIDIA AI labs & Olympic arena.",
+        // Dynamic theme customization (change colors easily here):
+        accentColor: defaultThemeRed,
+        buttonBgClass: defaultButtonClass,
+        playIconClass: "text-[#e41d43]",
       },
       {
         id: "placements",
-        monogram: "b b d i t m • c a r e e r s",
+        eyebrow: "Career Success",
         title: "Record Placements",
         description: "₹44.15 LPA highest package secured, 850+ offers across 180+ Fortune 500 recruiters.",
         image: "/banner/placed.webp",
-        bgClass: "bg-[#fefce8] border-amber-200/80",
-        tag: "₹ 44.15L HIGHEST PACKAGE",
-        tagBg: "bg-[#fef08a] text-amber-900",
+        tag: "₹44.15 LPA Peak",
         ctaText: "View Records",
         ctaLink: "/placements",
         isVideo: false,
         videoUrl: "",
         capsuleText: "Launching global careers at Google, Amazon, TCS & Fortune 500 recruiters.",
+        // Dynamic theme customization (change colors easily here):
+        accentColor: defaultThemeRed,
+        buttonBgClass: defaultButtonClass,
+        playIconClass: "text-[#e41d43]",
       },
       {
         id: "academics",
-        monogram: "b b d i t m • l e g a c y",
+        eyebrow: "Academic Legacy",
         title: "Academic Hub",
         description: "25+ years of legacy, AICTE approved standards, and NBA accredited curricula under AKTU Code 054.",
         image: "/banner/slideonec.webp",
-        bgClass: "bg-[#f1f5f9] border-slate-200",
-        tag: "AKTU CODE 054",
-        tagBg: "bg-[#e2e8f0] text-slate-800",
+        tag: "AKTU Code 054",
         ctaText: "Programmes 2026",
         ctaLink: "/programmes",
         isVideo: false,
         videoUrl: "",
         capsuleText: "Admissions open for B.Tech, M.Tech, MBA & MCA programmes 2026-27.",
+        // Dynamic theme customization (change colors easily here):
+        accentColor: defaultThemeRed,
+        buttonBgClass: defaultButtonClass,
+        playIconClass: "text-[#e41d43]",
       },
     ];
 
@@ -158,20 +170,6 @@ export function HeroSlideMediaCard({
           className
         )}
       >
-        {/* Top Floating Meta Capsule (Reference Style: The chain <hello@chain.com>) */}
-        <div className="relative z-30 mb-3 animate-in fade-in duration-300">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/95 border border-slate-200/90 shadow-xs backdrop-blur-md text-[11px] font-medium text-slate-700">
-            <span className="w-5 h-5 rounded-full bg-[#ecfccb] text-[#3f6212] flex items-center justify-center font-bold text-[10px] shrink-0">
-              🔗
-            </span>
-            <span className="font-semibold text-slate-900 font-heading">bbditm.ac.in</span>
-            <span className="text-slate-400 font-normal">&lt;admissions@bbditm.ac.in&gt;</span>
-            <div className="flex items-center gap-1 ml-1 text-slate-400">
-              <Sparkles className="w-3 h-3 text-amber-500 fill-amber-400" />
-            </div>
-          </div>
-        </div>
-
         {/* 3D Stacked Cards Stage */}
         <div className="relative w-full max-w-[340px] sm:max-w-[370px] min-h-[440px] flex items-center justify-center">
           {cardsData.map((card, idx) => {
@@ -182,46 +180,42 @@ export function HeroSlideMediaCard({
             const isLeft = position === 2;
 
             if (isFront) {
-              // ACTIVE FRONT CARD
+              // ACTIVE FRONT CARD (Apple clean museum tile with subtle frosted glass)
               return (
                 <div
                   key={card.id}
-                  className={cn(
-                    "relative z-20 w-full rounded-3xl border shadow-2xl p-5 sm:p-6 flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] scale-100 rotate-0 translate-x-0 translate-y-0 opacity-100",
-                    card.bgClass
-                  )}
+                  className="relative z-20 w-full rounded-[26px] bg-white/95 backdrop-blur-2xl border border-black/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] ring-1 ring-black/[0.02] p-5 sm:p-5.5 flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] scale-100 rotate-0 translate-x-0 translate-y-0 opacity-100"
                 >
-                  {/* Card Header: Brand Monogram + Clean Headline */}
-                  <div className="text-center space-y-1">
-                    <div className="flex items-center justify-center gap-2">
-                      <p className="text-[10px] tracking-[0.28em] text-indigo-600 uppercase font-mono font-medium">
-                        {card.monogram}
-                      </p>
+                  {/* Card Header: Eyebrow Capsule + Clean Headline + Shuffle Button */}
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-black/[0.04] text-[10px] font-semibold tracking-wider text-slate-500 uppercase font-sans">
+                        {card.eyebrow}
+                      </span>
                       <button
                         type="button"
                         onClick={rotateNext}
-                        title="Rotate next card"
-                        className="w-5 h-5 rounded-full bg-white/70 hover:bg-white text-slate-500 hover:text-indigo-600 flex items-center justify-center shadow-xs transition-transform active:rotate-180"
+                        title="Shuffle next card"
+                        className="w-6 h-6 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-slate-500 hover:text-[#1d1d1f] flex items-center justify-center transition-all active:rotate-180 active:scale-90 cursor-pointer"
+                        aria-label="Rotate next card"
                       >
-                        <RotateCw className="w-2.5 h-2.5" />
+                        <RotateCw className="w-3 h-3" />
                       </button>
                     </div>
-                    <h3 className="text-2xl sm:text-[26px] font-bold text-slate-900 tracking-tight font-heading leading-tight">
+                    <h3 className="text-[22px] sm:text-[24px] font-semibold text-[#1d1d1f] tracking-tight font-sans leading-tight">
                       {card.title}
                     </h3>
                   </div>
 
-                  {/* Center Arched Showcase Window */}
-                  <div className="relative my-3 mx-auto flex flex-col items-center">
+                  {/* Center Media Showcase Window (Clean Apple Rounded Geometry) */}
+                  <div className="relative my-3 w-full flex flex-col items-center">
                     <div
                       onClick={() =>
                         card.isVideo
                           ? onOpenVideoModal?.(card.videoUrl)
                           : rotateNext()
                       }
-                      className={cn(
-                        "relative w-44 sm:w-48 h-44 sm:h-48 rounded-t-full rounded-b-2xl overflow-hidden border-4 border-white shadow-md bg-white group/arch cursor-pointer transition-transform hover:scale-[1.02]"
-                      )}
+                      className="group/media relative w-full h-[185px] sm:h-[195px] rounded-[18px] overflow-hidden border border-black/[0.08] bg-[#f5f5f7] cursor-pointer shadow-[0_4px_16px_rgba(0,0,0,0.04)]"
                     >
                       <Image
                         src={card.image}
@@ -229,43 +223,46 @@ export function HeroSlideMediaCard({
                         fill
                         priority={idx === 0}
                         unoptimized
-                        sizes="(max-width: 640px) 190px, 210px"
-                        className="object-cover object-center group-hover/arch:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 640px) 320px, 360px"
+                        className="object-cover object-center group-hover/media:scale-[1.03] transition-transform duration-700 ease-out"
                       />
 
-                      {/* Video Play Overlay */}
+                      {/* Protective vignette for legibility of tags */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none" />
+
+                      {/* Top-Right Frosted Glass Tag Pill */}
+                      <div className="absolute top-2.5 right-2.5 z-10 pointer-events-none">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md border border-white/20 text-[10px] font-medium tracking-wide text-white shadow-xs">
+                          {card.id === "placements" ? (
+                            <Trophy className="w-3 h-3 text-amber-300" />
+                          ) : card.isVideo ? (
+                            <Video className="w-3 h-3 text-white" />
+                          ) : (
+                            <Sparkles className="w-3 h-3 text-white" />
+                          )}
+                          <span>{card.tag}</span>
+                        </span>
+                      </div>
+
+                      {/* Video Play Button (Signature Apple Translucent Frosted Glass with Dynamic Theme Red Icon) */}
                       {card.isVideo && (
-                        <div className="absolute inset-0 bg-black/25 group-hover/arch:bg-black/35 flex items-center justify-center transition-colors">
-                          <div className="w-12 h-12 rounded-full bg-[#e41d43] group-hover/arch:scale-110 flex items-center justify-center text-white shadow-lg transition-transform">
-                            <Play className="w-5 h-5 fill-white ml-0.5" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div
+                            className={cn(
+                              "w-12 h-12 rounded-full bg-white/95 hover:bg-white backdrop-blur-md group-hover/media:scale-110 active:scale-95 flex items-center justify-center shadow-lg border border-white/50 transition-all duration-300",
+                              card.playIconClass || "text-[#e41d43]"
+                            )}
+                          >
+                            <Play className="w-5 h-5 fill-current ml-0.5" />
                           </div>
                         </div>
                       )}
                     </div>
-
-                    {/* Decorative Charm / Badge hanging from Arch (Clickable to rotate) */}
-                    <button
-                      type="button"
-                      onClick={rotateNext}
-                      title="Click to shuffle card"
-                      className="absolute -bottom-3 z-10 flex flex-col items-center cursor-pointer group/charm"
-                    >
-                      <div className="w-0.5 h-2 bg-indigo-300" />
-                      <div className="w-8 h-8 rounded-xl bg-[#c7d2fe] border-2 border-white shadow-sm flex items-center justify-center text-indigo-700 group-hover/charm:scale-110 group-hover/charm:bg-indigo-600 group-hover/charm:text-white transition-all">
-                        {card.id === "placements" ? (
-                          <Trophy className="w-4 h-4" />
-                        ) : card.isVideo ? (
-                          <Video className="w-4 h-4" />
-                        ) : (
-                          <Sparkles className="w-4 h-4 fill-current" />
-                        )}
-                      </div>
-                    </button>
                   </div>
 
-                  {/* Card Body: Description & Action */}
-                  <div className="pt-2 text-center space-y-3">
-                    <p className="text-xs text-slate-600 leading-relaxed font-normal max-w-[270px] mx-auto line-clamp-2">
+                  {/* Card Body: Description & Dynamic Theme CTA */}
+                  <div className="pt-1 text-center space-y-3">
+                    <p className="text-[13px] text-slate-500 leading-relaxed font-normal max-w-[280px] mx-auto line-clamp-2">
                       {card.description}
                     </p>
 
@@ -274,16 +271,24 @@ export function HeroSlideMediaCard({
                         <button
                           type="button"
                           onClick={() => onOpenVideoModal?.(card.videoUrl)}
-                          className="inline-block px-6 py-2 rounded-xl bg-[#fef08a] hover:bg-[#fde047] text-slate-900 text-xs font-semibold shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+                          className={cn(
+                            "inline-flex items-center justify-center gap-1.5 px-6 py-2 rounded-full text-[13px] font-medium tracking-tight shadow-xs transition-all active:scale-95 cursor-pointer",
+                            card.buttonBgClass || defaultButtonClass
+                          )}
                         >
-                          Watch Tour
+                          <Play className="w-3.5 h-3.5 fill-white ml-0.5" />
+                          <span>Watch Tour</span>
                         </button>
                       ) : (
                         <Link
                           href={card.ctaLink}
-                          className="inline-block px-6 py-2 rounded-xl bg-[#fef08a] hover:bg-[#fde047] text-slate-900 text-xs font-semibold shadow-xs transition-transform hover:scale-105 active:scale-95"
+                          className={cn(
+                            "inline-flex items-center justify-center gap-1.5 px-6 py-2 rounded-full text-[13px] font-medium tracking-tight shadow-xs transition-all active:scale-95",
+                            card.buttonBgClass || defaultButtonClass
+                          )}
                         >
-                          {card.ctaText}
+                          <span>{card.ctaText}</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
                       )}
                     </div>
@@ -292,7 +297,7 @@ export function HeroSlideMediaCard({
               );
             }
 
-            // PEEKING BACKGROUND CARDS (Click to bring to front!)
+            // PEEKING BACKGROUND CARDS (Click to bring to front smoothly)
             return (
               <div
                 key={card.id}
@@ -304,36 +309,42 @@ export function HeroSlideMediaCard({
                   if (e.key === "Enter" || e.key === " ") setActiveCardIndex(idx);
                 }}
                 className={cn(
-                  "absolute top-5 w-[280px] sm:w-[310px] h-[370px] sm:h-[390px] rounded-3xl border shadow-md transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex flex-col justify-between p-4 cursor-pointer hover:shadow-xl",
-                  isRight && "z-10 -right-5 sm:-right-8 rotate-6 scale-95 opacity-75 hover:opacity-100 hover:scale-[0.98] hover:rotate-3",
-                  isLeft && "z-10 -left-5 sm:-left-8 -rotate-6 scale-95 opacity-75 hover:opacity-100 hover:scale-[0.98] hover:-rotate-3",
-                  card.bgClass
+                  "absolute top-5 w-[280px] sm:w-[310px] h-[370px] sm:h-[390px] rounded-[26px] bg-[#fafafc]/95 backdrop-blur-xl border border-black/[0.07] shadow-md transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex flex-col justify-between p-4 cursor-pointer hover:shadow-xl",
+                  isRight && "z-10 -right-5 sm:-right-8 rotate-6 scale-95 opacity-80 hover:opacity-100 hover:scale-[0.98] hover:rotate-3",
+                  isLeft && "z-10 -left-5 sm:-left-8 -rotate-6 scale-95 opacity-80 hover:opacity-100 hover:scale-[0.98] hover:-rotate-3"
                 )}
               >
-                <div className="text-center">
-                  <p className="text-[10px] tracking-[0.25em] text-slate-500 uppercase font-mono">
-                    {card.monogram}
-                  </p>
-                  <h4 className="text-lg font-bold text-slate-800 font-heading mt-0.5">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-semibold text-slate-400 tracking-wider uppercase font-sans">
+                      {card.eyebrow}
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-normal">
+                      Click to view
+                    </span>
+                  </div>
+                  <h4 className="text-[17px] font-semibold text-[#1d1d1f] tracking-tight font-sans mt-0.5">
                     {card.title}
                   </h4>
                 </div>
 
-                {/* Arched preview window */}
-                <div className="relative w-36 h-36 mx-auto rounded-t-full rounded-b-xl overflow-hidden border-2 border-white shadow-xs bg-white/60 pointer-events-none">
+                {/* Clean preview window */}
+                <div className="relative w-full h-[160px] sm:h-[175px] rounded-[16px] overflow-hidden border border-black/[0.06] bg-[#f5f5f7] pointer-events-none">
                   <Image
                     src={card.image}
                     alt=""
                     fill
                     unoptimized
-                    sizes="160px"
+                    sizes="280px"
                     className="object-cover"
                   />
+                  <div className="absolute inset-0 bg-black/10" />
                 </div>
 
-                <div className="text-center pt-1">
-                  <span className="inline-block px-3.5 py-1 rounded-lg bg-[#fef08a] text-[10px] font-semibold text-slate-800 shadow-xs pointer-events-none">
-                    Click to view
+                <div className="text-center pt-0.5 pointer-events-none">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/90 border border-black/[0.06] text-[11px] font-medium text-slate-700 shadow-2xs">
+                    <span>{card.ctaText}</span>
+                    <ChevronRight className="w-3 h-3 text-slate-400" />
                   </span>
                 </div>
               </div>
@@ -341,30 +352,30 @@ export function HeroSlideMediaCard({
           })}
         </div>
 
-        {/* Rotation Dots Indicator */}
-        <div className="flex items-center justify-center gap-1.5 my-2 z-20">
+        {/* Rotation Dots Indicator (Apple minimalist pills) */}
+        <div className="flex items-center justify-center gap-2 my-2.5 z-20">
           {cardsData.map((c, i) => (
             <button
               key={c.id}
               type="button"
               onClick={() => setActiveCardIndex(i)}
               className={cn(
-                "h-1.5 rounded-full transition-all duration-300",
+                "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
                 i === activeCardIndex
-                  ? "w-6 bg-[#243d77]"
-                  : "w-1.5 bg-slate-300 hover:bg-slate-400"
+                  ? "w-6 bg-[#1d1d1f]"
+                  : "w-1.5 bg-black/20 hover:bg-black/40"
               )}
               aria-label={`Switch to ${c.title}`}
             />
           ))}
         </div>
 
-        {/* Bottom Floating Action Pill */}
+        {/* Bottom Floating Action Pill (Apple frosted capsule bar) */}
         <div className="relative z-30 w-[94%] max-w-[370px]">
-          <div className="w-full rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-all hover:shadow-2xl group/bottompill">
+          <div className="w-full rounded-full bg-white/85 backdrop-blur-xl border border-black/[0.08] shadow-[0_8px_30px_rgb(0,0,0,0.06)] px-4 py-2 sm:py-2.5 flex items-center justify-between gap-3 transition-all hover:shadow-md group/bottompill">
             <Link
               href={activeCard.ctaLink}
-              className="flex-1 text-xs text-slate-700 hover:text-[#243d77] font-medium leading-snug line-clamp-2 pl-1 cursor-pointer transition-colors"
+              className="flex-1 text-xs text-slate-600 hover:text-[#e41d43] font-normal leading-snug line-clamp-1 pl-1 cursor-pointer transition-colors"
             >
               {activeCard.capsuleText}
             </Link>
@@ -372,9 +383,10 @@ export function HeroSlideMediaCard({
               type="button"
               onClick={rotateNext}
               title="Next card"
-              className="w-9 h-9 rounded-xl bg-[#c7d2fe] hover:bg-[#243d77] hover:text-white text-indigo-900 flex items-center justify-center shrink-0 transition-colors shadow-xs cursor-pointer active:scale-95"
+              className="w-7 h-7 rounded-full bg-[#1d1d1f] hover:bg-[#e41d43] text-white flex items-center justify-center shrink-0 transition-colors shadow-2xs cursor-pointer active:scale-90"
+              aria-label="Rotate next card"
             >
-              <ChevronRight className="w-5 h-5 group-hover/bottompill:translate-x-0.5 transition-transform" />
+              <ChevronRight className="w-4 h-4 group-hover/bottompill:translate-x-0.5 transition-transform" />
             </button>
           </div>
         </div>
@@ -478,7 +490,7 @@ export function HeroSlideMediaCard({
                   onClick={() =>
                     onOpenVideoModal?.(
                       media.videoUrl ||
-                        "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                      "https://www.youtube.com/embed/dQw4w9WgXcQ"
                     )
                   }
                   className="group/video relative cursor-pointer rounded-xl overflow-hidden border border-white/20 bg-black/30 p-3 sm:p-4 hover:border-[#f87171]/60 transition-all"
