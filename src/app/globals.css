@@ -201,6 +201,21 @@ body {
   }
 }
 
+/* 3D Apple-style centered diffuse card shadow */
+.apple-card-3d {
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-card-3d:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.13),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
 /* Respect reduced motion user preference */
 @media (prefers-reduced-motion: reduce) {
 

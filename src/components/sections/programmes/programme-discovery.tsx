@@ -34,7 +34,7 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
   });
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-[#f5f5f7]">
+    <section className="py-16 sm:py-18 lg:py-18 bg-[#f5f5f7]">
       <Container>
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -77,8 +77,7 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
           {filtered.map((prog) => (
             <div
               key={prog.id}
-              style={{ boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.04)" }}
-              className="group bg-white rounded-[22px] p-6 sm:p-7 shadow-[0px_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0px_24px_50px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+              className="group apple-card-3d relative z-10 hover:z-20 bg-white rounded-[22px] p-6 sm:p-7 flex flex-col justify-between"
             >
               <div>
                 {/* Degree & Level Badges */}
@@ -133,10 +132,10 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
 
                 <Link
                   href={`/programmes/${prog.slug}`}
-                  className="font-semibold text-[#e41d43] hover:text-[#c21334] group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1"
+                  className="group/btn inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#e41d43] text-[#fff1f3] hover:bg-[#e41d43] hover:text-white hover:shadow-[0_4px_12px_rgba(228,29,67,0.25)] transition-all duration-200 active:scale-95 shadow-[0_1px_4px_rgba(228,29,67,0.08)]"
                 >
                   <span>Curriculum</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5" />
                 </Link>
               </div>
             </div>
