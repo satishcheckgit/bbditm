@@ -117,7 +117,7 @@ const DEFAULT_STUDY_MATERIALS: StudyMaterialCardItem[] = [
     itemCount: "45+ Manuals",
   },
   {
-    id: "lab-manuals",
+    id: "lab-manualss",
     category: "Practical Records",
     title: "Important Lab Manuals",
     subtitle: "Step-by-step practical guides, circuit schematics & code files.",
@@ -135,25 +135,7 @@ const DEFAULT_STUDY_MATERIALS: StudyMaterialCardItem[] = [
     itemCount: "45+ Manuals",
   },
   {
-    id: "lab-manuals",
-    category: "Practical Records",
-    title: "Important Lab Manuals",
-    subtitle: "Step-by-step practical guides, circuit schematics & code files.",
-    tag: "Viva Ready",
-    bgClass: "bg-[#EFEAFF]",
-    hoverBgClass: "hover:bg-[#E5DEFE]",
-    borderClass: "border-[#DBD0FD]/60",
-    pillBg: "bg-[#E3DAFD]",
-    pillText: "text-[#6D28D9]",
-    circleRingColor: "ring-[#DDD1FD]",
-    imageSrc: "/study-materials/lab-practical-manuals.jpg",
-    imageAlt: "Laboratory Practical Manuals and Circuit Experiment Guides",
-    href: "/academics",
-    ctaText: "Open Manuals",
-    itemCount: "45+ Manuals",
-  },
-  {
-    id: "lab-manuals",
+    id: "lab-manualsss",
     category: "Practical Records",
     title: "Important Lab Manuals",
     subtitle: "Step-by-step practical guides, circuit schematics & code files.",
@@ -214,15 +196,15 @@ export function StudyMaterialsShowcase({
   };
 
   return (
-    <section className="py-14 sm:py-20 bg-white relative overflow-hidden">
+    <section className="py-14 sm:py-14 bg-white relative overflow-hidden">
       <Container>
         {/* Header with Title and Apple Circular Navigation Controls */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-10">
           <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fff1f3] text-[#e41d43] text-xs font-semibold tracking-wide uppercase">
+            {/* <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fff1f3] text-[#e41d43] text-xs font-semibold tracking-wide uppercase">
               <BookOpen className="w-3.5 h-3.5" />
               <span>{eyebrow}</span>
-            </div>
+            </div> */}
 
             <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-semibold text-[#1d1d1f] tracking-tight leading-[1.2] font-heading">
               {title}
@@ -236,27 +218,27 @@ export function StudyMaterialsShowcase({
 
         {/* Horizontal Carousel of Pastel Cards with Floating Navigation Controls */}
         <div className="relative group/carousel">
-          {/* Prominent Floating Left Button on Carousel Track */}
+          {/* Floating Left Button on Carousel Track (Shifted outward to edge, never overlaps card) */}
           {canScrollLeft && (
             <button
               type="button"
               onClick={() => handleScroll("left")}
               aria-label="Scroll left in study materials"
-              className="absolute -left-2 sm:-left-3 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-[#f5f5f7] text-[#1d1d1f] border border-black/[0.12] shadow-[0_8px_24px_rgba(0,0,0,0.18)] flex items-center justify-center transition-all duration-200 active:scale-90 hover:scale-105 ring-4 ring-white"
+              className="absolute -left-3 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-[#f5f5f7] text-[#1d1d1f] border border-black/10 shadow-[0_6px_20px_rgba(0,0,0,0.16)] flex items-center justify-center transition-all duration-200 active:scale-90 hover:scale-105"
             >
-              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+              <ChevronLeft className="w-5 h-5 mr-0.5" />
             </button>
           )}
 
-          {/* Prominent Floating Right Button on Carousel Track (Matches user screenshot) */}
+          {/* Floating Right Button on Carousel Track (Shifted outward to edge, never overlaps card) */}
           {canScrollRight && (
             <button
               type="button"
               onClick={() => handleScroll("right")}
               aria-label="Scroll right in study materials"
-              className="absolute -right-2 sm:-right-3 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#1d1d1f] hover:bg-black text-white shadow-[0_8px_28px_rgba(0,0,0,0.28)] flex items-center justify-center transition-all duration-200 active:scale-90 hover:scale-105 ring-4 ring-white"
+              className="absolute -right-3 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#1d1d1f] hover:bg-black text-white shadow-[0_6px_20px_rgba(0,0,0,0.28)] flex items-center justify-center transition-all duration-200 active:scale-90 hover:scale-105"
             >
-              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+              <ChevronRight className="w-5 h-5 ml-0.5" />
             </button>
           )}
 
