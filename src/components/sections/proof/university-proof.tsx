@@ -49,11 +49,11 @@ export function UniversityProof() {
             </p>
 
             <div className="pt-2">
-              <div className="p-5 rounded-2xl bg-[#f5f5f7] border border-[#d2d2d7]/80">
+              <div className="p-6 rounded-[22px] bg-[#f5f5f7] shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
                 <p className="text-xs font-semibold text-[#243d77] uppercase tracking-wider">
                   Commitment to Quality Learning
                 </p>
-                <p className="text-xs text-[#6e6e73] mt-1.5 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#6e6e73] mt-2 leading-relaxed">
                   Regular curriculum updates aligned with industry certifications in Cloud Computing, AI, Full-Stack Development, and Business Intelligence.
                 </p>
               </div>
@@ -67,15 +67,15 @@ export function UniversityProof() {
               return (
                 <div
                   key={pt.title}
-                  className="p-6 rounded-2xl border border-black/[0.06] bg-[#f5f5f7] hover:bg-white hover:border-[#243d77]/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 space-y-3"
+                  className="p-6 sm:p-7 rounded-[22px] bg-[#f5f5f7] hover:bg-white hover:shadow-[0_18px_40px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition-all duration-300 space-y-3"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white text-[#243d77] border border-black/[0.06] shadow-sm flex items-center justify-center">
+                  <div className="w-11 h-11 rounded-[14px] bg-white text-[#243d77] shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex items-center justify-center">
                     <Icon className="w-5 h-5 text-[#243d77]" />
                   </div>
-                  <h3 className="text-sm sm:text-base font-semibold text-[#1d1d1f] font-heading">
+                  <h3 className="text-sm sm:text-base font-semibold text-[#1d1d1f] font-heading tracking-tight">
                     {pt.title}
                   </h3>
-                  <p className="text-xs text-[#6e6e73] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
                     {pt.description}
                   </p>
                 </div>

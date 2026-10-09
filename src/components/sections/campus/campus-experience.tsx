@@ -57,19 +57,19 @@ export function CampusExperience() {
             return (
               <div
                 key={f.title}
-                className="p-6 rounded-2xl bg-[#f5f5f7] border border-black/[0.06] hover:bg-white hover:border-[#243d77]/25 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] transition-all duration-300 flex flex-col justify-between"
+                className="p-6 sm:p-7 rounded-[22px] bg-[#f5f5f7] hover:bg-white hover:shadow-[0_18px_40px_rgba(0,0,0,0.07)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-11 h-11 rounded-xl bg-white text-[#243d77] border border-black/[0.06] shadow-sm flex items-center justify-center">
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="w-12 h-12 rounded-[14px] bg-white text-[#243d77] shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex items-center justify-center">
                       <Icon className="w-5 h-5 text-[#243d77]" />
                     </div>
-                    <span className="text-xs font-semibold text-[#e41d43] uppercase tracking-tight">
+                    <span className="text-[11px] font-semibold text-[#e41d43] px-2.5 py-0.5 rounded-full bg-[#fff1f3] uppercase tracking-wider">
                       {f.tag}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-bold text-[#1d1d1f] mb-2 font-heading">
+                  <h3 className="text-base font-semibold text-[#1d1d1f] mb-2 font-heading tracking-tight">
                     {f.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">

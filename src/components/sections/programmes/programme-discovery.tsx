@@ -34,12 +34,12 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
   });
 
   return (
-    <section className="py-12 sm:py-16 lg:py-16 bg-[var(--color-surface-soft)]/50 border-t border-b border-gray-100">
+    <section className="py-16 sm:py-20 lg:py-24 bg-[#f5f5f7]">
       <Container>
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <SectionHeading
-            eyebrow="Academic Discovery"
+            eyebrow=""
             title="Explore our degrees and specialized tracks"
             description="Designed in collaboration with academic bodies and industry advisory councils to build competitive technical depth."
           />
@@ -54,7 +54,7 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
         </div>
 
         {/* Filter Pills Bar */}
-        <div className="flex items-center gap-1 overflow-x-auto p-1 rounded-full bg-[#e5e5ea]/70 border border-black/[0.04] max-w-fit mb-8 no-scrollbar">
+        <div className="flex items-center gap-1 overflow-x-auto p-1.5 rounded-full bg-[#e5e5ea]/80 backdrop-blur-md max-w-fit mb-8 no-scrollbar shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
           {filterTabs.map((tab) => {
             const isSelected = selectedFilter === tab.id;
             return (
@@ -77,12 +77,12 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
           {filtered.map((prog) => (
             <div
               key={prog.id}
-              className="group bg-white rounded-2xl p-6 border border-black/[0.06] shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] hover:border-[#243d77]/25 transition-all duration-300 flex flex-col justify-between"
+              className="group bg-white rounded-[22px] p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_18px_40px_rgba(0,0,0,0.07)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 {/* Degree & Level Badges */}
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#e41d43] bg-[#fff1f3] border border-[#e41d43]/20 px-2.5 py-0.5 rounded-full uppercase tracking-tight">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#e41d43] bg-[#fff1f3] px-2.5 py-0.5 rounded-full uppercase tracking-tight">
                     {prog.degree}
                   </span>
                   <span className="text-xs text-[#86868b] font-medium">
@@ -91,7 +91,7 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base sm:text-lg font-bold text-[#1d1d1f] group-hover:text-[#243d77] transition-colors leading-snug font-heading">
+                <h3 className="text-base sm:text-lg font-semibold text-[#1d1d1f] group-hover:text-[#243d77] transition-colors leading-snug font-heading tracking-tight">
                   {prog.title}
                 </h3>
 
@@ -104,7 +104,7 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
               </div>
 
               {/* Metadata & Footer Action */}
-              <div className="mt-5 pt-4 border-t border-black/[0.04] flex items-center justify-between text-xs text-[#86868b]">
+              <div className="mt-5 pt-4 border-t border-[#f5f5f7] flex items-center justify-between text-xs text-[#86868b]">
                 <div className="flex items-center gap-3">
                   <span className="inline-flex items-center gap-1 font-medium">
                     <Clock className="w-3.5 h-3.5 text-[#86868b]" />

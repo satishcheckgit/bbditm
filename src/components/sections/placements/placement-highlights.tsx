@@ -11,7 +11,7 @@ interface PlacementHighlightsProps {
 
 export function PlacementHighlights({ data }: PlacementHighlightsProps) {
   return (
-    <section className="py-16 sm:py-24 bg-[#000000] text-white border-t border-b border-white/10">
+    <section className="py-20 sm:py-28 bg-[#000000] text-white">
       <Container>
         {/* Section Heading with Contrast */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -36,12 +36,12 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
           {data.heroStats.map((stat) => (
             <div
               key={stat.label}
-              className="p-6 sm:p-7 rounded-2xl bg-[#161617] border border-white/10 shadow-lg"
+              className="p-6 sm:p-7 rounded-[22px] bg-[#1c1c1e] shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:bg-[#242426] hover:-translate-y-0.5 transition-all duration-300"
             >
-              <p className="text-3xl sm:text-4xl lg:text-[40px] font-bold text-[#f87171] tracking-tight font-heading">
+              <p className="text-3xl sm:text-4xl lg:text-[40px] font-bold text-[#e41d43] tracking-tight font-heading">
                 {stat.value}
               </p>
-              <h4 className="text-xs sm:text-sm font-semibold text-white mt-2 font-heading">
+              <h4 className="text-xs sm:text-sm font-semibold text-white mt-2 font-heading tracking-tight">
                 {stat.label}
               </h4>
               <p className="text-xs text-[#86868b] mt-1">
@@ -52,15 +52,15 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
         </div>
 
         {/* Top Recruiters Badges Grid */}
-        <div className="p-7 rounded-2xl bg-[#161617]/70 border border-white/10 mb-12">
+        <div className="p-7 sm:p-8 rounded-[24px] bg-[#1c1c1e] shadow-[0_8px_30px_rgba(0,0,0,0.4)] mb-12">
           <p className="text-xs font-semibold uppercase tracking-wider text-[#86868b] mb-4 text-center">
             Prominent Corporate Recruiters Visiting Campus
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
             {data.topRecruiters.map((recruiter) => (
               <span
                 key={recruiter.name}
-                className="px-4 py-1.5 rounded-full bg-[#242426] border border-white/10 text-xs font-medium text-slate-200 hover:border-[#e41d43] transition-colors"
+                className="px-4 py-1.5 rounded-full bg-[#2c2c2e] text-xs font-medium text-slate-200 hover:text-white hover:bg-[#3a3a3c] transition-colors"
               >
                 {recruiter.name}
               </span>
@@ -73,25 +73,25 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
           {data.studentStories.slice(0, 2).map((story) => (
             <div
               key={story.id}
-              className="p-7 rounded-2xl bg-[#161617] border border-white/10 flex flex-col justify-between"
+              className="p-7 sm:p-8 rounded-[24px] bg-[#1c1c1e] shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:bg-[#242426] transition-all duration-300 flex flex-col justify-between"
             >
               <div>
-                <Quote className="w-6 h-6 text-[#f87171] mb-3" />
+                <Quote className="w-6 h-6 text-[#e41d43] mb-3" />
                 <p className="text-xs sm:text-sm text-slate-200 leading-relaxed italic">
                   &ldquo;{story.quote}&rdquo;
                 </p>
               </div>
 
-              <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
+              <div className="mt-5 pt-4 border-t border-white/[0.08] flex items-center justify-between">
                 <div>
-                  <h4 className="text-xs sm:text-sm font-semibold text-white font-heading">
+                  <h4 className="text-xs sm:text-sm font-semibold text-white font-heading tracking-tight">
                     {story.studentName}
                   </h4>
                   <p className="text-xs text-[#86868b]">
                     {story.programme} · {story.batch}
                   </p>
                 </div>
-                <span className="text-xs font-semibold text-[#f87171] px-3 py-1 rounded-full bg-white/10">
+                <span className="text-xs font-semibold text-[#e41d43] px-3 py-1 rounded-full bg-[#e41d43]/15">
                   {story.company}
                 </span>
               </div>

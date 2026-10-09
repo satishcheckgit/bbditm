@@ -6,9 +6,9 @@ import { ArrowRight, PhoneCall, Sparkles } from "lucide-react";
 
 export function AdmissionCTA() {
   return (
-    <section className="py-16 sm:py-24 bg-white border-t border-gray-100">
+    <section className="py-20 sm:py-28 bg-white">
       <Container>
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#243d77] via-[#1a2c56] to-[#0f1b36] p-8 sm:p-12 lg:p-16 text-white text-center shadow-xl border border-white/10">
+        <div className="relative rounded-[28px] overflow-hidden bg-gradient-to-br from-[#243d77] via-[#1a2c56] to-[#0f1b36] p-8 sm:p-12 lg:p-16 text-white text-center shadow-[0_24px_60px_rgba(36,61,119,0.22)]">
           {/* Subtle architectural grid pattern */}
           <div
             className="pointer-events-none absolute inset-0 opacity-5 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"
@@ -16,8 +16,8 @@ export function AdmissionCTA() {
           />
 
           <div className="relative max-w-3xl mx-auto space-y-5">
-            <div className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-[#e41d43]/20 text-xs font-semibold tracking-tight text-rose-200 border border-[#e41d43]/40">
-              <Sparkles className="w-3.5 h-3.5 text-[#e41d43]" />
+            <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold tracking-tight text-white/95 shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-[#ff6b81]" />
               <span>Admissions Open for Academic Session 2026-27</span>
             </div>
 
@@ -44,7 +44,7 @@ export function AdmissionCTA() {
                 href={`tel:${siteConfig.contact.admissionsPhone}`}
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto text-white border-white/40 hover:bg-white/10"
+                className="w-full sm:w-auto text-white bg-white/10 border-0 hover:bg-white/20 shadow-none backdrop-blur-md"
               >
                 <PhoneCall className="w-4 h-4 mr-1 text-white" />
                 <span>Call Helpline: {siteConfig.contact.admissionsPhone}</span>

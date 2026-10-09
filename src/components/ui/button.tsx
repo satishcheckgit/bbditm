@@ -37,9 +37,9 @@ export const Button = React.forwardRef<
       slidecta:
         "bg-[#ed3d15] text-white hover:bg-[#e5244a] shadow-[0_1px_3px_rgba(228,29,67,0.3)] hover:shadow-[0_4px_12px_rgba(228,29,67,0.35)]",
       secondary:
-        "bg-[#f5f5f7] text-[#243d77] border border-[#d2d2d7] hover:bg-white hover:border-[#243d77] hover:shadow-sm",
+        "bg-[#f5f5f7] text-[#243d77] hover:bg-[#e8e8ed] shadow-none",
       outline:
-        "bg-white text-[#1d1d1f] border border-[#d2d2d7] hover:border-[#1d1d1f] hover:bg-[#f5f5f7]",
+        "bg-white/90 backdrop-blur-md text-[#1d1d1f] shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:bg-white hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)]",
       ghost:
         "bg-transparent text-[#1d1d1f] hover:bg-[#f5f5f7]",
       link:
