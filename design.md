@@ -25,6 +25,14 @@ colors:
   surface-chip-translucent: "#d2d2d7"
   on-primary: "#ffffff"
   on-dark: "#ffffff"
+  accent-tech-blue: "#0071e3"
+  accent-tech-blue-soft: "#eef5fd"
+  accent-crimson: "#e41d43"
+  accent-crimson-soft: "#fff1f3"
+  accent-emerald: "#00875a"
+  accent-emerald-soft: "#eaf7ee"
+  accent-purple: "#8944ab"
+  accent-purple-soft: "#f8f0fc"
 
 typography:
   hero-display:
@@ -266,6 +274,19 @@ components:
     typography: "{typography.display-lg}"
     rounded: "{rounded.none}"
     padding: 80px
+  apple-card-3d:
+    backgroundColor: "{colors.canvas}"
+    rounded: "22px"
+    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04)"
+    boxShadowHover: "0 16px 36px rgba(0, 0, 0, 0.13), 0 4px 12px rgba(0, 0, 0, 0.06)"
+    hoverTransform: "translateY(-5px)"
+  curriculum-pill-button:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.caption-strong}"
+    rounded: "{rounded.pill}"
+    padding: "6px 14px"
+    activeTransform: "scale(0.95)"
   footer:
     backgroundColor: "{colors.canvas-parchment}"
     textColor: "{colors.ink-muted-80}"
@@ -394,10 +415,14 @@ Apple's whitespace is the product's pedestal. Every tile begins with at least 64
 |---|---|---|
 | Flat | No shadow, no border | Full-bleed tiles, global nav, footer, body sections |
 | Soft hairline | 1px `rgba(0, 0, 0, 0.08)` border | Utility cards, sub-nav frosted-glass separator |
-| Backdrop blur | `backdrop-filter: blur(N)` on Parchment 80% | Sub-nav and the iPhone buy floating sticky bar |
-| Product shadow | `rgba(0, 0, 0, 0.22) 3px 5px 30px 0` | Product renders resting on a surface (the only true "shadow" in the system) |
+| Backdrop blur | `backdrop-filter: blur(N)` on Parchment 80% | Sub-nav, hero media pill, and sticky bars |
+| Product shadow | `rgba(0, 0, 0, 0.22) 3px 5px 30px 0` | Product renders resting on a surface |
+| Apple Store 3D Card | `0 4px 20px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04)` | Feature benefit cards, academic proof cards, discovery tiles |
+| Contact Grounding Shadow | `filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.15))` | Product/programme imagery inside cards to ground them |
 
-**Shadow philosophy.** Apple uses **exactly one** drop-shadow, and it is applied to photographic product imagery — never to cards, never to buttons, never to text. Elevation in the UI comes from (a) surface-color change (light tile ↔ dark tile) and (b) backdrop-blur on sticky bars. The single shadow is about giving the product weight, not about UI hierarchy.
+**Shadow philosophy.** Elevation operates across two distinct modes:
+1. **Full-Bleed Marketing Tiles:** Minimalist, zero card shadows; surface color shifts (`#f5f5f7` ↔ `#ffffff` ↔ `#272729`) provide visual breaks.
+2. **Apple Store Feature & Utility Cards (`.apple-card-3d`):** White borderless cards floating on parchment/light canvases use a **centered dark 3D ambient shadow** (`0 4px 20px rgba(0,0,0,0.08)`), deepening to `0 16px 36px rgba(0,0,0,0.13)` on hover with `-5px` lift. Product subjects inside cards utilize a subtle bottom contact drop-shadow (`filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.15))`).
 
 ### Decorative Depth
 - **Atmospheric imagery** on the environment page (photographic vista) supplies mood; no CSS gradient involved.
@@ -485,27 +510,95 @@ Error and validation states were not surfaced in the analyzed pages.
 
 **`footer`** — Background `{colors.canvas-parchment}` (#f5f5f7), text `{colors.ink-muted-80}`. Link columns in `{typography.dense-link}` (17px / 400 / 2.41 line-height — the relaxed leading is what makes the dense columns scannable). Column headings in `{typography.caption-strong}` (14px / 600). Legal row at the very bottom in `{typography.fine-print}` (12px / 400) with `{colors.ink-muted-48}` text. Vertical padding 64px.
 
+## Apple Store 3D Feature Cards & Vibrant Typography System (Learned Design Rules)
+
+Through iterative refinement and direct user pair-programming, the following verified Apple Store design rules and component behaviors have been established for this project:
+
+### 1. Centered Dark 3D Card Elevation (`.apple-card-3d`)
+Standard faint washed-out shadows (`rgba(0,0,0,0.04)`) fail to provide authentic physical separation on `#f5f5f7` parchment and white canvases. Apple Store official shelf cards (e.g., Mac Trade-in & feature cards) use a **dark-tinted, centered 3D ambient shadow**:
+```css
+/* Exact Apple Store centered dark 3D card shadow */
+.apple-card-3d {
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-card-3d:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.13),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+}
+```
+- **Z-Index Layering:** Always pair elevated cards with `relative z-10 hover:z-20` so lifted cards float above siblings without shadow clipping.
+- **Surface:** Pure white (`bg-white rounded-[22px]`), borderless (no 1px borders or strokes).
+
+### 2. Dual Shadow Architecture (Product & Discovery Cards)
+When presenting product or academic degree cards:
+1. **Card Container Elevation:** Low-opacity, highly diffused floating drop shadow (`box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.04)` to `0 4px 20px rgba(0, 0, 0, 0.08)`).
+2. **Product Image Contact Shadow:** A tight, grounded contact shadow applied directly to the image/subject using CSS filter:
+   `filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));`
+   This physically anchors the product to the card surface instead of making it feel flat.
+
+### 3. Apple Store Signature Colorful Typography & Matching Icons
+Monochromatic gray/black text across every card creates cognitive fatigue. Apple Store feature cards utilize a **vibrant color-coded proposition hierarchy**:
+- **Tech Blue (`#0071e3` / `bg-[#eef5fd]`):** Degrees, Official AKTU/AICTE codes, Accreditations.
+- **Brand Crimson Red (`#e41d43` / `bg-[#fff1f3]`):** Advanced Computing, AI Labs, Innovation.
+- **Emerald Green (`#00875a` / `bg-[#eaf7ee]`):** Corporate Recruiters, Placements, Outcomes.
+- **Royal Purple (`#8944ab` / `bg-[#f8f0fc]`):** 100+ Acre Campus, Societies, Student Life.
+
+**Card Headline Pattern:**
+```tsx
+<h3 className="text-base sm:text-lg font-semibold text-[#1d1d1f] font-heading tracking-tight leading-snug">
+  <span className={pt.accentText}>{pt.highlight}</span>{" "}
+  <span>{pt.title}.</span>
+</h3>
+<p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
+  {pt.description}
+</p>
+```
+- **Matching Squircle Icon:** Top icon sits in a matching soft-tinted rounded container (`w-11 h-11 rounded-[14px] ${accentBg} ${accentText}`) with subtle hover scale (`group-hover:scale-105`).
+
+### 4. Apple CTA Pill Grammar
+- All primary interactive elements and card action buttons are **full pills** (`rounded-full` / `{rounded.pill}`).
+- Primary action uses brand theme red (`bg-[#e41d43] text-[#fff1f3] hover:bg-[#c21334]`), not generic blue.
+- Secondary pill actions use soft tinted pills (`bg-[#fff1f3] text-[#e41d43] hover:bg-[#e41d43] hover:text-white`).
+- Micro-interactions: `active:scale-95` on press, arrow icon nudge `group-hover:translate-x-0.5`.
+
+### 5. Hero 3D Card Stack & Ambient Dynamic Background Engine
+- **3D Card Stack:** Interactive stacked perspective cards with automated rotation (1.5s/4s intervals) and smart pause-on-hover / pause-on-focus.
+- **4-Layer Media Engine:**
+  1. CSS Multi-layer Gradient (`.bbditm-hero`, `.bbditm-hero-second`).
+  2. Ambient Looping Video background.
+  3. Animated GIF / Unoptimized Photo overlay.
+  4. Subtle Frosted Glass Pill controls (`bg-white/95 backdrop-blur-2xl shadow-[0_24px_50px_rgba(0,0,0,0.08)]`).
+
+### 6. Golden Constraint: Zero Functional Layout Regression ("Existing Layout Mat Chedna")
+- Never alter column grids, responsive breakpoints, section padding rhythms, or break data schemas during aesthetic elevation.
+- Visual polish is achieved through surface tone contrast (`#f5f5f7` ↔ `#ffffff`), borderless elevation, refined SF Pro weight 600 typography with tight negative tracking, and pill buttons.
+
 ## Do's and Don'ts
 
 ### Do
-- Use `{colors.primary}` (Action Blue #0066cc) for every interactive element — links, pill CTAs, focus signals — and nothing else. The single accent is non-negotiable.
+- Use `{colors.primary}` (Brand Crimson Red #e41d43) for primary brand actions, pill CTAs, and active player buttons.
+- Use Apple Store vibrant accents (`#0071e3`, `#00875a`, `#8944ab`) to color-code proposition headlines and squircle icons on white feature cards.
+- Use `.apple-card-3d` (`0 4px 20px rgba(0, 0, 0, 0.08)`) on white feature cards to give physical floating 3D separation over `#f5f5f7` canvas.
+- Apply `filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15))` to product cutouts resting inside cards for grounded realism.
 - Set headlines in `{typography.hero-display}` or `{typography.display-lg}` with negative letter-spacing (`-0.28 → -0.374px`) to get the signature "Apple tight" cadence.
 - Run body copy at `{typography.body}` (17px / 400 / 1.47 / -0.374px) — not 16px. The extra pixel defines the brand's reading pace.
 - Alternate `{component.product-tile-light}` (or parchment) and `{component.product-tile-dark}` for full-bleed section rhythm. The color change IS the divider.
-- Reserve `{rounded.pill}` for the primary blue CTA and any other element that should read as an "action" (configurator chips, search input, sticky bar CTA).
-- Apply the single product-shadow (`rgba(0, 0, 0, 0.22) 3px 5px 30px`) only to product renders resting on a surface — never on cards, buttons, or text.
-- Use `transform: scale(0.95)` as the active/press state on every button — it's the system-wide micro-interaction.
-- Keep the global nav `{colors.surface-black}` (true black) — it's the only place pure black appears on most pages.
+- Reserve `{rounded.pill}` for CTAs and action buttons with `active:scale-95` tactile click feedback.
+- Preserve existing working layouts, grid structures, and responsive rules strictly ("bina existing layout chhede").
 
 ### Don't
-- Don't introduce a second accent color; every "click me" signal is `{colors.primary}` (Action Blue).
-- Don't add shadows to cards, buttons, or text — shadow is reserved for product imagery.
-- Don't use gradients as decorative backgrounds; atmosphere comes from photography.
+- Don't use flat washed-out shadows (`rgba(0,0,0,0.03)`) when a floating Apple 3D card is required; use `.apple-card-3d`.
+- Don't add hard 1px outline borders to cards or section dividers; use natural surface tone changes (`#f5f5f7` ↔ `#ffffff`).
+- Don't force monochromatic text across all cards when highlighting distinct value propositions; follow the Apple Store colorful headline model.
+- Don't alter existing layout grids or column spans when applying aesthetic polish.
 - Don't set body copy at weight 500 — Apple's ladder is 300 / 400 / 600 / 700, with 500 deliberately absent. Body is always 400; strong inline is 600; display is 600.
-- Don't round full-bleed tiles — tiles are rectangular and edge-to-edge; the color change is the divider.
-- Don't tighten line-height below 1.47 for body copy — the editorial leading is part of the brand.
-- Don't mix radii grammars — use `{rounded.sm}` for compact utility, `{rounded.lg}` for utility cards, `{rounded.pill}` for pills, and nothing in between (except the rare `{rounded.md}` Pearl Button).
-- Don't use `{colors.primary-on-dark}` (Sky Link Blue) on light surfaces — it's the dark-tile-only variant. Action Blue is for light surfaces.
+- Don't mix radii grammars — use `{rounded.sm}` for compact utility, `{rounded.lg}` for utility cards, `{rounded.pill}` for pills.
 
 ## Responsive Behavior
 

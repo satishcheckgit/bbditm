@@ -6,32 +6,48 @@ export function UniversityProof() {
   const points = [
     {
       icon: Award,
-      title: "AKTU Affiliation & AICTE Approval",
+      accentColor: "#0071e3",
+      accentBg: "bg-[#eef5fd]",
+      accentText: "text-[#0071e3]",
+      highlight: "Official AKTU Code: 054.",
+      title: "AICTE Approved Curriculum",
       description:
-        "Official AKTU College Code: 054. Curriculum structured around university examinations and accredited standards.",
+        "Curriculum structured around university examinations and accredited academic standards.",
     },
     {
       icon: Cpu,
-      title: "Advanced Departmental Laboratories",
+      accentColor: "#e41d43",
+      accentBg: "bg-[#fff1f3]",
+      accentText: "text-[#e41d43]",
+      highlight: "Advanced Computing & AI Labs.",
+      title: "Modern Departmental Facilities",
       description:
         "Equipped with modern high-performance computing centers, robotics rigs, VLSI simulators, and core civil/mechanical testing workshops.",
     },
     {
       icon: Briefcase,
-      title: "Dedicated Training & Placement Cell",
+      accentColor: "#00875a",
+      accentBg: "bg-[#eaf7ee]",
+      accentText: "text-[#00875a]",
+      highlight: "250+ Corporate Partners.",
+      title: "Dedicated Training & Placements",
       description:
-        "Year-round technical training, aptitude grooming, alumni mentorship panels, and recruitment drives with 250+ corporate partners.",
+        "Year-round technical training, aptitude grooming, alumni mentorship panels, and recruitment drives with leading industry recruiters.",
     },
     {
       icon: Building2,
-      title: "Comprehensive BBD City Campus",
+      accentColor: "#8944ab",
+      accentBg: "bg-[#f8f0fc]",
+      accentText: "text-[#8944ab]",
+      highlight: "Sprawling 100+ Acre Campus.",
+      title: "Comprehensive BBD City Life",
       description:
-        "Sprawling over 100+ acres on Faizabad Road, Lucknow, with modern hostels, sports stadium, digital central library, and banking facilities.",
+        "Faizabad Road, Lucknow, with modern hostels, sports stadium, digital central library, and banking facilities.",
     },
   ];
 
   return (
-    <section className="py-20 sm:py-28 bg-white">
+    <section className="py-12 sm:py-16 bg-[#F5F5F7]">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Editorial Statement */}
@@ -49,12 +65,15 @@ export function UniversityProof() {
             </p>
 
             <div className="pt-2">
-              <div className="p-6 rounded-[22px] bg-[#f5f5f7] shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
-                <p className="text-xs font-semibold text-[#243d77] uppercase tracking-wider">
+              <div className="apple-card-3d p-6 rounded-[22px] bg-white">
+                <p className="text-xs font-semibold text-[#0071e3] uppercase tracking-wider">
                   Commitment to Quality Learning
                 </p>
-                <p className="text-xs sm:text-sm text-[#6e6e73] mt-2 leading-relaxed">
-                  Regular curriculum updates aligned with industry certifications in Cloud Computing, AI, Full-Stack Development, and Business Intelligence.
+                <p className="text-xs sm:text-sm text-[#1d1d1f] mt-2 leading-relaxed">
+                  <span className="font-semibold text-[#0071e3]">Regular curriculum updates</span>{" "}
+                  <span className="text-[#6e6e73]">
+                    aligned with industry certifications in Cloud Computing, AI, Full-Stack Development, and Business Intelligence.
+                  </span>
                 </p>
               </div>
             </div>
@@ -67,13 +86,16 @@ export function UniversityProof() {
               return (
                 <div
                   key={pt.title}
-                  className="p-6 sm:p-7 rounded-[22px] bg-[#f5f5f7] hover:bg-white hover:shadow-[0_18px_40px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition-all duration-300 space-y-3"
+                  className="group apple-card-3d relative z-10 hover:z-20 p-6 sm:p-7 rounded-[22px] bg-white space-y-3"
                 >
-                  <div className="w-11 h-11 rounded-[14px] bg-white text-[#243d77] shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-[#243d77]" />
+                  <div
+                    className={`w-11 h-11 rounded-[14px] ${pt.accentBg} ${pt.accentText} flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
+                  >
+                    <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="text-sm sm:text-base font-semibold text-[#1d1d1f] font-heading tracking-tight">
-                    {pt.title}
+                  <h3 className="text-base sm:text-lg font-semibold text-[#1d1d1f] font-heading tracking-tight leading-snug">
+                    <span className={pt.accentText}>{pt.highlight}</span>{" "}
+                    <span>{pt.title}.</span>
                   </h3>
                   <p className="text-xs sm:text-sm text-[#6e6e73] leading-relaxed">
                     {pt.description}
