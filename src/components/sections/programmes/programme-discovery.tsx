@@ -54,7 +54,7 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
         </div>
 
         {/* Filter Pills Bar */}
-        <div className="flex items-center gap-1 overflow-x-auto p-1.5 rounded-full bg-[#e5e5ea]/80 backdrop-blur-md max-w-fit mb-8 no-scrollbar shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+        <div className="flex items-center gap-1 overflow-x-auto p-1.5 rounded-full bg-[#e8e8ed] backdrop-blur-md max-w-fit mb-8 no-scrollbar shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
           {filterTabs.map((tab) => {
             const isSelected = selectedFilter === tab.id;
             return (
