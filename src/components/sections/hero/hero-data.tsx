@@ -112,7 +112,7 @@ export const defaultFullHeroSlides: FullHeroSlide[] = [
   {
     id: "campus-infrastructure",
     layout: "split",
-    badge: "100+ ACRE SMART CAMPUS",
+    // badge: "100+ ACRE SMART CAMPUS",
     badgeVariant: "blue",
     backgroundImage: "/banner/bg_card.webp",
     headline: (
