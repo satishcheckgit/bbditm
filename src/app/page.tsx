@@ -22,8 +22,8 @@ export default async function HomePage() {
       <ProgrammeDiscovery programmes={data.featuredProgrammes} />
       <BentoGallery
         eyebrow="Curated Showcase"
-        title="Accessories & Home Entertainment"
-        description="Sound that surrounds you. Displays that captivate you. Precision accessories built to elevate every experience."
+        title="A Campus Full of Stories"
+        description="Every corner holds a story. Every moment sparks a memory. Explore the people, places, and experiences that make BBDITM extraordinary"
         items={DEFAULT_APPLE_GALLERY_ITEMS}
         enableQuickView={true}
         viewAllHref="/gallery"

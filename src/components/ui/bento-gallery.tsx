@@ -8,14 +8,143 @@ import { DEFAULT_APPLE_GALLERY_ITEMS } from "@/data/showcase-gallery";
 import { Plus, X, ChevronLeft, ChevronRight, Check, ExternalLink, Sparkles } from "lucide-react";
 
 /* -------------------------------------------------------------------------- */
+/*                        Academic/College Card Themes                        */
+/* -------------------------------------------------------------------------- */
+interface AcademicTheme {
+  category: string;
+  badgeBg: string;
+  bgImage: string;
+  imageBgGradient: string;
+  ambientGlow: string;
+  beamAngle: string;
+  dotsRow1: string[];
+  dotsRow2: string[];
+}
+
+const ACADEMIC_CARD_THEMES: AcademicTheme[] = [
+  // Card 0: Apple TV 4K
+  {
+    category: "COMPUTING & AI",
+    badgeBg: "bg-[#004b87]", // Jio deep navy
+    bgImage: "/academic/ai-supercomputing.jpg",
+    imageBgGradient: "",
+    ambientGlow: "",
+    beamAngle: "",
+    dotsRow1: [""],
+    dotsRow2: [""]
+  },
+  // Card 1: HomePod - Midnight
+  {
+    category: "ACOUSTIC RESEARCH",
+    badgeBg: "bg-[#581c87]", // Royal purple
+    bgImage: "/academic/cloud-cyberdefense.jpg",
+    imageBgGradient: "",
+    ambientGlow: "",
+    beamAngle: "",
+    dotsRow1: [""],
+    dotsRow2: [""]
+  },
+  // Card 2: Siri Remote
+  {
+    category: "ROBOTICS & KINEMATICS",
+    badgeBg: "bg-[#065f46]", // Deep emerald
+    bgImage: "/academic/robotics-automation.jpg",
+    imageBgGradient: "",
+    ambientGlow: "",
+    beamAngle: "",
+    dotsRow1: [""],
+    dotsRow2: [""]
+  },
+  // Card 3: AirPods Max 2
+  {
+    category: "ADVANCED SIGNAL LABS",
+    badgeBg: "bg-[#1e1b4b]", // Deep midnight
+    bgImage: "/academic/vlsi-microelectronics.jpg",
+    imageBgGradient: "",
+    ambientGlow: "",
+    beamAngle: "",
+    dotsRow1: [""],
+    dotsRow2: [""]
+  },
+  // Card 4: HomePod mini (exact middle card from screenshot: DIGITALISING INDIA)
+  {
+    category: "DIGITALISING INDIA",
+    badgeBg: "bg-[#004b87]", // Exact Jio badge color
+    bgImage: "/banner/students.webp",
+    imageBgGradient: "",
+    ambientGlow: "",
+    beamAngle: "",
+    dotsRow1: [""],
+    dotsRow2: [""]
+  },
+  // Card 5: Beats Studio Pro
+  {
+    category: "CAMPUS LIFE & ARTS",
+    badgeBg: "bg-[#854d0e]", // Warm amber
+    bgImage: "/banner/slideone.webp",
+    imageBgGradient: "",
+    ambientGlow: "",
+    beamAngle: "",
+    dotsRow1: [""],
+    dotsRow2: [""]
+  },
+  // Card 6: Home Cinema (Banner)
+  {
+    category: "CENTRAL AUDITORIUM",
+    badgeBg: "bg-[#004b87]",
+    bgImage: "/showcase/home-cinema.jpg",
+    imageBgGradient: "bg-gradient-to-br from-[#030712] via-[#0f172a] to-[#1e1b4b]",
+    ambientGlow: "rgba(99, 102, 241, 0.35)",
+    beamAngle: "135deg",
+    dotsRow1: [],
+    dotsRow2: [],
+  },
+  // Card 7: Apple TV+ (Banner)
+  {
+    category: "CAMPUS BROADCAST",
+    badgeBg: "bg-[#e41d43]", // BBD Crimson
+    bgImage: "/showcase/ted-lasso.jpg",
+    imageBgGradient: "bg-gradient-to-br from-[#1e40af] via-[#2563eb] to-[#0284c7]",
+    ambientGlow: "rgba(14, 165, 233, 0.45)",
+    beamAngle: "135deg",
+    dotsRow1: [],
+    dotsRow2: [],
+  },
+  // Card 8: Beats Solo 4
+  {
+    category: "INNOVATION INCUBATOR",
+    badgeBg: "bg-[#9f1239]", // BBD Crimson Ruby
+    bgImage: "/banner/placed.webp",
+    imageBgGradient: "",
+    ambientGlow: "",
+    beamAngle: "",
+    dotsRow1: [""],
+    dotsRow2: [""]
+  },
+  // Card 9: USB-C Digital AV Adapter
+  {
+    category: "VLSI & EMBEDDED LAB",
+    badgeBg: "bg-[#115e59]", // Deep teal
+    bgImage: "/study-materials/reference-textbooks.jpg",
+    imageBgGradient: "",
+    ambientGlow: "",
+    beamAngle: "",
+    dotsRow1: [""],
+    dotsRow2: [""]
+  },
+];
+
+/* -------------------------------------------------------------------------- */
 /*                               Product Card                                 */
 /* -------------------------------------------------------------------------- */
 interface ProductCardProps {
   item: BentoGalleryItem;
+  index: number;
   onOpenQuickView: (item: BentoGalleryItem, activeSwatch?: SwatchOption) => void;
 }
 
-function ProductCard({ item, onOpenQuickView }: ProductCardProps) {
+function ProductCard({ item, index, onOpenQuickView }: ProductCardProps) {
+  const theme = ACADEMIC_CARD_THEMES[index % ACADEMIC_CARD_THEMES.length];
   const [selectedSwatch, setSelectedSwatch] = useState<SwatchOption | null>(
     item.swatches && item.swatches.length > 0 ? item.swatches[0] : null
   );
@@ -56,32 +185,89 @@ function ProductCard({ item, onOpenQuickView }: ProductCardProps) {
   return (
     <div
       onClick={() => onOpenQuickView(item, selectedSwatch || undefined)}
-      className="group relative flex flex-col justify-between bg-white rounded-[26px] p-6 sm:p-7 border border-black/[0.04] shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer min-h-[460px] select-none"
+      className="group relative flex flex-col justify-between bg-white rounded-[24px] p-5 sm:p-6 border border-black/[0.06] shadow-[0_4px_18px_rgba(0,0,0,0.05)] hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer min-h-[480px] select-none"
       role="article"
       aria-label={displayTitle}
     >
-      {/* Upper Area: Image + Carousel controls */}
-      <div className="relative w-full h-[230px] flex items-center justify-center mb-6">
-        {/* Product Image */}
-        <div className="relative w-full h-full flex items-center justify-center p-2">
+      {/* Upper Area: Academic/College Background Image (replacing background color as requested) */}
+      <div
+        className="relative w-full h-[225px] sm:h-[235px] rounded-[18px] overflow-hidden mb-4 p-3 flex items-center justify-center shadow-inner"
+      >
+        {/* Background Image */}
+        <Image
+          src={theme.bgImage}
+          alt={theme.category}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-cover"
+          priority={false}
+        />
+
+        {/* Colorful Gradient Overlay so background photo retains rich academic tone */}
+        <div
+          className={`absolute inset-0 ${theme.imageBgGradient} opacity-80 mix-blend-multiply pointer-events-none`}
+        />
+        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+
+        {/* Ambient Radial Lighting Glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `radial-gradient(circle at 50% 50%, ${theme.ambientGlow} 0%, transparent 72%)`,
+          }}
+        />
+
+        {/* Diagonal Light Shard Overlays (matching angled beam in Jio screenshot) */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-25"
+          style={{
+            background: `linear-gradient(${theme.beamAngle}, rgba(255,255,255,0.45) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.2) 100%)`,
+          }}
+        />
+
+
+        {/* Colorful Dot Matrix Pattern at the bottom (matching Jio card 2 in screenshot) */}
+        <div className="absolute bottom-2.5 left-3.5 right-3.5 flex flex-col gap-1 pointer-events-none z-10 opacity-80">
+          <div className="flex items-center gap-1.5 overflow-hidden">
+            {theme.dotsRow1.map((c, i) => (
+              <span
+                key={i}
+                className="w-1.5 h-1.5 rounded-full shrink-0 shadow-xs"
+                style={{ backgroundColor: c }}
+              />
+            ))}
+          </div>
+          <div className="flex items-center gap-1.5 overflow-hidden pl-1">
+            {theme.dotsRow2.map((c, i) => (
+              <span
+                key={i}
+                className="w-1.5 h-1.5 rounded-full shrink-0 shadow-xs"
+                style={{ backgroundColor: c }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Product / Visual Stage (gives 3D pop & seamless image presentation) */}
+        {/* <div className="relative z-10 w-[175px] h-[175px] sm:w-[185px] sm:h-[185px] rounded-[16px] bg-white/95 backdrop-blur-md p-2 shadow-[0_8px_24px_rgba(0,0,0,0.16)] flex items-center justify-center group-hover:scale-105 group-hover:shadow-[0_12px_28px_rgba(0,0,0,0.22)] transition-all duration-300">
           <Image
             src={displayedImage}
             alt={displayTitle}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-contain transition-all duration-500 ease-out group-hover:scale-105"
+            className="object-contain p-2 transition-transform duration-500 ease-out"
             priority={false}
           />
-        </div>
+        </div> */}
 
-        {/* Carousel Navigation Arrows (when multi-image exists) */}
+        {/* Carousel Navigation Arrows */}
         {allImages.length > 1 && (
-          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-between px-1 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
+          <div className="absolute inset-x-2 top-1/2 -translate-y-1/2 flex items-center justify-between pointer-events-none z-20">
             <button
               type="button"
               onClick={handlePrevSlide}
               aria-label="Previous image"
-              className="pointer-events-auto w-8 h-8 rounded-full bg-white/90 hover:bg-white text-[#1d1d1f] shadow-md border border-black/[0.05] flex items-center justify-center backdrop-blur-md transition-all active:scale-90 hover:scale-105"
+              className="pointer-events-auto w-8 h-8 rounded-full bg-white/95 hover:bg-white text-[#1d1d1f] shadow-lg flex items-center justify-center backdrop-blur-md transition-all active:scale-90 hover:scale-110"
             >
               <ChevronLeft className="w-4 h-4 text-[#1d1d1f]" />
             </button>
@@ -89,7 +275,7 @@ function ProductCard({ item, onOpenQuickView }: ProductCardProps) {
               type="button"
               onClick={handleNextSlide}
               aria-label="Next image"
-              className="pointer-events-auto w-8 h-8 rounded-full bg-white/90 hover:bg-white text-[#1d1d1f] shadow-md border border-black/[0.05] flex items-center justify-center backdrop-blur-md transition-all active:scale-90 hover:scale-105"
+              className="pointer-events-auto w-8 h-8 rounded-full bg-white/95 hover:bg-white text-[#1d1d1f] shadow-lg flex items-center justify-center backdrop-blur-md transition-all active:scale-90 hover:scale-110"
             >
               <ChevronRight className="w-4 h-4 text-[#1d1d1f]" />
             </button>
@@ -97,8 +283,17 @@ function ProductCard({ item, onOpenQuickView }: ProductCardProps) {
         )}
       </div>
 
+      {/* Category Pill Badge (exact solid badge style like DIGITALISING INDIA in screenshot) */}
+      <div className="mb-2">
+        <span
+          className={`inline-block px-2.5 py-0.5 rounded-[4px] ${theme.badgeBg} text-white text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-xs`}
+        >
+          {item.badge || theme.category}
+        </span>
+      </div>
+
       {/* Middle Area: Swatches or Carousel dots */}
-      <div className="min-h-[26px] flex items-center justify-center mb-4">
+      <div className="min-h-[22px] flex items-center justify-start mb-2">
         {item.swatches && item.swatches.length > 0 ? (
           <div
             className="flex items-center gap-2"
@@ -113,7 +308,7 @@ function ProductCard({ item, onOpenQuickView }: ProductCardProps) {
                   type="button"
                   onClick={(e) => handleSwatchClick(e, swatch)}
                   className={`w-3.5 h-3.5 rounded-full transition-all duration-200 relative ${isSelected
-                    ? "ring-2 ring-offset-2 ring-[#0071e3] scale-110"
+                    ? "ring-2 ring-offset-2 ring-[#004b87] scale-110"
                     : "hover:scale-115 opacity-90 hover:opacity-100"
                     }`}
                   style={{
@@ -133,7 +328,7 @@ function ProductCard({ item, onOpenQuickView }: ProductCardProps) {
             {allImages.map((_, idx) => (
               <span
                 key={idx}
-                className={`h-1.5 rounded-full transition-all duration-300 ${currentSlide === idx ? "w-4 bg-[#1d1d1f]" : "w-1.5 bg-[#d2d2d7]"
+                className={`h-1.5 rounded-full transition-all duration-300 ${currentSlide === idx ? "w-4 bg-[#004b87]" : "w-1.5 bg-[#d2d2d7]"
                   }`}
               />
             ))}
@@ -143,12 +338,12 @@ function ProductCard({ item, onOpenQuickView }: ProductCardProps) {
 
       {/* Lower Area: Title and Pricing information */}
       <div className="flex flex-col justify-end">
-        <h3 className="text-[16px] sm:text-[17px] font-semibold text-[#1d1d1f] tracking-tight leading-snug group-hover:text-[#0071e3] transition-colors line-clamp-2">
+        <h3 className="text-[15px] sm:text-[16px] font-bold text-[#1d1d1f] tracking-tight leading-snug group-hover:text-[#004b87] transition-colors line-clamp-2">
           {displayTitle}
         </h3>
 
         {/* Pricing details matching Apple Store format */}
-        <div className="mt-2.5 text-[12px] sm:text-[13px] text-[#6e6e73] leading-relaxed">
+        <div className="mt-2 text-[12px] sm:text-[13px] text-[#6e6e73] leading-relaxed">
           {item.monthlyPrice && (
             <p className="font-normal text-[#1d1d1f]">{item.monthlyPrice}</p>
           )}
@@ -162,6 +357,12 @@ function ProductCard({ item, onOpenQuickView }: ProductCardProps) {
             <p className="text-[11px] text-[#86868b] mt-0.5">{item.finePrint}</p>
           )}
         </div>
+
+        {/* Know More > Action Link (matching reference screenshot) */}
+        <div className="mt-3 pt-2.5 border-t border-black/[0.05] flex items-center text-xs font-bold text-[#004b87] group-hover:text-[#002f57] transition-colors">
+          <span>Know more</span>
+          <ChevronRight className="w-3.5 h-3.5 ml-0.5 transition-transform duration-200 group-hover:translate-x-1" />
+        </div>
       </div>
     </div>
   );
@@ -172,35 +373,36 @@ function ProductCard({ item, onOpenQuickView }: ProductCardProps) {
 /* -------------------------------------------------------------------------- */
 interface BannerCardProps {
   item: BentoGalleryItem;
+  index: number;
   onOpenQuickView: (item: BentoGalleryItem) => void;
 }
 
-function BannerCard({ item, onOpenQuickView }: BannerCardProps) {
+function BannerCard({ item, index, onOpenQuickView }: BannerCardProps) {
+  const theme = ACADEMIC_CARD_THEMES[index % ACADEMIC_CARD_THEMES.length];
   const isDark = item.theme === "dark" || !item.theme;
   const isBlue = item.theme === "blue";
 
   return (
     <div
       onClick={() => onOpenQuickView(item)}
-      className={`group relative flex flex-col justify-between rounded-[26px] p-7 sm:p-9 overflow-hidden transition-all duration-300 ease-out cursor-pointer min-h-[460px] col-span-1 sm:col-span-2 lg:col-span-2 ${isDark
-        ? "bg-[#050507] text-white shadow-[0_4px_24px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.35)] hover:-translate-y-1"
+      className={`group relative flex flex-col justify-between rounded-[24px] p-7 sm:p-9 overflow-hidden transition-all duration-300 ease-out cursor-pointer min-h-[480px] col-span-1 sm:col-span-2 lg:col-span-2 ${isDark
+        ? "bg-gradient-to-br from-[#05070e] via-[#091122] to-[#111e3b] text-white shadow-[0_4px_24px_rgba(0,0,0,0.25)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.4)] hover:-translate-y-1.5"
         : isBlue
-          ? "bg-gradient-to-br from-[#1f57d6] via-[#1b4cb8] to-[#12368c] text-white shadow-[0_4px_24px_rgba(31,87,214,0.25)] hover:shadow-[0_20px_48px_rgba(31,87,214,0.38)] hover:-translate-y-1"
-          : "bg-[#1d1d1f] text-white shadow-xl hover:-translate-y-1"
+          ? "bg-gradient-to-br from-[#0c2340] via-[#1d4ed8] to-[#0284c7] text-white shadow-[0_4px_24px_rgba(29,78,216,0.3)] hover:shadow-[0_20px_48px_rgba(29,78,216,0.45)] hover:-translate-y-1.5"
+          : "bg-[#1d1d1f] text-white shadow-xl hover:-translate-y-1.5"
         } ${item.customBgClass || ""}`}
       role="article"
       aria-label={item.title}
     >
-      {/* Top Header Text */}
+      {/* Top Header Text with Category Badge */}
       <div className="relative z-10 max-w-md">
-        {item.eyebrow && (
-          <p
-            className={`text-xs font-semibold uppercase tracking-wider mb-2 ${isDark ? "text-[#86868b]" : "text-white/80"
-              }`}
+        <div className="mb-2.5">
+          <span
+            className={`inline-block px-2.5 py-0.5 rounded-[4px] ${theme.badgeBg} text-white text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-xs`}
           >
-            {item.eyebrow}
-          </p>
-        )}
+            {item.badge || theme.category}
+          </span>
+        </div>
         <h3 className="text-2xl sm:text-3xl lg:text-[32px] font-bold tracking-tight text-white leading-tight">
           {item.title}
         </h3>
@@ -211,8 +413,15 @@ function BannerCard({ item, onOpenQuickView }: BannerCardProps) {
         )}
       </div>
 
-      {/* Middle/Bottom Visual Image */}
+      {/* Middle/Bottom Visual Image with Light Ray Accent */}
       <div className="relative w-full h-[240px] sm:h-[260px] my-4 rounded-xl overflow-hidden flex items-center justify-center">
+
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `radial-gradient(circle at 50% 50%, ${theme.ambientGlow} 0%, transparent 75%)`,
+          }}
+        />
         <Image
           src={item.image}
           alt={item.title}
@@ -220,16 +429,17 @@ function BannerCard({ item, onOpenQuickView }: BannerCardProps) {
           sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover sm:object-contain group-hover:scale-103 transition-transform duration-700 ease-out"
         />
-        {/* Soft vignette gradient */}
+
         {isDark && (
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050507] via-transparent to-transparent pointer-events-none opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#05070e] via-transparent to-transparent pointer-events-none opacity-40" />
         )}
       </div>
 
-      {/* Bottom Floating Action Plus Button */}
-      <div className="relative z-10 flex items-center justify-between pt-2">
-        <span className="text-xs font-medium text-white/70 group-hover:text-white transition-colors">
-          {item.ctaText || "Explore more"}
+      {/* Bottom Floating Action Plus Button + Action Link */}
+      <div className="relative z-10 flex items-center justify-between pt-2 border-t border-white/10">
+        <span className="text-xs font-semibold text-white/90 group-hover:text-white transition-colors flex items-center gap-1">
+          <span>{item.ctaText || "Explore facility"}</span>
+          <ChevronRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
         </span>
 
         <button
@@ -239,7 +449,7 @@ function BannerCard({ item, onOpenQuickView }: BannerCardProps) {
             onOpenQuickView(item);
           }}
           aria-label={`View details for ${item.title}`}
-          className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 active:scale-95 text-white flex items-center justify-center backdrop-blur-md shadow-md transition-all hover:scale-105 border border-white/10"
+          className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 active:scale-95 text-white flex items-center justify-center backdrop-blur-md shadow-md transition-all hover:scale-105 border border-white/15"
         >
           <Plus className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
         </button>
@@ -534,12 +744,13 @@ export function BentoGallery({
 
         {/* 4-Column Responsive Bento Gallery Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-          {items.map((item) => {
+          {items.map((item, index) => {
             if (item.type === "banner") {
               return (
                 <BannerCard
                   key={item.id}
                   item={item}
+                  index={index}
                   onOpenQuickView={(it) => handleOpenQuickView(it)}
                 />
               );
@@ -548,6 +759,7 @@ export function BentoGallery({
               <ProductCard
                 key={item.id}
                 item={item}
+                index={index}
                 onOpenQuickView={(it, sw) => handleOpenQuickView(it, sw)}
               />
             );
