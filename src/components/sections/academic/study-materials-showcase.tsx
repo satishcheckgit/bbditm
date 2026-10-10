@@ -236,7 +236,7 @@ export function StudyMaterialsShowcase({
               type="button"
               onClick={() => handleScroll("right")}
               aria-label="Scroll right in study materials"
-              className="absolute -right-3 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#1d1d1f] hover:bg-black text-white shadow-[0_6px_20px_rgba(0,0,0,0.28)] flex items-center justify-center transition-all duration-200 active:scale-90 hover:scale-105"
+              className="absolute -right-3 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-[#f5f5f7] text-[#1d1d1f] shadow-[0_6px_20px_rgba(0,0,0,0.28)] flex items-center justify-center transition-all duration-200 active:scale-90 hover:scale-105"
             >
               <ChevronRight className="w-5 h-5 ml-0.5" />
             </button>
