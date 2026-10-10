@@ -112,11 +112,10 @@ function ProductCard({ item, onOpenQuickView }: ProductCardProps) {
                   key={swatch.id}
                   type="button"
                   onClick={(e) => handleSwatchClick(e, swatch)}
-                  className={`w-3.5 h-3.5 rounded-full transition-all duration-200 relative ${
-                    isSelected
-                      ? "ring-2 ring-offset-2 ring-[#0071e3] scale-110"
-                      : "hover:scale-115 opacity-90 hover:opacity-100"
-                  }`}
+                  className={`w-3.5 h-3.5 rounded-full transition-all duration-200 relative ${isSelected
+                    ? "ring-2 ring-offset-2 ring-[#0071e3] scale-110"
+                    : "hover:scale-115 opacity-90 hover:opacity-100"
+                    }`}
                   style={{
                     backgroundColor: swatch.colorHex,
                     boxShadow: "inset 0 1px 2px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.1)",
@@ -134,9 +133,8 @@ function ProductCard({ item, onOpenQuickView }: ProductCardProps) {
             {allImages.map((_, idx) => (
               <span
                 key={idx}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  currentSlide === idx ? "w-4 bg-[#1d1d1f]" : "w-1.5 bg-[#d2d2d7]"
-                }`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${currentSlide === idx ? "w-4 bg-[#1d1d1f]" : "w-1.5 bg-[#d2d2d7]"
+                  }`}
               />
             ))}
           </div>
@@ -184,13 +182,12 @@ function BannerCard({ item, onOpenQuickView }: BannerCardProps) {
   return (
     <div
       onClick={() => onOpenQuickView(item)}
-      className={`group relative flex flex-col justify-between rounded-[26px] p-7 sm:p-9 overflow-hidden transition-all duration-300 ease-out cursor-pointer min-h-[460px] col-span-1 sm:col-span-2 lg:col-span-2 ${
-        isDark
-          ? "bg-[#050507] text-white shadow-[0_4px_24px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.35)] hover:-translate-y-1"
-          : isBlue
+      className={`group relative flex flex-col justify-between rounded-[26px] p-7 sm:p-9 overflow-hidden transition-all duration-300 ease-out cursor-pointer min-h-[460px] col-span-1 sm:col-span-2 lg:col-span-2 ${isDark
+        ? "bg-[#050507] text-white shadow-[0_4px_24px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.35)] hover:-translate-y-1"
+        : isBlue
           ? "bg-gradient-to-br from-[#1f57d6] via-[#1b4cb8] to-[#12368c] text-white shadow-[0_4px_24px_rgba(31,87,214,0.25)] hover:shadow-[0_20px_48px_rgba(31,87,214,0.38)] hover:-translate-y-1"
           : "bg-[#1d1d1f] text-white shadow-xl hover:-translate-y-1"
-      } ${item.customBgClass || ""}`}
+        } ${item.customBgClass || ""}`}
       role="article"
       aria-label={item.title}
     >
@@ -198,9 +195,8 @@ function BannerCard({ item, onOpenQuickView }: BannerCardProps) {
       <div className="relative z-10 max-w-md">
         {item.eyebrow && (
           <p
-            className={`text-xs font-semibold uppercase tracking-wider mb-2 ${
-              isDark ? "text-[#86868b]" : "text-white/80"
-            }`}
+            className={`text-xs font-semibold uppercase tracking-wider mb-2 ${isDark ? "text-[#86868b]" : "text-white/80"
+              }`}
           >
             {item.eyebrow}
           </p>
@@ -315,15 +311,14 @@ function QuickViewModal({ item, initialSwatch, onClose }: QuickViewModalProps) {
 
         {/* Left Side: Visual Showcase */}
         <div
-          className={`relative w-full md:w-1/2 min-h-[280px] md:min-h-[420px] p-8 flex items-center justify-center ${
-            isBanner
-              ? item.theme === "dark"
-                ? "bg-[#0a0a0c]"
-                : item.theme === "blue"
+          className={`relative w-full md:w-1/2 min-h-[280px] md:min-h-[420px] p-8 flex items-center justify-center ${isBanner
+            ? item.theme === "dark"
+              ? "bg-[#0a0a0c]"
+              : item.theme === "blue"
                 ? "bg-gradient-to-br from-[#1f57d6] to-[#12368c]"
                 : "bg-neutral-900"
-              : "bg-[#f5f5f7]"
-          }`}
+            : "bg-[#f5f5f7]"
+            }`}
         >
           <div className="relative w-full h-[260px] md:h-[340px]">
             <Image
@@ -385,11 +380,10 @@ function QuickViewModal({ item, initialSwatch, onClose }: QuickViewModalProps) {
                         key={swatch.id}
                         type="button"
                         onClick={() => setActiveSwatch(swatch)}
-                        className={`w-6 h-6 rounded-full transition-all relative flex items-center justify-center ${
-                          isSelected
-                            ? "ring-2 ring-offset-2 ring-[#0071e3] scale-105"
-                            : "hover:scale-110 opacity-85 hover:opacity-100"
-                        }`}
+                        className={`w-6 h-6 rounded-full transition-all relative flex items-center justify-center ${isSelected
+                          ? "ring-2 ring-offset-2 ring-[#0071e3] scale-105"
+                          : "hover:scale-110 opacity-85 hover:opacity-100"
+                          }`}
                         style={{
                           backgroundColor: swatch.colorHex,
                           boxShadow: "inset 0 1px 2px rgba(0,0,0,0.25)",
@@ -502,18 +496,18 @@ export function BentoGallery({
   };
 
   return (
-    <section className={`py-12 sm:py-16 lg:py-20 bg-[#f5f5f7] ${className}`}>
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section className={`py-12 sm:py-12 lg:py-20 bg-[#fffaf0] ${className}`}>
+      <div className="max-w-[1540px] mx-auto px-2 sm:px-4 lg:px-4">
         {/* Section Header */}
         {(title || eyebrow || description) && (
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-14">
             <div className="max-w-2xl">
-              {eyebrow && (
+              {/* {eyebrow && (
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[#0071e3] text-xs font-semibold tracking-wide mb-3 shadow-[0_1px_4px_rgba(0,0,0,0.04)] border border-black/[0.04]">
                   <Sparkles className="w-3.5 h-3.5 text-[#0071e3]" />
                   <span>{eyebrow}</span>
                 </div>
-              )}
+              )} */}
               {title && (
                 <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-semibold text-[#1d1d1f] tracking-tight leading-tight">
                   {title}
