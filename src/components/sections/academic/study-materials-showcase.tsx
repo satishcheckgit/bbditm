@@ -32,12 +32,12 @@ const DEFAULT_STUDY_MATERIALS: StudyMaterialCardItem[] = [
     title: "Syllabus & Blueprint",
     subtitle: "Complete credit mapping & unit plans for all 8 semesters.",
     tag: "2025–26 Scheme",
-    bgClass: "bg-[#FEF5E7]",
-    hoverBgClass: "hover:bg-[#FDF0D7]",
-    borderClass: "border-[#F9DCAB]/60",
-    pillBg: "bg-[#FCEFD2]",
+    bgClass: "bg-[#FAC875]",
+    hoverBgClass: "hover:bg-[#FAC875]",
+    borderClass: "border-[#F7CD8A]/70",
+    pillBg: "bg-[#FCDFA5]",
     pillText: "text-[#B45309]",
-    circleRingColor: "ring-[#F8DCAB]",
+    circleRingColor: "ring-[#F8CF8C]",
     imageSrc: "/study-materials/syllabus-blueprints.jpg",
     imageAlt: "AKTU Engineering Syllabus Handbook and Module Blueprints",
     href: "/academics",
@@ -50,12 +50,12 @@ const DEFAULT_STUDY_MATERIALS: StudyMaterialCardItem[] = [
     title: "Previous Year Papers",
     subtitle: "Past 10 years AKTU end-sem question papers with answers.",
     tag: "10-Yr Solved",
-    bgClass: "bg-[#F3EBFB]",
-    hoverBgClass: "hover:bg-[#ECE0F9]",
-    borderClass: "border-[#E3CFF8]/60",
-    pillBg: "bg-[#EBDDF9]",
+    bgClass: "bg-[#D396FF]",
+    hoverBgClass: "hover:bg-[#D396FF]",
+    borderClass: "border-[#D5ABF3]/70",
+    pillBg: "bg-[#DEBEF5]",
     pillText: "text-[#7C3AED]",
-    circleRingColor: "ring-[#E5D2F9]",
+    circleRingColor: "ring-[#D7AFF4]",
     imageSrc: "/study-materials/previous-year-papers.jpg",
     imageAlt: "Previous Year AKTU University Semester Question Papers",
     href: "/academics",
@@ -68,12 +68,12 @@ const DEFAULT_STUDY_MATERIALS: StudyMaterialCardItem[] = [
     title: "Sample Question Papers",
     subtitle: "Departmental model test papers with handwritten step solutions.",
     tag: "Model Solutions",
-    bgClass: "bg-[#E9F3FE]",
-    hoverBgClass: "hover:bg-[#DEEEFD]",
-    borderClass: "border-[#CCE2FC]/60",
-    pillBg: "bg-[#DDEBFC]",
+    bgClass: "bg-[#61B3FA]",
+    hoverBgClass: "hover:bg-[#61B3FA]",
+    borderClass: "border-[#A7CFFB]/70",
+    pillBg: "bg-[#BFDDFC]",
     pillText: "text-[#0284C7]",
-    circleRingColor: "ring-[#CEE3FC]",
+    circleRingColor: "ring-[#B1D5FC]",
     imageSrc: "/study-materials/sample-model-papers.jpg",
     imageAlt: "Sample and Model Question Papers with Solutions",
     href: "/academics",
@@ -86,12 +86,12 @@ const DEFAULT_STUDY_MATERIALS: StudyMaterialCardItem[] = [
     title: "NCERT & Books",
     subtitle: "AICTE prescribed engineering textbooks & fundamental volumes.",
     tag: "Free E-Books",
-    bgClass: "bg-[#E7F8EE]",
-    hoverBgClass: "hover:bg-[#DAF5E3]",
-    borderClass: "border-[#C4EFD3]/60",
-    pillBg: "bg-[#D9F4E3]",
+    bgClass: "bg-[#A3FFC9]",
+    hoverBgClass: "hover:bg-[#A3FFC9]",
+    borderClass: "border-[#9FDFB7]/70",
+    pillBg: "bg-[#BAE6CB]",
     pillText: "text-[#059669]",
-    circleRingColor: "ring-[#C6EFD4]",
+    circleRingColor: "ring-[#ACE0BE]",
     imageSrc: "/study-materials/reference-textbooks.jpg",
     imageAlt: "NCERT and Engineering Core Reference Textbooks",
     href: "/academics",
@@ -104,12 +104,12 @@ const DEFAULT_STUDY_MATERIALS: StudyMaterialCardItem[] = [
     title: "Important Lab Manuals",
     subtitle: "Step-by-step practical guides, circuit schematics & code files.",
     tag: "Viva Ready",
-    bgClass: "bg-[#EFEAFF]",
-    hoverBgClass: "hover:bg-[#E5DEFE]",
-    borderClass: "border-[#DBD0FD]/60",
-    pillBg: "bg-[#E3DAFD]",
+    bgClass: "bg-[#E2D8FF]",
+    hoverBgClass: "hover:bg-[#D0BEFE]",
+    borderClass: "border-[#B89DFC]/70",
+    pillBg: "bg-[#CDB8FE]",
     pillText: "text-[#6D28D9]",
-    circleRingColor: "ring-[#DDD1FD]",
+    circleRingColor: "ring-[#BEA3FD]",
     imageSrc: "/study-materials/lab-practical-manuals.jpg",
     imageAlt: "Laboratory Practical Manuals and Circuit Experiment Guides",
     href: "/academics",
@@ -122,12 +122,12 @@ const DEFAULT_STUDY_MATERIALS: StudyMaterialCardItem[] = [
     title: "Important Lab Manuals",
     subtitle: "Step-by-step practical guides, circuit schematics & code files.",
     tag: "Viva Ready",
-    bgClass: "bg-[#EFEAFF]",
-    hoverBgClass: "hover:bg-[#E5DEFE]",
-    borderClass: "border-[#DBD0FD]/60",
-    pillBg: "bg-[#E3DAFD]",
+    bgClass: "bg-[#E2D8FF]",
+    hoverBgClass: "hover:bg-[#D0BEFE]",
+    borderClass: "border-[#B89DFC]/70",
+    pillBg: "bg-[#CDB8FE]",
     pillText: "text-[#6D28D9]",
-    circleRingColor: "ring-[#DDD1FD]",
+    circleRingColor: "ring-[#BEA3FD]",
     imageSrc: "/study-materials/lab-practical-manuals.jpg",
     imageAlt: "Laboratory Practical Manuals and Circuit Experiment Guides",
     href: "/academics",
@@ -140,12 +140,12 @@ const DEFAULT_STUDY_MATERIALS: StudyMaterialCardItem[] = [
     title: "Important Lab Manuals",
     subtitle: "Step-by-step practical guides, circuit schematics & code files.",
     tag: "Viva Ready",
-    bgClass: "bg-[#EFEAFF]",
-    hoverBgClass: "hover:bg-[#E5DEFE]",
-    borderClass: "border-[#DBD0FD]/60",
-    pillBg: "bg-[#E3DAFD]",
+    bgClass: "bg-[#E2D8FF]",
+    hoverBgClass: "hover:bg-[#D0BEFE]",
+    borderClass: "border-[#B89DFC]/70",
+    pillBg: "bg-[#CDB8FE]",
     pillText: "text-[#6D28D9]",
-    circleRingColor: "ring-[#DDD1FD]",
+    circleRingColor: "ring-[#BEA3FD]",
     imageSrc: "/study-materials/lab-practical-manuals.jpg",
     imageAlt: "Laboratory Practical Manuals and Circuit Experiment Guides",
     href: "/academics",
@@ -196,7 +196,7 @@ export function StudyMaterialsShowcase({
   };
 
   return (
-    <section className="py-14 sm:py-14 bg-white relative overflow-hidden">
+    <section className="py-10 sm:py-10 bg-white relative overflow-hidden">
       <Container>
         {/* Header with Title and Apple Circular Navigation Controls */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-10">
@@ -210,7 +210,7 @@ export function StudyMaterialsShowcase({
               {title}
             </h2>
 
-            <p className="text-sm sm:text-base text-[#6e6e73] leading-relaxed pt-0.5">
+            <p className="text-sm sm:text-base text-[#0C0C0D] leading-relaxed pt-0.5">
               {description}
             </p>
           </div>
@@ -262,7 +262,7 @@ export function StudyMaterialsShowcase({
                         {item.tag}
                       </span>
 
-                      <span className="text-[11px] font-medium text-[#86868b]">
+                      <span className="text-[11px] font-medium text-[#0C0C0D]">
                         {item.itemCount}
                       </span>
                     </div>
@@ -271,7 +271,7 @@ export function StudyMaterialsShowcase({
                       {item.title}
                     </h3>
 
-                    <p className="text-xs text-[#6e6e73] leading-relaxed line-clamp-2">
+                    <p className="text-xs text-[#0C0C0D] leading-relaxed line-clamp-2">
                       {item.subtitle}
                     </p>
                   </div>

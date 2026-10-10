@@ -34,7 +34,7 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
   });
 
   return (
-    <section className="py-16 sm:py-18 lg:py-18 bg-[#f5f5f7]">
+    <section className="py-12 sm:py-12 lg:py-12 bg-[#ffffff]">
       <Container>
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
