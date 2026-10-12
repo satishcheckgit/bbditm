@@ -26,7 +26,7 @@ const ACADEMIC_CARD_THEMES: AcademicTheme[] = [
   {
     category: "COMPUTING & AI",
     badgeBg: "bg-[#004b87]",
-    bgImage: "/academic/gallery1.webp",
+    bgImage: "/academic/sample3.webp",
     imageBgGradient: "",
     ambientGlow: "",
     beamAngle: "",
@@ -37,7 +37,7 @@ const ACADEMIC_CARD_THEMES: AcademicTheme[] = [
   {
     category: "ACOUSTIC RESEARCH",
     badgeBg: "bg-[#581c87]", // Royal purple
-    bgImage: "/academic/sample.png",
+    bgImage: "/academic/sample2.webp",
     imageBgGradient: "",
     ambientGlow: "",
     beamAngle: "",
@@ -48,7 +48,7 @@ const ACADEMIC_CARD_THEMES: AcademicTheme[] = [
   {
     category: "ROBOTICS & KINEMATICS",
     badgeBg: "bg-[#065f46]", // Deep emerald
-    bgImage: "/academic/robotics-automation.jpg",
+    bgImage: "/academic/sample4.webp",
     imageBgGradient: "",
     ambientGlow: "",
     beamAngle: "",
@@ -189,26 +189,26 @@ function ProductCard({ item, index, onOpenQuickView }: ProductCardProps) {
   return (
     <div
       onClick={() => onOpenQuickView(item, selectedSwatch || undefined)}
-      className="group relative flex flex-col bg-white rounded-[26px] overflow-hidden border border-black/[0.06] shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_18px_44px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer min-h-[460px] sm:min-h-[480px] select-none"
+      className={`group relative flex flex-col ${item.customBgClass || "bg-white"} rounded-[22px] overflow-hidden border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_36px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer min-h-[350px] sm:min-h-[360px] select-none`}
       role="article"
       aria-label={displayTitle}
     >
       {/* Top Header: Eyebrow, Title, Subtitle, Price (matching Apple Store reference) */}
-      <div className="flex flex-col text-left pt-6 px-6 sm:pt-7 sm:px-7">
+      <div className="flex flex-col text-left pt-5 px-5 sm:pt-6 sm:px-6">
         {/* Eyebrow */}
         {/* <span className="text-[12px] font-semibold text-[#b64400] tracking-wider uppercase mb-1.5">
           {displayEyebrow}
         </span> */}
 
         {/* Title */}
-        <h3 className="text-[16px] sm:text-[18px] font-bold text-[#1d1d1f] tracking-tight leading-snug line-clamp-2 mb-1.5 group-hover:text-[#004b87] transition-colors">
+        <h3 className="text-[16px] sm:text-[18px] font-bold text-[#1d1d1f] tracking-tight leading-snug line-clamp-2 mb-1 group-hover:text-[#004b87] transition-colors">
           {displayTitle}
         </h3>
       </div>
 
       {/* Bottom Area: Visual Image (flush edge-to-edge, flex-1 eliminates dead whitespace) */}
       <div
-        className="relative w-full flex-1  min-h-[250px] overflow-hidden mt-4 group-hover:scale-[1.02] transition-transform duration-300"
+        className="relative w-full flex-1 min-h-[190px] sm:min-h-[200px] overflow-hidden mt-3 group-hover:scale-[1.02] transition-transform duration-300"
       >
         {/* Background Image */}
         <Image
@@ -307,7 +307,7 @@ function BannerCard({ item, index, onOpenQuickView }: BannerCardProps) {
   return (
     <div
       onClick={() => onOpenQuickView(item)}
-      className={`group relative flex flex-col justify-between rounded-[24px] p-7 sm:p-9 overflow-hidden transition-all duration-300 ease-out cursor-pointer min-h-[480px] col-span-1 sm:col-span-2 lg:col-span-2 ${isDark
+      className={`group relative flex flex-col justify-between rounded-[22px] p-6 sm:p-7 overflow-hidden transition-all duration-300 ease-out cursor-pointer min-h-[350px] sm:min-h-[360px] col-span-1 sm:col-span-2 lg:col-span-2 ${isDark
         ? "bg-gradient-to-br from-[#05070e] via-[#091122] to-[#111e3b] text-white shadow-[0_4px_24px_rgba(0,0,0,0.25)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.4)] hover:-translate-y-1.5"
         : isBlue
           ? "bg-gradient-to-br from-[#0c2340] via-[#1d4ed8] to-[#0284c7] text-white shadow-[0_4px_24px_rgba(29,78,216,0.3)] hover:shadow-[0_20px_48px_rgba(29,78,216,0.45)] hover:-translate-y-1.5"
@@ -318,25 +318,25 @@ function BannerCard({ item, index, onOpenQuickView }: BannerCardProps) {
     >
       {/* Top Header Text with Category Badge */}
       <div className="relative z-10 max-w-md">
-        <div className="mb-2.5">
+        <div className="mb-2">
           <span
             className={`inline-block px-2.5 py-0.5 rounded-[4px] ${theme.badgeBg} text-white text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-xs`}
           >
             {item.badge || theme.category}
           </span>
         </div>
-        <h3 className="text-2xl sm:text-3xl lg:text-[32px] font-bold tracking-tight text-white leading-tight">
+        <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white leading-snug line-clamp-2">
           {item.title}
         </h3>
         {item.subtitle && (
-          <p className="mt-2 text-sm sm:text-base text-white/80 leading-relaxed">
+          <p className="mt-1.5 text-xs sm:text-sm text-white/80 leading-relaxed line-clamp-2">
             {item.subtitle}
           </p>
         )}
       </div>
 
       {/* Middle/Bottom Visual Image with Light Ray Accent */}
-      <div className="relative w-full h-[240px] sm:h-[260px] my-4 rounded-xl overflow-hidden flex items-center justify-center">
+      <div className="relative w-full h-[190px] sm:h-[210px] my-2.5 rounded-xl overflow-hidden flex items-center justify-center">
 
         <div
           className="absolute inset-0 pointer-events-none"

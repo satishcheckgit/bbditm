@@ -47,7 +47,7 @@ export function HomeHero({
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
   const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
-  const [containerHeight, setContainerHeight] = useState<number | undefined>(700);
+  const [containerHeight, setContainerHeight] = useState<number | undefined>(920);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Measure and synchronize slider and banner heights so there is ZERO vertical jumping
