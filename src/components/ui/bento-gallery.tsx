@@ -25,8 +25,8 @@ const ACADEMIC_CARD_THEMES: AcademicTheme[] = [
   // Card 0: Apple TV 4K
   {
     category: "COMPUTING & AI",
-    badgeBg: "bg-[#004b87]", // Jio deep navy
-    bgImage: "/academic/ai-supercomputing.jpg",
+    badgeBg: "bg-[#004b87]",
+    bgImage: "/academic/gallery1.webp",
     imageBgGradient: "",
     ambientGlow: "",
     beamAngle: "",
@@ -182,83 +182,101 @@ function ProductCard({ item, index, onOpenQuickView }: ProductCardProps) {
     }
   };
 
+  const displayEyebrow = item.eyebrow || item.badge || "NEW";
+  const displaySubtitle = item.subtitle || item.details?.highlights?.[0] || item.details?.description;
+  const displayPrice = item.price || item.monthlyPrice;
+
   return (
     <div
       onClick={() => onOpenQuickView(item, selectedSwatch || undefined)}
-      className="group relative flex flex-col justify-between bg-white rounded-[24px] p-5 sm:p-6 border border-black/[0.06] shadow-[0_4px_18px_rgba(0,0,0,0.05)] hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer min-h-[480px] select-none"
+      className="group relative flex flex-col justify-between bg-white rounded-[26px] overflow-hidden border border-black/[0.06] shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_18px_44px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer min-h-[480px] sm:min-h-[500px] select-none"
       role="article"
       aria-label={displayTitle}
     >
-      {/* Upper Area: Academic/College Background Image (replacing background color as requested) */}
+      {/* Top Header: Eyebrow, Title, Subtitle, Price (matching Apple Store reference) */}
+      <div className="flex flex-col text-left pt-6 px-6 sm:pt-7 sm:px-7">
+        {/* Eyebrow */}
+        <span className="text-[12px] font-semibold text-[#b64400] tracking-wider uppercase mb-1.5">
+          {displayEyebrow}
+        </span>
+
+        {/* Title */}
+        <h3 className="text-[22px] sm:text-[24px] font-bold text-[#1d1d1f] tracking-tight leading-snug line-clamp-2 mb-1.5 group-hover:text-[#004b87] transition-colors">
+          {displayTitle}
+        </h3>
+
+        {/* Subtitle */}
+        {displaySubtitle && (
+          <p className="text-[14px] text-[#1d1d1f] leading-snug font-normal line-clamp-1 mb-1">
+            {displaySubtitle}
+          </p>
+        )}
+
+        {/* Pricing */}
+        {displayPrice && (
+          <p className="text-[13px] text-[#6e6e73] font-normal leading-normal">
+            {displayPrice}
+          </p>
+        )}
+      </div>
+
+      {/* Bottom Area: Visual Image (flush edge-to-edge with no inner margins or inner rounded) */}
       <div
-        className="relative w-full h-[225px] sm:h-[235px] rounded-[18px] overflow-hidden mb-4 p-3 flex items-center justify-center shadow-inner"
+        className="relative w-full h-[250px] sm:h-[270px] overflow-hidden mt-4 group-hover:scale-[1.02] transition-transform duration-300"
       >
         {/* Background Image */}
         <Image
           src={theme.bgImage}
-          alt={theme.category}
+          alt={theme.category || displayTitle}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className="object-cover"
           priority={false}
         />
 
-        {/* Colorful Gradient Overlay so background photo retains rich academic tone */}
-        <div
-          className={`absolute inset-0 ${theme.imageBgGradient} opacity-80 mix-blend-multiply pointer-events-none`}
-        />
-        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-
         {/* Ambient Radial Lighting Glow */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at 50% 50%, ${theme.ambientGlow} 0%, transparent 72%)`,
-          }}
-        />
+        {theme.ambientGlow && (
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: `radial-gradient(circle at 50% 50%, ${theme.ambientGlow} 0%, transparent 72%)`,
+            }}
+          />
+        )}
 
         {/* Diagonal Light Shard Overlays (matching angled beam in Jio screenshot) */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-25"
-          style={{
-            background: `linear-gradient(${theme.beamAngle}, rgba(255,255,255,0.45) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.2) 100%)`,
-          }}
-        />
-
+        {theme.beamAngle && (
+          <div
+            className="absolute inset-0 pointer-events-none opacity-25"
+            style={{
+              background: `linear-gradient(${theme.beamAngle}, rgba(255,255,255,0.45) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.2) 100%)`,
+            }}
+          />
+        )}
 
         {/* Colorful Dot Matrix Pattern at the bottom (matching Jio card 2 in screenshot) */}
-        <div className="absolute bottom-2.5 left-3.5 right-3.5 flex flex-col gap-1 pointer-events-none z-10 opacity-80">
-          <div className="flex items-center gap-1.5 overflow-hidden">
-            {theme.dotsRow1.map((c, i) => (
-              <span
-                key={i}
-                className="w-1.5 h-1.5 rounded-full shrink-0 shadow-xs"
-                style={{ backgroundColor: c }}
-              />
-            ))}
+        {theme.dotsRow1?.filter(Boolean).length > 0 && (
+          <div className="absolute bottom-2.5 left-3.5 right-3.5 flex flex-col gap-1 pointer-events-none z-10 opacity-80">
+            <div className="flex items-center gap-1.5 overflow-hidden">
+              {theme.dotsRow1.filter(Boolean).map((c, i) => (
+                <span
+                  key={i}
+                  className="w-1.5 h-1.5 rounded-full shrink-0 shadow-xs"
+                  style={{ backgroundColor: c }}
+                />
+              ))}
+            </div>
+            <div className="flex items-center gap-1.5 overflow-hidden pl-1">
+              {theme.dotsRow2?.filter(Boolean).map((c, i) => (
+                <span
+                  key={i}
+                  className="w-1.5 h-1.5 rounded-full shrink-0 shadow-xs"
+                  style={{ backgroundColor: c }}
+                />
+              ))}
+            </div>
           </div>
-          <div className="flex items-center gap-1.5 overflow-hidden pl-1">
-            {theme.dotsRow2.map((c, i) => (
-              <span
-                key={i}
-                className="w-1.5 h-1.5 rounded-full shrink-0 shadow-xs"
-                style={{ backgroundColor: c }}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Product / Visual Stage (gives 3D pop & seamless image presentation) */}
-        {/* <div className="relative z-10 w-[175px] h-[175px] sm:w-[185px] sm:h-[185px] rounded-[16px] bg-white/95 backdrop-blur-md p-2 shadow-[0_8px_24px_rgba(0,0,0,0.16)] flex items-center justify-center group-hover:scale-105 group-hover:shadow-[0_12px_28px_rgba(0,0,0,0.22)] transition-all duration-300">
-          <Image
-            src={displayedImage}
-            alt={displayTitle}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-contain p-2 transition-transform duration-500 ease-out"
-            priority={false}
-          />
-        </div> */}
+        )}
 
         {/* Carousel Navigation Arrows */}
         {allImages.length > 1 && (
@@ -281,88 +299,6 @@ function ProductCard({ item, index, onOpenQuickView }: ProductCardProps) {
             </button>
           </div>
         )}
-      </div>
-
-      {/* Category Pill Badge (exact solid badge style like DIGITALISING INDIA in screenshot) */}
-      <div className="mb-2">
-        <span
-          className={`inline-block px-2.5 py-0.5 rounded-[4px] ${theme.badgeBg} text-white text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-xs`}
-        >
-          {item.badge || theme.category}
-        </span>
-      </div>
-
-      {/* Middle Area: Swatches or Carousel dots */}
-      <div className="min-h-[22px] flex items-center justify-start mb-2">
-        {item.swatches && item.swatches.length > 0 ? (
-          <div
-            className="flex items-center gap-2"
-            role="radiogroup"
-            aria-label="Color options"
-          >
-            {item.swatches.map((swatch) => {
-              const isSelected = selectedSwatch?.id === swatch.id;
-              return (
-                <button
-                  key={swatch.id}
-                  type="button"
-                  onClick={(e) => handleSwatchClick(e, swatch)}
-                  className={`w-3.5 h-3.5 rounded-full transition-all duration-200 relative ${isSelected
-                    ? "ring-2 ring-offset-2 ring-[#004b87] scale-110"
-                    : "hover:scale-115 opacity-90 hover:opacity-100"
-                    }`}
-                  style={{
-                    backgroundColor: swatch.colorHex,
-                    boxShadow: "inset 0 1px 2px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.1)",
-                  }}
-                  title={swatch.name}
-                  aria-label={swatch.name}
-                  aria-checked={isSelected}
-                  role="radio"
-                />
-              );
-            })}
-          </div>
-        ) : allImages.length > 1 ? (
-          <div className="flex items-center gap-1.5">
-            {allImages.map((_, idx) => (
-              <span
-                key={idx}
-                className={`h-1.5 rounded-full transition-all duration-300 ${currentSlide === idx ? "w-4 bg-[#004b87]" : "w-1.5 bg-[#d2d2d7]"
-                  }`}
-              />
-            ))}
-          </div>
-        ) : null}
-      </div>
-
-      {/* Lower Area: Title and Pricing information */}
-      <div className="flex flex-col justify-end">
-        <h3 className="text-[15px] sm:text-[16px] font-bold text-[#1d1d1f] tracking-tight leading-snug group-hover:text-[#004b87] transition-colors line-clamp-2">
-          {displayTitle}
-        </h3>
-
-        {/* Pricing details matching Apple Store format */}
-        <div className="mt-2 text-[12px] sm:text-[13px] text-[#6e6e73] leading-relaxed">
-          {item.monthlyPrice && (
-            <p className="font-normal text-[#1d1d1f]">{item.monthlyPrice}</p>
-          )}
-          {item.price && (
-            <p className="text-[#6e6e73]">
-              {item.monthlyPrice ? "or " : ""}
-              <span className="font-medium text-[#1d1d1f]">{item.price}</span>
-            </p>
-          )}
-          {item.finePrint && (
-            <p className="text-[11px] text-[#86868b] mt-0.5">{item.finePrint}</p>
-          )}
-        </div>
-
-        {/* Know More > Action Link (matching reference screenshot) */}
-        <div className="mt-3 pt-2.5 border-t border-black/[0.05] flex items-center text-xs font-bold text-[#004b87] group-hover:text-[#002f57] transition-colors">
-          <span>Know more</span>
-          <ChevronRight className="w-3.5 h-3.5 ml-0.5 transition-transform duration-200 group-hover:translate-x-1" />
-        </div>
       </div>
     </div>
   );

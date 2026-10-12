@@ -7,7 +7,7 @@ export const DEFAULT_APPLE_GALLERY_ITEMS: BentoGalleryItem[] = [
     title: "Apple TV 4K Wi-Fi + Ethernet with 128GB storage",
     monthlyPrice: "From ₹5567.00/mo. with EMI*",
     price: "₹31900.00*",
-    image: "/showcase/apple-tv-4k.jpg",
+    image: "/showcase/apple-tv-4.jpg",
     details: {
       description: "Apple TV 4K lets you watch shows and movies in stunning 4K Dolby Vision and HDR10+. Get theater-like Spatial Audio with Dolby Atmos that immerses you in sound.",
       highlights: [
