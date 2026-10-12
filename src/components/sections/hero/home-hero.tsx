@@ -191,7 +191,7 @@ export function HomeHero({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       className={cn(
-        "relative overflow-hidden bg-white select-none outline-none focus-visible:ring-1 focus-visible:ring-[#e41d43]",
+        "relative overflow-hidden bg-white select-none outline-none focus-visible:ring-1 focus-visible:ring-[#e41d43] -mt-20",
         "pt-0 sm:pt-0 md:pt-0 lg:pt-0 pb-0",
         className
       )}
@@ -319,7 +319,7 @@ export function HomeHero({
                 {isBannerMode ? (
                   <div
                     className={cn(
-                      "w-full lg:h-full mx-auto flex items-center justify-center transition-all",
+                      "w-full lg:h-full mx-auto flex items-center justify-center transition-all pt-20",
                       slide.fullBleed
                         ? "max-w-none px-0"
                         : "max-w-[1680px] px-2 sm:px-4 md:px-6"
@@ -427,7 +427,7 @@ export function HomeHero({
                     </div>
                   </div>
                 ) : (
-                  <Container className="relative z-10 pb-10 sm:pb-12 md:pb-14">
+                  <Container className="relative z-10 pt-20 pb-10 sm:pb-12 md:pb-14">
                     {/* OPTION 1: SPLIT 2-COLUMN LAYOUT (Supporting Text + Card / Video / Image Card) */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-8 items-center min-h-0 lg:min-h-[500px]">
                       {/* Left Column: Headline, Subtitle, CTAs, Proof Points */}

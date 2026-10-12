@@ -37,7 +37,7 @@ const ACADEMIC_CARD_THEMES: AcademicTheme[] = [
   {
     category: "ACOUSTIC RESEARCH",
     badgeBg: "bg-[#581c87]", // Royal purple
-    bgImage: "/academic/cloud-cyberdefense.jpg",
+    bgImage: "/academic/sample.png",
     imageBgGradient: "",
     ambientGlow: "",
     beamAngle: "",
@@ -196,33 +196,19 @@ function ProductCard({ item, index, onOpenQuickView }: ProductCardProps) {
       {/* Top Header: Eyebrow, Title, Subtitle, Price (matching Apple Store reference) */}
       <div className="flex flex-col text-left pt-6 px-6 sm:pt-7 sm:px-7">
         {/* Eyebrow */}
-        <span className="text-[12px] font-semibold text-[#b64400] tracking-wider uppercase mb-1.5">
+        {/* <span className="text-[12px] font-semibold text-[#b64400] tracking-wider uppercase mb-1.5">
           {displayEyebrow}
-        </span>
+        </span> */}
 
         {/* Title */}
-        <h3 className="text-[22px] sm:text-[24px] font-bold text-[#1d1d1f] tracking-tight leading-snug line-clamp-2 mb-1.5 group-hover:text-[#004b87] transition-colors">
+        <h3 className="text-[16px] sm:text-[18px] font-bold text-[#1d1d1f] tracking-tight leading-snug line-clamp-2 mb-1.5 group-hover:text-[#004b87] transition-colors">
           {displayTitle}
         </h3>
-
-        {/* Subtitle */}
-        {displaySubtitle && (
-          <p className="text-[14px] text-[#1d1d1f] leading-snug font-normal line-clamp-1 mb-1">
-            {displaySubtitle}
-          </p>
-        )}
-
-        {/* Pricing */}
-        {displayPrice && (
-          <p className="text-[13px] text-[#6e6e73] font-normal leading-normal">
-            {displayPrice}
-          </p>
-        )}
       </div>
 
       {/* Bottom Area: Visual Image (flush edge-to-edge, flex-1 eliminates dead whitespace) */}
       <div
-        className="relative w-full flex-1 min-h-[250px] overflow-hidden mt-4 group-hover:scale-[1.02] transition-transform duration-300"
+        className="relative w-full flex-1  min-h-[250px] overflow-hidden mt-4 group-hover:scale-[1.02] transition-transform duration-300"
       >
         {/* Background Image */}
         <Image
@@ -642,7 +628,7 @@ export function BentoGallery({
   };
 
   return (
-    <section className={`py-12 sm:py-12 lg:py-20 bg-[#fffaf0] ${className}`}>
+    <section className={`py-10 sm:py-10 lg:py-14 bg-[#fffaf0] ${className}`}>
       <div className="max-w-[1540px] mx-auto px-2 sm:px-4 lg:px-4">
         {/* Section Header */}
         {(title || eyebrow || description) && (

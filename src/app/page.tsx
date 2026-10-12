@@ -31,11 +31,11 @@ export default async function HomePage() {
       />
       <UniversityProof />
       {/* <AcademicGraphicShowcase /> */}
-      <SchoolShowcase schools={data.schools} />
+      {/* <SchoolShowcase schools={data.schools} /> */}
       <PlacementHighlights data={data.placements} />
-      <CampusExperience />
+      {/* <CampusExperience /> */}
       <NewsAndEvents news={data.news} events={data.events} />
-      <AdmissionCTA />
+      {/* <AdmissionCTA /> */}
     </>
   );
 }

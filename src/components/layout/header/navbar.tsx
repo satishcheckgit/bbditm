@@ -32,7 +32,7 @@ export function Header() {
       <div
         className={`w-full border-b transition-all duration-300 ${isScrolled
           ? "bg-white/85 backdrop-blur-xl border-black/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
-          : "bg-white/90 backdrop-blur-md border-black/[0.05]"
+          : "bg-transparent border-transparent"
           }`}
       >
         <Container className="flex items-center justify-between h-20">
