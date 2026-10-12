@@ -189,7 +189,7 @@ function ProductCard({ item, index, onOpenQuickView }: ProductCardProps) {
   return (
     <div
       onClick={() => onOpenQuickView(item, selectedSwatch || undefined)}
-      className="group relative flex flex-col justify-between bg-white rounded-[26px] overflow-hidden border border-black/[0.06] shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_18px_44px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer min-h-[480px] sm:min-h-[500px] select-none"
+      className="group relative flex flex-col bg-white rounded-[26px] overflow-hidden border border-black/[0.06] shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_18px_44px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer min-h-[460px] sm:min-h-[480px] select-none"
       role="article"
       aria-label={displayTitle}
     >
@@ -220,9 +220,9 @@ function ProductCard({ item, index, onOpenQuickView }: ProductCardProps) {
         )}
       </div>
 
-      {/* Bottom Area: Visual Image (flush edge-to-edge with no inner margins or inner rounded) */}
+      {/* Bottom Area: Visual Image (flush edge-to-edge, flex-1 eliminates dead whitespace) */}
       <div
-        className="relative w-full h-[250px] sm:h-[270px] overflow-hidden mt-4 group-hover:scale-[1.02] transition-transform duration-300"
+        className="relative w-full flex-1 min-h-[250px] overflow-hidden mt-4 group-hover:scale-[1.02] transition-transform duration-300"
       >
         {/* Background Image */}
         <Image
