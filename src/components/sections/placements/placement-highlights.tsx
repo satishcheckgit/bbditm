@@ -35,13 +35,10 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
           {data.heroStats.map((stat, index) => (
             <div
               key={stat.label}
-              className={`py-7 sm:px-7 sm:py-9 lg:px-8 lg:py-10 ${
-                index > 0 ? "border-t border-black/10 sm:border-t-0" : ""
-              } ${
-                index % 2 !== 0 ? "sm:border-l sm:border-black/10" : ""
-              } ${
-                index > 1 ? "sm:border-t sm:border-black/10 lg:border-t-0" : ""
-              } ${index > 0 ? "lg:border-l lg:border-black/10" : ""}`}
+              className={`py-7 sm:px-7 sm:py-9 lg:px-8 lg:py-10 ${index > 0 ? "border-t border-black/10 sm:border-t-0" : ""
+                } ${index % 2 !== 0 ? "sm:border-l sm:border-black/10" : ""
+                } ${index > 1 ? "sm:border-t sm:border-black/10 lg:border-t-0" : ""
+                } ${index > 0 ? "lg:border-l lg:border-black/10" : ""}`}
             >
               <p className="font-heading text-[clamp(2.4rem,3.6vw,4rem)] font-semibold leading-none tracking-[-0.05em] text-[#e41d43]">
                 {stat.value}
@@ -57,10 +54,25 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
         </div>
 
         <div className="grid gap-6 py-12 sm:py-14 lg:grid-cols-12 lg:py-16">
-          <div className="flex min-h-[320px] flex-col justify-between rounded-[22px] bg-[#e9eef7] p-7 sm:p-8 lg:col-span-4 lg:min-h-0 lg:p-9">
+          <div className="flex min-h-[320px] flex-col justify-between rounded-[22px]  p-7 sm:p-8 lg:col-span-4 lg:min-h-0 lg:p-9">
             <p className="text-sm font-semibold text-[#e41d43]">Industry network</p>
-            <h3 className="my-8 max-w-sm font-heading text-3xl font-semibold leading-[1.08] tracking-[-0.035em] text-[#243d77] sm:text-4xl">
-              The companies our students meet on campus.
+            <h3 className="my-8 max-w-sm font-heading text-3xl font-semibold leading-[1.08] tracking-[-0.035em] text-black sm:text-4xl">
+              The{" "}
+              <span className="relative isolate inline-block px-1">
+                <span
+                  aria-hidden="true"
+                  className="absolute -inset-x-0.5 bottom-[0.03em] top-[0.12em] -z-10 rounded-[5px] bg-[#ff1e6e]/60 blur-[1px]"
+                />
+                companies
+              </span>{" "}
+              our students meet{" "}
+              <span className="relative isolate inline-block px-1">
+                <span
+                  aria-hidden="true"
+                  className="absolute -inset-x-0.5 bottom-[0.03em] top-[0.12em] -z-10 rounded-[5px] bg-[#ff1e6e]/60 blur-[1px]"
+                />
+                on campus.
+              </span>
             </h3>
             <p className="max-w-sm border-t border-[#243d77]/15 pt-5 text-[17px] leading-[1.5] text-[#52617e]">
               Recruiters span technology, consulting, engineering, finance and
