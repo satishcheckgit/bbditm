@@ -48,7 +48,7 @@ const ACADEMIC_CARD_THEMES: AcademicTheme[] = [
   {
     category: "ROBOTICS & KINEMATICS",
     badgeBg: "bg-[#065f46]", // Deep emerald
-    bgImage: "/academic/sample4.webp",
+    bgImage: "/academic/sample3.webp",
     imageBgGradient: "",
     ambientGlow: "",
     beamAngle: "",
@@ -59,7 +59,7 @@ const ACADEMIC_CARD_THEMES: AcademicTheme[] = [
   {
     category: "ADVANCED SIGNAL LABS",
     badgeBg: "bg-[#1e1b4b]", // Deep midnight
-    bgImage: "/academic/vlsi-microelectronics.jpg",
+    bgImage: "/academic/sample2.webp",
     imageBgGradient: "",
     ambientGlow: "",
     beamAngle: "",

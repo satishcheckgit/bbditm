@@ -1,14 +1,40 @@
+"use client";
+
 import React from "react";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import type { PlacementData } from "@/types/placement";
-import { ArrowRight, Quote } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface PlacementHighlightsProps {
   data: PlacementData;
 }
 
+const testimonialPlaceholder: PlacementData["studentStories"][number] = {
+  id: "story-placeholder",
+  studentName: "Student story coming soon",
+  programme: "Programme to be updated",
+  batch: "Batch details pending",
+  company: "Placement outcome pending",
+  packageText: "Ai Engineer",
+  quote: "A verified student experience will be featured here.",
+};
+
 export function PlacementHighlights({ data }: PlacementHighlightsProps) {
+  const testimonialTrackRef = React.useRef<HTMLDivElement>(null);
+  const testimonialStories = [...data.studentStories, testimonialPlaceholder];
+
+  const scrollTestimonials = (direction: "previous" | "next") => {
+    const track = testimonialTrackRef.current;
+    if (!track) return;
+
+    track.scrollBy({
+      left: direction === "next" ? track.clientWidth * 0.72 : -track.clientWidth * 0.72,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section className="overflow-hidden bg-[#f5f5f7] py-16 text-[#1d1d1f] sm:py-20 lg:py-24">
       <Container>
@@ -99,61 +125,125 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
           </div>
         </div>
 
-        <div className="rounded-[28px] bg-[#243d77] px-6 py-8 sm:px-9 sm:py-10 lg:px-12 lg:py-12">
-          <div className="mb-7 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="w-full py-8 sm:py-10 lg:py-12">
+          <div className="mb-8 flex w-full flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm font-semibold text-[#ffb0be]">Graduate voices</p>
-              <h3 className="mt-3 font-heading text-3xl font-semibold tracking-[-0.035em] text-white sm:text-4xl">
-                Prepared here. Progressing everywhere.
+              <p className="text-sm font-semibold text-[#e41d43]">Graduate voices</p>
+              <h3 className="mt-3 max-w-2xl font-heading text-3xl font-semibold leading-[1.08] tracking-[-0.035em] text-[#1d1d1f] sm:text-4xl">
+                Their experience, in their own words.
               </h3>
             </div>
 
-            <Button
-              href="/placements"
-              variant="secondary"
-              className="group self-start bg-white text-[#1d1d1f] hover:bg-[#f5f5f7] sm:self-auto"
-            >
-              <span>Explore placements</span>
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </Button>
+            <div className="flex items-center gap-3 self-start sm:self-auto">
+              <div className="flex items-center gap-2" aria-label="Testimonial carousel controls">
+                <button
+                  type="button"
+                  onClick={() => scrollTestimonials("previous")}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f5f5f7] text-[#1d1d1f] transition-[transform,background-color] duration-300 hover:scale-105 hover:bg-[#e8e8ed] active:scale-95"
+                  aria-label="Previous student testimonials"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollTestimonials("next")}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f5f5f7] text-[#1d1d1f] transition-[transform,background-color] duration-300 hover:scale-105 hover:bg-[#e8e8ed] active:scale-95"
+                  aria-label="Next student testimonials"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+
+              <Button
+                href="/placements"
+                variant="primary"
+                className="group hidden sm:inline-flex"
+              >
+                <span>Explore placements</span>
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Button>
+            </div>
           </div>
 
-          <div className="grid gap-px overflow-hidden rounded-[22px] bg-white/15 md:grid-cols-2">
-            {data.studentStories.slice(0, 2).map((story) => (
-              <article
-                key={story.id}
-                className="flex min-h-[310px] flex-col justify-between bg-[#1a2c56] p-7 sm:p-8 lg:p-9"
-              >
-                <div>
-                  <Quote
-                    className="mb-5 h-7 w-7 fill-[#e41d43] text-[#e41d43]"
+          <div className="relative overflow-hidden py-10 sm:py-12">
+            <div
+              ref={testimonialTrackRef}
+              className="relative flex snap-x snap-mandatory gap-7 overflow-x-auto px-4 py-6 [scrollbar-width:none] sm:gap-9 lg:gap-10 [&::-webkit-scrollbar]:hidden"
+              aria-label="Student placement testimonials"
+            >
+              {testimonialStories.map((story, index) => (
+                <article
+                  key={story.id}
+                  tabIndex={0}
+                  className={`group relative flex min-h-[200px] w-[74vw] max-w-[330px] shrink-0 snap-center flex-col rounded-[8px] bg-white px-6 pb-5 pt-8 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:z-10 hover:scale-[1.02] hover:rotate-0 hover:shadow-[0_20px_45px_rgba(77,61,34,0.16)] focus-visible:z-10 focus-visible:scale-[1.02] focus-visible:rotate-0 focus-visible:shadow-[0_20px_45px_rgba(77,61,34,0.16)] sm:w-[46vw] sm:px-6 md:w-[34vw] lg:w-[25vw] xl:w-[22vw] ${index % 2 === 0
+                    ? "md:-rotate-[2deg] md:translate-y-2"
+                    : "md:rotate-[2deg] md:-translate-y-2"
+                    }`}
+                >
+                  <div
                     aria-hidden="true"
-                  />
-                  <blockquote className="max-w-xl font-heading text-xl font-normal leading-[1.38] tracking-[-0.025em] text-[#f5f5f7] sm:text-2xl">
-                    &ldquo;{story.quote}&rdquo;
-                  </blockquote>
-                </div>
-
-                <footer className="mt-8 flex flex-col gap-4 border-t border-white/10 pt-5 sm:flex-row sm:items-end sm:justify-between">
-                  <div>
-                    <p className="text-[17px] font-semibold tracking-[-0.018em] text-white">
-                      {story.studentName}
-                    </p>
-                    <p className="mt-1 text-sm leading-relaxed text-[#86868b]">
-                      {story.programme} · {story.batch}
-                    </p>
+                    className={`absolute left-1/2 top-0 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/60 shadow-[0_4px_5px_rgba(0,0,0,0.24),inset_0_1px_2px_rgba(255,255,255,0.75)] ${index % 2 === 0 ? "bg-[#e41d43]" : "bg-[#8b4df0]"
+                      }`}
+                  >
+                    <span className="absolute left-1/2 top-[90%] h-4 w-1 -translate-x-1/2 bg-black/10 blur-[1px]" />
                   </div>
-                  <div className="sm:text-right">
-                    <p className="text-sm font-semibold text-[#ffb0be]">
-                      {story.company}
-                    </p>
-                    <p className="mt-1 text-xs text-[#86868b]">
+
+                  <header className="flex items-center gap-3">
+                    <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#f5f5f7] font-heading text-xs font-semibold text-[#243d77] ring-1 ring-black/[0.06] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 group-focus-visible:scale-105">
+                      {story.avatar ? (
+                        <Image
+                          src={story.avatar}
+                          alt={`${story.studentName}, ${story.programme}`}
+                          fill
+                          sizes="40px"
+                          className="object-cover"
+                        />
+                      ) : (
+                        story.studentName
+                          .split(" ")
+                          .map((name) => name[0])
+                          .slice(0, 2)
+                          .join("")
+                      )}
+                    </div>
+
+                    <div className="min-w-0">
+                      <h4 className="text-sm font-semibold leading-tight tracking-[-0.01em] text-[#e41d43]">
+                        {story.studentName}
+                      </h4>
+                      <p className="mt-1 text-xs text-[#86868b]">
+                        {story.programme} · {story.batch}
+                      </p>
+                    </div>
+                  </header>
+
+                  <div className="flex flex-1 items-center py-4">
+                    <blockquote className="max-w-xl font-serif text-lg leading-[1.4] tracking-[-0.018em] text-[#1d1d1f] sm:text-xl">
+                      &ldquo;{story.quote}&rdquo;
+                    </blockquote>
+                  </div>
+
+                  <footer className="flex items-end justify-between gap-4 border-t border-black/[0.08] pt-4">
+                    <div>
+                      <p className="text-xs font-medium text-[#86868b]">Now at</p>
+                      <p className="mt-1 text-sm font-semibold text-[#e41d43]">
+                        {story.company}
+                      </p>
+                    </div>
+                    <p className="max-w-[12rem] rounded-full bg-[#e9eef7] px-3 py-1.5 text-right text-xs font-semibold leading-snug text-[#243d77] transition-[transform,background-color] duration-300 group-hover:-translate-x-1 group-hover:bg-[#dfe7f4] group-focus-visible:-translate-x-1 group-focus-visible:bg-[#dfe7f4]">
                       {story.packageText}
                     </p>
-                  </div>
-                </footer>
-              </article>
-            ))}
+                  </footer>
+                </article>
+              ))}
+            </div>
+
+            <div className="relative mt-4 flex justify-center sm:hidden">
+              <Button href="/placements" variant="primary" className="group">
+                <span>Explore placements</span>
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Button>
+            </div>
           </div>
         </div>
       </Container>
