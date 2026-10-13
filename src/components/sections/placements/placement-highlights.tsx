@@ -1,7 +1,6 @@
 import React from "react";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { PlacementData } from "@/types/placement";
+import type { PlacementData } from "@/types/placement";
 import { ArrowRight, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -11,92 +10,139 @@ interface PlacementHighlightsProps {
 
 export function PlacementHighlights({ data }: PlacementHighlightsProps) {
   return (
-    <section className="py-20 sm:py-28 bg-[#000000] text-white">
+    <section className="overflow-hidden bg-[#f5f5f7] py-16 text-[#1d1d1f] sm:py-20 lg:py-24">
       <Container>
-        {/* Section Heading with Contrast */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <SectionHeading
-            isDark
-            eyebrow="Placement Outcomes"
-            title="Industry-tested careers and graduate outcomes"
-            description="Our Training and Placement Cell facilitates campus recruitment, pre-placement talks, and industry internships across leading sectors."
-          />
-          <Button
-            href="/placements"
-            variant="secondary"
-            className="self-start md:self-end shrink-0"
-          >
-            <span>Full Placement Report</span>
-            <ArrowRight className="w-4 h-4 ml-1" />
-          </Button>
+        <div className="grid gap-7 border-b border-black/10 pb-10 lg:grid-cols-12 lg:items-end lg:gap-10 lg:pb-12">
+          <div className="lg:col-span-8">
+            <p className="mb-4 text-sm font-semibold tracking-[-0.01em] text-[#e41d43]">
+              Placement outcomes
+            </p>
+            <h2 className="max-w-4xl font-heading text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-[#1d1d1f]">
+              Ready for the work that shapes what comes next.
+            </h2>
+          </div>
+
+          <div className="lg:col-span-4 lg:pb-1">
+            <p className="max-w-md text-[17px] leading-[1.5] tracking-[-0.015em] text-[#6e6e73]">
+              Our Training and Placement Cell connects classroom learning with
+              internships, career preparation and opportunities across leading
+              sectors.
+            </p>
+          </div>
         </div>
 
-        {/* 4 Large Verified Metric Counters */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
-          {data.heroStats.map((stat) => (
+        <div className="grid grid-cols-1 border-b border-black/10 sm:grid-cols-2 lg:grid-cols-4">
+          {data.heroStats.map((stat, index) => (
             <div
               key={stat.label}
-              className="p-6 sm:p-7 rounded-[22px] bg-[#1c1c1e] shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:bg-[#242426] hover:-translate-y-0.5 transition-all duration-300"
+              className={`py-7 sm:px-7 sm:py-9 lg:px-8 lg:py-10 ${
+                index > 0 ? "border-t border-black/10 sm:border-t-0" : ""
+              } ${
+                index % 2 !== 0 ? "sm:border-l sm:border-black/10" : ""
+              } ${
+                index > 1 ? "sm:border-t sm:border-black/10 lg:border-t-0" : ""
+              } ${index > 0 ? "lg:border-l lg:border-black/10" : ""}`}
             >
-              <p className="text-3xl sm:text-4xl lg:text-[40px] font-bold text-[#e41d43] tracking-tight font-heading">
+              <p className="font-heading text-[clamp(2.4rem,3.6vw,4rem)] font-semibold leading-none tracking-[-0.05em] text-[#e41d43]">
                 {stat.value}
               </p>
-              <h4 className="text-xs sm:text-sm font-semibold text-white mt-2 font-heading tracking-tight">
+              <h3 className="mt-4 text-[17px] font-semibold leading-tight tracking-[-0.018em] text-[#1d1d1f]">
                 {stat.label}
-              </h4>
-              <p className="text-xs text-[#86868b] mt-1">
+              </h3>
+              <p className="mt-2 max-w-[15rem] text-sm leading-relaxed text-[#86868b]">
                 {stat.subtext}
               </p>
             </div>
           ))}
         </div>
 
-        {/* Top Recruiters Badges Grid */}
-        <div className="p-7 sm:p-8 rounded-[24px] bg-[#1c1c1e] shadow-[0_8px_30px_rgba(0,0,0,0.4)] mb-12">
-          <p className="text-xs font-semibold uppercase tracking-wider text-[#86868b] mb-4 text-center">
-            Prominent Corporate Recruiters Visiting Campus
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
-            {data.topRecruiters.map((recruiter) => (
-              <span
-                key={recruiter.name}
-                className="px-4 py-1.5 rounded-full bg-[#2c2c2e] text-xs font-medium text-slate-200 hover:text-white hover:bg-[#3a3a3c] transition-colors"
-              >
-                {recruiter.name}
-              </span>
-            ))}
+        <div className="grid gap-6 py-12 sm:py-14 lg:grid-cols-12 lg:py-16">
+          <div className="flex min-h-[320px] flex-col justify-between rounded-[22px] bg-[#e9eef7] p-7 sm:p-8 lg:col-span-4 lg:min-h-0 lg:p-9">
+            <p className="text-sm font-semibold text-[#e41d43]">Industry network</p>
+            <h3 className="my-8 max-w-sm font-heading text-3xl font-semibold leading-[1.08] tracking-[-0.035em] text-[#243d77] sm:text-4xl">
+              The companies our students meet on campus.
+            </h3>
+            <p className="max-w-sm border-t border-[#243d77]/15 pt-5 text-[17px] leading-[1.5] text-[#52617e]">
+              Recruiters span technology, consulting, engineering, finance and
+              infrastructure.
+            </p>
+          </div>
+
+          <div className="lg:col-span-8">
+            <div className="grid gap-px overflow-hidden rounded-[22px] bg-black/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.04)] sm:grid-cols-2 xl:grid-cols-3">
+              {data.topRecruiters.map((recruiter) => (
+                <div
+                  key={recruiter.name}
+                  className="group flex min-h-24 flex-col justify-center bg-white px-5 py-4 sm:px-6"
+                >
+                  <p className="text-[16px] font-semibold leading-snug tracking-[-0.018em] text-[#1d1d1f] transition-colors duration-300 group-hover:text-[#e41d43]">
+                    {recruiter.name}
+                  </p>
+                  <p className="mt-1.5 text-xs leading-relaxed text-[#6e6e73]">
+                    {recruiter.sector}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Student Testimonial Spotlight */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {data.studentStories.slice(0, 2).map((story) => (
-            <div
-              key={story.id}
-              className="p-7 sm:p-8 rounded-[24px] bg-[#1c1c1e] shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:bg-[#242426] transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                <Quote className="w-6 h-6 text-[#e41d43] mb-3" />
-                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed italic">
-                  &ldquo;{story.quote}&rdquo;
-                </p>
-              </div>
-
-              <div className="mt-5 pt-4 border-t border-white/[0.08] flex items-center justify-between">
-                <div>
-                  <h4 className="text-xs sm:text-sm font-semibold text-white font-heading tracking-tight">
-                    {story.studentName}
-                  </h4>
-                  <p className="text-xs text-[#86868b]">
-                    {story.programme} · {story.batch}
-                  </p>
-                </div>
-                <span className="text-xs font-semibold text-[#e41d43] px-3 py-1 rounded-full bg-[#e41d43]/15">
-                  {story.company}
-                </span>
-              </div>
+        <div className="rounded-[28px] bg-[#243d77] px-6 py-8 sm:px-9 sm:py-10 lg:px-12 lg:py-12">
+          <div className="mb-7 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold text-[#ffb0be]">Graduate voices</p>
+              <h3 className="mt-3 font-heading text-3xl font-semibold tracking-[-0.035em] text-white sm:text-4xl">
+                Prepared here. Progressing everywhere.
+              </h3>
             </div>
-          ))}
+
+            <Button
+              href="/placements"
+              variant="secondary"
+              className="group self-start bg-white text-[#1d1d1f] hover:bg-[#f5f5f7] sm:self-auto"
+            >
+              <span>Explore placements</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+            </Button>
+          </div>
+
+          <div className="grid gap-px overflow-hidden rounded-[22px] bg-white/15 md:grid-cols-2">
+            {data.studentStories.slice(0, 2).map((story) => (
+              <article
+                key={story.id}
+                className="flex min-h-[310px] flex-col justify-between bg-[#1a2c56] p-7 sm:p-8 lg:p-9"
+              >
+                <div>
+                  <Quote
+                    className="mb-5 h-7 w-7 fill-[#e41d43] text-[#e41d43]"
+                    aria-hidden="true"
+                  />
+                  <blockquote className="max-w-xl font-heading text-xl font-normal leading-[1.38] tracking-[-0.025em] text-[#f5f5f7] sm:text-2xl">
+                    &ldquo;{story.quote}&rdquo;
+                  </blockquote>
+                </div>
+
+                <footer className="mt-8 flex flex-col gap-4 border-t border-white/10 pt-5 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="text-[17px] font-semibold tracking-[-0.018em] text-white">
+                      {story.studentName}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-[#86868b]">
+                      {story.programme} · {story.batch}
+                    </p>
+                  </div>
+                  <div className="sm:text-right">
+                    <p className="text-sm font-semibold text-[#ffb0be]">
+                      {story.company}
+                    </p>
+                    <p className="mt-1 text-xs text-[#86868b]">
+                      {story.packageText}
+                    </p>
+                  </div>
+                </footer>
+              </article>
+            ))}
+          </div>
         </div>
       </Container>
     </section>
