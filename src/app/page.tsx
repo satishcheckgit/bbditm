@@ -29,13 +29,8 @@ export default async function HomePage() {
         viewAllHref="/gallery"
         viewAllText="Explore Full Showcase"
       />
-      <UniversityProof />
-      {/* <AcademicGraphicShowcase /> */}
-      {/* <SchoolShowcase schools={data.schools} /> */}
       <PlacementHighlights data={data.placements} />
-      {/* <CampusExperience /> */}
       <NewsAndEvents news={data.news} events={data.events} />
-      {/* <AdmissionCTA /> */}
     </>
   );
 }
