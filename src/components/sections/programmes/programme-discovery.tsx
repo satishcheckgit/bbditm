@@ -54,16 +54,17 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
         </div>
 
         {/* Filter Pills Bar */}
-        <div className="flex items-center gap-1 overflow-x-auto p-1.5 rounded-full bg-[#e8e8ed] backdrop-blur-md max-w-fit mb-8 no-scrollbar shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+        <div className="inline-flex items-center gap-1 overflow-x-auto p-0.5 sm:p-0.5 rounded-full bg-[#e8e8ed]/90 backdrop-blur-xl border border-black/[0.04] max-w-full mb-8 no-scrollbar shadow-[inset_0_1px_2px_rgba(0,0,0,0.04)]">
           {filterTabs.map((tab) => {
             const isSelected = selectedFilter === tab.id;
             return (
               <button
                 key={tab.id}
+                type="button"
                 onClick={() => setSelectedFilter(tab.id)}
-                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${isSelected
-                  ? "bg-[#243d77] text-white shadow-sm"
-                  : "text-[#1d1d1f] hover:text-[#243d77] hover:bg-white/60"
+                className={`px-4 py-2 rounded-full text-xs transition-all duration-200 whitespace-nowrap cursor-pointer select-none tracking-tight active:scale-95 ${isSelected
+                  ? "bg-black text-white font-semibold shadow-[0_2px_8px_rgba(0,0,0,0.22),0_1px_2px_rgba(0,0,0,0.12)]"
+                  : "text-[#515154] font-medium hover:text-black hover:bg-white/60"
                   }`}
               >
                 {tab.label}

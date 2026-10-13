@@ -59,7 +59,7 @@ export const DEFAULT_APPLE_GALLERY_ITEMS: BentoGalleryItem[] = [
     type: "product",
     customBgClass: "bg-[#fff]",
     eyebrow: "INDUSTRY 4.0 LAB",
-    title: "Robotics & Autonomous Systems Lab",
+    title: "Robotics & Autonomous Lab",
     subtitle: "6-axis kinematic articulators with ROS2 and mechatronics control",
     price: "Department of Mechanical & Mechatronics",
     monthlyPrice: "AKTU Code: 054 • Automation Wing",
