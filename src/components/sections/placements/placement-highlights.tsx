@@ -24,6 +24,10 @@ const testimonialPlaceholder: PlacementData["studentStories"][number] = {
 export function PlacementHighlights({ data }: PlacementHighlightsProps) {
   const testimonialTrackRef = React.useRef<HTMLDivElement>(null);
   const testimonialStories = [...data.studentStories, testimonialPlaceholder];
+  const recruiterRows = [
+    data.topRecruiters.filter((_, index) => index % 2 === 0),
+    data.topRecruiters.filter((_, index) => index % 2 !== 0),
+  ];
 
   const scrollTestimonials = (direction: "previous" | "next") => {
     const track = testimonialTrackRef.current;
@@ -107,18 +111,34 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
           </div>
 
           <div className="lg:col-span-8">
-            <div className="grid gap-px overflow-hidden rounded-[22px] bg-black/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.04)] sm:grid-cols-2 xl:grid-cols-3">
-              {data.topRecruiters.map((recruiter) => (
+            <div className="relative flex h-full min-h-[320px] flex-col justify-center gap-5 overflow-hidden rounded-[22px] bg-white py-8 shadow-[0_4px_20px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.04)] [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+              <h4 className="sr-only">Prominent corporate recruiters</h4>
+              <ul className="sr-only">
+                {data.topRecruiters.map((recruiter) => (
+                  <li key={recruiter.name}>
+                    {recruiter.name}, {recruiter.sector}
+                  </li>
+                ))}
+              </ul>
+
+              {recruiterRows.map((row, rowIndex) => (
                 <div
-                  key={recruiter.name}
-                  className="group flex min-h-24 flex-col justify-center bg-white px-5 py-4 sm:px-6"
+                  key={rowIndex}
+                  className="recruiter-marquee group flex w-max items-center hover:[animation-play-state:paused]"
+                  data-direction={rowIndex === 0 ? "forward" : "reverse"}
+                  aria-hidden="true"
                 >
-                  <p className="text-[16px] font-semibold leading-snug tracking-[-0.018em] text-[#1d1d1f] transition-colors duration-300 group-hover:text-[#e41d43]">
-                    {recruiter.name}
-                  </p>
-                  <p className="mt-1.5 text-xs leading-relaxed text-[#6e6e73]">
-                    {recruiter.sector}
-                  </p>
+                  {[...row, ...row].map((recruiter, index) => (
+                    <div
+                      key={`${recruiter.name}-${index}`}
+                      className="mx-3 flex h-20 min-w-52 items-center justify-center rounded-[14px] bg-[#f5f5f7] px-7 text-center transition-colors duration-300 hover:bg-[#eeeeF1]"
+                      title={`${recruiter.name} · ${recruiter.sector}`}
+                    >
+                      <span className="font-heading text-[17px] font-semibold leading-tight tracking-[-0.025em] text-[#55555a]">
+                        {recruiter.name}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
@@ -247,6 +267,40 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
           </div>
         </div>
       </Container>
+
+      <style jsx global>{`
+        @keyframes recruiter-marquee-forward {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+
+        @keyframes recruiter-marquee-reverse {
+          from {
+            transform: translateX(-50%);
+          }
+          to {
+            transform: translateX(0);
+          }
+        }
+
+        .recruiter-marquee[data-direction="forward"] {
+          animation: recruiter-marquee-forward 32s linear infinite;
+        }
+
+        .recruiter-marquee[data-direction="reverse"] {
+          animation: recruiter-marquee-reverse 36s linear infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .recruiter-marquee {
+            animation-play-state: paused !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
