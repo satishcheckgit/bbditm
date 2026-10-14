@@ -6,10 +6,22 @@ import { Menu, X, ChevronDown, ExternalLink } from "lucide-react";
 import { mainNavItems, utilityNavItems } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/button";
+import { NavItem, UtilityNavItem } from "@/types/navigation";
 
-export function MobileNav() {
+interface MobileNavProps {
+  mainNav?: NavItem[];
+  utilityNav?: UtilityNavItem[];
+}
+
+export function MobileNav({
+  mainNav = mainNavItems,
+  utilityNav = utilityNavItems,
+}: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  const displayMainNav = mainNav && mainNav.length > 0 ? mainNav : mainNavItems;
+  const displayUtilityNav = utilityNav && utilityNav.length > 0 ? utilityNav : utilityNavItems;
 
   const closeMenu = () => {
     setIsOpen(false);
@@ -78,7 +90,7 @@ export function MobileNav() {
         {/* Scrollable Navigation Body */}
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
           <nav aria-label="Mobile primary navigation" className="space-y-1">
-            {mainNavItems.map((item, idx) => {
+            {displayMainNav.map((item, idx) => {
               const hasSub = item.groups && item.groups.length > 0;
               const isExpanded = expandedIndex === idx;
 
@@ -142,7 +154,7 @@ export function MobileNav() {
               Quick Portals
             </p>
             <div className="grid grid-cols-2 gap-2 text-xs">
-              {utilityNavItems.map((u) => (
+              {displayUtilityNav.map((u) => (
                 <a
                   key={u.title}
                   href={u.href}

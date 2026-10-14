@@ -2,8 +2,15 @@ import React from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { utilityNavItems } from "@/config/navigation";
+import { UtilityNavItem } from "@/types/navigation";
 
-export function UtilityBar() {
+interface UtilityBarProps {
+  items?: UtilityNavItem[];
+}
+
+export function UtilityBar({ items = utilityNavItems }: UtilityBarProps) {
+  const displayItems = items && items.length > 0 ? items : utilityNavItems;
+
   return (
     <div className="hidden lg:block bg-[#1a2c56] border-b border-[#243d77] text-xs text-slate-200 py-1.5 transition-colors">
       <Container className="flex items-center justify-between">
@@ -18,7 +25,7 @@ export function UtilityBar() {
         </div>
 
         <nav aria-label="Utility navigation" className="flex items-center gap-5">
-          {utilityNavItems.map((item) =>
+          {displayItems.map((item) =>
             item.isExternal ? (
               <a
                 key={item.title}

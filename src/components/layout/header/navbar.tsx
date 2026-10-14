@@ -6,14 +6,20 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { UtilityBar } from "./utility-bar";
 import { MobileNav } from "./mobile-nav";
-import { mainNavItems } from "@/config/navigation";
+import { mainNavItems, utilityNavItems } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { ChevronDown, ArrowRight, Sparkles } from "lucide-react";
 import Image from "next/image";
+import { useHeaderNav } from "@/services/navigation/navigation.queries";
 
 export function Header() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Dynamic Navigation from Payload CMS via TanStack Query
+  const { data: navData } = useHeaderNav();
+  const mainNav = navData?.mainNav && navData.mainNav.length > 0 ? navData.mainNav : mainNavItems;
+  const utilityNav = navData?.utilityNav && navData.utilityNav.length > 0 ? navData.utilityNav : utilityNavItems;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +32,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 w-full transition-all duration-300">
       {/* Utility Bar */}
-      <UtilityBar />
+      <UtilityBar items={utilityNav} />
 
       {/* Main Navbar */}
       <div
@@ -59,7 +65,7 @@ export function Header() {
             className="hidden lg:flex items-center gap-1 xl:gap-1.5"
             onMouseLeave={() => setActiveMenu(null)}
           >
-            {mainNavItems.map((item) => {
+            {mainNav.map((item) => {
               const hasFlyout = item.groups && item.groups.length > 0;
               const isActive = activeMenu === item.title;
 
@@ -180,7 +186,7 @@ export function Header() {
             </Button>
 
             {/* Mobile Menu Trigger */}
-            <MobileNav />
+            <MobileNav mainNav={mainNav} utilityNav={utilityNav} />
           </div>
         </Container>
       </div>
