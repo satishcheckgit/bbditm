@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/header/navbar";
 import { Footer } from "@/components/layout/footer/footer";
 import { siteConfig } from "@/config/site";
+import { QueryProvider } from "@/providers/query-provider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -75,16 +76,18 @@ export default function RootLayout({
           Skip to main content
         </a>
 
-        {/* Global Navigation Shell */}
-        <Header />
+        {/* Global Navigation Shell & TanStack Query Context */}
+        <QueryProvider>
+          <Header />
 
-        {/* Page Content */}
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
+          {/* Page Content */}
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
 
-        {/* Global Footer */}
-        <Footer />
+          {/* Global Footer */}
+          <Footer />
+        </QueryProvider>
       </body>
     </html>
   );

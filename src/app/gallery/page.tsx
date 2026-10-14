@@ -6,10 +6,14 @@ import { DEFAULT_APPLE_GALLERY_ITEMS, BBD_CAMPUS_GALLERY_ITEMS } from "@/data/sh
 import { Container } from "@/components/ui/container";
 import { ArrowLeft, Layers, Sparkles, Copy, Check, Eye } from "lucide-react";
 import Link from "next/link";
+import { useGalleryItems } from "@/services/gallery/gallery.queries";
 
 export default function GalleryShowcasePage() {
   const [activeTab, setActiveTab] = useState<"apple" | "campus">("apple");
   const [copied, setCopied] = useState(false);
+
+  // TanStack Query hook - automatically caches and refreshes in background
+  const { data: queryItems } = useGalleryItems(activeTab);
 
   const sampleUsageCode = `<BentoGallery
   eyebrow="Curated Showcase"
@@ -83,7 +87,7 @@ export default function GalleryShowcasePage() {
           eyebrow="Apple Store Official Grid"
           title="Accessories & Home Entertainment"
           description="Sound that surrounds you. Displays that captivate you. Precision accessories built to elevate every experience."
-          items={DEFAULT_APPLE_GALLERY_ITEMS}
+          items={queryItems || DEFAULT_APPLE_GALLERY_ITEMS}
           enableQuickView={true}
         />
       ) : (
@@ -91,7 +95,7 @@ export default function GalleryShowcasePage() {
           eyebrow="BBDITM Innovation Ecosystem"
           title="Advanced Computing & Practical Research Centers"
           description="Next-generation supercomputing rigs, 6-axis precision robotic kinematics, and specialized electronic micro-assembly wings."
-          items={BBD_CAMPUS_GALLERY_ITEMS}
+          items={queryItems || BBD_CAMPUS_GALLERY_ITEMS}
           enableQuickView={true}
         />
       )}
