@@ -628,7 +628,7 @@ export function BentoGallery({
   };
 
   return (
-    <section className={`py-10 sm:py-10 lg:py-10 bg-[#fffaf0] ${className}`}>
+    <section className={`py-10 sm:py-10 lg:py-10 bg-[#f5f5f7] ${className}`}>
       <div className="max-w-[1540px] mx-auto px-2 sm:px-4 lg:px-4">
         {/* Section Header */}
         {(title || eyebrow || description) && (

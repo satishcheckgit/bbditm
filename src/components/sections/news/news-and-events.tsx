@@ -14,7 +14,7 @@ export function NewsAndEvents({ news, events }: NewsAndEventsProps) {
   const secondaryNews = news.slice(1, 3);
 
   return (
-    <section className="py-20 sm:py-28 bg-[#f5f5f7]">
+    <section className="py-4 sm:py-4 bg-[#f5f5f7]">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
           {/* Left: Latest News (7 Cols) */}

@@ -196,7 +196,7 @@ export function StudyMaterialsShowcase({
   };
 
   return (
-    <section className="py-10 sm:py-10 bg-[#fffaf0] relative overflow-hidden">
+    <section className="py-10 sm:py-10 bg-[#f5f5f7] relative overflow-hidden">
       <Container>
         {/* Header with Title and Apple Circular Navigation Controls */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-10">

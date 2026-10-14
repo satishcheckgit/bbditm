@@ -16,7 +16,7 @@ const testimonialPlaceholder: PlacementData["studentStories"][number] = {
   studentName: "Student story coming soon",
   programme: "Programme to be updated",
   batch: "Batch details pending",
-  company: "Placement outcome pending",
+  company: "Placement pending",
   packageText: "Ai Engineer",
   quote: "A verified student experience will be featured here.",
 };
@@ -40,13 +40,11 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
   };
 
   return (
-    <section className="overflow-hidden bg-[#f5f5f7] py-16 text-[#1d1d1f] sm:py-20 lg:py-24">
+    <section className="overflow-hidden bg-[#f5f5f7] py-10 text-[#1d1d1f] sm:py-10 lg:py-10">
       <Container>
         <div className="grid gap-7 border-b border-black/10 pb-10 lg:grid-cols-12 lg:items-end lg:gap-10 lg:pb-12">
           <div className="lg:col-span-8">
-            <p className="mb-4 text-sm font-semibold tracking-[-0.01em] text-[#e41d43]">
-              Placement outcomes
-            </p>
+
             <h2 className="max-w-4xl font-heading text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-[#1d1d1f]">
               Ready for the work that shapes what comes next.
             </h2>
@@ -83,9 +81,9 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
           ))}
         </div>
 
-        <div className="grid gap-6 py-12 sm:py-14 lg:grid-cols-12 lg:py-16">
+        <div className="grid gap-6 py-4 sm:py-6 lg:grid-cols-12 lg:py-6">
           <div className="flex min-h-[320px] flex-col justify-between rounded-[22px]  p-7 sm:p-8 lg:col-span-4 lg:min-h-0 lg:p-9">
-            <p className="text-sm font-semibold text-[#e41d43]">Industry network</p>
+
             <h3 className="my-8 max-w-sm font-heading text-3xl font-semibold leading-[1.08] tracking-[-0.035em] text-black sm:text-4xl">
               The{" "}
               <span className="relative isolate inline-block px-1">
@@ -111,7 +109,7 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
           </div>
 
           <div className="lg:col-span-8">
-            <div className="relative flex h-full min-h-[320px] flex-col justify-center gap-5 overflow-hidden rounded-[22px] bg-white py-8 shadow-[0_4px_20px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.04)] [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+            <div className="relative flex h-full min-h-[320px] flex-col justify-center gap-5 overflow-hidden rounded-[22px] py-8 shadow-[0_4px_20px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.04)] [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
               <h4 className="sr-only">Prominent corporate recruiters</h4>
               <ul className="sr-only">
                 {data.topRecruiters.map((recruiter) => (
@@ -145,10 +143,9 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
           </div>
         </div>
 
-        <div className="w-full py-8 sm:py-10 lg:py-12">
+        <div className="w-full py-4 sm:py-4 lg:py-4">
           <div className="mb-8 flex w-full flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm font-semibold text-[#e41d43]">Graduate voices</p>
               <h3 className="mt-3 max-w-2xl font-heading text-3xl font-semibold leading-[1.08] tracking-[-0.035em] text-[#1d1d1f] sm:text-4xl">
                 Their experience, in their own words.
               </h3>
@@ -185,7 +182,7 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
             </div>
           </div>
 
-          <div className="relative overflow-hidden py-10 sm:py-12">
+          <div className="relative overflow-hidden py-10 sm:py-10">
             <div
               ref={testimonialTrackRef}
               className="relative flex snap-x snap-mandatory gap-7 overflow-x-auto px-4 py-6 [scrollbar-width:none] sm:gap-9 lg:gap-10 [&::-webkit-scrollbar]:hidden"
@@ -195,7 +192,7 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
                 <article
                   key={story.id}
                   tabIndex={0}
-                  className={`group relative flex min-h-[200px] w-[74vw] max-w-[330px] shrink-0 snap-center flex-col rounded-[8px] bg-white px-6 pb-5 pt-8 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:z-10 hover:scale-[1.02] hover:rotate-0 hover:shadow-[0_20px_45px_rgba(77,61,34,0.16)] focus-visible:z-10 focus-visible:scale-[1.02] focus-visible:rotate-0 focus-visible:shadow-[0_20px_45px_rgba(77,61,34,0.16)] sm:w-[46vw] sm:px-6 md:w-[34vw] lg:w-[25vw] xl:w-[22vw] ${index % 2 === 0
+                  className={`group relative flex min-h-[200px] w-[74vw] max-w-[330px] shrink-0 snap-center flex-col rounded-[18px] bg-white px-6 pb-5 pt-8 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:z-10 hover:scale-[1.02] hover:rotate-0 hover:shadow-[0_20px_45px_rgba(77,61,34,0.16)] focus-visible:z-10 focus-visible:scale-[1.02] focus-visible:rotate-0 focus-visible:shadow-[0_20px_45px_rgba(77,61,34,0.16)] sm:w-[46vw] sm:px-6 md:w-[34vw] lg:w-[25vw] xl:w-[22vw] ${index % 2 === 0
                     ? "md:-rotate-[2deg] md:translate-y-2"
                     : "md:rotate-[2deg] md:-translate-y-2"
                     }`}
