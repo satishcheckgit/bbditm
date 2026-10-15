@@ -15,6 +15,13 @@ interface RawPayloadNavGroup {
   items?: RawPayloadNavGroupItem[];
 }
 
+interface RawPayloadMenuBlock {
+  id?: string;
+  blockType: string;
+  heading?: string;
+  items?: RawPayloadNavGroupItem[];
+}
+
 interface RawPayloadNavItem {
   id?: string;
   title: string;
@@ -27,6 +34,7 @@ interface RawPayloadNavItem {
     href?: string | null;
   } | null;
   groups?: RawPayloadNavGroup[];
+  menuBlocks?: RawPayloadMenuBlock[];
 }
 
 interface RawPayloadUtilityItem {
@@ -48,6 +56,7 @@ interface RawHeaderNavResponse {
 
 /**
  * Fetches dynamic Navigation Menu from Payload CMS Global endpoint (/api/globals/header-nav).
+ * Supports both modern Payload Blocks pattern (menuBlocks) and legacy groups array.
  * Falls back to local static config if Payload backend is offline.
  */
 export async function fetchHeaderNav(signal?: AbortSignal): Promise<HeaderNavData> {
@@ -63,28 +72,48 @@ export async function fetchHeaderNav(signal?: AbortSignal): Promise<HeaderNavDat
         isExternal: Boolean(item.isExternal),
       }));
 
-      const mainNav: NavItem[] = (res.mainNav || []).map((item) => ({
-        title: item.title,
-        href: item.url || "#",
-        isMegaMenu: Boolean(item.isMegaMenu),
-        featured:
-          item.featured && item.featured.title
-            ? {
-                title: item.featured.title,
-                description: item.featured.description || "",
-                href: item.featured.href || "#",
-                badge: item.featured.badge || undefined,
-              }
-            : undefined,
-        groups: (item.groups || []).map((grp) => ({
-          heading: grp.heading,
-          items: (grp.items || []).map((sub) => ({
-            title: sub.title,
-            href: sub.url,
-            description: sub.description || undefined,
-          })),
-        })),
-      }));
+      const mainNav: NavItem[] = (res.mainNav || []).map((item) => {
+        // Modern Blocks Pattern (menuBlocks) with fallback to legacy groups
+        let groups: { heading: string; items: { title: string; href: string; description?: string }[] }[] = [];
+
+        if (Array.isArray(item.menuBlocks) && item.menuBlocks.length > 0) {
+          groups = item.menuBlocks
+            .filter((blk) => !blk.blockType || blk.blockType === "column")
+            .map((col) => ({
+              heading: col.heading || "",
+              items: (col.items || []).map((sub) => ({
+                title: sub.title,
+                href: sub.url,
+                description: sub.description || undefined,
+              })),
+            }));
+        } else if (Array.isArray(item.groups) && item.groups.length > 0) {
+          groups = item.groups.map((grp) => ({
+            heading: grp.heading,
+            items: (grp.items || []).map((sub) => ({
+              title: sub.title,
+              href: sub.url,
+              description: sub.description || undefined,
+            })),
+          }));
+        }
+
+        return {
+          title: item.title,
+          href: item.url || "#",
+          isMegaMenu: Boolean(item.isMegaMenu),
+          featured:
+            item.featured && item.featured.title
+              ? {
+                  title: item.featured.title,
+                  description: item.featured.description || "",
+                  href: item.featured.href || "#",
+                  badge: item.featured.badge || undefined,
+                }
+              : undefined,
+          groups,
+        };
+      });
 
       return { utilityNav, mainNav };
     }

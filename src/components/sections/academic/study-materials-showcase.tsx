@@ -251,7 +251,7 @@ export function StudyMaterialsShowcase({
               return (
                 <div
                   key={item.id}
-                  className={`snap-start shrink-0 w-[220px] sm:w-[245px] md:w-[260px] h-[370px] sm:h-[390px] rounded-[24px] ${item.bgClass} ${item.hoverBgClass} border ${item.borderClass} p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_32px_rgba(0,0,0,0.08)] group relative overflow-hidden`}
+                  className={`snap-start shrink-0 w-[220px] sm:w-[245px] md:w-[260px] h-[370px] sm:h-[390px] rounded-[24px] ${item.bgClass} ${item.hoverBgClass} ${item.borderClass} p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_32px_rgba(0,0,0,0.08)] group relative overflow-hidden`}
                 >
                   {/* Top Section: Tag and Bold Title */}
                   <div className="space-y-3 z-10">
