@@ -11,11 +11,12 @@ export interface HeroSlideContentProps {
 
 export function HeroSlideContent({ slide, className }: HeroSlideContentProps) {
   const media = slide.media;
+  const hasDualCtas = Boolean(slide.primaryCta && slide.secondaryCta);
 
   return (
     <div
       className={cn(
-        "space-y-4 sm:space-y-6 md:space-y-7",
+        "space-y-2.5 sm:space-y-6 md:space-y-7 text-center sm:text-left",
         media?.type === "image" && media?.imageUrl
           ? "lg:col-span-6"
           : "lg:col-span-7",
@@ -24,7 +25,7 @@ export function HeroSlideContent({ slide, className }: HeroSlideContentProps) {
     >
       {/* Badge */}
       {slide.badge && (
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-slate-100 text-[#243d77] border border-slate-200/70">
+        <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide bg-slate-100 text-[#243d77] border border-slate-200/70">
           <span className="w-1.5 h-1.5 rounded-full bg-[#e41d43]" />
           <span>{slide.badge}</span>
         </div>
@@ -32,29 +33,41 @@ export function HeroSlideContent({ slide, className }: HeroSlideContentProps) {
 
       {/* Main Headline */}
       {slide.headline && (
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-semibold text-black tracking-tight leading-[1.12] font-heading">
+        <h1 className="text-[1.5rem] sm:text-4xl md:text-5xl lg:text-[46px] font-semibold text-black tracking-tight leading-[1.2] sm:leading-[1.12] font-heading text-balance">
           {slide.headline}
         </h1>
       )}
 
       {/* Subtitle */}
       {slide.subtitle && (
-        <p className="text-base sm:text-lg text-[#6e6e73] leading-relaxed max-w-2xl font-normal">
+        <p className="text-[13px] sm:text-lg text-[#6e6e73] leading-relaxed max-w-2xl font-normal mx-auto sm:mx-0 line-clamp-3 sm:line-clamp-none">
           {slide.subtitle}
         </p>
       )}
 
-      {/* Primary & Secondary Call-to-actions */}
+      {/* CTAs — dual: side-by-side on phone (saves height); single: compact centered pill */}
       {slide.primaryCta && (
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+        <div
+          className={cn(
+            "flex pt-1",
+            hasDualCtas
+              ? "flex-row items-stretch gap-2 sm:gap-3 w-full max-w-md mx-auto sm:max-w-none sm:mx-0 sm:flex-row"
+              : "flex-row flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3"
+          )}
+        >
           <Button
             href={slide.primaryCta.href}
             variant="slidecta"
             size="lg"
-            className="group"
+            className={cn(
+              "group font-semibold",
+              "min-h-11 px-3.5 py-2.5 text-[12px] gap-1 shadow-[0_6px_18px_rgba(237,61,21,0.28)]",
+              "sm:min-h-0 sm:px-6 sm:py-2.5 sm:text-base sm:font-medium sm:gap-2 sm:shadow-[0_1px_3px_rgba(228,29,67,0.3)]",
+              hasDualCtas ? "flex-1 sm:flex-none min-w-0" : "w-auto max-w-full"
+            )}
           >
-            <span>{slide.primaryCta.label}</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-1" />
+            <span className="truncate">{slide.primaryCta.label}</span>
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 group-hover:translate-x-1 transition-transform" />
           </Button>
 
           {slide.secondaryCta && (
@@ -62,16 +75,22 @@ export function HeroSlideContent({ slide, className }: HeroSlideContentProps) {
               href={slide.secondaryCta.href}
               variant="secondary"
               size="lg"
+              className={cn(
+                "font-semibold",
+                "min-h-11 px-3.5 py-2.5 text-[12px] gap-1 border border-black/[0.08] bg-white/90 backdrop-blur-sm",
+                "sm:min-h-0 sm:px-6 sm:py-2.5 sm:text-base sm:font-medium sm:gap-2 sm:border-0 sm:bg-[#f5f5f7] sm:backdrop-blur-none",
+                "flex-1 sm:flex-none min-w-0"
+              )}
             >
-              <span>{slide.secondaryCta.label}</span>
+              <span className="truncate">{slide.secondaryCta.label}</span>
             </Button>
           )}
         </div>
       )}
 
-      {/* Key Proof Points / Stats Grid */}
+      {/* Stats — original simple grid (unchanged look) */}
       {slide.stats && slide.stats.length > 0 && (
-        <div className="pt-4 sm:pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-3 sm:gap-6 max-w-xl">
+        <div className="pt-4 sm:pt-6 border-t border-slate-200/80 grid grid-cols-3 gap-3 sm:gap-6 max-w-xl mx-auto sm:mx-0">
           {slide.stats.map((stat, sIdx) => (
             <div key={sIdx}>
               <p className="text-2xl sm:text-3xl font-bold text-[#243d77] tracking-tight font-heading">

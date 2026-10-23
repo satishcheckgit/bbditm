@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Menu, X, ChevronDown, ExternalLink } from "lucide-react";
 import { mainNavItems, utilityNavItems } from "@/config/navigation";
@@ -19,6 +20,7 @@ export function MobileNav({
 }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   const displayMainNav = mainNav && mainNav.length > 0 ? mainNav : mainNavItems;
   const displayUtilityNav = utilityNav && utilityNav.length > 0 ? utilityNav : utilityNavItems;
@@ -28,21 +30,172 @@ export function MobileNav({
     setExpandedIndex(null);
   };
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
+      document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = "unset";
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
     };
   }, [isOpen]);
 
   const toggleGroup = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
+
+  const menuOverlay =
+    mounted &&
+    createPortal(
+      <>
+        {/* Backdrop */}
+        {isOpen && (
+          <div
+            className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm transition-opacity lg:hidden"
+            onClick={closeMenu}
+            aria-hidden="true"
+          />
+        )}
+
+        {/* Slide-out Menu — portaled to body so sticky/blur header cannot trap fixed */}
+        <div
+          className={`fixed top-0 right-0 z-[110] h-dvh w-[85%] max-w-md bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out lg:hidden ${
+            isOpen ? "translate-x-0 pointer-events-auto" : "translate-x-full pointer-events-none"
+          }`}
+          aria-hidden={!isOpen}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between p-5 border-b border-gray-100">
+            <div>
+              <div className="font-extrabold text-lg text-[#243d77] tracking-tight">
+                BBD<span className="text-[#e41d43]">ITM</span>
+              </div>
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                BBD Educational Group
+              </p>
+            </div>
+            <button
+              onClick={closeMenu}
+              className="p-2 text-[#6e6e73] hover:text-[#1d1d1f] rounded-full hover:bg-black/5 transition-colors"
+              aria-label="Close menu"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Scrollable Navigation Body */}
+          <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
+            <nav aria-label="Mobile primary navigation" className="space-y-1">
+              {displayMainNav.map((item, idx) => {
+                const hasSub = item.groups && item.groups.length > 0;
+                const isExpanded = expandedIndex === idx;
+
+                return (
+                  <div
+                    key={item.title}
+                    className="border-b border-black/[0.06] last:border-b-0 pb-1"
+                  >
+                    {hasSub ? (
+                      <div>
+                        <button
+                          onClick={() => toggleGroup(idx)}
+                          className="w-full flex items-center justify-between py-3 text-sm font-bold text-[#243d77] hover:text-[#e41d43] transition-colors text-left"
+                        >
+                          <span>{item.title}</span>
+                          <ChevronDown
+                            className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
+                              isExpanded ? "rotate-180 text-[#e41d43]" : ""
+                            }`}
+                          />
+                        </button>
+
+                        {isExpanded && (
+                          <div className="pl-3 pb-3 pt-2 space-y-3 bg-[#f5f5f7] rounded-xl my-1.5 p-3.5 border border-black/[0.04]">
+                            {item.groups?.map((group) => (
+                              <div key={group.heading} className="space-y-1">
+                                <span className="text-xs font-bold uppercase tracking-wider text-[#e41d43]">
+                                  {group.heading}
+                                </span>
+                                <div className="space-y-1 mt-1">
+                                  {group.items.map((subItem) => (
+                                    <Link
+                                      key={subItem.title}
+                                      href={subItem.href}
+                                      onClick={closeMenu}
+                                      className="block py-1 text-xs text-gray-700 hover:text-[#243d77] font-semibold"
+                                    >
+                                      {subItem.title}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        onClick={closeMenu}
+                        className="block py-3 text-sm font-bold text-[#243d77] hover:text-[#e41d43] transition-colors"
+                      >
+                        {item.title}
+                      </Link>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
+
+            {/* Quick Utility Portals */}
+            <div className="pt-4 border-t border-black/[0.06]">
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#86868b] mb-2">
+                Quick Portals
+              </p>
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                {displayUtilityNav.map((u) => (
+                  <a
+                    key={u.title}
+                    href={u.href}
+                    target={u.isExternal ? "_blank" : undefined}
+                    rel={u.isExternal ? "noopener noreferrer" : undefined}
+                    className="p-2.5 rounded-xl bg-[#f5f5f7] text-[#1d1d1f] hover:text-[#243d77] font-medium flex items-center justify-between border border-black/[0.04]"
+                  >
+                    <span>{u.title}</span>
+                    {u.isExternal && <ExternalLink className="w-3 h-3 text-gray-400" />}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Sticky Mobile CTA footer */}
+          <div className="p-4 border-t border-gray-100 bg-white space-y-2">
+            <Button href={siteConfig.links.applyNow} variant="primary" className="w-full">
+              Apply for Admission 2026-27
+            </Button>
+            <div className="text-center">
+              <a
+                href={`tel:${siteConfig.contact.admissionsPhone}`}
+                className="text-xs text-gray-500 hover:text-[var(--color-brand-600)]"
+              >
+                Admissions Helpline: {siteConfig.contact.admissionsPhone}
+              </a>
+            </div>
+          </div>
+        </div>
+      </>,
+      document.body
+    );
 
   return (
     <div className="lg:hidden">
@@ -55,136 +208,7 @@ export function MobileNav({
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
 
-      {/* Backdrop */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm transition-opacity"
-          onClick={() => setIsOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Slide-out Menu */}
-      <div
-        className={`fixed top-0 right-0 z-50 h-full w-[85%] max-w-md bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between p-5 border-b border-gray-100">
-          <div>
-            <div className="font-extrabold text-lg text-[#243d77] tracking-tight">
-              BBD<span className="text-[#e41d43]">ITM</span>
-            </div>
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">BBD Educational Group</p>
-          </div>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="p-2 text-[#6e6e73] hover:text-[#1d1d1f] rounded-full hover:bg-black/5 transition-colors"
-            aria-label="Close menu"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Scrollable Navigation Body */}
-        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
-          <nav aria-label="Mobile primary navigation" className="space-y-1">
-            {displayMainNav.map((item, idx) => {
-              const hasSub = item.groups && item.groups.length > 0;
-              const isExpanded = expandedIndex === idx;
-
-              return (
-                <div key={item.title} className="border-b border-black/[0.06] last:border-b-0 pb-1">
-                  {hasSub ? (
-                    <div>
-                      <button
-                        onClick={() => toggleGroup(idx)}
-                        className="w-full flex items-center justify-between py-3 text-sm font-bold text-[#243d77] hover:text-[#e41d43] transition-colors text-left"
-                      >
-                        <span>{item.title}</span>
-                        <ChevronDown
-                          className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
-                            isExpanded ? "rotate-180 text-[#e41d43]" : ""
-                          }`}
-                        />
-                      </button>
-
-                      {isExpanded && (
-                        <div className="pl-3 pb-3 pt-2 space-y-3 bg-[#f5f5f7] rounded-xl my-1.5 p-3.5 border border-black/[0.04]">
-                          {item.groups?.map((group) => (
-                            <div key={group.heading} className="space-y-1">
-                              <span className="text-xs font-bold uppercase tracking-wider text-[#e41d43]">
-                                {group.heading}
-                              </span>
-                              <div className="space-y-1 mt-1">
-                                {group.items.map((subItem) => (
-                                  <Link
-                                    key={subItem.title}
-                                    href={subItem.href}
-                                    onClick={closeMenu}
-                                    className="block py-1 text-xs text-gray-700 hover:text-[#243d77] font-semibold"
-                                  >
-                                    {subItem.title}
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      onClick={closeMenu}
-                      className="block py-3 text-sm font-bold text-[#243d77] hover:text-[#e41d43] transition-colors"
-                    >
-                      {item.title}
-                    </Link>
-                  )}
-                </div>
-              );
-            })}
-          </nav>
-
-          {/* Quick Utility Portals */}
-          <div className="pt-4 border-t border-black/[0.06]">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#86868b] mb-2">
-              Quick Portals
-            </p>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              {displayUtilityNav.map((u) => (
-                <a
-                  key={u.title}
-                  href={u.href}
-                  target={u.isExternal ? "_blank" : undefined}
-                  rel={u.isExternal ? "noopener noreferrer" : undefined}
-                  className="p-2.5 rounded-xl bg-[#f5f5f7] text-[#1d1d1f] hover:text-[#243d77] font-medium flex items-center justify-between border border-black/[0.04]"
-                >
-                  <span>{u.title}</span>
-                  {u.isExternal && <ExternalLink className="w-3 h-3 text-gray-400" />}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Sticky Mobile CTA footer */}
-        <div className="p-4 border-t border-gray-100 bg-white space-y-2">
-          <Button href={siteConfig.links.applyNow} variant="primary" className="w-full">
-            Apply for Admission 2026-27
-          </Button>
-          <div className="text-center">
-            <a
-              href={`tel:${siteConfig.contact.admissionsPhone}`}
-              className="text-xs text-gray-500 hover:text-[var(--color-brand-600)]"
-            >
-              Admissions Helpline: {siteConfig.contact.admissionsPhone}
-            </a>
-          </div>
-        </div>
-      </div>
+      {menuOverlay}
     </div>
   );
 }

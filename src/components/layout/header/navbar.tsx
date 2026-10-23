@@ -82,7 +82,16 @@ export function Header() {
                       : "text-[#1d1d1f] hover:text-[#243d77] hover:bg-[#f5f5f7]"
                       }`}
                   >
-                    <span>{item.title}</span>
+                    <span className="whitespace-nowrap">
+                      {item.title === "Life at BBDITM" ? (
+                        <>
+                          <span className="xl:hidden">Campus Life</span>
+                          <span className="hidden xl:inline">Life at BBDITM</span>
+                        </>
+                      ) : (
+                        item.title
+                      )}
+                    </span>
                     {hasFlyout && (
                       <ChevronDown
                         className={`w-3.5 h-3.5 transition-transform duration-200 ${isActive ? "rotate-180 text-[#e41d43]" : "text-[#86868b]"
@@ -180,9 +189,10 @@ export function Header() {
               href={siteConfig.links.applyNow}
               variant="primary"
               size="md"
-              className="hidden sm:inline-flex"
+              className="hidden sm:inline-flex shrink-0 whitespace-nowrap px-3.5 py-1.5 text-xs md:px-5 md:py-2 md:text-sm"
             >
-              Apply Now 2026-27
+              Apply Now
+              <span className="hidden xl:inline"> 2026-27</span>
             </Button>
 
             {/* Mobile Menu Trigger */}

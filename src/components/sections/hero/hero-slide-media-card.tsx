@@ -101,7 +101,7 @@ export function HeroSlideMediaCard({
           className
         )}
       >
-        <div className="relative mx-auto w-full h-[320px] sm:h-[400px] lg:h-[460px] xl:h-[500px] flex items-center justify-center lg:justify-end group/rightcard">
+        <div className="relative mx-auto w-full h-[240px] sm:h-[400px] lg:h-[460px] xl:h-[500px] flex items-center justify-center lg:justify-end group/rightcard">
           <Image
             src={media.imageUrl}
             alt={media.imageAlt || media.title || "Hero showcase"}
@@ -199,12 +199,12 @@ export function HeroSlideMediaCard({
         onFocus={() => setIsHovered(true)}
         onBlur={() => setIsHovered(false)}
         className={cn(
-          "relative lg:col-span-5 flex flex-col items-center justify-center py-4 select-none",
+          "relative lg:col-span-5 flex flex-col items-center justify-center py-1 sm:py-4 select-none overflow-x-clip sm:overflow-visible w-full",
           className
         )}
       >
-        {/* 3D Stacked Cards Stage */}
-        <div className="relative w-full max-w-[340px] sm:max-w-[370px] min-h-[440px] flex items-center justify-center">
+        {/* 3D Stacked Cards Stage — compact height on mobile; peeks from sm+ */}
+        <div className="relative w-full max-w-[min(100%,320px)] sm:max-w-[340px] md:max-w-[370px] min-h-0 sm:min-h-[440px] flex items-center justify-center">
           {cardsData.map((card, idx) => {
             // Position relative to activeCardIndex: 0 = front, 1 = right, 2 = left
             const position = (idx - activeCardIndex + cardsData.length) % cardsData.length;
@@ -217,38 +217,38 @@ export function HeroSlideMediaCard({
               return (
                 <div
                   key={card.id}
-                  className="relative z-20 w-full rounded-[26px] bg-white/95 backdrop-blur-2xl shadow-[0_24px_50px_rgba(0,0,0,0.08),0_4px_16px_rgba(0,0,0,0.02)] p-5 sm:p-5.5 flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] scale-100 rotate-0 translate-x-0 translate-y-0 opacity-100"
+                  className="relative z-20 w-full rounded-[20px] sm:rounded-[26px] bg-white/95 backdrop-blur-2xl shadow-[0_16px_40px_rgba(0,0,0,0.08),0_4px_16px_rgba(0,0,0,0.02)] sm:shadow-[0_24px_50px_rgba(0,0,0,0.08),0_4px_16px_rgba(0,0,0,0.02)] p-3.5 sm:p-5 md:p-5.5 flex flex-col justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] scale-100 rotate-0 translate-x-0 translate-y-0 opacity-100"
                 >
                   {/* Card Header: Eyebrow Capsule + Clean Headline + Shuffle Button */}
                   <div>
-                    <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-black/[0.04] text-[10px] font-semibold tracking-wider text-slate-500 uppercase font-sans">
+                    <div className="flex items-center justify-between gap-2 mb-1 sm:mb-1.5">
+                      <span className="inline-flex items-center px-2 py-0.5 sm:px-2.5 rounded-full bg-black/[0.04] text-[9px] sm:text-[10px] font-semibold tracking-wider text-slate-500 uppercase font-sans">
                         {card.eyebrow}
                       </span>
                       <button
                         type="button"
                         onClick={rotateNext}
                         title="Shuffle next card"
-                        className="w-6 h-6 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-slate-500 hover:text-[#1d1d1f] flex items-center justify-center transition-all active:rotate-180 active:scale-90 cursor-pointer"
+                        className="w-7 h-7 sm:w-6 sm:h-6 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-slate-500 hover:text-[#1d1d1f] flex items-center justify-center transition-all active:rotate-180 active:scale-90 cursor-pointer"
                         aria-label="Rotate next card"
                       >
                         <RotateCw className="w-3 h-3" />
                       </button>
                     </div>
-                    <h3 className="text-[22px] sm:text-[24px] font-semibold text-[#1d1d1f] tracking-tight font-sans leading-tight">
+                    <h3 className="text-[17px] sm:text-[24px] font-semibold text-[#1d1d1f] tracking-tight font-sans leading-tight">
                       {card.title}
                     </h3>
                   </div>
 
-                  {/* Center Media Showcase Window (Clean Apple Rounded Geometry - Borderless) */}
-                  <div className="relative my-3 w-full flex flex-col items-center">
+                  {/* Center Media Showcase Window — shorter on mobile */}
+                  <div className="relative my-2 sm:my-3 w-full flex flex-col items-center">
                     <div
                       onClick={() =>
                         card.isVideo
                           ? onOpenVideoModal?.(card.videoUrl)
                           : rotateNext()
                       }
-                      className="group/media relative w-full h-[185px] sm:h-[195px] rounded-[18px] overflow-hidden bg-[#f5f5f7] cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
+                      className="group/media relative w-full h-[128px] sm:h-[185px] md:h-[195px] rounded-[14px] sm:rounded-[18px] overflow-hidden bg-[#f5f5f7] cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
                     >
                       <Image
                         src={card.image}
@@ -264,38 +264,38 @@ export function HeroSlideMediaCard({
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none" />
 
                       {/* Top-Right Frosted Glass Tag Pill */}
-                      <div className="absolute top-2.5 right-2.5 z-10 pointer-events-none">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-md text-[10px] font-medium tracking-wide text-white shadow-xs">
+                      <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 z-10 pointer-events-none">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-black/45 backdrop-blur-md text-[9px] sm:text-[10px] font-medium tracking-wide text-white shadow-xs">
                           {card.id === "placements" ? (
-                            <Trophy className="w-3 h-3 text-amber-300" />
+                            <Trophy className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-amber-300" />
                           ) : card.isVideo ? (
-                            <Video className="w-3 h-3 text-white" />
+                            <Video className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
                           ) : (
-                            <Sparkles className="w-3 h-3 text-white" />
+                            <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
                           )}
                           <span>{card.tag}</span>
                         </span>
                       </div>
 
-                      {/* Video Play Button (Signature Apple Translucent Frosted Glass with Dynamic Theme Red Icon) */}
+                      {/* Video Play Button */}
                       {card.isVideo && (
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div
                             className={cn(
-                              "w-12 h-12 rounded-full bg-white/95 hover:bg-white backdrop-blur-md group-hover/media:scale-110 active:scale-95 flex items-center justify-center shadow-lg transition-all duration-300",
+                              "w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 hover:bg-white backdrop-blur-md group-hover/media:scale-110 active:scale-95 flex items-center justify-center shadow-lg transition-all duration-300",
                               card.playIconClass || "text-[#e41d43]"
                             )}
                           >
-                            <Play className="w-5 h-5 fill-current ml-0.5" />
+                            <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-current ml-0.5" />
                           </div>
                         </div>
                       )}
                     </div>
                   </div>
 
-                  {/* Card Body: Description & Dynamic Theme CTA */}
-                  <div className="pt-1 text-center space-y-3">
-                    <p className="text-[13px] text-slate-500 leading-relaxed font-normal max-w-[280px] mx-auto line-clamp-2">
+                  {/* Card Body — description hidden on phone (left column already tells the story) */}
+                  <div className="pt-0.5 sm:pt-1 text-center space-y-2 sm:space-y-3">
+                    <p className="hidden sm:block text-[13px] text-slate-500 leading-relaxed font-normal max-w-[280px] mx-auto line-clamp-2">
                       {card.description}
                     </p>
 
@@ -305,7 +305,7 @@ export function HeroSlideMediaCard({
                           type="button"
                           onClick={() => onOpenVideoModal?.(card.videoUrl)}
                           className={cn(
-                            "inline-flex items-center justify-center gap-1.5 px-6 py-2 rounded-full text-[13px] font-medium tracking-tight shadow-xs transition-all active:scale-95 cursor-pointer",
+                            "inline-flex items-center justify-center gap-1.5 min-h-10 sm:min-h-0 px-5 sm:px-6 py-2 rounded-full text-[12px] sm:text-[13px] font-medium tracking-tight shadow-xs transition-all active:scale-95 cursor-pointer w-full sm:w-auto",
                             card.buttonBgClass || defaultButtonClass
                           )}
                         >
@@ -316,7 +316,7 @@ export function HeroSlideMediaCard({
                         <Link
                           href={card.ctaLink}
                           className={cn(
-                            "inline-flex items-center justify-center gap-1.5 px-6 py-2 rounded-full text-[13px] font-medium tracking-tight shadow-xs transition-all active:scale-95",
+                            "inline-flex items-center justify-center gap-1.5 min-h-10 sm:min-h-0 px-5 sm:px-6 py-2 rounded-full text-[12px] sm:text-[13px] font-medium tracking-tight shadow-xs transition-all active:scale-95 w-full sm:w-auto",
                             card.buttonBgClass || defaultButtonClass
                           )}
                         >
@@ -342,7 +342,9 @@ export function HeroSlideMediaCard({
                   if (e.key === "Enter" || e.key === " ") setActiveCardIndex(idx);
                 }}
                 className={cn(
-                  "absolute top-5 w-[280px] sm:w-[310px] h-[370px] sm:h-[390px] rounded-[26px] bg-[#fafafc]/95 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.06)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex flex-col justify-between p-4 cursor-pointer hover:shadow-xl",
+                  "absolute top-5 w-[280px] sm:w-[310px] h-[370px] sm:h-[390px] rounded-[26px] bg-[#fafafc]/95 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.06)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex-col justify-between p-4 cursor-pointer hover:shadow-xl",
+                  // Hide peek cards on narrow phones to avoid horizontal overflow; show from sm+
+                  "hidden sm:flex",
                   isRight && "z-10 -right-5 sm:-right-8 rotate-6 scale-95 opacity-80 hover:opacity-100 hover:scale-[0.98] hover:rotate-3",
                   isLeft && "z-10 -left-5 sm:-left-8 -rotate-6 scale-95 opacity-80 hover:opacity-100 hover:scale-[0.98] hover:-rotate-3"
                 )}
@@ -385,15 +387,15 @@ export function HeroSlideMediaCard({
           })}
         </div>
 
-        {/* Rotation Dots Indicator (Apple minimalist pills) */}
-        <div className="flex items-center justify-center gap-2 my-2.5 z-20">
+        {/* Rotation Dots — larger hit area on mobile; shuffle via dots instead of bottom pill */}
+        <div className="flex items-center justify-center gap-2.5 sm:gap-2 my-2 sm:my-2.5 z-20">
           {cardsData.map((c, i) => (
             <button
               key={c.id}
               type="button"
               onClick={() => setActiveCardIndex(i)}
               className={cn(
-                "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
+                "relative h-1.5 rounded-full transition-all duration-300 cursor-pointer before:absolute before:-inset-3 before:content-['']",
                 i === activeCardIndex
                   ? "w-6 bg-[#1d1d1f]"
                   : "w-1.5 bg-black/20 hover:bg-black/40"
@@ -403,8 +405,8 @@ export function HeroSlideMediaCard({
           ))}
         </div>
 
-        {/* Bottom Floating Action Pill (Apple frosted capsule bar - Borderless) */}
-        <div className="relative z-30 w-[94%] max-w-[370px]">
+        {/* Bottom Floating Action Pill — desktop/tablet only (redundant with card CTA on phone) */}
+        <div className="relative z-30 w-[94%] max-w-[370px] hidden sm:block">
           <div className="w-full rounded-full bg-white/90 backdrop-blur-xl shadow-[0_10px_35px_rgba(0,0,0,0.07)] px-4 py-2 sm:py-2.5 flex items-center justify-between gap-3 transition-all hover:shadow-lg group/bottompill">
             <Link
               href={activeCard.ctaLink}
@@ -437,7 +439,7 @@ export function HeroSlideMediaCard({
     >
       <div className="relative mx-auto max-w-md md:max-w-lg lg:max-w-none">
         <div className="relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-300">
-          <div className="relative min-h-[380px] sm:min-h-[420px] lg:min-h-[460px] flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#1c2e59] via-[#152345] to-[#0c162e] border border-white/10 p-5 sm:p-6 lg:p-7 text-white group/rightcard">
+          <div className="relative min-h-[320px] sm:min-h-[420px] lg:min-h-[460px] flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#1c2e59] via-[#152345] to-[#0c162e] border border-white/10 p-4 sm:p-6 lg:p-7 text-white group/rightcard">
             {(!media.imageUrl || media.type !== "image") && (
               <>
                 <div

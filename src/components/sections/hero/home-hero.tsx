@@ -198,11 +198,11 @@ export function HomeHero({
     >
       {/* Subtle background ambient mesh */}
       <div
-        className="pointer-events-none absolute -top-40 right-0 -z-10 h-[500px] w-[500px] rounded-full bg-[var(--color-brand-50)] blur-3xl opacity-70"
+        className="pointer-events-none absolute -top-24 right-0 -z-10 h-[240px] w-[240px] sm:h-[400px] sm:w-[400px] lg:-top-40 lg:h-[500px] lg:w-[500px] rounded-full bg-[var(--color-brand-50)] blur-3xl opacity-70"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute top-1/2 left-0 -z-10 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-blue-50/50 blur-3xl opacity-60"
+        className="pointer-events-none absolute top-1/2 left-0 -z-10 h-[200px] w-[200px] sm:h-[320px] sm:w-[320px] lg:h-[400px] lg:w-[400px] -translate-x-1/2 rounded-full bg-blue-50/50 blur-3xl opacity-60"
         aria-hidden="true"
       />
 
@@ -308,9 +308,9 @@ export function HomeHero({
                       </div>
                     )}
 
-                    {/* Layer 4: Soft protective fade on left side for text readability */}
+                    {/* Layer 4: Soft protective fade — stronger on mobile for text/stats over photo; left-side on desktop */}
                     {(slide.showBackgroundOverlay ?? Boolean(slide.backgroundImage && !slide.backgroundClass)) && (
-                      <div className="absolute inset-0 pointer-events-none z-0 bg-gradient-to-r from-white via-white/20 via-35% to-transparent" />
+                      <div className="absolute inset-0 pointer-events-none z-0 bg-gradient-to-b from-white from-0% via-white/92 via-55% to-white/70 lg:bg-gradient-to-r lg:from-white lg:via-white/20 lg:via-35% lg:to-transparent" />
                     )}
                   </>
                 )}
@@ -319,7 +319,7 @@ export function HomeHero({
                 {isBannerMode ? (
                   <div
                     className={cn(
-                      "w-full lg:h-full mx-auto flex items-center justify-center transition-all pt-20",
+                      "w-full lg:h-full mx-auto flex items-center justify-center transition-all pt-16 sm:pt-20",
                       slide.fullBleed
                         ? "max-w-none px-0"
                         : "max-w-[1680px] px-2 sm:px-4 md:px-6"
@@ -375,34 +375,34 @@ export function HomeHero({
                       {slide.showOverlay && (
                         <>
                           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none" />
-                          <div className="relative z-20 max-w-2xl space-y-4 md:space-y-5 p-6 sm:p-10 md:p-12 text-white flex flex-col justify-end h-full">
+                          <div className="relative z-20 max-w-2xl space-y-3 sm:space-y-4 md:space-y-5 p-5 sm:p-10 md:p-12 text-white flex flex-col justify-end h-full">
                             {slide.badge && (
-                              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide bg-white/20 backdrop-blur-md text-white border border-white/30">
-                                <span className="w-2 h-2 rounded-full bg-[#e41d43]" />
+                              <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide bg-white/20 backdrop-blur-md text-white border border-white/30">
+                                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#e41d43]" />
                                 <span>{slide.badge}</span>
                               </div>
                             )}
 
                             {slide.headline && (
-                              <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight leading-[1.14] font-heading drop-shadow-md">
+                              <h2 className="text-xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight leading-[1.18] sm:leading-[1.14] font-heading drop-shadow-md">
                                 {slide.headline}
                               </h2>
                             )}
 
                             {slide.subtitle && (
-                              <p className="text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed font-normal max-w-xl drop-shadow-sm">
+                              <p className="text-[13px] sm:text-base md:text-lg text-slate-200 leading-relaxed font-normal max-w-xl drop-shadow-sm line-clamp-3 sm:line-clamp-none">
                                 {slide.subtitle}
                               </p>
                             )}
 
                             {(slide.primaryCta || slide.secondaryCta) && (
-                              <div className="flex flex-wrap items-center gap-3 pt-2">
+                              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 pt-1 sm:pt-2">
                                 {slide.primaryCta && (
                                   <Button
                                     href={slide.primaryCta.href}
                                     variant="primary"
                                     size="lg"
-                                    className="group shadow-lg"
+                                    className="group shadow-lg min-h-11 w-full sm:w-auto"
                                   >
                                     <span>{slide.primaryCta.label}</span>
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-1" />
@@ -414,7 +414,7 @@ export function HomeHero({
                                     href={slide.secondaryCta.href}
                                     variant="secondary"
                                     size="lg"
-                                    className="bg-white/90 backdrop-blur-md text-[#243d77] hover:bg-white border-0 shadow-lg"
+                                    className="bg-white/90 backdrop-blur-md text-[#243d77] hover:bg-white border-0 shadow-lg min-h-11 w-full sm:w-auto"
                                   >
                                     <span>{slide.secondaryCta.label}</span>
                                   </Button>
@@ -427,9 +427,9 @@ export function HomeHero({
                     </div>
                   </div>
                 ) : (
-                  <Container className="relative z-10 pt-20 pb-10 sm:pb-12 md:pb-14">
-                    {/* OPTION 1: SPLIT 2-COLUMN LAYOUT (Supporting Text + Card / Video / Image Card) */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-8 items-center min-h-0 lg:min-h-[500px]">
+                  <Container className="relative z-10 pt-16 pb-14 sm:pt-20 sm:pb-12 md:pb-14 lg:pt-20">
+                    {/* OPTION 1: SPLIT 2-COLUMN LAYOUT — tighter gap on phone only */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8 lg:gap-8 items-center min-h-0 lg:min-h-[500px]">
                       {/* Left Column: Headline, Subtitle, CTAs, Proof Points */}
                       <HeroSlideContent slide={slide} />
 
@@ -452,14 +452,14 @@ export function HomeHero({
 
       {/* Apple-grade Master Bottom Navigation Bar (Centered Dots with Play/Pause) */}
       {showIndicators && totalSlides > 1 && (
-        <div className="absolute bottom-3 sm:bottom-4 md:bottom-5 left-0 right-0 z-20 pointer-events-none">
+        <div className="absolute bottom-2.5 sm:bottom-4 md:bottom-5 left-0 right-0 z-20 pointer-events-none">
           <Container>
             <div
-              className="flex items-center justify-center gap-3.5 pointer-events-auto"
+              className="flex items-center justify-center gap-3 sm:gap-3.5 pointer-events-auto"
             >
               {/* Center Apple-style Indicator Progress Pills */}
               <div
-                className="flex items-center gap-2.5"
+                className="flex items-center gap-2 sm:gap-2.5"
                 role="tablist"
                 aria-label="Hero slide selection"
               >
@@ -474,7 +474,7 @@ export function HomeHero({
                       aria-selected={isActive}
                       aria-label={`Go to slide ${idx + 1}: ${slideLabel}`}
                       onClick={() => goToSlide(idx)}
-                      className="group relative h-2.5 rounded-full overflow-hidden transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#e41d43] before:absolute before:-inset-2 before:content-['']"
+                      className="group relative h-2 sm:h-2.5 rounded-full overflow-hidden transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#e41d43] before:absolute before:-inset-3 before:content-['']"
                       style={{
                         width: isActive ? "52px" : "14px",
                         backgroundColor: isActive
@@ -501,14 +501,14 @@ export function HomeHero({
                 <button
                   type="button"
                   onClick={() => setIsPlaying(!isPlaying)}
-                  className="w-7 h-7 rounded-full border border-slate-200 bg-white/90 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-xs flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
+                  className="w-8 h-8 sm:w-7 sm:h-7 rounded-full border border-slate-200 bg-white/90 hover:bg-white text-[#1d1d1f] hover:text-[#e41d43] shadow-xs flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#e41d43]"
                   aria-label={isPlaying ? "Pause hero slider" : "Play hero slider"}
                   title={isPlaying ? "Pause autoplay" : "Start autoplay"}
                 >
                   {isPlaying ? (
-                    <Pause className="w-3 h-3 text-slate-700" />
+                    <Pause className="w-3.5 h-3.5 sm:w-3 sm:h-3 text-slate-700" />
                   ) : (
-                    <Play className="w-3 h-3 text-slate-700 fill-slate-700 ml-0.5" />
+                    <Play className="w-3.5 h-3.5 sm:w-3 sm:h-3 text-slate-700 fill-slate-700 ml-0.5" />
                   )}
                 </button>
               )}
