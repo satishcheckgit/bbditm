@@ -189,26 +189,26 @@ function ProductCard({ item, index, onOpenQuickView }: ProductCardProps) {
   return (
     <div
       onClick={() => onOpenQuickView(item, selectedSwatch || undefined)}
-      className={`group relative flex flex-col ${item.customBgClass || "bg-white"} rounded-[22px] overflow-hidden border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_36px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-300 ease-out cursor-pointer min-h-[350px] sm:min-h-[360px] select-none`}
+      className={`group relative flex flex-col ${item.customBgClass || "bg-white"} rounded-[20px] sm:rounded-[22px] overflow-hidden border border-black/[0.04] shadow-[0_2px_12px_rgba(0,0,0,0.04)] sm:shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_36px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 active:scale-[0.98] sm:active:scale-100 transition-all duration-200 sm:duration-300 ease-out cursor-pointer min-h-[320px] sm:min-h-[360px] select-none [-webkit-tap-highlight-color:transparent]`}
       role="article"
       aria-label={displayTitle}
     >
       {/* Top Header: Eyebrow, Title, Subtitle, Price (matching Apple Store reference) */}
-      <div className="flex flex-col text-left pt-5 px-5 sm:pt-6 sm:px-6">
+      <div className="flex flex-col text-left pt-4.5 px-4.5 sm:pt-6 sm:px-6">
         {/* Eyebrow */}
         {/* <span className="text-[12px] font-semibold text-[#b64400] tracking-wider uppercase mb-1.5">
           {displayEyebrow}
         </span> */}
 
         {/* Title */}
-        <h3 className="text-[16px] sm:text-[18px] font-bold text-[#1d1d1f] tracking-tight leading-snug line-clamp-2 mb-1 group-hover:text-[#004b87] transition-colors">
+        <h3 className="text-[15px] sm:text-[18px] font-bold text-[#1d1d1f] tracking-tight leading-snug line-clamp-2 mb-1 group-hover:text-[#004b87] transition-colors">
           {displayTitle}
         </h3>
       </div>
 
       {/* Bottom Area: Visual Image (flush edge-to-edge, flex-1 eliminates dead whitespace) */}
       <div
-        className="relative w-full flex-1 min-h-[190px] sm:min-h-[200px] overflow-hidden mt-3 group-hover:scale-[1.02] transition-transform duration-300"
+        className="relative w-full flex-1 min-h-[180px] sm:min-h-[200px] overflow-hidden mt-2.5 sm:mt-3 group-hover:scale-[1.02] transition-transform duration-300"
       >
         {/* Background Image */}
         <Image
@@ -307,7 +307,7 @@ function BannerCard({ item, index, onOpenQuickView }: BannerCardProps) {
   return (
     <div
       onClick={() => onOpenQuickView(item)}
-      className={`group relative flex flex-col justify-between rounded-[22px] p-6 sm:p-7 overflow-hidden transition-all duration-300 ease-out cursor-pointer min-h-[350px] sm:min-h-[360px] col-span-1 sm:col-span-2 lg:col-span-2 ${isDark
+      className={`group relative flex flex-col justify-between rounded-[20px] sm:rounded-[22px] p-5 sm:p-7 overflow-hidden transition-all duration-200 sm:duration-300 ease-out cursor-pointer min-h-[320px] sm:min-h-[360px] col-span-1 sm:col-span-2 lg:col-span-2 active:scale-[0.98] sm:active:scale-100 select-none [-webkit-tap-highlight-color:transparent] ${isDark
         ? "bg-gradient-to-br from-[#05070e] via-[#091122] to-[#111e3b] text-white shadow-[0_4px_24px_rgba(0,0,0,0.25)] hover:shadow-[0_20px_48px_rgba(0,0,0,0.4)] hover:-translate-y-1.5"
         : isBlue
           ? "bg-gradient-to-br from-[#0c2340] via-[#1d4ed8] to-[#0284c7] text-white shadow-[0_4px_24px_rgba(29,78,216,0.3)] hover:shadow-[0_20px_48px_rgba(29,78,216,0.45)] hover:-translate-y-1.5"
@@ -320,23 +320,23 @@ function BannerCard({ item, index, onOpenQuickView }: BannerCardProps) {
       <div className="relative z-10 max-w-md">
         <div className="mb-2">
           <span
-            className={`inline-block px-2.5 py-0.5 rounded-[4px] ${theme.badgeBg} text-white text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-xs`}
+            className={`inline-block px-2 sm:px-2.5 py-0.5 rounded-[4px] ${theme.badgeBg} text-white text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-xs`}
           >
             {item.badge || theme.category}
           </span>
         </div>
-        <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white leading-snug line-clamp-2">
+        <h3 className="text-[17px] sm:text-2xl font-bold tracking-tight text-white leading-snug line-clamp-2">
           {item.title}
         </h3>
         {item.subtitle && (
-          <p className="mt-1.5 text-xs sm:text-sm text-white/80 leading-relaxed line-clamp-2">
+          <p className="mt-1 sm:mt-1.5 text-[12px] sm:text-sm text-white/80 leading-relaxed line-clamp-2">
             {item.subtitle}
           </p>
         )}
       </div>
 
       {/* Middle/Bottom Visual Image with Light Ray Accent */}
-      <div className="relative w-full h-[190px] sm:h-[210px] my-2.5 rounded-xl overflow-hidden flex items-center justify-center">
+      <div className="relative w-full h-[175px] sm:h-[210px] my-2 sm:my-2.5 rounded-xl overflow-hidden flex items-center justify-center">
 
         <div
           className="absolute inset-0 pointer-events-none"
@@ -359,7 +359,7 @@ function BannerCard({ item, index, onOpenQuickView }: BannerCardProps) {
 
       {/* Bottom Floating Action Plus Button + Action Link */}
       <div className="relative z-10 flex items-center justify-between pt-2 border-t border-white/10">
-        <span className="text-xs font-semibold text-white/90 group-hover:text-white transition-colors flex items-center gap-1">
+        <span className="text-[11px] sm:text-xs font-semibold text-white/90 group-hover:text-white transition-colors flex items-center gap-1">
           <span>{item.ctaText || "Explore facility"}</span>
           <ChevronRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
         </span>
@@ -371,9 +371,9 @@ function BannerCard({ item, index, onOpenQuickView }: BannerCardProps) {
             onOpenQuickView(item);
           }}
           aria-label={`View details for ${item.title}`}
-          className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 active:scale-95 text-white flex items-center justify-center backdrop-blur-md shadow-md transition-all hover:scale-105 border border-white/15"
+          className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/20 hover:bg-white/30 active:scale-90 text-white flex items-center justify-center backdrop-blur-md shadow-md transition-all hover:scale-105 border border-white/15 select-none [-webkit-tap-highlight-color:transparent]"
         >
-          <Plus className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
+          <Plus className="w-4.5 h-4.5 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:rotate-90" />
         </button>
       </div>
     </div>
@@ -421,14 +421,14 @@ function QuickViewModal({ item, initialSwatch, onClose }: QuickViewModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-md animate-in fade-in duration-200"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
     >
       <div
-        className="relative w-full max-w-3xl bg-white rounded-[28px] overflow-hidden shadow-2xl border border-black/[0.06] max-h-[90vh] flex flex-col md:flex-row animate-in zoom-in-95 duration-200 select-text"
+        className="relative w-full max-w-3xl bg-white rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-2xl border border-black/[0.06] max-h-[90vh] flex flex-col md:flex-row animate-in zoom-in-95 duration-200 select-text"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -436,7 +436,7 @@ function QuickViewModal({ item, initialSwatch, onClose }: QuickViewModalProps) {
           type="button"
           onClick={onClose}
           aria-label="Close dialog"
-          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200 text-[#1d1d1f] flex items-center justify-center transition-all active:scale-95 shadow-sm"
+          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200 text-[#1d1d1f] flex items-center justify-center transition-all active:scale-90 shadow-sm select-none [-webkit-tap-highlight-color:transparent]"
         >
           <X className="w-5 h-5" />
         </button>
@@ -582,14 +582,14 @@ function QuickViewModal({ item, initialSwatch, onClose }: QuickViewModalProps) {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded-full bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs sm:text-sm font-semibold py-3 px-5 text-center transition-all shadow-sm active:scale-98"
+              className="flex-1 min-h-[44px] rounded-full bg-[#0071e3] hover:bg-[#0077ed] text-white text-[13px] sm:text-sm font-semibold py-2.5 sm:py-3 px-5 text-center transition-all shadow-sm active:scale-95 select-none [-webkit-tap-highlight-color:transparent]"
             >
               {item.ctaText || "Select & Proceed"}
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="rounded-full bg-neutral-100 hover:bg-neutral-200 text-[#1d1d1f] text-xs sm:text-sm font-medium py-3 px-5 text-center transition-all"
+              className="min-h-[44px] rounded-full bg-neutral-100 hover:bg-neutral-200 text-[#1d1d1f] text-[13px] sm:text-sm font-medium py-2.5 sm:py-3 px-5 text-center transition-all active:scale-95 select-none [-webkit-tap-highlight-color:transparent]"
             >
               Close
             </button>
@@ -628,11 +628,11 @@ export function BentoGallery({
   };
 
   return (
-    <section className={`py-10 sm:py-10 lg:py-10 bg-[#f5f5f7] ${className}`}>
-      <div className="max-w-[1540px] mx-auto px-2 sm:px-4 lg:px-4">
+    <section className={`py-8 sm:py-10 lg:py-10 bg-[#f5f5f7] ${className}`}>
+      <div className="max-w-[1540px] mx-auto px-4 sm:px-4 lg:px-4">
         {/* Section Header */}
         {(title || eyebrow || description) && (
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-14">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-14">
             <div className="max-w-2xl">
               {/* {eyebrow && (
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[#0071e3] text-xs font-semibold tracking-wide mb-3 shadow-[0_1px_4px_rgba(0,0,0,0.04)] border border-black/[0.04]">
@@ -641,12 +641,12 @@ export function BentoGallery({
                 </div>
               )} */}
               {title && (
-                <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-semibold text-[#1d1d1f] tracking-tight leading-tight">
+                <h2 className="text-[22px] sm:text-4xl lg:text-[40px] font-bold sm:font-semibold text-[#1d1d1f] tracking-tight leading-tight font-heading">
                   {title}
                 </h2>
               )}
               {description && (
-                <p className="mt-3 text-sm sm:text-base text-[#6e6e73] leading-relaxed">
+                <p className="mt-2 sm:mt-3 text-[13px] sm:text-base text-[#6e6e73] leading-relaxed">
                   {description}
                 </p>
               )}
@@ -655,7 +655,7 @@ export function BentoGallery({
             {viewAllHref && (
               <Link
                 href={viewAllHref}
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#0071e3] hover:text-[#0077ed] shrink-0 self-start md:self-end group"
+                className="inline-flex items-center gap-1.5 text-[13px] sm:text-sm font-semibold text-[#0071e3] hover:text-[#0077ed] shrink-0 self-start md:self-end group active:scale-95 transition-all select-none [-webkit-tap-highlight-color:transparent]"
               >
                 <span>{viewAllText}</span>
                 <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -665,7 +665,7 @@ export function BentoGallery({
         )}
 
         {/* 4-Column Responsive Bento Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {items.map((item, index) => {
             if (item.type === "banner") {
               return (

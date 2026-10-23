@@ -144,6 +144,7 @@ export function ProgrammeDiscovery({ programmes }: ProgrammeDiscoveryProps) {
             </div>
           ))}
         </div>
+
       </Container>
     </section>
   );
