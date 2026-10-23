@@ -199,12 +199,12 @@ export function HeroSlideMediaCard({
         onFocus={() => setIsHovered(true)}
         onBlur={() => setIsHovered(false)}
         className={cn(
-          "relative lg:col-span-5 flex flex-col items-center justify-center py-1 sm:py-4 select-none overflow-x-clip sm:overflow-visible w-full",
+          "relative lg:col-span-5 flex flex-col items-center justify-center py-1 sm:py-4 select-none overflow-visible w-full",
           className
         )}
       >
-        {/* 3D Stacked Cards Stage — compact height on mobile; peeks from sm+ */}
-        <div className="relative w-full max-w-[min(100%,320px)] sm:max-w-[340px] md:max-w-[370px] min-h-0 sm:min-h-[440px] flex items-center justify-center">
+        {/* 3D Stacked Cards Stage with Proportional Wings Rotation on Both Mobile & Desktop */}
+        <div className="relative w-full max-w-[min(100%,290px)] sm:max-w-[340px] md:max-w-[370px] min-h-[305px] sm:min-h-[440px] flex items-center justify-center">
           {cardsData.map((card, idx) => {
             // Position relative to activeCardIndex: 0 = front, 1 = right, 2 = left
             const position = (idx - activeCardIndex + cardsData.length) % cardsData.length;
@@ -229,13 +229,13 @@ export function HeroSlideMediaCard({
                         type="button"
                         onClick={rotateNext}
                         title="Shuffle next card"
-                        className="w-7 h-7 sm:w-6 sm:h-6 rounded-full bg-black/[0.04] hover:bg-black/[0.08] text-slate-500 hover:text-[#1d1d1f] flex items-center justify-center transition-all active:rotate-180 active:scale-90 cursor-pointer"
+                        className="w-8 h-8 sm:w-6 sm:h-6 rounded-full bg-black/[0.04] hover:bg-black/[0.08] active:bg-black/[0.12] text-slate-500 hover:text-[#1d1d1f] flex items-center justify-center transition-all active:rotate-180 active:scale-90 cursor-pointer select-none [-webkit-tap-highlight-color:transparent]"
                         aria-label="Rotate next card"
                       >
-                        <RotateCw className="w-3 h-3" />
+                        <RotateCw className="w-3.5 h-3.5 sm:w-3 sm:h-3" />
                       </button>
                     </div>
-                    <h3 className="text-[17px] sm:text-[24px] font-semibold text-[#1d1d1f] tracking-tight font-sans leading-tight">
+                    <h3 className="text-[18px] sm:text-[24px] font-bold sm:font-semibold text-[#1d1d1f] tracking-tight font-sans leading-tight">
                       {card.title}
                     </h3>
                   </div>
@@ -305,7 +305,7 @@ export function HeroSlideMediaCard({
                           type="button"
                           onClick={() => onOpenVideoModal?.(card.videoUrl)}
                           className={cn(
-                            "inline-flex items-center justify-center gap-1.5 min-h-10 sm:min-h-0 px-5 sm:px-6 py-2 rounded-full text-[12px] sm:text-[13px] font-medium tracking-tight shadow-xs transition-all active:scale-95 cursor-pointer w-full sm:w-auto",
+                            "inline-flex items-center justify-center gap-1.5 px-4.5 sm:px-6 py-2 sm:py-2 rounded-full text-[12px] sm:text-[13px] font-semibold sm:font-medium tracking-tight shadow-xs transition-all duration-150 active:scale-95 select-none [-webkit-tap-highlight-color:transparent] cursor-pointer w-auto",
                             card.buttonBgClass || defaultButtonClass
                           )}
                         >
@@ -316,7 +316,7 @@ export function HeroSlideMediaCard({
                         <Link
                           href={card.ctaLink}
                           className={cn(
-                            "inline-flex items-center justify-center gap-1.5 min-h-10 sm:min-h-0 px-5 sm:px-6 py-2 rounded-full text-[12px] sm:text-[13px] font-medium tracking-tight shadow-xs transition-all active:scale-95 w-full sm:w-auto",
+                            "inline-flex items-center justify-center gap-1.5 px-4.5 sm:px-6 py-2 sm:py-2 rounded-full text-[12px] sm:text-[13px] font-semibold sm:font-medium tracking-tight shadow-xs transition-all duration-150 active:scale-95 select-none [-webkit-tap-highlight-color:transparent] w-auto",
                             card.buttonBgClass || defaultButtonClass
                           )}
                         >
@@ -342,42 +342,40 @@ export function HeroSlideMediaCard({
                   if (e.key === "Enter" || e.key === " ") setActiveCardIndex(idx);
                 }}
                 className={cn(
-                  "absolute top-5 w-[280px] sm:w-[310px] h-[370px] sm:h-[390px] rounded-[26px] bg-[#fafafc]/95 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.06)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex-col justify-between p-4 cursor-pointer hover:shadow-xl",
-                  // Hide peek cards on narrow phones to avoid horizontal overflow; show from sm+
-                  "hidden sm:flex",
-                  isRight && "z-10 -right-5 sm:-right-8 rotate-6 scale-95 opacity-80 hover:opacity-100 hover:scale-[0.98] hover:rotate-3",
-                  isLeft && "z-10 -left-5 sm:-left-8 -rotate-6 scale-95 opacity-80 hover:opacity-100 hover:scale-[0.98] hover:-rotate-3"
+                  "absolute top-2 sm:top-5 w-[260px] sm:w-[310px] h-[268px] sm:h-[390px] rounded-[22px] sm:rounded-[26px] bg-[#fafafc]/95 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,0,0,0.06)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden flex flex-col justify-between p-3 sm:p-4 cursor-pointer hover:shadow-xl",
+                  isRight && "z-10 -right-6 sm:-right-8 rotate-[7.5deg] sm:rotate-6 scale-95 opacity-85 hover:opacity-100 hover:scale-[0.98] hover:rotate-3",
+                  isLeft && "z-10 -left-6 sm:-left-8 -rotate-[7.5deg] sm:-rotate-6 scale-95 opacity-85 hover:opacity-100 hover:scale-[0.98] hover:-rotate-3"
                 )}
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-semibold text-slate-400 tracking-wider uppercase font-sans">
+                    <span className="text-[9px] sm:text-[10px] font-semibold text-slate-400 tracking-wider uppercase font-sans">
                       {card.eyebrow}
                     </span>
-                    <span className="text-[10px] text-slate-400 font-normal">
+                    <span className="text-[9px] sm:text-[10px] text-slate-400 font-normal">
                       Click to view
                     </span>
                   </div>
-                  <h4 className="text-[17px] font-semibold text-[#1d1d1f] tracking-tight font-sans mt-0.5">
+                  <h4 className="text-[13px] sm:text-[17px] font-semibold text-[#1d1d1f] tracking-tight font-sans mt-0.5 line-clamp-1">
                     {card.title}
                   </h4>
                 </div>
 
                 {/* Clean preview window - Borderless */}
-                <div className="relative w-full h-[160px] sm:h-[175px] rounded-[16px] overflow-hidden bg-[#f5f5f7] pointer-events-none">
+                <div className="relative w-full h-[110px] sm:h-[175px] rounded-[13px] sm:rounded-[16px] overflow-hidden bg-[#f5f5f7] pointer-events-none">
                   <Image
                     src={card.image}
                     alt=""
                     fill
                     unoptimized
-                    sizes="280px"
+                    sizes="(max-width: 640px) 255px, 280px"
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-black/10" />
                 </div>
 
                 <div className="text-center pt-0.5 pointer-events-none">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/95 text-[11px] font-medium text-slate-700 shadow-2xs">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/95 text-[10px] sm:text-[11px] font-medium text-slate-700 shadow-2xs">
                     <span>{card.ctaText}</span>
                     <ChevronRight className="w-3 h-3 text-slate-400" />
                   </span>
@@ -405,8 +403,8 @@ export function HeroSlideMediaCard({
           ))}
         </div>
 
-        {/* Bottom Floating Action Pill — desktop/tablet only (redundant with card CTA on phone) */}
-        <div className="relative z-30 w-[94%] max-w-[370px] hidden sm:block">
+        {/* Bottom Floating Action Pill — desktop only (redundant with card CTA on mobile/tablet) */}
+        <div className="relative z-30 w-[94%] max-w-[370px] hidden lg:block">
           <div className="w-full rounded-full bg-white/90 backdrop-blur-xl shadow-[0_10px_35px_rgba(0,0,0,0.07)] px-4 py-2 sm:py-2.5 flex items-center justify-between gap-3 transition-all hover:shadow-lg group/bottompill">
             <Link
               href={activeCard.ctaLink}
