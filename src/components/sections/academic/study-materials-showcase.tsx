@@ -206,11 +206,11 @@ export function StudyMaterialsShowcase({
               <span>{eyebrow}</span>
             </div> */}
 
-            <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-semibold text-[#1d1d1f] tracking-tight leading-[1.2] font-heading">
+            <h2 className="text-[22px] sm:text-3xl lg:text-[34px] font-bold sm:font-semibold text-[#1d1d1f] tracking-tight leading-snug sm:leading-[1.2] font-heading">
               {title}
             </h2>
 
-            <p className="text-sm sm:text-base text-[#0C0C0D] leading-relaxed pt-0.5">
+            <p className="text-[13px] sm:text-base text-[#48484a] sm:text-[#0C0C0D] leading-relaxed pt-0.5">
               {description}
             </p>
           </div>
@@ -218,25 +218,25 @@ export function StudyMaterialsShowcase({
 
         {/* Horizontal Carousel of Pastel Cards with Floating Navigation Controls */}
         <div className="relative group/carousel">
-          {/* Floating Left Button on Carousel Track (Shifted outward to edge, never overlaps card) */}
+          {/* Floating Left Button on Carousel Track (Desktop only, hidden on mobile for clean gesture swipe) */}
           {canScrollLeft && (
             <button
               type="button"
               onClick={() => handleScroll("left")}
               aria-label="Scroll left in study materials"
-              className="absolute -left-3 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-[#f5f5f7] text-[#1d1d1f] border border-black/10 shadow-[0_6px_20px_rgba(0,0,0,0.16)] flex items-center justify-center transition-all duration-200 active:scale-90 hover:scale-105"
+              className="hidden sm:flex absolute sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-[#f5f5f7] text-[#1d1d1f] border border-black/10 shadow-[0_6px_20px_rgba(0,0,0,0.16)] items-center justify-center transition-all duration-200 active:scale-90 hover:scale-105"
             >
               <ChevronLeft className="w-5 h-5 mr-0.5" />
             </button>
           )}
 
-          {/* Floating Right Button on Carousel Track (Shifted outward to edge, never overlaps card) */}
+          {/* Floating Right Button on Carousel Track (Desktop only, hidden on mobile for clean gesture swipe) */}
           {canScrollRight && (
             <button
               type="button"
               onClick={() => handleScroll("right")}
               aria-label="Scroll right in study materials"
-              className="absolute -right-3 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-[#f5f5f7] text-[#1d1d1f] shadow-[0_6px_20px_rgba(0,0,0,0.28)] flex items-center justify-center transition-all duration-200 active:scale-90 hover:scale-105"
+              className="hidden sm:flex absolute sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-[#f5f5f7] text-[#1d1d1f] shadow-[0_6px_20px_rgba(0,0,0,0.28)] items-center justify-center transition-all duration-200 active:scale-90 hover:scale-105"
             >
               <ChevronRight className="w-5 h-5 ml-0.5" />
             </button>
@@ -245,33 +245,33 @@ export function StudyMaterialsShowcase({
           <div
             ref={scrollContainerRef}
             onScroll={checkScroll}
-            className="flex gap-5 sm:gap-6 overflow-x-auto pb-4 pt-2 -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth snap-x snap-mandatory scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 pt-2 -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth snap-x snap-mandatory scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] touch-pan-x select-none"
           >
             {materials.map((item) => {
               return (
                 <div
                   key={item.id}
-                  className={`snap-start shrink-0 w-[220px] sm:w-[245px] md:w-[260px] h-[370px] sm:h-[390px] rounded-[24px] ${item.bgClass} ${item.hoverBgClass} ${item.borderClass} p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_32px_rgba(0,0,0,0.08)] group relative overflow-hidden`}
+                  className={`snap-start shrink-0 w-[220px] sm:w-[245px] md:w-[260px] h-[365px] sm:h-[390px] rounded-[24px] ${item.bgClass} ${item.hoverBgClass} ${item.borderClass} p-4.5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.985] sm:active:scale-100 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_32px_rgba(0,0,0,0.08)] group relative overflow-hidden select-none`}
                 >
                   {/* Top Section: Tag and Bold Title */}
-                  <div className="space-y-3 z-10">
+                  <div className="space-y-2.5 sm:space-y-3 z-10">
                     <div className="flex items-center justify-between gap-2">
                       <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${item.pillBg} ${item.pillText}`}
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold sm:font-semibold uppercase tracking-wider ${item.pillBg} ${item.pillText}`}
                       >
                         {item.tag}
                       </span>
 
-                      <span className="text-[11px] font-medium text-[#0C0C0D]">
+                      <span className="text-[10.5px] sm:text-[11px] font-semibold sm:font-medium text-[#1d1d1f]/80 sm:text-[#0C0C0D]">
                         {item.itemCount}
                       </span>
                     </div>
 
-                    <h3 className="text-lg sm:text-[19px] font-semibold text-[#1d1d1f] font-heading tracking-tight leading-snug line-clamp-2">
+                    <h3 className="text-[17px] sm:text-[19px] font-bold sm:font-semibold text-[#1d1d1f] font-heading tracking-tight leading-snug line-clamp-2">
                       {item.title}
                     </h3>
 
-                    <p className="text-xs text-[#0C0C0D] leading-relaxed line-clamp-2">
+                    <p className="text-[11.5px] sm:text-xs text-[#3a3a3c] sm:text-[#0C0C0D] leading-relaxed line-clamp-2">
                       {item.subtitle}
                     </p>
                   </div>
@@ -301,13 +301,13 @@ export function StudyMaterialsShowcase({
                     </div>
 
                     {/* Micro Pill CTA on Hover / Always accessible */}
-                    <div className="mt-3 opacity-90 group-hover:opacity-100 transition-opacity">
+                    <div className="mt-3 opacity-95 sm:opacity-90 sm:group-hover:opacity-100 transition-opacity">
                       <Link
                         href={item.href}
-                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white text-[#1d1d1f] border border-black/[0.08] shadow-[0_2px_6px_rgba(0,0,0,0.04)] hover:bg-[#1d1d1f] hover:text-white transition-all duration-200 active:scale-95"
+                        className="inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:px-3 sm:py-1 rounded-full text-[12px] sm:text-xs font-semibold bg-white text-[#1d1d1f] border border-black/[0.08] shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:bg-[#1d1d1f] hover:text-white transition-all duration-150 active:scale-95 active:bg-[#1d1d1f] active:text-white select-none [-webkit-tap-highlight-color:transparent]"
                       >
                         <span>{item.ctaText}</span>
-                        <ArrowRight className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-0.5" />
+                        <ArrowRight className="w-3.5 h-3.5 sm:w-3 sm:h-3 transition-transform duration-200 group-hover:translate-x-0.5" />
                       </Link>
                     </div>
                   </div>

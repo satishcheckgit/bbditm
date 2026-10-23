@@ -38,7 +38,7 @@ export function SectionHeading({
       )}
       <h2
         className={cn(
-          "text-2xl sm:text-4xl font-semibold tracking-tight leading-snug font-heading",
+          "text-[22px] sm:text-4xl font-bold sm:font-semibold tracking-tight leading-snug font-heading",
           isDark ? "text-white" : "text-black"
         )}
       >
@@ -47,8 +47,8 @@ export function SectionHeading({
       {description && (
         <p
           className={cn(
-            "mt-3 text-sm sm:text-base leading-relaxed",
-            isDark ? "text-[#86868b]" : "text-[#6e6e73]"
+            "mt-2 sm:mt-3 text-[13px] sm:text-base leading-relaxed",
+            isDark ? "text-[#86868b]" : "text-[#515154] sm:text-[#6e6e73]"
           )}
         >
           {description}
