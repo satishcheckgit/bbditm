@@ -30,9 +30,15 @@ export default function GalleryShowcasePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f5f7]">
-      {/* Top Breadcrumb & Switcher Bar */}
-      <div className="bg-white border-b border-black/[0.06] sticky top-0 z-40 backdrop-blur-md bg-white/90">
+    <div className="min-h-screen bg-[#f5f5f7] pb-4 md:pb-0">
+      {/* Mobile switcher — non-sticky, solid bg */}
+      <div className="md:hidden bg-white border-y border-black/[0.06] px-4 py-2.5 flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x">
+        <button type="button" onClick={() => setActiveTab("apple")} className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors ${activeTab === "apple" ? "bg-black text-white" : "bg-[#f5f5f7] text-[#6e6e73]"}`}>Apple Preset</button>
+        <button type="button" onClick={() => setActiveTab("campus")} className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-colors ${activeTab === "campus" ? "bg-black text-white" : "bg-[#f5f5f7] text-[#6e6e73]"}`}>BBDITM Labs</button>
+      </div>
+
+      {/* Top Breadcrumb & Switcher Bar — desktop */}
+      <div className="hidden md:block bg-white border-b border-black/[0.06] sticky top-0 z-40 backdrop-blur-md bg-white/90">
         <Container>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-3.5">
             <div className="flex items-center gap-3">

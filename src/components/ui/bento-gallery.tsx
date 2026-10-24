@@ -613,6 +613,7 @@ export function BentoGallery({
   viewAllHref,
   viewAllText = "Explore All Accessories",
 }: BentoGalleryProps) {
+
   const [quickViewItem, setQuickViewItem] = useState<BentoGalleryItem | null>(null);
   const [selectedInitialSwatch, setSelectedInitialSwatch] = useState<SwatchOption | undefined>(undefined);
 
@@ -628,76 +629,72 @@ export function BentoGallery({
   };
 
   return (
-    <section className={`py-8 sm:py-10 lg:py-10 bg-[#f5f5f7] ${className}`}>
-      <div className="max-w-[1540px] mx-auto px-4 sm:px-4 lg:px-4">
-        {/* Section Header */}
-        {(title || eyebrow || description) && (
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-14">
-            <div className="max-w-2xl">
-              {/* {eyebrow && (
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[#0071e3] text-xs font-semibold tracking-wide mb-3 shadow-[0_1px_4px_rgba(0,0,0,0.04)] border border-black/[0.04]">
-                  <Sparkles className="w-3.5 h-3.5 text-[#0071e3]" />
-                  <span>{eyebrow}</span>
-                </div>
-              )} */}
-              {title && (
-                <h2 className="text-[22px] sm:text-4xl lg:text-[40px] font-bold sm:font-semibold text-[#1d1d1f] tracking-tight leading-tight font-heading">
-                  {title}
-                </h2>
-              )}
-              {description && (
-                <p className="mt-2 sm:mt-3 text-[13px] sm:text-base text-[#6e6e73] leading-relaxed">
-                  {description}
-                </p>
+    <>
+      {/* Mobile — swipeable showcase rail */}
+      <section className="md:hidden bg-[#f5f5f7] pt-5 pb-6">
+        <div className="px-4 mb-3 flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[#e41d43]">{eyebrow}</p>
+            <h2 className="mt-1 text-[22px] font-bold tracking-tight leading-tight text-[#1d1d1f] font-heading line-clamp-2">{title}</h2>
+            {description && <p className="mt-2 text-[13px] leading-relaxed text-[#6e6e73] line-clamp-2">{description}</p>}
+          </div>
+          {viewAllHref && (
+            <Link href={viewAllHref} className="shrink-0 inline-flex items-center gap-1 text-xs font-semibold text-[#0071e3] pt-1">
+              {viewAllText} <ChevronRight className="w-3.5 h-3.5" />
+            </Link>
+          )}
+        </div>
+        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory overscroll-x-contain touch-pan-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pl-4 pr-4 scroll-px-4 scroll-smooth">
+          {items.map((item, index) => (
+            <div
+              key={`m-${item.id}`}
+              className="shrink-0 snap-start w-[72vw] max-w-[300px]"
+              onClick={() => handleOpenQuickView(item)}
+            >
+              {item.type === "banner" ? (
+                <BannerCard item={item} index={index} onOpenQuickView={(it) => handleOpenQuickView(it)} />
+              ) : (
+                <ProductCard item={item} index={index} onOpenQuickView={(it, sw) => handleOpenQuickView(it, sw)} />
               )}
             </div>
-
-            {viewAllHref && (
-              <Link
-                href={viewAllHref}
-                className="inline-flex items-center gap-1.5 text-[13px] sm:text-sm font-semibold text-[#0071e3] hover:text-[#0077ed] shrink-0 self-start md:self-end group active:scale-95 transition-all select-none [-webkit-tap-highlight-color:transparent]"
-              >
-                <span>{viewAllText}</span>
-                <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-            )}
-          </div>
-        )}
-
-        {/* 4-Column Responsive Bento Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {items.map((item, index) => {
-            if (item.type === "banner") {
-              return (
-                <BannerCard
-                  key={item.id}
-                  item={item}
-                  index={index}
-                  onOpenQuickView={(it) => handleOpenQuickView(it)}
-                />
-              );
-            }
-            return (
-              <ProductCard
-                key={item.id}
-                item={item}
-                index={index}
-                onOpenQuickView={(it, sw) => handleOpenQuickView(it, sw)}
-              />
-            );
-          })}
+          ))}
         </div>
-      </div>
+        {enableQuickView && <QuickViewModal item={quickViewItem} initialSwatch={selectedInitialSwatch} onClose={handleCloseQuickView} />}
+      </section>
 
-      {/* Quick View Modal */}
-      {enableQuickView && (
-        <QuickViewModal
-          item={quickViewItem}
-          initialSwatch={selectedInitialSwatch}
-          onClose={handleCloseQuickView}
-        />
-      )}
-    </section>
+      {/* Desktop */}
+      <section className={`hidden md:block py-8 sm:py-10 lg:py-10 bg-[#f5f5f7] ${className}`}>
+        <div className="max-w-[1540px] mx-auto px-4 sm:px-4 lg:px-4">
+          {(title || eyebrow || description) && (
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-14">
+              <div className="max-w-2xl">
+                {title && (
+                  <h2 className="text-[22px] sm:text-4xl lg:text-[40px] font-bold sm:font-semibold text-[#1d1d1f] tracking-tight leading-tight font-heading">
+                    {title}
+                  </h2>
+                )}
+                {description && <p className="mt-2 sm:mt-3 text-[13px] sm:text-base text-[#6e6e73] leading-relaxed">{description}</p>}
+              </div>
+              {viewAllHref && (
+                <Link href={viewAllHref} className="inline-flex items-center gap-1.5 text-[13px] sm:text-sm font-semibold text-[#0071e3] hover:text-[#0077ed] shrink-0 self-start md:self-end group active:scale-95 transition-all select-none [-webkit-tap-highlight-color:transparent]">
+                  <span>{viewAllText}</span>
+                  <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                </Link>
+              )}
+            </div>
+          )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {items.map((item, index) => {
+              if (item.type === "banner") {
+                return <BannerCard key={item.id} item={item} index={index} onOpenQuickView={(it) => handleOpenQuickView(it)} />;
+              }
+              return <ProductCard key={item.id} item={item} index={index} onOpenQuickView={(it, sw) => handleOpenQuickView(it, sw)} />;
+            })}
+          </div>
+        </div>
+        {enableQuickView && <QuickViewModal item={quickViewItem} initialSwatch={selectedInitialSwatch} onClose={handleCloseQuickView} />}
+      </section>
+    </>
   );
 }
 

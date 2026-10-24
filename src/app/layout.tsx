@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header/navbar";
 import { Footer } from "@/components/layout/footer/footer";
+import { AppShell } from "@/components/mobile";
 import { siteConfig } from "@/config/site";
 import { QueryProvider } from "@/providers/query-provider";
 
@@ -20,6 +21,17 @@ const openSans = Open_Sans({
   weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#161617" },
+  ],
+};
 
 export const metadata: Metadata = {
   title: {
@@ -55,6 +67,16 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  appleWebApp: {
+    capable: true,
+    title: siteConfig.shortName,
+    statusBarStyle: "default",
+  },
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
 };
 
 export default function RootLayout({
@@ -77,17 +99,14 @@ export default function RootLayout({
           Skip to main content
         </a>
 
-        {/* Global Navigation Shell & TanStack Query Context */}
+        {/* Global Providers — single-pass shell: children rendered once */}
         <QueryProvider>
-          <Header />
-
-          {/* Page Content */}
-          <main id="main-content" className="flex-1">
+          <AppShell
+            desktopHeader={<Header />}
+            desktopFooter={<Footer />}
+          >
             {children}
-          </main>
-
-          {/* Global Footer */}
-          <Footer />
+          </AppShell>
         </QueryProvider>
       </body>
     </html>

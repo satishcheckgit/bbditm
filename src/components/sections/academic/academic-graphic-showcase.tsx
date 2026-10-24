@@ -115,71 +115,98 @@ export function AcademicGraphicShowcase({
   const bgClass = variant === "white" ? "bg-white" : "bg-[#F5F5F7]";
 
   return (
-    <section className={`py-16 sm:py-24 ${bgClass} relative overflow-hidden`}>
-      <Container>
-        {/* Apple-style Editorial Section Header */}
-        <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fff1f3] text-[#e41d43] text-xs font-semibold tracking-wide uppercase">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{eyebrow}</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-semibold text-[#1d1d1f] tracking-tight leading-[1.12] font-heading">
-            {title}
-          </h2>
-
-          <p className="text-base sm:text-lg text-[#6e6e73] leading-relaxed pt-1">
-            {description}
-          </p>
+    <>
+      {/* Mobile — swipeable lab rail */}
+      <section className={`md:hidden ${bgClass} pt-5 pb-6`}>
+        <div className="px-4 mb-3">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#fff1f3] text-[#e41d43] text-[11px] font-bold tracking-wider uppercase">
+            <Sparkles className="w-3 h-3" /> {eyebrow}
+          </span>
+          <h2 className="mt-3 text-[22px] font-bold tracking-tight leading-tight text-[#1d1d1f] font-heading">{title}</h2>
+          <p className="mt-2 text-[13px] leading-relaxed text-[#6e6e73] line-clamp-3">{description}</p>
         </div>
+        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory overscroll-x-contain touch-pan-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pl-4 pr-4 scroll-px-4 scroll-smooth">
+          {facilities.map((facility) => (
+            <article
+              key={`m-${facility.id}`}
+              className="shrink-0 snap-start w-[82vw] max-w-[340px] bg-white rounded-[22px] p-4 border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.04)] flex flex-col"
+            >
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className={`inline-flex px-2.5 py-1 rounded-full text-[11px] font-bold ${facility.accentBg} ${facility.accentText}`}>
+                  {facility.category}
+                </span>
+                <span className="text-[11px] font-medium text-[#86868b] inline-flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3 text-[#00875a]" /> {facility.badge}
+                </span>
+              </div>
+              <h3 className="text-[16px] font-bold text-[#1d1d1f] font-heading tracking-tight leading-snug">
+                <span className={facility.accentText}>{facility.highlight}</span> {facility.title}
+              </h3>
+              <p className="mt-2 text-[13px] text-[#6e6e73] leading-relaxed line-clamp-3">{facility.description}</p>
+              <div className="relative mt-4 h-40 rounded-[16px] bg-gradient-to-b from-[#fbfbfd] to-[#f5f5f7] overflow-hidden border border-black/[0.03] flex items-center justify-center p-3">
+                <div className="absolute inset-0 opacity-20" style={{ background: `radial-gradient(circle at 50% 55%, ${facility.accentColor} 0%, transparent 68%)` }} />
+                <Image
+                  src={facility.imageSrc}
+                  alt={facility.imageAlt}
+                  fill
+                  sizes="340px"
+                  className="object-contain p-2"
+                  style={{ filter: "drop-shadow(0px 8px 10px rgba(0,0,0,0.12))" }}
+                />
+              </div>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {facility.specs.slice(0, 3).map((s) => (
+                  <span key={s} className="text-[11px] font-medium px-2 py-1 rounded-full bg-[#f5f5f7] text-[#1d1d1f] border border-black/[0.04]">
+                    {s}
+                  </span>
+                ))}
+              </div>
+              <Link href={facility.ctaHref} className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full bg-[#e41d43] px-4 py-2.5 text-xs font-bold text-white active:scale-95 transition-transform">
+                {facility.ctaText} <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
 
-        {/* 2x2 Bento Grid with Dual-Shadow Physics */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
-          {facilities.map((facility) => {
-            return (
+      {/* Desktop — 2x2 grid */}
+      <section className={`hidden md:block py-16 sm:py-24 ${bgClass} relative overflow-hidden`}>
+        <Container>
+          <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fff1f3] text-[#e41d43] text-xs font-semibold tracking-wide uppercase">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>{eyebrow}</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-semibold text-[#1d1d1f] tracking-tight leading-[1.12] font-heading">
+              {title}
+            </h2>
+            <p className="text-base sm:text-lg text-[#6e6e73] leading-relaxed pt-1">{description}</p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+            {facilities.map((facility) => (
               <article
                 key={facility.id}
                 className="group apple-card-3d bg-white rounded-[26px] p-6 sm:p-8 flex flex-col justify-between relative border border-black/[0.04] transition-all duration-300"
               >
-                {/* Top Metatag Row */}
                 <div className="flex items-center justify-between gap-4 mb-4">
-                  <div
-                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${facility.accentBg} ${facility.accentText}`}
-                  >
+                  <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${facility.accentBg} ${facility.accentText}`}>
                     <span>{facility.category}</span>
                   </div>
-
                   <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#86868b]">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00875a]" />
-                    {facility.badge}
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00875a]" /> {facility.badge}
                   </span>
                 </div>
-
-                {/* Typography Header */}
                 <div className="space-y-2">
                   <h3 className="text-xl sm:text-2xl font-semibold text-[#1d1d1f] font-heading tracking-tight leading-snug">
-                    <span className={facility.accentText}>
-                      {facility.highlight}
-                    </span>{" "}
-                    <span>{facility.title}</span>
+                    <span className={facility.accentText}>{facility.highlight}</span> <span>{facility.title}</span>
                   </h3>
-
-                  <p className="text-sm sm:text-[15px] text-[#6e6e73] leading-relaxed">
-                    {facility.description}
-                  </p>
+                  <p className="text-sm sm:text-[15px] text-[#6e6e73] leading-relaxed">{facility.description}</p>
                 </div>
-
-                {/* 3D Product Render Stage (Apple Dual-Shadow Physics) */}
                 <div className="my-6 relative w-full h-64 sm:h-72 rounded-[20px] bg-gradient-to-b from-[#fbfbfd] to-[#f5f5f7]/80 flex items-center justify-center overflow-hidden border border-black/[0.03] group-hover:bg-[#fbfbfd] transition-colors duration-300">
-                  {/* Subtle ambient radial backlight */}
                   <div
                     className="absolute inset-0 opacity-20 pointer-events-none transition-opacity duration-500 group-hover:opacity-35"
-                    style={{
-                      background: `radial-gradient(circle at 50% 55%, ${facility.accentColor} 0%, transparent 68%)`,
-                    }}
+                    style={{ background: `radial-gradient(circle at 50% 55%, ${facility.accentColor} 0%, transparent 68%)` }}
                   />
-
-                  {/* Rendered 3D asset with grounded drop-shadow */}
                   <div className="relative w-full h-full p-4 sm:p-6 flex items-center justify-center">
                     <Image
                       src={facility.imageSrc}
@@ -187,48 +214,30 @@ export function AcademicGraphicShowcase({
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                       className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-                      style={{
-                        filter:
-                          "drop-shadow(0px 10px 14px rgba(0, 0, 0, 0.15)) drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.08))",
-                      }}
+                      style={{ filter: "drop-shadow(0px 10px 14px rgba(0, 0, 0, 0.15)) drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.08))" }}
                       priority={facility.id === "ai-supercomputing"}
                     />
                   </div>
                 </div>
-
-                {/* Hardware Spec Tags */}
                 <div className="flex flex-wrap items-center gap-2 mb-6">
                   {facility.specs.map((spec) => (
-                    <span
-                      key={spec}
-                      className="text-xs font-medium px-2.5 py-1 rounded-full bg-[#f5f5f7] text-[#1d1d1f] border border-black/[0.04]"
-                    >
+                    <span key={spec} className="text-xs font-medium px-2.5 py-1 rounded-full bg-[#f5f5f7] text-[#1d1d1f] border border-black/[0.04]">
                       {spec}
                     </span>
                   ))}
                 </div>
-
-                {/* Bottom CTA & Status Bar */}
                 <div className="pt-4 border-t border-black/[0.06] flex items-center justify-between gap-4">
-                  <Link
-                    href={facility.ctaHref}
-                    className="group/btn inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-[#e41d43] text-white hover:bg-[#c21334] transition-all duration-200 active:scale-95 shadow-[0_2px_8px_rgba(228,29,67,0.22)]"
-                  >
+                  <Link href={facility.ctaHref} className="group/btn inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-[#e41d43] text-white hover:bg-[#c21334] transition-all duration-200 active:scale-95 shadow-[0_2px_8px_rgba(228,29,67,0.22)]">
                     <span>{facility.ctaText}</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5" />
                   </Link>
-
-                  {facility.statusText && (
-                    <span className="text-xs text-[#86868b] font-medium hidden sm:inline">
-                      {facility.statusText}
-                    </span>
-                  )}
+                  {facility.statusText && <span className="text-xs text-[#86868b] font-medium hidden sm:inline">{facility.statusText}</span>}
                 </div>
               </article>
-            );
-          })}
-        </div>
-      </Container>
-    </section>
+            ))}
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }

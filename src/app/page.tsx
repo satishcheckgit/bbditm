@@ -1,5 +1,6 @@
 import { getHomepageData } from "@/data";
 import { HomeHero } from "@/components/sections/hero/home-hero";
+import { HomeHeroZeptoMobile } from "@/components/sections/hero/home-hero-zepto-mobile";
 import { ProgrammeDiscovery } from "@/components/sections/programmes/programme-discovery";
 import { UniversityProof } from "@/components/sections/proof/university-proof";
 import { AcademicGraphicShowcase } from "@/components/sections/academic/academic-graphic-showcase";
@@ -17,7 +18,11 @@ export default async function HomePage() {
 
   return (
     <>
-      <HomeHero />
+      {/* Hero: desktop = full HomeHero (stacked cards), mobile = Zepto-style single card */}
+      <div className="hidden md:block">
+        <HomeHero />
+      </div>
+      <HomeHeroZeptoMobile />
       <StudyMaterialsShowcase />
       <ProgrammeDiscovery programmes={data.featuredProgrammes} />
       <BentoGallery

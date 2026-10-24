@@ -12,9 +12,21 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="py-16 sm:py-24 bg-white">
+    <div className="py-10 md:py-16 sm:py-24 bg-white pb-20 md:pb-16">
+      {/* Mobile sticky contact actions */}
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-black/10 bg-white/95 backdrop-blur-xl md:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+        <div className="mx-auto flex w-full max-w-2xl items-center gap-2 px-4 py-2.5">
+          <a href={`tel:${siteConfig.contact.admissionsPhone}`} className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-[#243d77] px-4 py-3 text-sm font-bold text-white active:scale-[0.98] transition-transform">
+            <Phone className="w-4 h-4" /> Call Admissions
+          </a>
+          <a href={`mailto:${siteConfig.contact.admissionsEmail}`} className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-[#e41d43] px-4 py-3 text-sm font-bold text-white shadow-[0_8px_20px_rgba(228,29,67,0.3)] active:scale-[0.98] transition-transform">
+            <Mail className="w-4 h-4" /> Email
+          </a>
+        </div>
+      </div>
+
       <Container>
-        <div className="max-w-3xl mb-14">
+        <div className="max-w-3xl mb-10 md:mb-14">
           <span className="text-xs font-bold uppercase tracking-wider text-[#e41d43]">
             Get In Touch
           </span>

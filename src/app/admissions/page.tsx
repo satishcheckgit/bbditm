@@ -39,10 +39,36 @@ export default function AdmissionsPage() {
   ];
 
   return (
-    <div className="py-16 sm:py-24 bg-white">
+    <div className="py-10 md:py-16 sm:py-24 bg-white pb-20 md:pb-16">
+      {/* Mobile sticky steps indicator */}
+      <div className="md:hidden sticky top-0 z-20 px-4 py-2.5 bg-white border-y border-black/[0.06] mb-6">
+        <div className="flex items-center gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden touch-pan-x">
+          {steps.map((s) => (
+            <span key={s.step} className="shrink-0 inline-flex items-center gap-1.5 rounded-full bg-[#f5f5f7] border border-black/5 px-3 py-1.5 text-[11px] font-bold text-[#1d1d1f]">
+              <span className="text-[#e41d43]">{s.step}</span> {s.title}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile sticky CTA */}
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-black/10 bg-white/95 backdrop-blur-xl md:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+        <div className="mx-auto flex w-full max-w-2xl items-center gap-2 px-4 py-2.5">
+          <a href={`tel:${siteConfig.contact.admissionsPhone}`} className="flex size-11 items-center justify-center rounded-full border border-black/10 bg-white text-[#243d77] active:scale-95 transition-transform shrink-0" aria-label={`Call ${siteConfig.contact.admissionsPhone}`}>
+            <PhoneCall className="w-4 h-4" />
+          </a>
+          <a href="#fees" className="flex-1 inline-flex items-center justify-center rounded-full border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-[#1d1d1f] active:scale-[0.98] transition-transform">
+            Fees
+          </a>
+          <a href={siteConfig.links.applyNow} className="flex-1 inline-flex items-center justify-center gap-1 rounded-full bg-[#e41d43] px-5 py-3 text-sm font-bold text-white shadow-[0_8px_20px_rgba(228,29,67,0.3)] active:scale-[0.98] transition-transform">
+            Apply <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+
       <Container>
         {/* Header */}
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-10 md:mb-16">
           <span className="text-xs font-bold uppercase tracking-wider text-[#e41d43]">
             Enrollment 2026-27
           </span>

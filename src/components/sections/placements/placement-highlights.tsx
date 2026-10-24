@@ -40,46 +40,59 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
   };
 
   return (
-    <section className="overflow-hidden bg-[#f5f5f7] py-10 text-[#1d1d1f] sm:py-10 lg:py-10">
-      <Container>
-        <div className="grid gap-7 border-b border-black/10 pb-10 lg:grid-cols-12 lg:items-end lg:gap-10 lg:pb-12">
-          <div className="lg:col-span-8">
-
-            <h2 className="max-w-4xl font-heading text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-[#1d1d1f]">
-              Ready for the work that shapes what comes next.
-            </h2>
-          </div>
-
-          <div className="lg:col-span-4 lg:pb-1">
-            <p className="max-w-md text-[17px] leading-[1.5] tracking-[-0.015em] text-[#6e6e73]">
-              Our Training and Placement Cell connects classroom learning with
-              internships, career preparation and opportunities across leading
-              sectors.
-            </p>
-          </div>
+    <>
+      {/* Mobile — swipeable stats rail + compact header */}
+      <section className="md:hidden bg-[#f5f5f7] pt-5 pb-6">
+        <div className="px-4 mb-3">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-[#e41d43]">Placements & Careers</p>
+          <h2 className="mt-1 text-[22px] font-bold tracking-tight leading-tight text-[#1d1d1f] font-heading">
+            Ready for the work that shapes what comes next.
+          </h2>
+          <p className="mt-2 text-[13px] leading-relaxed text-[#6e6e73]">Training & Placement Cell · internships to offers across leading sectors.</p>
         </div>
-
-        <div className="grid grid-cols-1 border-b border-black/10 sm:grid-cols-2 lg:grid-cols-4">
-          {data.heroStats.map((stat, index) => (
+        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory overscroll-x-contain touch-pan-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pl-4 pr-4 scroll-px-4 scroll-smooth">
+          {data.heroStats.map((stat) => (
             <div
               key={stat.label}
-              className={`py-7 sm:px-7 sm:py-9 lg:px-8 lg:py-10 ${index > 0 ? "border-t border-black/10 sm:border-t-0" : ""
-                } ${index % 2 !== 0 ? "sm:border-l sm:border-black/10" : ""
-                } ${index > 1 ? "sm:border-t sm:border-black/10 lg:border-t-0" : ""
-                } ${index > 0 ? "lg:border-l lg:border-black/10" : ""}`}
+              className="shrink-0 snap-start w-[72vw] max-w-[300px] rounded-[18px] bg-white border border-black/5 p-5 shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
             >
-              <p className="font-heading text-[clamp(2.4rem,3.6vw,4rem)] font-semibold leading-none tracking-[-0.05em] text-[#e41d43]">
-                {stat.value}
-              </p>
-              <h3 className="mt-4 text-[17px] font-semibold leading-tight tracking-[-0.018em] text-[#1d1d1f]">
-                {stat.label}
-              </h3>
-              <p className="mt-2 max-w-[15rem] text-sm leading-relaxed text-[#86868b]">
-                {stat.subtext}
-              </p>
+              <p className="font-heading text-3xl font-semibold tracking-tight text-[#e41d43] leading-none">{stat.value}</p>
+              <p className="mt-3 text-sm font-semibold text-[#1d1d1f] leading-tight">{stat.label}</p>
+              <p className="mt-1.5 text-xs leading-relaxed text-[#86868b] line-clamp-2">{stat.subtext}</p>
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="hidden md:block overflow-hidden bg-[#f5f5f7] py-10 text-[#1d1d1f] sm:py-10 lg:py-10">
+        <Container>
+          <div className="grid gap-7 border-b border-black/10 pb-10 lg:grid-cols-12 lg:items-end lg:gap-10 lg:pb-12">
+            <div className="lg:col-span-8">
+              <h2 className="max-w-4xl font-heading text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-[#1d1d1f]">
+                Ready for the work that shapes what comes next.
+              </h2>
+            </div>
+            <div className="lg:col-span-4 lg:pb-1">
+              <p className="max-w-md text-[17px] leading-[1.5] tracking-[-0.015em] text-[#6e6e73]">
+                Our Training and Placement Cell connects classroom learning with internships, career preparation and opportunities across leading sectors.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 border-b border-black/10 sm:grid-cols-2 lg:grid-cols-4">
+            {data.heroStats.map((stat, index) => (
+              <div
+                key={stat.label}
+                className={`py-7 sm:px-7 sm:py-9 lg:px-8 lg:py-10 ${index > 0 ? "border-t border-black/10 sm:border-t-0" : ""} ${index % 2 !== 0 ? "sm:border-l sm:border-black/10" : ""} ${index > 1 ? "sm:border-t sm:border-black/10 lg:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-black/10" : ""}`}
+              >
+                <p className="font-heading text-[clamp(2.4rem,3.6vw,4rem)] font-semibold leading-none tracking-[-0.05em] text-[#e41d43]">
+                  {stat.value}
+                </p>
+                <h3 className="mt-4 text-[17px] font-semibold leading-tight tracking-[-0.018em] text-[#1d1d1f]">{stat.label}</h3>
+                <p className="mt-2 max-w-[15rem] text-sm leading-relaxed text-[#86868b]">{stat.subtext}</p>
+              </div>
+            ))}
+          </div>
 
         <div className="grid gap-6 py-4 sm:py-6 lg:grid-cols-12 lg:py-6">
           <div className="flex min-h-[320px] flex-col justify-between rounded-[22px]  p-7 sm:p-8 lg:col-span-4 lg:min-h-0 lg:p-9">
@@ -263,41 +276,42 @@ export function PlacementHighlights({ data }: PlacementHighlightsProps) {
             </div>
           </div>
         </div>
-      </Container>
+        </Container>
 
-      <style jsx global>{`
-        @keyframes recruiter-marquee-forward {
-          from {
-            transform: translateX(0);
+        <style jsx global>{`
+          @keyframes recruiter-marquee-forward {
+            from {
+              transform: translateX(0);
+            }
+            to {
+              transform: translateX(-50%);
+            }
           }
-          to {
-            transform: translateX(-50%);
-          }
-        }
 
-        @keyframes recruiter-marquee-reverse {
-          from {
-            transform: translateX(-50%);
+          @keyframes recruiter-marquee-reverse {
+            from {
+              transform: translateX(-50%);
+            }
+            to {
+              transform: translateX(0);
+            }
           }
-          to {
-            transform: translateX(0);
+
+          .recruiter-marquee[data-direction="forward"] {
+            animation: recruiter-marquee-forward 32s linear infinite;
           }
-        }
 
-        .recruiter-marquee[data-direction="forward"] {
-          animation: recruiter-marquee-forward 32s linear infinite;
-        }
-
-        .recruiter-marquee[data-direction="reverse"] {
-          animation: recruiter-marquee-reverse 36s linear infinite;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .recruiter-marquee {
-            animation-play-state: paused !important;
+          .recruiter-marquee[data-direction="reverse"] {
+            animation: recruiter-marquee-reverse 36s linear infinite;
           }
-        }
-      `}</style>
-    </section>
+
+          @media (prefers-reduced-motion: reduce) {
+            .recruiter-marquee {
+              animation-play-state: paused !important;
+            }
+          }
+        `}</style>
+      </section>
+    </>
   );
 }

@@ -196,25 +196,55 @@ export function StudyMaterialsShowcase({
   };
 
   return (
-    <section className="py-10 sm:py-10 bg-[#f5f5f7] relative overflow-hidden">
-      <Container>
-        {/* Header with Title and Apple Circular Navigation Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-10">
-          <div className="space-y-2 max-w-2xl">
-            {/* <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fff1f3] text-[#e41d43] text-xs font-semibold tracking-wide uppercase">
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>{eyebrow}</span>
-            </div> */}
-
-            <h2 className="text-[22px] sm:text-3xl lg:text-[34px] font-bold sm:font-semibold text-[#1d1d1f] tracking-tight leading-snug sm:leading-[1.2] font-heading">
-              {title}
-            </h2>
-
-            <p className="text-[13px] sm:text-base text-[#48484a] sm:text-[#0C0C0D] leading-relaxed pt-0.5">
-              {description}
-            </p>
-          </div>
+    <>
+      {/* Mobile — compact header, rail is already swipe-native */}
+      <section className="md:hidden bg-[#f5f5f7] pt-5 pb-6">
+        <div className="px-4 mb-3">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-[#e41d43]">{eyebrow}</p>
+          <h2 className="mt-1 text-[22px] font-bold tracking-tight leading-tight text-[#1d1d1f] font-heading">{title}</h2>
+          <p className="mt-2 text-[13px] leading-relaxed text-[#6e6e73] line-clamp-2">{description}</p>
         </div>
+        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory overscroll-x-contain touch-pan-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pl-4 pr-4 scroll-px-4 scroll-smooth pb-2">
+          {materials.map((item) => (
+            <Link
+              key={`m-${item.id}`}
+              href={item.href}
+              className={`shrink-0 snap-start w-[68vw] max-w-[280px] rounded-[22px] ${item.bgClass} ${item.borderClass} border p-4 flex flex-col justify-between active:scale-[0.99] transition-transform`}
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className={`inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${item.pillBg} ${item.pillText}`}>
+                    {item.tag}
+                  </span>
+                  <span className="text-[11px] font-semibold text-[#1d1d1f]/70">{item.itemCount}</span>
+                </div>
+                <h3 className="text-[15px] font-bold text-[#1d1d1f] font-heading tracking-tight leading-snug line-clamp-2">{item.title}</h3>
+                <p className="mt-1 text-[12px] text-[#3a3a3c] leading-relaxed line-clamp-2">{item.subtitle}</p>
+              </div>
+              <div className="mt-4 flex flex-col items-center">
+                <div className={`w-28 h-28 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-sm ring-4 ${item.circleRingColor} p-2`}>
+                  <Image src={item.imageSrc} alt={item.imageAlt} width={96} height={96} className="object-contain" />
+                </div>
+                <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#1d1d1f] border border-black/5">
+                  {item.ctaText} <ArrowRight className="w-3 h-3" />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Desktop */}
+      <section className="hidden md:block py-10 sm:py-10 bg-[#f5f5f7] relative overflow-hidden">
+        <Container>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-10">
+            <div className="space-y-2 max-w-2xl">
+              <h2 className="text-[22px] sm:text-3xl lg:text-[34px] font-bold sm:font-semibold text-[#1d1d1f] tracking-tight leading-snug sm:leading-[1.2] font-heading">
+                {title}
+              </h2>
+              <p className="text-[13px] sm:text-base text-[#48484a] sm:text-[#0C0C0D] leading-relaxed pt-0.5">{description}</p>
+            </div>
+          </div>
 
         {/* Horizontal Carousel of Pastel Cards with Floating Navigation Controls */}
         <div className="relative group/carousel">
@@ -247,76 +277,53 @@ export function StudyMaterialsShowcase({
             onScroll={checkScroll}
             className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 pt-2 -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth snap-x snap-mandatory scrollbar-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] touch-pan-x select-none"
           >
-            {materials.map((item) => {
-              return (
-                <div
-                  key={item.id}
-                  className={`snap-start shrink-0 w-[220px] sm:w-[245px] md:w-[260px] h-[365px] sm:h-[390px] rounded-[24px] ${item.bgClass} ${item.hoverBgClass} ${item.borderClass} p-4.5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.985] sm:active:scale-100 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_32px_rgba(0,0,0,0.08)] group relative overflow-hidden select-none`}
-                >
-                  {/* Top Section: Tag and Bold Title */}
-                  <div className="space-y-2.5 sm:space-y-3 z-10">
-                    <div className="flex items-center justify-between gap-2">
-                      <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold sm:font-semibold uppercase tracking-wider ${item.pillBg} ${item.pillText}`}
-                      >
-                        {item.tag}
-                      </span>
-
-                      <span className="text-[10.5px] sm:text-[11px] font-semibold sm:font-medium text-[#1d1d1f]/80 sm:text-[#0C0C0D]">
-                        {item.itemCount}
-                      </span>
-                    </div>
-
-                    <h3 className="text-[17px] sm:text-[19px] font-bold sm:font-semibold text-[#1d1d1f] font-heading tracking-tight leading-snug line-clamp-2">
-                      {item.title}
-                    </h3>
-
-                    <p className="text-[11.5px] sm:text-xs text-[#3a3a3c] sm:text-[#0C0C0D] leading-relaxed line-clamp-2">
-                      {item.subtitle}
-                    </p>
+            {materials.map((item) => (
+              <div
+                key={item.id}
+                className={`snap-start shrink-0 w-[220px] sm:w-[245px] md:w-[260px] h-[365px] sm:h-[390px] rounded-[24px] ${item.bgClass} ${item.hoverBgClass} ${item.borderClass} p-4.5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.985] sm:active:scale-100 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_32px_rgba(0,0,0,0.08)] group relative overflow-hidden select-none`}
+              >
+                <div className="space-y-2.5 sm:space-y-3 z-10">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold sm:font-semibold uppercase tracking-wider ${item.pillBg} ${item.pillText}`}>
+                      {item.tag}
+                    </span>
+                    <span className="text-[10.5px] sm:text-[11px] font-semibold sm:font-medium text-[#1d1d1f]/80 sm:text-[#0C0C0D]">{item.itemCount}</span>
                   </div>
-
-                  {/* Bottom Circular Window (Distinct Signature Feature from User Design) */}
-                  <div className="relative mt-auto pt-2 flex flex-col items-center">
-                    {/* Glowing Circular Portal Ring with Grounded 3D Subject */}
-                    <div
-                      className={`w-36 h-36 sm:w-40 sm:h-40 rounded-full bg-white relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.08)] ring-4 ${item.circleRingColor} flex items-center justify-center p-2 transition-transform duration-500 ease-out group-hover:scale-105`}
+                  <h3 className="text-[17px] sm:text-[19px] font-bold sm:font-semibold text-[#1d1d1f] font-heading tracking-tight leading-snug line-clamp-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-[11.5px] sm:text-xs text-[#3a3a3c] sm:text-[#0C0C0D] leading-relaxed line-clamp-2">{item.subtitle}</p>
+                </div>
+                <div className="relative mt-auto pt-2 flex flex-col items-center">
+                  <div className={`w-36 h-36 sm:w-40 sm:h-40 rounded-full bg-white relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.08)] ring-4 ${item.circleRingColor} flex items-center justify-center p-2 transition-transform duration-500 ease-out group-hover:scale-105`}>
+                    <div className="absolute inset-0 bg-radial from-white via-white/80 to-[#fbfbfd] pointer-events-none" />
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      <Image
+                        src={item.imageSrc}
+                        alt={item.imageAlt}
+                        fill
+                        sizes="160px"
+                        className="object-contain p-1 transition-transform duration-500 group-hover:scale-110"
+                        style={{ filter: "drop-shadow(0px 8px 10px rgba(0, 0, 0, 0.12)) drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.06))" }}
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-3 opacity-95 sm:opacity-90 sm:group-hover:opacity-100 transition-opacity">
+                    <Link
+                      href={item.href}
+                      className="inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:px-3 sm:py-1 rounded-full text-[12px] sm:text-xs font-semibold bg-white text-[#1d1d1f] border border-black/[0.08] shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:bg-[#1d1d1f] hover:text-white transition-all duration-150 active:scale-95 active:bg-[#1d1d1f] active:text-white select-none [-webkit-tap-highlight-color:transparent]"
                     >
-                      {/* Inner subtle radial highlight */}
-                      <div className="absolute inset-0 bg-radial from-white via-white/80 to-[#fbfbfd] pointer-events-none" />
-
-                      <div className="relative w-full h-full flex items-center justify-center">
-                        <Image
-                          src={item.imageSrc}
-                          alt={item.imageAlt}
-                          fill
-                          sizes="160px"
-                          className="object-contain p-1 transition-transform duration-500 group-hover:scale-110"
-                          style={{
-                            filter:
-                              "drop-shadow(0px 8px 10px rgba(0, 0, 0, 0.12)) drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.06))",
-                          }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Micro Pill CTA on Hover / Always accessible */}
-                    <div className="mt-3 opacity-95 sm:opacity-90 sm:group-hover:opacity-100 transition-opacity">
-                      <Link
-                        href={item.href}
-                        className="inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:px-3 sm:py-1 rounded-full text-[12px] sm:text-xs font-semibold bg-white text-[#1d1d1f] border border-black/[0.08] shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:bg-[#1d1d1f] hover:text-white transition-all duration-150 active:scale-95 active:bg-[#1d1d1f] active:text-white select-none [-webkit-tap-highlight-color:transparent]"
-                      >
-                        <span>{item.ctaText}</span>
-                        <ArrowRight className="w-3.5 h-3.5 sm:w-3 sm:h-3 transition-transform duration-200 group-hover:translate-x-0.5" />
-                      </Link>
-                    </div>
+                      <span>{item.ctaText}</span>
+                      <ArrowRight className="w-3.5 h-3.5 sm:w-3 sm:h-3 transition-transform duration-200 group-hover:translate-x-0.5" />
+                    </Link>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </Container>
     </section>
+    </>
   );
 }
